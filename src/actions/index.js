@@ -1,5 +1,5 @@
-import {auth} from './auth';
+import {initSession} from './session';
 
 export {
-    auth
+    initSession
 };

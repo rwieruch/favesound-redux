@@ -1,6 +1,11 @@
 import {Map} from 'immutable';
 
-export default function(state = Map(), action) {
+const initialState = Map({
+  session: null,
+  user: null
+});
+
+export default function(state = initialState, action) {
   switch (action.type) {
   case 'SET_SESSION':
     return setSession(state, action.session);
