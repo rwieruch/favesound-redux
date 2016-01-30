@@ -2,23 +2,25 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index';
 
-export const Favesound = React.createClass({
-  getFollowingsDom: function() {
-      const { followings } = this.props;
+export class Favesound extends React.Component {
 
-      if (!followings) {
-        return '';
-      }
+  getFollowingsDom() {
+    const { followings } = this.props;
 
-      return <ul>{followings.toJSON().map((following, idx) => {
-        return (
-          <li key={idx}>
-            {following.username}
-          </li>
-        );
-      })}</ul>;
-  },
-  render: function() {
+    if (!followings) {
+      return '';
+    }
+
+    return <ul>{followings.toJSON().map((following, idx) => {
+      return (
+        <li key={idx}>
+          {following.username}
+        </li>
+      );
+    })}</ul>;
+  }
+
+  render() {
     const { currentUser, session, followings } = this.props;
 
     if (currentUser) {
@@ -27,7 +29,8 @@ export const Favesound = React.createClass({
       return <button onClick={() => this.props.initSession()}>Login</button>;
     }
   }
-});
+
+}
 
 function mapStateToProps(state) {
   return {
