@@ -1,30 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index';
+import {Followings} from '../components/Followings';
 
 export class Dashboard extends React.Component {
 
-  getFollowingsDom() {
-    const { followings } = this.props;
-
-    if (!followings) {
-      return '';
-    }
-
-    return <ul>{followings.toJSON().map((following, idx) => {
-      return (
-        <li key={idx}>
-          {following.username}
-        </li>
-      );
-    })}</ul>;
-  }
-
   render() {
-    const { currentUser, session, followings } = this.props;
+    const { currentUser, followings } = this.props;
 
     if (currentUser) {
-      return <div><div>{currentUser.username}</div>{this.getFollowingsDom()}</div>;
+      return <div>
+        <div>Hello {currentUser.username}</div>
+        <Followings {...this.props} />
+      </div>;
     } else {
       return <button onClick={() => this.props.initSession()}>Login</button>;
     }
