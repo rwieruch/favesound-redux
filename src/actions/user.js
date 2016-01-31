@@ -1,5 +1,5 @@
-import Cookies from 'js-cookie';
 import * as actionTypes from '../constants/actionTypes';
+import {apiUrl} from '../utils/soundcloudApi';
 
 function mergeFollowings(followings) {
   return {
@@ -10,8 +10,7 @@ function mergeFollowings(followings) {
 
 export function fetchFollowings(user, nextHref) {
 
-  const accessToken = Cookies.get('accessToken');
-  const initHref = `//api.soundcloud.com/users/${user.id}/followings?limit=200&offset=0&oauth_token=${accessToken}`;
+  const initHref = apiUrl(`users/${user.id}/followings?limit=200&offset=0`);
   const followingsUrl = nextHref || initHref;
 
   return dispatch => {
@@ -35,12 +34,8 @@ function mergeActivities(activities) {
 }
 
 export function fetchActivities() {
-
-  const accessToken = Cookies.get('accessToken');
-  const activitiesUrl = `//api.soundcloud.com/me/activities?limit=200&offset=0&oauth_token=${accessToken}`;
-
   return dispatch => {
-    return fetch(activitiesUrl)
+    return fetch(apiUrl(`me/activities?limit=200&offset=0`))
       .then(response => response.json())
       .then(data => dispatch(mergeActivities(data.collection)));
   };

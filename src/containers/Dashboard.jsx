@@ -10,7 +10,7 @@ export class Dashboard extends React.Component {
     const { currentUser, followings } = this.props;
 
     if (currentUser) {
-      return <div>
+      return <div className='dashboard'>
         <h1>Hello {currentUser.username}</h1>
         <Followings {...this.props} />
         <Activities {...this.props} />

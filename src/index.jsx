@@ -11,6 +11,8 @@ import {DashboardContainer} from './containers/Dashboard';
 import Callback from './containers/Callback';
 import App from './containers/App';
 
+require('../styles/index.scss');
+
 const store = configureStore();
 
 const routes = <Route component={App}>

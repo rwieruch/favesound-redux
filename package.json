@@ -30,6 +30,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "css-loader": "^0.23.1",
     "immutable": "^3.7.5",
     "js-cookie": "^2.1.0",
     "react": "^0.14.3",
@@ -39,6 +40,8 @@
     "react-router-redux": "^2.1.0",
     "redux": "^3.0.4",
     "redux-thunk": "^1.0.0",
-    "soundcloud": "^3.0.1"
+    "sass-loader": "^3.1.2",
+    "soundcloud": "^3.0.1",
+    "style-loader": "^0.13.0"
   }
 }
