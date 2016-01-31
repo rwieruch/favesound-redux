@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
-import {apiUrl} from '../utils/soundcloudApi';
+import {apiUrl, addAccessToken} from '../utils/soundcloudApi';
 
 function mergeFollowings(followings) {
   return {
@@ -33,11 +33,44 @@ function mergeActivities(activities) {
   };
 }
 
-export function fetchActivities() {
-  return dispatch => {
-    return fetch(apiUrl(`me/activities?limit=200&offset=0`))
+function setActivitiesNextHref(nextHref) {
+  return {
+    type: actionTypes.SET_ACTIVITIES_NEXT_HREF,
+    nextHref
+  };
+}
+
+function setActivitiesRequestInProcess(inProcess) {
+  return {
+    type: actionTypes.SET_ACTIVITIES_REQUEST_IN_RPOCESS,
+    inProcess
+  };
+}
+
+export function fetchActivities(nextHref) {
+
+  let activitiesUrl;
+  if (nextHref) {
+    activitiesUrl = addAccessToken(nextHref);
+  } else {
+    activitiesUrl = apiUrl(`me/activities?limit=200&offset=0`);
+  }
+
+  return (dispatch, getState) => {
+
+    const activitiesRequestInProcess = getState().user.get('activitiesRequestInProcess');
+
+    if (activitiesRequestInProcess) { return; }
+
+    dispatch(setActivitiesRequestInProcess(true));
+
+    return fetch(activitiesUrl)
       .then(response => response.json())
-      .then(data => dispatch(mergeActivities(data.collection)));
+      .then(data => {
+        dispatch(mergeActivities(data.collection));
+        dispatch(setActivitiesNextHref(data.next_href));
+        dispatch(setActivitiesRequestInProcess(false));
+      });
   };
 
 }

@@ -1,6 +1,7 @@
 import React from 'react';
+import FetchOnScroll from '../components/FetchOnScroll';
 
-export class Activities extends React.Component {
+class Activities extends React.Component {
 
   renderActivities() {
     const { activities } = this.props;
@@ -18,8 +19,24 @@ export class Activities extends React.Component {
     })}</ul>);
   }
 
+  renderActivitiesRequestInProcess() {
+    const { activitiesRequestInProcess } = this.props;
+
+    if (activitiesRequestInProcess) {
+      return <div>Loading ...</div>;
+    } else {
+      return <div></div>;
+    }
+  }
+
   render() {
-    return <div>{this.renderActivities()}</div>;
+    return (
+      <div>
+        <div>{this.renderActivities()}</div>
+        <div>{this.renderActivitiesRequestInProcess()}</div>
+      </div>);
   }
 
 }
+
+export default FetchOnScroll(Activities);

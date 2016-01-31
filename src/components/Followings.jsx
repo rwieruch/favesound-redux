@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class Followings extends React.Component {
+export default class Followings extends React.Component {
 
   renderFollowings() {
     const { followings } = this.props;
