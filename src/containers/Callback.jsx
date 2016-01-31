@@ -1,17 +1,19 @@
 import React from 'react';
 import SC from 'soundcloud';
 
-export default React.createClass({
-  componentDidMount:function(){
+export default class Callback extends React.Component {
+
+  componentDidMount() {
     window.setTimeout(opener.SC.connectCallback, 1);
-  },
-  render: function() {
+  }
+
+  render() {
     return (
       <div>
-          <p>
-            This page should close soon
-          </p>
+        <p>
+          This page should close soon
+        </p>
       </div>
     );
   }
-});
+}

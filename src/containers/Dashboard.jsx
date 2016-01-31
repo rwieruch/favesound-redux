@@ -6,17 +6,21 @@ import {Activities} from '../components/Activities';
 
 export class Dashboard extends React.Component {
 
+  login() {
+    this.props.initSession();
+  }
+
   render() {
     const { currentUser, followings } = this.props;
 
     if (currentUser) {
-      return <div className='dashboard'>
+      return (<div className='dashboard'>
         <h1>Hello {currentUser.username}</h1>
         <Followings {...this.props} />
         <Activities {...this.props} />
-      </div>;
+      </div>);
     } else {
-      return <button onClick={() => this.props.initSession()}>Login</button>;
+      return <button onClick={() => this.login()}>Login</button>;
     }
   }
 

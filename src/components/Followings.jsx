@@ -9,17 +9,17 @@ export class Followings extends React.Component {
       return '';
     }
 
-    return <ul>{followings.toJSON().map((following, idx) => {
+    return (<ul>{followings.toJSON().map((following, idx) => {
       return (
         <li key={idx}>
           {following.username}
         </li>
       );
-    })}</ul>;
+    })}</ul>);
   }
 
   render() {
-    return <div>{this.renderFollowings()}</div>
+    return <div>{this.renderFollowings()}</div>;
   }
 
 }

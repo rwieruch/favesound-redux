@@ -9,17 +9,17 @@ export class Activities extends React.Component {
       return '';
     }
 
-    return <ul>{activities.toJSON().map((activity, idx) => {
+    return (<ul>{activities.toJSON().map((activity, idx) => {
       return (
         <li key={idx}>
           {activity.type}
         </li>
       );
-    })}</ul>;
+    })}</ul>);
   }
 
   render() {
-    return <div>{this.renderActivities()}</div>
+    return <div>{this.renderActivities()}</div>;
   }
 
 }
