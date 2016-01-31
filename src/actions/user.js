@@ -1,8 +1,9 @@
 import Cookies from 'js-cookie';
+import * as actionTypes from '../constants/actionTypes';
 
 function mergeFollowings(followings) {
   return {
-    type: 'MERGE_FOLLOWINGS',
+    type: actionTypes.MERGE_FOLLOWINGS,
     followings
   };
 }
@@ -28,7 +29,7 @@ export function fetchFollowings(user, nextHref) {
 
 function mergeActivities(activities) {
   return {
-    type: 'MERGE_ACTIVITIES',
+    type: actionTypes.MERGE_ACTIVITIES,
     activities
   };
 }

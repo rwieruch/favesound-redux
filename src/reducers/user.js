@@ -1,4 +1,5 @@
 import {Map, List, fromJS} from 'immutable';
+import * as actionTypes from '../constants/actionTypes';
 
 const initialState = Map({
   followings: List(),
@@ -7,9 +8,9 @@ const initialState = Map({
 
 export default function(state = initialState, action) {
   switch (action.type) {
-  case 'MERGE_FOLLOWINGS':
+  case actionTypes.MERGE_FOLLOWINGS:
     return mergeFollowings(state, fromJS(action.followings));
-  case 'MERGE_ACTIVITIES':
+  case actionTypes.MERGE_ACTIVITIES:
     return mergeActivities(state, fromJS(action.activities));
   }
   return state;

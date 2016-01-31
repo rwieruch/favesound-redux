@@ -1,4 +1,5 @@
 import {Map} from 'immutable';
+import * as actionTypes from '../constants/actionTypes';
 
 const initialState = Map({
   session: null,
@@ -7,9 +8,9 @@ const initialState = Map({
 
 export default function(state = initialState, action) {
   switch (action.type) {
-  case 'SET_SESSION':
+  case actionTypes.SET_SESSION:
     return setSession(state, action.session);
-  case 'SET_USER':
+  case actionTypes.SET_USER:
     return setUser(state, action.user);
   }
   return state;

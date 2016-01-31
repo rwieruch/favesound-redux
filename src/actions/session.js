@@ -1,26 +1,27 @@
 import Cookies from 'js-cookie';
-import * as initialize from '../constants/initialize';
+import {CLIENT_ID} from '../constants/authentification';
+import * as actionTypes from '../constants/actionTypes';
 import {fetchFollowings, fetchActivities} from './user';
 
 const OAUTH_TOKEN = 'accessToken';
 
 function setSession(session) {
   return {
-    type: 'SET_SESSION',
+    type: actionTypes.SET_SESSION,
     session
   };
 }
 
 function setUser(user) {
   return {
-    type: 'SET_USER',
+    type: actionTypes.SET_USER,
     user
   };
 }
 
 export function initSession() {
 
-  const client_id = initialize.CLIENT_ID;
+  const client_id = CLIENT_ID;
   const redirect_uri = `${window.location.protocol}//${window.location.host}/callback`;
 
   return (dispatch) => {
