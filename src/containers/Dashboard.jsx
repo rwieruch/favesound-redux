@@ -16,8 +16,10 @@ export class Dashboard extends React.Component {
     if (currentUser) {
       return (<div className='dashboard'>
         <h1>Hello {currentUser.username}</h1>
-        <Followings {...this.props} />
-        <Activities {...this.props} />
+        <div className='dashboard-content'>
+          <Activities {...this.props} />
+          <Followings {...this.props} />
+        </div>
       </div>);
     } else {
       return <button onClick={() => this.login()}>Login</button>;

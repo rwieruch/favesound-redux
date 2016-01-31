@@ -1,3 +1,7 @@
 .dashboard {
-    color: red;
+
+  &-content {
+    display: flex;
+  }
+
 }
