@@ -7,9 +7,9 @@ import {Provider} from 'react-redux';
 import rootReducer from './reducers/index';
 import SC from 'soundcloud';
 import configureStore from './stores/configureStore';
-import {DashboardContainer} from './components/Dashboard';
-import Callback from './components/Callback';
-import App from './components/App';
+import {DashboardContainer} from './containers/Dashboard';
+import Callback from './containers/Callback';
+import App from './containers/App';
 
 const store = configureStore();
 

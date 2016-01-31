@@ -11,7 +11,7 @@ export class Dashboard extends React.Component {
 
     if (currentUser) {
       return <div>
-        <div>Hello {currentUser.username}</div>
+        <h1>Hello {currentUser.username}</h1>
         <Followings {...this.props} />
         <Activities {...this.props} />
       </div>;
