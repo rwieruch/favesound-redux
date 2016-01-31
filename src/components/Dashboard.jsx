@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index';
 
-export class Favesound extends React.Component {
+export class Dashboard extends React.Component {
 
   getFollowingsDom() {
     const { followings } = this.props;
@@ -39,4 +39,4 @@ function mapStateToProps(state) {
   };
 }
 
-export const FavesoundContainer = connect(mapStateToProps, actions)(Favesound);
+export const DashboardContainer = connect(mapStateToProps, actions)(Dashboard);

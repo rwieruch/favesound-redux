@@ -36,6 +36,7 @@
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0-rc3",
+    "react-router-redux": "^2.1.0",
     "redux": "^3.0.4",
     "redux-thunk": "^1.0.0",
     "soundcloud": "^3.0.1"
