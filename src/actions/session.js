@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import * as initialize from '../constants/initialize';
-import {fetchFollowings} from './user';
+import {fetchFollowings, fetchActivities} from './user';
 
 const OAUTH_TOKEN = 'accessToken';
 
@@ -41,6 +41,7 @@ function fetchUser(accessToken) {
       .then(me => {
         dispatch(setUser(me));
         dispatch(fetchFollowings(me));
+        dispatch(fetchActivities());
       });
   };
 }
