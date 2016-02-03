@@ -1,5 +1,6 @@
 .track {
 
+  border-bottom: 0.5px solid $background;
   display: flex;
 
   &-content {
@@ -7,10 +8,43 @@
     height: 80px;
     padding: $padding / 2;
     background: $backgroundSecondary;
-
-    &:hover {
-      background: $backgroundSecondaryHover;
-    }
   }
+
+  &-img {
+    position: relative;
+    cursor: pointer;
+
+    &-overlay {
+      color: $mainColor;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      background: rgba(0,0,0,0.5);
+
+      transition: opacity 0.5s;
+      -webkit-transition: opacity 0.2s;
+      transition-timing-function: ease;
+      -webkit-transition-timing-function: ease;
+
+      i {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 35px;
+        font-size: 30px;
+      }
+
+    }
+
+
+  }
+
+  &:hover .track-img-overlay {
+    opacity: 1;
+  }
+
 
 }

@@ -1,13 +1,12 @@
 import React from 'react';
+import {getTrackIcon} from '../utils/track';
 
 export default class Track extends React.Component {
 
   renderImage(artwork_url, title, avatar_url) {
     return (
-      <div>
-        <img src={artwork_url || avatar_url}
-          alt={title}/>
-      </div>);
+      <img src={artwork_url || avatar_url}
+        alt={title}/>);
   }
 
   renderTrack() {
@@ -22,11 +21,12 @@ export default class Track extends React.Component {
 
     return (
       <div className='track'>
-        <div>
+        <div className='track-img'>
           {this.renderImage(artwork_url, title, avatar_url)}
+          <div className='track-img-overlay'><i className='fa fa-play'></i></div>
         </div>
         <div className='track-content'>
-          <a href={permalink_url}>{username} - {title}</a>
+          <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title}</a>
         </div>
       </div>);
   }
