@@ -1,0 +1,16 @@
+.track {
+
+  display: flex;
+
+  &-content {
+    width: 100%;
+    height: 80px;
+    padding: $padding / 2;
+    background: $backgroundSecondary;
+
+    &:hover {
+      background: $backgroundSecondaryHover;
+    }
+  }
+
+}

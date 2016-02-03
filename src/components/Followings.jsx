@@ -19,7 +19,10 @@ export default class Followings extends React.Component {
   }
 
   render() {
-    return <div>{this.renderFollowings()}</div>;
+    return (
+      <div>
+        <div>{this.renderFollowings()}</div>
+      </div>);
   }
 
 }

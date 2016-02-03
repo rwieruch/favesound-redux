@@ -13,8 +13,12 @@ export class Dashboard extends React.Component {
       return (<div className='dashboard'>
         <h1>Hello {currentUser.username}</h1>
         <div className='dashboard-content'>
-          <Activities {...this.props} scrollFunction={this.props.fetchActivities.bind(null, activitiesNextHref)}/>
-          <Followings {...this.props} />
+          <div className='dashboard-content-main'>
+            <Activities {...this.props} scrollFunction={this.props.fetchActivities.bind(null, activitiesNextHref)}/>
+          </div>
+          <div className='dashboard-content-side'>
+            <Followings {...this.props} />
+          </div>
         </div>
       </div>);
     } else {

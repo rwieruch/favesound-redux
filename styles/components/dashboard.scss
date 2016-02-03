@@ -1,7 +1,24 @@
 .dashboard {
 
+  margin: 0 2%;
+
   &-content {
+
     display: flex;
+    flex-direction: row;
+
+    &-main, &-content-side {
+      margin: 0 $padding $padding 0;
+    }
+
+    &-main {
+      width: 70%;
+    }
+
+    &-side {
+      width: 30%;
+    }
+
   }
 
 }

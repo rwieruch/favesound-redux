@@ -1,5 +1,6 @@
 import React from 'react';
 import FetchOnScroll from '../components/FetchOnScroll';
+import Track from '../components/Track';
 
 class Activities extends React.Component {
 
@@ -13,7 +14,7 @@ class Activities extends React.Component {
     return (<ul>{activities.toJSON().map((activity, idx) => {
       return (
         <li key={idx}>
-          {activity.type}
+          <Track activity={activity} />
         </li>
       );
     })}</ul>);

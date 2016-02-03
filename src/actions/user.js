@@ -53,7 +53,7 @@ export function fetchActivities(nextHref) {
   if (nextHref) {
     activitiesUrl = addAccessToken(nextHref);
   } else {
-    activitiesUrl = apiUrl(`me/activities?limit=200&offset=0`);
+    activitiesUrl = apiUrl(`me/activities?limit=50&offset=0`);
   }
 
   return (dispatch, getState) => {
