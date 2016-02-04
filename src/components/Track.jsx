@@ -1,5 +1,6 @@
 import React from 'react';
 import {getTrackIcon} from '../utils/track';
+import {isActivePlayingTrack} from '../utils/player';
 
 export default class Track extends React.Component {
 
@@ -8,7 +9,7 @@ export default class Track extends React.Component {
   }
 
   renderTrack() {
-    const { activity } = this.props;
+    const { activity, activeTrack, isPlaying } = this.props;
     const { origin, type } = activity;
 
     if (!origin) { return; }
@@ -21,7 +22,7 @@ export default class Track extends React.Component {
       <div className='track'>
         <div className='track-img' onClick={() => this.props.activateTrack(activity)}>
           {this.renderImage(artwork_url, title, avatar_url)}
-          <div className='track-img-overlay'><i className='fa fa-play'></i></div>
+          <div className='track-img-overlay'><i className={'fa ' + (isActivePlayingTrack(activeTrack, activity, isPlaying) ? 'fa-pause' : 'fa-play')}></i></div>
         </div>
         <div className='track-content'>
           <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title}</a>

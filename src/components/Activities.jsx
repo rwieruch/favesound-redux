@@ -14,7 +14,7 @@ class Activities extends React.Component {
     return (<ul>{activities.toJSON().map((activity, idx) => {
       return (
         <li key={idx}>
-          <Track activity={activity} activateTrack={activateTrack}/>
+          <Track activity={activity} {...this.props}/>
         </li>
       );
     })}</ul>);
