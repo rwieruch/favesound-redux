@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as actions from '../actions/index';
 import Followings from '../components/Followings';
 import Activities from '../components/Activities';
+import Player from '../components/Player';
 
 export class Dashboard extends React.Component {
 
@@ -20,6 +21,7 @@ export class Dashboard extends React.Component {
             <Followings {...this.props} />
           </div>
         </div>
+        <Player {...this.props} />
       </div>);
     } else {
       return <button onClick={() => this.props.initSession()}>Login</button>;
@@ -34,7 +36,9 @@ function mapStateToProps(state) {
     followings: state.user.get('followings'),
     activities: state.user.get('activities'),
     activitiesNextHref: state.user.get('activitiesNextHref'),
-    activitiesRequestInProcess: state.user.get('activitiesRequestInProcess')
+    activitiesRequestInProcess: state.user.get('activitiesRequestInProcess'),
+    activeTrack: state.player.get('activeTrack'),
+    isPlaying: state.player.get('isPlaying')
   };
 }
 

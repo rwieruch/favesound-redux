@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
-import {apiUrl, addAccessToken} from '../utils/soundcloudApi';
+import {apiUrl, addAccessTokenWith} from '../utils/soundcloudApi';
 
 function mergeFollowings(followings) {
   return {
@@ -51,7 +51,7 @@ export function fetchActivities(nextHref) {
 
   let activitiesUrl;
   if (nextHref) {
-    activitiesUrl = addAccessToken(nextHref);
+    activitiesUrl = addAccessTokenWith(nextHref, '&');
   } else {
     activitiesUrl = apiUrl(`me/activities?limit=50&offset=0`);
   }

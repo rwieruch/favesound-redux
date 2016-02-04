@@ -4,9 +4,7 @@ import {getTrackIcon} from '../utils/track';
 export default class Track extends React.Component {
 
   renderImage(artwork_url, title, avatar_url) {
-    return (
-      <img src={artwork_url || avatar_url}
-        alt={title}/>);
+    return <img src={artwork_url || avatar_url} alt={title}/>;
   }
 
   renderTrack() {
@@ -21,7 +19,7 @@ export default class Track extends React.Component {
 
     return (
       <div className='track'>
-        <div className='track-img'>
+        <div className='track-img' onClick={() => this.props.activateTrack(activity)}>
           {this.renderImage(artwork_url, title, avatar_url)}
           <div className='track-img-overlay'><i className='fa fa-play'></i></div>
         </div>

@@ -5,7 +5,7 @@ import Track from '../components/Track';
 class Activities extends React.Component {
 
   renderActivities() {
-    const { activities } = this.props;
+    const { activities, activeTrack, activateTrack } = this.props;
 
     if (!activities) {
       return '';
@@ -14,7 +14,7 @@ class Activities extends React.Component {
     return (<ul>{activities.toJSON().map((activity, idx) => {
       return (
         <li key={idx}>
-          <Track activity={activity} />
+          <Track activity={activity} activateTrack={activateTrack}/>
         </li>
       );
     })}</ul>);
