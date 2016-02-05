@@ -12,7 +12,6 @@
 
   &-img {
     position: relative;
-    cursor: pointer;
 
     &-overlay {
       color: $mainColor;
@@ -22,7 +21,7 @@
       top: 0;
       left: 0;
       opacity: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.7);
 
       transition: opacity 0.5s;
       -webkit-transition: opacity 0.2s;
@@ -30,15 +29,22 @@
       -webkit-transition-timing-function: ease;
 
       i {
+        cursor: pointer;
+        transform: translateX(-50%);
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
-        top: 35px;
-        font-size: 30px;
+        font-size: 25px;
+      }
+
+      i.fa-play, i.fa-pause {
+        top: 10px;
+      }
+
+      i.fa-th-list {
+        top: 60px;
       }
 
     }
-
 
   }
 

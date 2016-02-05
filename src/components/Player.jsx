@@ -22,13 +22,13 @@ export default class Footer extends React.Component {
 
   renderNav() {
 
-    const { activeTrack, isPlaying } = this.props;
+    const { activeTrack, isPlaying, isOpenPlaylist } = this.props;
 
     if (!activeTrack) { return; }
 
     const { origin } = activeTrack;
     const { user, title, stream_url } = origin;
-    const { username} = user;
+    const { username } = user;
 
     return (
       <div className='player-content'>
@@ -43,6 +43,9 @@ export default class Footer extends React.Component {
         </div>
         <div>
           {username} - {title}
+        </div>
+        <div>
+          <i className='fa fa-th-list' onClick={() => this.props.togglePlaylist(isOpenPlaylist)}></i>
         </div>
         <audio id='audio' ref='audio' src={addAccessTokenWith(stream_url, '?')}></audio>
       </div>

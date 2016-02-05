@@ -5,7 +5,7 @@ import {isActivePlayingTrack} from '../utils/player';
 export default class Track extends React.Component {
 
   renderImage(artwork_url, title, avatar_url) {
-    return <img src={artwork_url || avatar_url} alt={title}/>;
+    return <img src={artwork_url || avatar_url} alt={title} height='100' width='100'/>;
   }
 
   renderTrack() {
@@ -20,9 +20,18 @@ export default class Track extends React.Component {
 
     return (
       <div className='track'>
-        <div className='track-img' onClick={() => this.props.activateTrack(activity)}>
+        <div className='track-img'>
           {this.renderImage(artwork_url, title, avatar_url)}
-          <div className='track-img-overlay'><i className={'fa ' + (isActivePlayingTrack(activeTrack, activity, isPlaying) ? 'fa-pause' : 'fa-play')}></i></div>
+          <div className='track-img-overlay'>
+            <i
+                className={'fa ' + (isActivePlayingTrack(activeTrack, activity, isPlaying) ? 'fa-pause' : 'fa-play')}
+                onClick={() => this.props.activateTrack(activity)}>
+            </i>
+            <i
+                className={'fa fa-th-list'}
+                onClick={() => this.props.addTrackToPlaylist(activity)}>
+            </i>
+          </div>
         </div>
         <div className='track-content'>
           <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title}</a>

@@ -1,0 +1,34 @@
+.mini-track {
+
+  border-bottom: 0.5px solid $background;
+  display: flex;
+  margin-right: $padding / 2;
+
+  &-content {
+    width: 100%;
+    height: 20px;
+    padding: $padding / 2;
+    background: $nav;
+  }
+
+  &-action {
+
+    margin: auto ($padding / 2);
+
+    transition: margin 0.2s;
+    -webkit-transition: margin 0.2s;
+    transition-timing-function: ease;
+    -webkit-transition-timing-function: ease;
+
+    i {
+      cursor: pointer;
+      font-size: 15px;
+
+      &:hover {
+          color: $mainColor;
+      }
+    }
+
+  }
+
+}

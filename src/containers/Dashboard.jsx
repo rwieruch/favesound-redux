@@ -4,6 +4,7 @@ import * as actions from '../actions/index';
 import Followings from '../components/Followings';
 import Activities from '../components/Activities';
 import Player from '../components/Player';
+import Playlist from '../components/Playlist';
 
 export class Dashboard extends React.Component {
 
@@ -21,6 +22,7 @@ export class Dashboard extends React.Component {
             <Followings {...this.props} />
           </div>
         </div>
+        <Playlist {...this.props} />
         <Player {...this.props} />
       </div>);
     } else {
@@ -38,7 +40,9 @@ function mapStateToProps(state) {
     activitiesNextHref: state.user.get('activitiesNextHref'),
     activitiesRequestInProcess: state.user.get('activitiesRequestInProcess'),
     activeTrack: state.player.get('activeTrack'),
-    isPlaying: state.player.get('isPlaying')
+    isPlaying: state.player.get('isPlaying'),
+    playlist: state.player.get('playlist'),
+    isOpenPlaylist: state.environment.get('isOpenPlaylist')
   };
 }
 

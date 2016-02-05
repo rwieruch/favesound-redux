@@ -1,0 +1,46 @@
+.playlist {
+
+  background: $nav;
+  position: fixed;
+  right: 10%;
+  bottom: 0;
+  width: $padding * 18;
+  height: $padding * 15;
+  border-top: $border;
+  overflow: scroll;
+  opacity: 0;
+
+  transition: height 0.2s;
+  -webkit-transition: opacity 0.2s;
+  transition-timing-function: ease;
+  -webkit-transition-timing-function: ease;
+
+  &-visible {
+    opacity: 1;
+  }
+
+  &-content {
+    position: relative;
+    display: flex;
+    justify-content: start;
+    height: 100%;
+    margin-left: 25%;
+
+    div {
+      margin: auto $padding;
+
+      i {
+        cursor: pointer;
+        font-size: 20px;
+        width: 20px;
+
+        &:hover {
+          color: $mainColor;
+        }
+
+      }
+    }
+
+  }
+
+}
