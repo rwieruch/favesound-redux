@@ -8,7 +8,7 @@ export default class Header extends React.Component {
 
 
     return (<div className='header-content'>
-      <h1>Hello {currentUser.username}</h1>
+      <h1>Hey {currentUser.username}</h1>
     </div>);
   }
 
