@@ -21,6 +21,7 @@ export class Dashboard extends React.Component {
           </div>
           <div className='dashboard-content-side'>
             <Followings {...this.props} />
+            <Followings {...this.props} />
           </div>
         </div>
         <Playlist {...this.props} />

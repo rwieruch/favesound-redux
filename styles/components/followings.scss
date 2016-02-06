@@ -1,0 +1,29 @@
+.followings {
+
+  i {
+    opacity: 0;
+    transition: opacity 0.2s;
+    -webkit-transition: opacity 0.2s;
+    transition-timing-function: ease;
+    -webkit-transition-timing-function: ease;
+  }
+
+  &:hover i {
+    opacity: 1;
+  }
+
+  &-content {
+    height: $padding * 12;
+    overflow: hidden;
+
+    ul, li, a {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  .more &-content {
+    height: 100%
+  }
+
+}
