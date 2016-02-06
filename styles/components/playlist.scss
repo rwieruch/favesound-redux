@@ -9,6 +9,7 @@
   border: $border;
   overflow: scroll;
   opacity: 0;
+  pointer-events: none;
 
   transition: height 0.2s;
   -webkit-transition: opacity 0.2s;
@@ -17,6 +18,7 @@
 
   &-visible {
     opacity: 1;
+    pointer-events: all;
   }
 
   &-content {

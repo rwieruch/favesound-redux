@@ -35,7 +35,7 @@ export default class Followings extends React.Component {
     return (<div className='followings'>
       <h2>
         <a href='#' onClick={() => this.toggleMore()}>
-          Followings&nbsp;
+          {this.props.title}&nbsp;
           <i className={'fa ' + (this.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down')}></i>
         </a>
       </h2>

@@ -20,8 +20,8 @@ export class Dashboard extends React.Component {
             <Activities {...this.props} scrollFunction={this.props.fetchActivities.bind(null, activitiesNextHref)}/>
           </div>
           <div className='dashboard-content-side'>
-            <Followings {...this.props} />
-            <Followings {...this.props} />
+            <Followings title='Followings' {...this.props} />
+            <Followings title='Followers' {...this.props} />
           </div>
         </div>
         <Playlist {...this.props} />
