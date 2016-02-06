@@ -1,5 +1,5 @@
 import React from 'react';
-import {isSameTrackAndPlaying} from '../utils/player';
+import {isSameTrackAndPlaying, isSameTrack} from '../utils/player';
 
 export default class MiniTrack extends React.Component {
 
@@ -18,9 +18,10 @@ export default class MiniTrack extends React.Component {
     const permalink_url_user = user.permalink_url;
 
     const trackIsPlaying = isSameTrackAndPlaying(activeTrack, activity, isPlaying);
+    const trackIsSame = isSameTrack(activeTrack)(activity);
 
     return (
-      <div className='mini-track'>
+      <div className={'mini-track ' + (trackIsSame ? 'active-track' : '' )}>
         <div className='mini-track-img'>
           {this.renderImage(artwork_url, title, avatar_url)}
         </div>

@@ -5,6 +5,7 @@ import Followings from '../components/Followings';
 import Activities from '../components/Activities';
 import Player from '../components/Player';
 import Playlist from '../components/Playlist';
+import Header from '../components/Header';
 
 export class Dashboard extends React.Component {
 
@@ -13,7 +14,7 @@ export class Dashboard extends React.Component {
 
     if (currentUser) {
       return (<div className='dashboard'>
-        <h1>Hello {currentUser.username}</h1>
+        <Header {...this.props} />
         <div className='dashboard-content'>
           <div className='dashboard-content-main'>
             <Activities {...this.props} scrollFunction={this.props.fetchActivities.bind(null, activitiesNextHref)}/>

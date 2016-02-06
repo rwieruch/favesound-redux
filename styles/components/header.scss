@@ -1,0 +1,20 @@
+.header {
+
+  background: $nav;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: $padding * 3;
+  border-bottom: $border;
+  z-index: 1;
+
+  &-content {
+    position: relative;
+    display: flex;
+    justify-content: start;
+    height: 100%;
+    margin-left: 10%;
+  }
+
+}

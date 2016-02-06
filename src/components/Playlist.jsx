@@ -7,12 +7,6 @@ export default class Playlist extends React.Component {
 
     const { playlist } = this.props;
 
-    // if (!activeTrack) { return; }
-
-    // const { origin } = activeTrack;
-    // const { user, title, stream_url } = origin;
-    // const { username } = user;
-
     return (<ul>{playlist.toJSON().map((activity, idx) => {
       return (
         <li key={idx}>
