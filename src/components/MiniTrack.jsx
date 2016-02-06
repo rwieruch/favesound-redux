@@ -18,7 +18,7 @@ export default class MiniTrack extends React.Component {
     const permalink_url_user = user.permalink_url;
 
     const trackIsPlaying = isSameTrackAndPlaying(activeTrack, activity, isPlaying);
-    const trackIsSame = isSameTrack.bind(activeTrack)(activity);
+    const trackIsSame = isSameTrack(activeTrack)(activity);
 
     return (
       <div className={'mini-track ' + (trackIsSame ? 'active-track' : '' )}>
@@ -27,18 +27,20 @@ export default class MiniTrack extends React.Component {
         </div>
         <div className='mini-track-content'>
           <a href={permalink_url}>{username} - {title}</a>
-        </div>
-        <div className='mini-track-action'>
-          <i
-            className={'fa ' + (trackIsPlaying ? 'fa-pause' : 'fa-play')}
-            onClick={() => this.props.activateTrack(activity)}>
-          </i>
-        </div>
-        <div className='mini-track-action'>
-          <i
-            className='fa fa-times'
-            onClick={() => this.props.removeTrackFromPlaylist(activity)}>
-          </i>
+          <div className='mini-track-content-action'>
+            <div className='mini-track-content-action-item'>
+              <i
+                className={'fa ' + (trackIsPlaying ? 'fa-pause' : 'fa-play')}
+                onClick={() => this.props.activateTrack(activity)}>
+              </i>
+            </div>
+            <div className='mini-track-content-action-item'>
+              <i
+                className='fa fa-times'
+                onClick={() => this.props.removeTrackFromPlaylist(activity)}>
+              </i>
+            </div>
+          </div>
         </div>
       </div>);
   }
