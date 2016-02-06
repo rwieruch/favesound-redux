@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie';
 
-export function apiUrl(url) {
+export function apiUrl(url, symbol) {
     const accessToken = Cookies.get('accessToken');
-    return `//api.soundcloud.com/${url}&oauth_token=${accessToken}`;
+    return `//api.soundcloud.com/${url}${symbol}oauth_token=${accessToken}`;
 }
 
 export function addAccessTokenWith(url, symbol) {
@@ -21,6 +21,6 @@ export function getLazyLoadingUrl(user, nextHref, initHref) {
   if (nextHref) {
     return addAccessTokenWith(nextHref, '&');
   } else {
-    return apiUrl(`${urlPrefix}/${initHref}`);
+    return apiUrl(`${urlPrefix}/${initHref}`, '&');
   }
 }

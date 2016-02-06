@@ -1,6 +1,7 @@
 import * as actionTypes from '../constants/actionTypes';
 import {togglePlaylist} from './environment';
 import {isSameTrackAndPlaying, isSameTrack} from '../utils/player';
+import {apiUrl} from '../utils/soundcloudApi';
 
 function setActiveTrack(activeTrack) {
     return {

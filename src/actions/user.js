@@ -10,7 +10,7 @@ function mergeFollowings(followings) {
 
 export function fetchFollowings(user, nextHref) {
 
-  const initHref = apiUrl(`users/${user.id}/followings?limit=200&offset=0`);
+  const initHref = apiUrl(`users/${user.id}/followings?limit=200&offset=0`, '&');
   const followingsUrl = nextHref || initHref;
 
   return dispatch => {

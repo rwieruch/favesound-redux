@@ -2,6 +2,7 @@ import Cookies from 'js-cookie';
 import {CLIENT_ID} from '../constants/authentification';
 import * as actionTypes from '../constants/actionTypes';
 import {fetchFollowings, fetchActivities, fetchFollowers} from './user';
+import {apiUrl} from '../utils/soundcloudApi';
 
 const OAUTH_TOKEN = 'accessToken';
 
@@ -45,7 +46,7 @@ export function logout() {
 
 function fetchUser(accessToken) {
   return dispatch => {
-    fetch(`//api.soundcloud.com/me?oauth_token=${accessToken}`)
+    fetch(apiUrl(`me`, '?'))
       .then(response => response.json())
       .then(me => {
         dispatch(setUser(me));
