@@ -1,6 +1,6 @@
 import {initSession} from './session';
 import {fetchActivities} from './user';
-import {activateTrack, togglePlayTrack, addTrackToPlaylist, removeTrackFromPlaylist} from './player';
+import {activateTrack, activateIteratedTrack, togglePlayTrack, addTrackToPlaylist, removeTrackFromPlaylist} from './player';
 import {togglePlaylist} from './environment';
 
 export {
@@ -10,5 +10,6 @@ export {
     togglePlayTrack,
     addTrackToPlaylist,
     removeTrackFromPlaylist,
+    activateIteratedTrack,
     togglePlaylist
 };

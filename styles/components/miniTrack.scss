@@ -1,24 +1,25 @@
 .mini-track {
 
-  border-bottom: 0.5px solid $background;
   display: flex;
-  margin-right: $padding / 2;
+  height: 40px;
+  overflow: hidden;
+  border-bottom: $border;
+
+  &:hover &-action {
+    opacity: 1;
+    margin: auto ($padding / 2);
+  }
 
   &-content {
-    width: 100%;
     height: 20px;
     padding: $padding / 2;
     background: $nav;
   }
 
   &-action {
-
-    margin: auto ($padding / 2);
-
-    transition: margin 0.2s;
-    -webkit-transition: margin 0.2s;
-    transition-timing-function: ease;
-    -webkit-transition-timing-function: ease;
+    opacity: 0;
+    margin: auto 0;
+    transition: all 0.2s;
 
     i {
       cursor: pointer;

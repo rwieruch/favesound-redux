@@ -1,6 +1,6 @@
 import React from 'react';
 import {getTrackIcon} from '../utils/track';
-import {isActivePlayingTrack} from '../utils/player';
+import {isSameTrackAndPlaying} from '../utils/player';
 
 export default class Track extends React.Component {
 
@@ -18,7 +18,7 @@ export default class Track extends React.Component {
     return (
       <div className='track-img-overlay'>
         <i
-            className={'fa ' + (isActivePlayingTrack(activeTrack, activity, isPlaying) ? 'fa-pause' : 'fa-play')}
+            className={'fa ' + (isSameTrackAndPlaying(activeTrack, activity, isPlaying) ? 'fa-pause' : 'fa-play')}
             onClick={() => this.props.activateTrack(activity)}>
         </i>
         <i

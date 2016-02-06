@@ -33,13 +33,13 @@ export default class Footer extends React.Component {
     return (
       <div className='player-content'>
         <div>
-          <i className='fa fa-step-backward'></i>
+          <i className='fa fa-step-backward' onClick={() => this.props.activateIteratedTrack(activeTrack, -1)}></i>
         </div>
         <div>
           <i className={'fa ' + (isPlaying ? 'fa-pause' : 'fa-play')} onClick={() => this.togglePlay()}></i>
         </div>
         <div>
-          <i className='fa fa-step-forward'></i>
+          <i className='fa fa-step-forward' onClick={() => this.props.activateIteratedTrack(activeTrack, 1)}></i>
         </div>
         <div>
           {username} - {title}
