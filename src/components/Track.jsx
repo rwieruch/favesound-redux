@@ -1,8 +1,33 @@
 import React from 'react';
-import {getTrackIcon} from '../utils/track';
+import ReactDOM from 'react-dom';
+import Waveform from 'waveform.js';
+import {getTrackIcon, isNoTrack, normalizeSamples} from '../utils/track';
 import {isSameTrackAndPlaying} from '../utils/player';
 
 export default class Track extends React.Component {
+
+  componentDidMount() {
+
+    let { idx, activity } = this.props;
+    let { origin } = activity;
+
+    if (!origin) { return; }
+
+    let { waveform_url, id } = origin;
+
+    if (!waveform_url) { return; }
+
+    fetch(waveform_url)
+      .then(response => response.json())
+      .then((data) => {
+        var waveform = new Waveform({
+          container: document.getElementById('waveform-' + id + idx),
+          innerColor: '#61B25A',
+          data: normalizeSamples(data.samples)
+        });
+      });
+
+  }
 
   renderImage(artwork_url, title, avatar_url) {
     return <img src={artwork_url || avatar_url} alt={title} height='100' width='100'/>;
@@ -33,12 +58,12 @@ export default class Track extends React.Component {
   }
 
   renderTrack() {
-    const { activity, activeTrack, isPlaying } = this.props;
+    const { activity, activeTrack, isPlaying, idx } = this.props;
     const { origin, type } = activity;
 
-    if (!origin) { return; }
+    if (isNoTrack(activity)) { return; }
 
-    const { user, title, reposts_count, playback_count, likes_count, permalink_url, artwork_url, stream_url } = origin;
+    const { user, title, reposts_count, playback_count, likes_count, permalink_url, artwork_url, stream_url, id } = origin;
     const { avatar_url, username } = user;
     const permalink_url_user = user.permalink_url;
 
@@ -48,7 +73,8 @@ export default class Track extends React.Component {
           {this.renderImage(artwork_url, title, avatar_url)}
         </div>
         <div className='track-content'>
-          <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title}</a>
+          <div id={'waveform-' + id + idx} className='track-content-waveform'></div>
+          <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title} {type}</a>
         </div>
         {this.renderActions(isPlaying, activity, activeTrack)}
       </div>);
