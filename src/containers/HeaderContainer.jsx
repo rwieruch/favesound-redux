@@ -1,6 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../actions/index';
 
-export default class Header extends React.Component {
+export class Header extends React.Component {
 
   renderHeader() {
 
@@ -21,3 +23,11 @@ export default class Header extends React.Component {
   }
 
 }
+
+function mapStateToProps(state) {
+  return {
+    currentUser: state.session.get('user')
+  };
+}
+
+export const HeaderContainer = connect(mapStateToProps, actions)(Header);

@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {connect} from 'react-redux';
+import * as actions from '../actions/index';
 import {addAccessTokenWith} from '../utils/soundcloudApi';
 
-export default class Player extends React.Component {
+export class Player extends React.Component {
 
   componentDidUpdate() {
 
@@ -57,3 +59,13 @@ export default class Player extends React.Component {
   }
 
 }
+
+function mapStateToProps(state) {
+  return {
+    activeTrack: state.player.get('activeTrack'),
+    isPlaying: state.player.get('isPlaying'),
+    isOpenPlaylist: state.environment.get('isOpenPlaylist')
+  };
+}
+
+export const PlayerContainer = connect(mapStateToProps, actions)(Player);

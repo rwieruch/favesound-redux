@@ -1,7 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../actions/index';
 import MiniTrack from '../components/MiniTrack';
 
-export default class Playlist extends React.Component {
+export class Playlist extends React.Component {
 
   renderPlaylist() {
 
@@ -23,3 +25,14 @@ export default class Playlist extends React.Component {
   }
 
 }
+
+function mapStateToProps(state) {
+  return {
+    activeTrack: state.player.get('activeTrack'),
+    isPlaying: state.player.get('isPlaying'),
+    playlist: state.player.get('playlist'),
+    isOpenPlaylist: state.environment.get('isOpenPlaylist')
+  };
+}
+
+export const PlaylistContainer = connect(mapStateToProps, actions)(Playlist);

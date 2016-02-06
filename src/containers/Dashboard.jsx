@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index';
+import {HeaderContainer} from '../containers/HeaderContainer';
+import {PlayerContainer} from '../containers/PlayerContainer';
+import {PlaylistContainer} from '../containers/PlaylistContainer';
 import UserMosaic from '../components/UserMosaic';
 import Activities from '../components/Activities';
-import Player from '../components/Player';
-import Playlist from '../components/Playlist';
-import Header from '../components/Header';
 
 export class Dashboard extends React.Component {
 
@@ -30,10 +30,10 @@ export class Dashboard extends React.Component {
 
   render() {
     return (<div className='dashboard'>
-      <Header {...this.props} />
+      <HeaderContainer />
       {this.getInnerContent()}
-      <Playlist {...this.props} />
-      <Player {...this.props} />
+      <PlaylistContainer />
+      <PlayerContainer />
     </div>);
   }
 
@@ -50,9 +50,7 @@ function mapStateToProps(state) {
     followersNextHref: state.user.get('followersNextHref'),
     followersRequestInProcess: state.user.get('followersRequestInProcess'),
     activeTrack: state.player.get('activeTrack'),
-    isPlaying: state.player.get('isPlaying'),
-    playlist: state.player.get('playlist'),
-    isOpenPlaylist: state.environment.get('isOpenPlaylist')
+    isPlaying: state.player.get('isPlaying')
   };
 }
 
