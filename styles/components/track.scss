@@ -14,9 +14,9 @@
     &-waveform {
       position: absolute;
       top: $padding * 2;
-      right: $padding;
+      left: $padding;
       height: 30%;
-      width: 95%;
+      width: 90%;
 
       pointer-events: none;
 
@@ -26,40 +26,62 @@
       transition-timing-function: ease;
       -webkit-transition-timing-function: ease;
     }
-  }
 
-  &-actions {
+    &-info {
+      position: absolute;
+      bottom: $padding / 4;
+      left: $padding / 2;
+      display: flex;
+      width: 100%;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+      opacity: .2;
+      transition: opacity 0.2s;
+      -webkit-transition: opacity 0.2s;
+      transition-timing-function: ease;
+      -webkit-transition-timing-function: ease;
 
-    opacity: 0;
-    margin: 0;
-    transition: all 0.2s;
+      &-item {
+        width: 20%;
+      }
+    }
 
-    &-item {
+    &-actions {
+      position: absolute;
+      right: 0;
+      top: $padding;
 
-      padding: ($padding / 2) 0;
+      opacity: 0;
+      transition: all 0.2s;
+      -webkit-transition: all 0.2s;
+      transition-timing-function: ease;
+      -webkit-transition-timing-function: ease;
 
-      i {
-        cursor: pointer;
-        font-size: 20px;
+      &-item {
 
-        &:hover {
-          color: $mainColor;
+        margin: ($padding / 2) 0;
+
+        i {
+          cursor: pointer;
+          font-size: 20px;
+
+          &:hover {
+            color: $mainColor;
+          }
         }
       }
-
     }
   }
 
-  &:hover .track-actions {
+  &:hover .track-content-actions {
     opacity: 1;
-    margin: 0 ($padding / 2);
+    margin-right: ($padding / 2);
   }
 
   &:hover .track-content-waveform {
+    opacity: 1;
+  }
+
+  &:hover .track-content-info {
     opacity: 1;
   }
 

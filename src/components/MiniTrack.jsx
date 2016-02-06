@@ -18,7 +18,7 @@ export default class MiniTrack extends React.Component {
     const permalink_url_user = user.permalink_url;
 
     const trackIsPlaying = isSameTrackAndPlaying(activeTrack, activity, isPlaying);
-    const trackIsSame = isSameTrack(activeTrack)(activity);
+    const trackIsSame = isSameTrack.bind(activeTrack)(activity);
 
     return (
       <div className={'mini-track ' + (trackIsSame ? 'active-track' : '' )}>

@@ -63,7 +63,7 @@ export default class Track extends React.Component {
 
     if (isNoTrack(activity)) { return; }
 
-    const { user, title, reposts_count, playback_count, likes_count, permalink_url, artwork_url, stream_url, id } = origin;
+    const { user, title, reposts_count, playback_count, comment_count, download_count, likes_count, permalink_url, artwork_url, stream_url, id } = origin;
     const { avatar_url, username } = user;
     const permalink_url_user = user.permalink_url;
 
@@ -73,10 +73,40 @@ export default class Track extends React.Component {
           {this.renderImage(artwork_url, title, avatar_url)}
         </div>
         <div className='track-content'>
-          <div id={'waveform-' + id + idx} className='track-content-waveform'></div>
           <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title} {type}</a>
+          <div className='track-content-waveform' id={'waveform-' + id + idx}></div>
+          <div className='track-content-info'>
+            <div className='track-content-info-item'>
+              <i className='fa fa-play'></i>&nbsp;{playback_count}
+            </div>
+            <div className='track-content-info-item'>
+              <i className='fa fa-heart'></i>&nbsp;{likes_count}
+            </div>
+            <div className='track-content-info-item'>
+              <i className='fa fa-retweet'></i>&nbsp;{reposts_count}
+            </div>
+            <div className='track-content-info-item'>
+              <i className='fa fa-comment'></i>&nbsp;{comment_count}
+            </div>
+            <div className='track-content-info-item'>
+              <i className='fa fa-download'></i>&nbsp;{download_count}
+            </div>
+          </div>
+          <div className='track-content-actions'>
+            <div className='track-content-actions-item'>
+              <i
+                  className={'fa ' + (isSameTrackAndPlaying(activeTrack, activity, isPlaying) ? 'fa-pause' : 'fa-play')}
+                  onClick={() => this.props.activateTrack(activity)}>
+              </i>
+            </div>
+            <div className='track-content-actions-item'>
+              <i
+                  className={'fa fa-th-list'}
+                  onClick={() => this.props.addTrackToPlaylist(activity)}>
+              </i>
+            </div>
+          </div>
         </div>
-        {this.renderActions(isPlaying, activity, activeTrack)}
       </div>);
   }
 
