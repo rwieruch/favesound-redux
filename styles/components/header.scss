@@ -12,9 +12,24 @@
   &-content {
     position: relative;
     display: flex;
-    justify-content: start;
     height: 100%;
-    margin-left: 10%;
+    justify-content: space-between;
+    margin: 0 10%;
+
+    div {
+      margin: auto $padding;
+
+      i {
+        cursor: pointer;
+        font-size: 20px;
+        width: 20px;
+
+        &:hover {
+          color: $mainColor;
+        }
+
+      }
+    }
   }
 
 }

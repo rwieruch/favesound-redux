@@ -19,7 +19,7 @@ function setUser(user) {
   };
 }
 
-export function initSession() {
+export function login() {
 
   const client_id = CLIENT_ID;
   const redirect_uri = `${window.location.protocol}//${window.location.host}/callback`;
@@ -32,6 +32,14 @@ export function initSession() {
       dispatch(setSession(session));
       dispatch(fetchUser(session.oauth_token));
     });
+  }
+}
+
+export function logout() {
+  return (dispatch) => {
+    Cookies.remove(OAUTH_TOKEN);
+    dispatch(setSession(null));
+    dispatch(setUser(null));
   }
 }
 

@@ -4,11 +4,15 @@ export default class Header extends React.Component {
 
   renderHeader() {
 
-    const { currentUser } = this.props;
-
+    const { currentUser, login, logout } = this.props;
 
     return (<div className='header-content'>
-      <h1>Hey {currentUser.username}</h1>
+      <div>
+        <h1>{currentUser ? 'Hey ' + currentUser.username : 'Favesound'}</h1>
+      </div>
+      <div>
+        <a href="#" onClick={() => currentUser ? logout() : login() }>{currentUser ? 'Logout': 'Login'}</a>
+      </div>
     </div>);
   }
 

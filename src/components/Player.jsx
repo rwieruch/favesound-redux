@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {addAccessTokenWith} from '../utils/soundcloudApi';
 
-export default class Footer extends React.Component {
+export default class Player extends React.Component {
 
   componentDidUpdate() {
 

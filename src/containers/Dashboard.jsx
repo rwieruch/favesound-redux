@@ -9,26 +9,32 @@ import Header from '../components/Header';
 
 export class Dashboard extends React.Component {
 
-  render() {
-    const { initSession, currentUser, followings, activitiesNextHref, followers, followersNextHref, followersRequestInProcess, fetchFollowers } = this.props;
+  getInnerContent() {
+    const { currentUser, followings, activitiesNextHref, followers, followersNextHref, followersRequestInProcess, fetchFollowers } = this.props;
+
     if (currentUser) {
-      return (<div className='dashboard'>
-        <Header {...this.props} />
-        <div className='dashboard-content'>
-          <div className='dashboard-content-main'>
-            <Activities {...this.props} scrollFunction={this.props.fetchActivities.bind(null, null, activitiesNextHref)}/>
-          </div>
-          <div className='dashboard-content-side'>
-            <UserMosaic title='Followings' userList={followings} />
-            <UserMosaic title='Followers' userList={followers} nextHref={followersNextHref} requestInProcess={followersRequestInProcess} currentUser={currentUser} fetchMore={fetchFollowers}/>
-          </div>
+      return (<div className='dashboard-content'>
+        <div className='dashboard-content-main'>
+          <Activities {...this.props} scrollFunction={this.props.fetchActivities.bind(null, null, activitiesNextHref)}/>
         </div>
-        <Playlist {...this.props} />
-        <Player {...this.props} />
+        <div className='dashboard-content-side'>
+          <UserMosaic title='Followings' userList={followings} />
+          <UserMosaic title='Followers' userList={followers} nextHref={followersNextHref} requestInProcess={followersRequestInProcess} currentUser={currentUser} fetchMore={fetchFollowers}/>
+        </div>
       </div>);
     } else {
-      return <button onClick={() => initSession()}>Login</button>;
+      return <div></div>;
     }
+
+  }
+
+  render() {
+    return (<div className='dashboard'>
+      <Header {...this.props} />
+      {this.getInnerContent()}
+      <Playlist {...this.props} />
+      <Player {...this.props} />
+    </div>);
   }
 
 }
