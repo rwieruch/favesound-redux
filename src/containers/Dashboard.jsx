@@ -11,7 +11,6 @@ export class Dashboard extends React.Component {
 
   render() {
     const { initSession, currentUser, followings, activitiesNextHref, followers, followersNextHref, followersRequestInProcess, fetchFollowers } = this.props;
-    console.log(fetchFollowers);
     if (currentUser) {
       return (<div className='dashboard'>
         <Header {...this.props} />

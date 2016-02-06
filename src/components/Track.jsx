@@ -8,7 +8,7 @@ export default class Track extends React.Component {
     return <img src={artwork_url || avatar_url} alt={title} height='100' width='100'/>;
   }
 
-  renderOverlay(isPlaying, activity, activeTrack) {
+  renderActions(isPlaying, activity, activeTrack) {
 
     const { origin } = activity;
     const { stream_url } = origin;
@@ -16,15 +16,19 @@ export default class Track extends React.Component {
     if (!stream_url) { return; }
 
     return (
-      <div className='track-img-overlay'>
-        <i
-            className={'fa ' + (isSameTrackAndPlaying(activeTrack, activity, isPlaying) ? 'fa-pause' : 'fa-play')}
-            onClick={() => this.props.activateTrack(activity)}>
-        </i>
-        <i
-            className={'fa fa-th-list'}
-            onClick={() => this.props.addTrackToPlaylist(activity)}>
-        </i>
+      <div className='track-actions'>
+        <div className='track-actions-item'>
+          <i
+              className={'fa ' + (isSameTrackAndPlaying(activeTrack, activity, isPlaying) ? 'fa-pause' : 'fa-play')}
+              onClick={() => this.props.activateTrack(activity)}>
+          </i>
+        </div>
+        <div className='track-actions-item'>
+          <i
+              className={'fa fa-th-list'}
+              onClick={() => this.props.addTrackToPlaylist(activity)}>
+          </i>
+        </div>
       </div>);
   }
 
@@ -42,11 +46,11 @@ export default class Track extends React.Component {
       <div className='track'>
         <div className='track-img'>
           {this.renderImage(artwork_url, title, avatar_url)}
-          {this.renderOverlay(isPlaying, activity, activeTrack)}
         </div>
         <div className='track-content'>
           <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title}</a>
         </div>
+        {this.renderActions(isPlaying, activity, activeTrack)}
       </div>);
   }
 

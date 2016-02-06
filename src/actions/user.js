@@ -90,7 +90,6 @@ function setFollowersRequestInProcess(inProcess) {
 }
 
 export function fetchFollowers(user, nextHref) {
-  console.log(user, nextHref);
   return (dispatch, getState) => {
 
     let url = getLazyLoadingUrl(user, nextHref, 'followers?limit=200&offset=0');

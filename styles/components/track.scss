@@ -1,55 +1,42 @@
 .track {
 
-  border-bottom: 0.5px solid $background;
   display: flex;
+  margin: ($padding / 2) 0;
+  background: $backgroundSecondary;
 
   &-content {
     width: 100%;
     height: 80px;
     padding: $padding / 2;
-    background: $backgroundSecondary;
   }
 
-  &-img {
-    position: relative;
+  &-actions {
 
-    &-overlay {
-      color: $mainColor;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      background: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
-      transition: opacity 0.5s;
-      -webkit-transition: opacity 0.2s;
-      transition-timing-function: ease;
-      -webkit-transition-timing-function: ease;
+    opacity: 0;
+    margin: 0;
+    transition: all 0.2s;
+
+    &-item {
 
       i {
         cursor: pointer;
-        transform: translateX(-50%);
-        position: absolute;
-        left: 50%;
-        font-size: 25px;
-      }
+        font-size: 20px;
 
-      i.fa-play, i.fa-pause {
-        top: 10px;
-      }
-
-      i.fa-th-list {
-        top: 60px;
+        &:hover {
+          color: $mainColor;
+        }
       }
 
     }
-
   }
 
-  &:hover .track-img-overlay {
+  &:hover .track-actions {
     opacity: 1;
+    margin: 0 ($padding / 2);
   }
 
 
