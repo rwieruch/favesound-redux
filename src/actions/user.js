@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
-import {apiUrl, addAccessTokenWith} from '../utils/soundcloudApi';
+import {apiUrl, addAccessTokenWith, getLazyLoadingUrl} from '../utils/soundcloudApi';
 
 function mergeFollowings(followings) {
   return {
@@ -47,29 +47,65 @@ function setActivitiesRequestInProcess(inProcess) {
   };
 }
 
-export function fetchActivities(nextHref) {
-
-  let activitiesUrl;
-  if (nextHref) {
-    activitiesUrl = addAccessTokenWith(nextHref, '&');
-  } else {
-    activitiesUrl = apiUrl(`me/activities?limit=50&offset=0`);
-  }
-
+export function fetchActivities(user, nextHref) {
   return (dispatch, getState) => {
 
-    const activitiesRequestInProcess = getState().user.get('activitiesRequestInProcess');
+    let url = getLazyLoadingUrl(user, nextHref, 'activities?limit=50&offset=0');
+    let requestInProcess = getState().user.get('activitiesRequestInProcess');
 
-    if (activitiesRequestInProcess) { return; }
+    if (requestInProcess) { return; }
 
     dispatch(setActivitiesRequestInProcess(true));
 
-    return fetch(activitiesUrl)
+    return fetch(url)
       .then(response => response.json())
       .then(data => {
         dispatch(mergeActivities(data.collection));
         dispatch(setActivitiesNextHref(data.next_href));
         dispatch(setActivitiesRequestInProcess(false));
+      });
+  };
+
+}
+
+function mergeFollowers(followers) {
+  return {
+    type: actionTypes.MERGE_FOLLOWERS,
+    followers
+  };
+}
+
+function setFollowersNextHref(nextHref) {
+  return {
+    type: actionTypes.SET_FOLLOWERS_NEXT_HREF,
+    nextHref
+  };
+}
+
+function setFollowersRequestInProcess(inProcess) {
+  return {
+    type: actionTypes.SET_FOLLOWERS_REQUEST_IN_RPOCESS,
+    inProcess
+  };
+}
+
+export function fetchFollowers(user, nextHref) {
+  console.log(user, nextHref);
+  return (dispatch, getState) => {
+
+    let url = getLazyLoadingUrl(user, nextHref, 'followers?limit=200&offset=0');
+    let requestInProcess = getState().user.get('followersRequestInProcess');
+
+    if (requestInProcess) { return; }
+
+    dispatch(setFollowersRequestInProcess(true));
+
+    return fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        dispatch(mergeFollowers(data.collection));
+        dispatch(setFollowersNextHref(data.next_href));
+        dispatch(setFollowersRequestInProcess(false));
       });
   };
 

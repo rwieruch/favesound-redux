@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index';
-import Followings from '../components/Followings';
+import UserMosaic from '../components/UserMosaic';
 import Activities from '../components/Activities';
 import Player from '../components/Player';
 import Playlist from '../components/Playlist';
@@ -10,25 +10,25 @@ import Header from '../components/Header';
 export class Dashboard extends React.Component {
 
   render() {
-    const { currentUser, followings, activitiesNextHref } = this.props;
-
+    const { initSession, currentUser, followings, activitiesNextHref, followers, followersNextHref, followersRequestInProcess, fetchFollowers } = this.props;
+    console.log(fetchFollowers);
     if (currentUser) {
       return (<div className='dashboard'>
         <Header {...this.props} />
         <div className='dashboard-content'>
           <div className='dashboard-content-main'>
-            <Activities {...this.props} scrollFunction={this.props.fetchActivities.bind(null, activitiesNextHref)}/>
+            <Activities {...this.props} scrollFunction={this.props.fetchActivities.bind(null, null, activitiesNextHref)}/>
           </div>
           <div className='dashboard-content-side'>
-            <Followings title='Followings' {...this.props} />
-            <Followings title='Followers' {...this.props} />
+            <UserMosaic title='Followings' userList={followings} />
+            <UserMosaic title='Followers' userList={followers} nextHref={followersNextHref} requestInProcess={followersRequestInProcess} currentUser={currentUser} fetchMore={fetchFollowers}/>
           </div>
         </div>
         <Playlist {...this.props} />
         <Player {...this.props} />
       </div>);
     } else {
-      return <button onClick={() => this.props.initSession()}>Login</button>;
+      return <button onClick={() => initSession()}>Login</button>;
     }
   }
 
@@ -41,6 +41,9 @@ function mapStateToProps(state) {
     activities: state.user.get('activities'),
     activitiesNextHref: state.user.get('activitiesNextHref'),
     activitiesRequestInProcess: state.user.get('activitiesRequestInProcess'),
+    followers: state.user.get('followers'),
+    followersNextHref: state.user.get('followersNextHref'),
+    followersRequestInProcess: state.user.get('followersRequestInProcess'),
     activeTrack: state.player.get('activeTrack'),
     isPlaying: state.player.get('isPlaying'),
     playlist: state.player.get('playlist'),

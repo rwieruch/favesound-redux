@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import {CLIENT_ID} from '../constants/authentification';
 import * as actionTypes from '../constants/actionTypes';
-import {fetchFollowings, fetchActivities} from './user';
+import {fetchFollowings, fetchActivities, fetchFollowers} from './user';
 
 const OAUTH_TOKEN = 'accessToken';
 
@@ -42,6 +42,7 @@ function fetchUser(accessToken) {
       .then(me => {
         dispatch(setUser(me));
         dispatch(fetchFollowings(me));
+        dispatch(fetchFollowers(me));
         dispatch(fetchActivities());
       });
   };

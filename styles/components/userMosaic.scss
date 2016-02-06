@@ -1,4 +1,4 @@
-.followings {
+.user-mosaic {
 
   i {
     opacity: 0;
@@ -22,8 +22,12 @@
     }
   }
 
-  .more &-content {
+  .more-visible &-content {
     height: 100%;
+  }
+
+  &-actions {
+    margin: ($padding / 2) auto;
   }
 
 }

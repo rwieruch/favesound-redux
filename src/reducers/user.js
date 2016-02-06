@@ -5,7 +5,10 @@ const initialState = Map({
   followings: List(),
   activities: List(),
   activitiesNextHref: null,
-  activitiesRequestInProcess: false
+  activitiesRequestInProcess: false,
+  followers: List(),
+  followersNextHref: null,
+  followersRequestInProcess: false
 });
 
 export default function(state = initialState, action) {
@@ -18,6 +21,12 @@ export default function(state = initialState, action) {
     return setActivitiesNextHref(state, action.nextHref);
   case actionTypes.SET_ACTIVITIES_REQUEST_IN_RPOCESS:
     return setActivitiesRequestInProcess(state, action.inProcess);
+  case actionTypes.MERGE_FOLLOWERS:
+    return mergeFollowers(state, fromJS(action.followers));
+  case actionTypes.SET_FOLLOWERS_NEXT_HREF:
+    return setFollowersNextHref(state, action.nextHref);
+  case actionTypes.SET_FOLLOWERS_REQUEST_IN_RPOCESS:
+    return setFollowersRequestInProcess(state, action.inProcess);
   }
   return state;
 }
@@ -36,4 +45,16 @@ function setActivitiesNextHref(state, nextHref) {
 
 function setActivitiesRequestInProcess(state, inProcess) {
   return state.set('activitiesRequestInProcess', inProcess);
+}
+
+function mergeFollowers(state, followers) {
+  return state.updateIn(['followers'], (list) => list.concat(followers));
+}
+
+function setFollowersNextHref(state, nextHref) {
+  return state.set('followersNextHref', nextHref);
+}
+
+function setFollowersRequestInProcess(state, inProcess) {
+  return state.set('followersRequestInProcess', inProcess);
 }

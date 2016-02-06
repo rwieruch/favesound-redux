@@ -30,3 +30,43 @@ a {
     color: $hyperlinkVisited;
   }
 }
+
+button.ghost {
+  display: inline-block;
+  border: 1px solid $mainColor;
+  height: $padding;
+  line-height: $padding;
+  color: $mainColor;
+  -webkit-border-radius: 5px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 5px;
+  -moz-background-clip: padding;
+  border-radius: 5px;
+  background-clip: padding-box;
+  padding: .5em 1.5em;
+  font-weight: bold;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  background: transparent;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  cursor: pointer;
+  -webkit-backface-visibility: hidden;
+
+  &:hover {
+    -webkit-transition: 0.2s ease;
+    -moz-transition: 0.2s ease;
+    -o-transition: 0.2s ease;
+    transition: 0.2s ease;
+    background-color: $mainColor;
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+}
