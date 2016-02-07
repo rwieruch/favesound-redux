@@ -39,3 +39,11 @@ export function normalizeSamples(samples) {
   }
   return newSamples;
 }
+
+export function isJsonWaveform(waveformUrl) {
+  return waveformUrl.indexOf('.json') !== -1;
+}
+
+export function isPngWaveform(waveformUrl) {
+  return waveformUrl.indexOf('.png') !== -1;
+}

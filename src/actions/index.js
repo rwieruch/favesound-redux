@@ -1,6 +1,7 @@
 import { login, logout } from './session';
 import { fetchActivities, fetchFollowers, fetchFavorites } from './user';
 import { togglePlaylist } from './environment';
+import { fetchActivitiesByGenre } from './browse';
 import {
   activateTrack,
   activateIteratedTrack,
@@ -20,5 +21,6 @@ export {
   addTrackToPlaylist,
   removeTrackFromPlaylist,
   activateIteratedTrack,
-  togglePlaylist
+  togglePlaylist,
+  fetchActivitiesByGenre
 };

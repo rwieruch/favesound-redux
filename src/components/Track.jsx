@@ -1,12 +1,12 @@
 import React from 'react';
 import Waveform from 'waveform.js';
-import { getTrackIcon, isNoTrack, normalizeSamples } from '../utils/track';
+import { getTrackIcon, isNoTrack, normalizeSamples, isJsonWaveform, isPngWaveform } from '../utils/track';
 import { isSameTrackAndPlaying } from '../utils/player';
 
 export default class Track extends React.Component {
 
   componentDidMount() {
-    const { idx, activity } = this.props;
+    const { activity, idx } = this.props;
     const { origin } = activity;
 
     if (!origin) { return; }
@@ -15,7 +15,13 @@ export default class Track extends React.Component {
 
     if (!waveform_url) { return; }
 
-    fetch(waveform_url)
+    if (isJsonWaveform(waveform_url)) {
+      this.fetchJsonWaveform(id, idx, waveform_url);
+    }
+  }
+
+  fetchJsonWaveform(id, idx, waveformUrl) {
+    fetch(waveformUrl)
       .then(response => response.json())
       .then((data) => {
         const elementId = `waveform-${id}${idx}`;
@@ -33,6 +39,19 @@ export default class Track extends React.Component {
 
   addTrackToPlaylist(activity, addTrackToPlaylist) {
     addTrackToPlaylist(activity);
+  }
+
+
+  renderWaveform(id, idx, waveformUrl) {
+    if (isJsonWaveform(waveformUrl)) {
+      return <div className="track-content-waveform" id={"waveform-" + id + idx}></div>;
+    }
+
+    if (isPngWaveform(waveformUrl)) {
+      return; // <div className="track-content-waveform" id={"waveform-" + id + idx}></div>
+    }
+
+    return;
   }
 
   renderImage(artwork_url, title, avatar_url) {
@@ -55,6 +74,7 @@ export default class Track extends React.Component {
       likes_count,
       artwork_url,
       permalink_url,
+      waveform_url,
       id
     } = origin;
 
@@ -67,7 +87,7 @@ export default class Track extends React.Component {
         </div>
         <div className="track-content">
           <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title} {type}</a>
-          <div className="track-content-waveform" id={"waveform-" + id + idx}></div>
+          {this.renderWaveform(id, idx, waveform_url)}
           <div className="track-content-info">
             <div className="track-content-info-item">
               <i className="fa fa-play"></i>&nbsp;{playback_count}

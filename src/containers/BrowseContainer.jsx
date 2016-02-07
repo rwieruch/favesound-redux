@@ -8,6 +8,10 @@ import Activities from '../components/Activities';
 
 export class Browse extends React.Component {
 
+  componentDidMount() {
+    this.fetchActivitiesByGenre();
+  }
+
   getInnerContent() {
     const { activitiesByGenre } = this.props;
     const filteredActivitiesByGenre = activitiesByGenre; // TODO: filter
@@ -22,8 +26,9 @@ export class Browse extends React.Component {
   }
 
   fetchActivitiesByGenre() {
-    const { activitiesNextHref } = this.props;
-    this.props.fetchActivitiesByGenre(null, activitiesNextHref);
+    const { genre, activitiesByGenreNextHrefs } = this.props;
+    const nextHref = activitiesByGenreNextHrefs.get(genre);
+    this.props.fetchActivitiesByGenre(nextHref, genre);
   }
 
   render() {
@@ -37,9 +42,11 @@ export class Browse extends React.Component {
 
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    activitiesByGenre: state.browse.get('activities'),
+    genre: ownProps.location.query.genre,
+    activitiesByGenre: state.browse.get('activitiesByGenre'),
+    activitiesByGenreNextHrefs: state.browse.get('activitiesByGenreNextHrefs')
   };
 }
 
