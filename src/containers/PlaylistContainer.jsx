@@ -1,21 +1,21 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import MiniTrack from '../components/MiniTrack';
 
 export class Playlist extends React.Component {
 
+  renderMiniTrack(activity, idx) {
+    return (
+      <li key={idx}>
+        <MiniTrack activity={activity} {...this.props}/>
+      </li>
+    );
+  }
+
   renderPlaylist() {
-
     const { playlist } = this.props;
-
-    return (<ul>{playlist.toJSON().map((activity, idx) => {
-      return (
-        <li key={idx}>
-          <MiniTrack activity={activity} {...this.props}/>
-        </li>
-      );
-    })}</ul>);
+    return (<ul>{playlist.toJSON().map(this.renderMiniTrack.bind(this))}</ul>);
   }
 
   render() {
@@ -23,7 +23,6 @@ export class Playlist extends React.Component {
         {this.renderPlaylist()}
     </div>);
   }
-
 }
 
 function mapStateToProps(state) {

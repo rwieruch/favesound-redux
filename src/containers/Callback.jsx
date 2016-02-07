@@ -1,5 +1,4 @@
 import React from 'react';
-import SC from 'soundcloud';
 
 export default class Callback extends React.Component {
 

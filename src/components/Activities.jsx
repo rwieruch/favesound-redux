@@ -4,20 +4,22 @@ import Track from '../components/Track';
 
 class Activities extends React.Component {
 
+  renderActivity(activity, idx) {
+    return (
+      <li key={idx}>
+        <Track activity={activity} idx={idx} {...this.props}/>
+      </li>
+    );
+  }
+
   renderActivities() {
-    const { activities, activeTrack, activateTrack } = this.props;
+    const { activities } = this.props;
 
     if (!activities) {
       return '';
     }
 
-    return (<ul>{activities.toJSON().map((activity, idx) => {
-      return (
-        <li key={idx}>
-          <Track activity={activity} idx={idx} {...this.props}/>
-        </li>
-      );
-    })}</ul>);
+    return <ul>{activities.toJSON().map(this.renderActivity.bind(this))}</ul>;
   }
 
   renderActivitiesRequestInProcess() {

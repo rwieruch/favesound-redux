@@ -1,13 +1,13 @@
+/*eslint-disable */
+import SC from 'soundcloud';
+/*eslint-enable */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Router, {Route} from 'react-router';
+import Router, { Route } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import rootReducer from './reducers/index';
-import SC from 'soundcloud';
+import { Provider } from 'react-redux';
 import configureStore from './stores/configureStore';
-import {DashboardContainer} from './containers/Dashboard';
+import { DashboardContainer } from './containers/DashboardContainer';
 import Callback from './containers/Callback';
 import App from './containers/App';
 

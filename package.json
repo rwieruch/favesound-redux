@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch"
   },
@@ -25,6 +26,7 @@
     "chai": "^3.4.1",
     "chai-immutable": "^1.5.3",
     "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^5.0.0",
     "eslint-loader": "^1.2.1",
     "eslint-plugin-react": "^3.16.1",
     "jsdom": "^7.2.0",

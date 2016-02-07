@@ -1,30 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../actions/index';
-import {addAccessTokenWith} from '../utils/soundcloudApi';
+import { addAccessTokenWith } from '../utils/soundcloudApi';
 
 export class Player extends React.Component {
 
   componentDidUpdate() {
-
-    let audioElement = ReactDOM.findDOMNode(this.refs.audio);
+    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
 
     if (!audioElement) { return; }
 
     const { isPlaying } = this.props;
-    isPlaying ? audioElement.play() : audioElement.pause();
+    if (isPlaying) {
+      audioElement.play();
+    } else {
+      audioElement.pause();
+    }
   }
 
-  togglePlay() {
-    let { togglePlayTrack, isPlaying } = this.props;
+  togglePlay(togglePlayTrack, isPlaying) {
+    if (isPlaying) {
+      togglePlayTrack(!isPlaying);
+    } else {
+      togglePlayTrack(!isPlaying);
+    }
+  }
 
-    isPlaying ? togglePlayTrack(!isPlaying) : togglePlayTrack(!isPlaying);
+  togglePlaylist(isOpenPlaylist, togglePlaylist) {
+    togglePlaylist(isOpenPlaylist);
+  }
+
+  activateIteratedTrack(activeTrack, iterate, activateIteratedTrack) {
+    activateIteratedTrack(activeTrack, iterate);
   }
 
   renderNav() {
-
-    const { activeTrack, isPlaying, isOpenPlaylist } = this.props;
+    const {
+      activeTrack,
+      isPlaying,
+      isOpenPlaylist,
+      togglePlayTrack,
+      togglePlaylist,
+      activateIteratedTrack
+    } = this.props;
 
     if (!activeTrack) { return; }
 
@@ -33,29 +52,41 @@ export class Player extends React.Component {
     const { username } = user;
 
     return (
-      <div className='player-content'>
+      <div className="player-content">
         <div>
-          <i className='fa fa-step-backward' onClick={() => this.props.activateIteratedTrack(activeTrack, -1)}></i>
+          <i
+            className="fa fa-step-backward"
+            onClick={this.activateIteratedTrack.bind(this, activeTrack, -1, activateIteratedTrack)}
+          ></i>
         </div>
         <div>
-          <i className={'fa ' + (isPlaying ? 'fa-pause' : 'fa-play')} onClick={() => this.togglePlay()}></i>
+          <i
+            className={"fa " + (isPlaying ? "fa-pause" : "fa-play")}
+            onClick={this.togglePlay.bind(this, togglePlayTrack, isPlaying)}
+          ></i>
         </div>
         <div>
-          <i className='fa fa-step-forward' onClick={() => this.props.activateIteratedTrack(activeTrack, 1)}></i>
+          <i
+            className="fa fa-step-forward"
+            onClick={this.activateIteratedTrack.bind(this, activeTrack, 1, activateIteratedTrack)}
+          ></i>
         </div>
         <div>
           {username} - {title}
         </div>
         <div>
-          <i className='fa fa-th-list' onClick={() => this.props.togglePlaylist(isOpenPlaylist)}></i>
+          <i
+            className="fa fa-th-list"
+            onClick={this.togglePlaylist.bind(this, isOpenPlaylist, togglePlaylist)}
+          ></i>
         </div>
-        <audio id='audio' ref='audio' src={addAccessTokenWith(stream_url, '?')}></audio>
+        <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
       </div>
     );
   }
 
   render() {
-    return <div className={this.props.activeTrack ? 'player player-visible' : 'player'}>{this.renderNav()}</div>;
+    return <div className={this.props.activeTrack ? "player player-visible" : "player"}>{this.renderNav()}</div>;
   }
 
 }

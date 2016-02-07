@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default function(InnerComponent) {
+export default function (InnerComponent) {
   class FetchOnScrollComponent extends Component {
     constructor(props) {
       super(props);
@@ -24,10 +24,10 @@ export default function(InnerComponent) {
     render() {
       return <InnerComponent {...this.props} />;
     }
-  };
+  }
 
   FetchOnScrollComponent.propTypes = {
-    scrollFunction: PropTypes.func.isRequired
+    scrollFunction: PropTypes.func.isRequired,
   };
 
   return FetchOnScrollComponent;

@@ -4,22 +4,42 @@ export default class UserMosaic extends React.Component {
 
   constructor(props) {
     super(props);
-    this.stisMoreToggledate = props.isMoreToggled;
+    this.isMoreToggled = props.isMoreToggled;
   }
 
   toggleMore() {
     this.isMoreToggled = !this.isMoreToggled;
   }
 
-  renderNextButton() {
+  fetchMore(nextHref, currentUser, fetchMore) {
+    fetchMore(currentUser, nextHref);
+  }
 
-    let { nextHref, currentUser } = this.props;
+  renderNextButton() {
+    const { nextHref, currentUser, fetchMore } = this.props;
 
     if (!nextHref || !this.isMoreToggled) {
       return '';
     }
 
-    return <button className='ghost' onClick={() => this.props.fetchMore(currentUser, nextHref)}>More</button>;
+    return (
+      <button
+        className="ghost"
+        onClick={this.fetchMore.bind(this, nextHref, currentUser, fetchMore)}
+      >
+        More
+      </button>
+    );
+  }
+
+  renderUser(user, idx) {
+    return (
+      <li key={idx}>
+        <a href={user.permalink_url}>
+          <img src={user.avatar_url} alt={user.username} height="40" width="40"/>
+        </a>
+      </li>
+    );
   }
 
   renderUsers() {
@@ -29,34 +49,25 @@ export default class UserMosaic extends React.Component {
       return '';
     }
 
-    return (<div className='user-mosaic-content'>
-      <ul>{userList.toJSON().map((user, idx) => {
-        return (
-          <li key={idx}>
-            <a href={user.permalink_url}>
-              <img src={user.avatar_url} alt={user.username} height='40' width='40'/>
-            </a>
-          </li>
-        );
-      })}</ul>
+    return (<div className="user-mosaic-content">
+      <ul>{userList.toJSON().map(this.renderUser)}</ul>
     </div>);
   }
 
   render() {
-    return (<div className='user-mosaic'>
+    return (<div className="user-mosaic">
       <h2>
-        <a href='#' onClick={() => this.toggleMore()}>
+        <a href="#" onClick={() => this.toggleMore()}>
           {this.props.title}&nbsp;
-          <i className={'fa ' + (this.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down')}></i>
+          <i className={"fa " + (this.isMoreToggled ? "fa-chevron-up" : "fa-chevron-down")}></i>
         </a>
       </h2>
-      <div className={(this.isMoreToggled ? 'more-visible' : '')}>{this.renderUsers()}</div>
-      <div className='user-mosaic-actions'>
+      <div className={(this.isMoreToggled ? "more-visible" : "")}>{this.renderUsers()}</div>
+      <div className="user-mosaic-actions">
         {this.renderNextButton()}
       </div>
     </div>);
   }
-
 }
 
 UserMosaic.propTypes = {
