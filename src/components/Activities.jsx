@@ -29,7 +29,7 @@ class Activities extends React.Component {
     if (activitiesRequestInProcess) {
       return <LoadingSpinner />;
     } else {
-      return <div></div>;
+      return;
     }
   }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-export default class UserMosaic extends React.Component {
+export default class ItemList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -24,7 +24,7 @@ export default class UserMosaic extends React.Component {
     }
 
     if (requestInProcess) {
-      return <div className="user-mosaic"><LoadingSpinner /></div>;
+      return <LoadingSpinner />;
     }
 
     return (
@@ -61,17 +61,17 @@ export default class UserMosaic extends React.Component {
     const { list, kind, requestInProcess } = this.props;
 
     if (!list || requestInProcess) {
-      return <div className="user-mosaic"><LoadingSpinner /></div>;
+      return <div className="item-list"><LoadingSpinner /></div>;
     }
 
     if (kind === 'user') {
-      return (<div className="user-mosaic-content">
+      return (<div className="item-list-content">
         <ul>{list.toJSON().map(this.renderUser)}</ul>
       </div>);
     }
 
     if (kind === 'track') {
-      return (<div className="user-mosaic-content">
+      return (<div className="item-list-content">
         <ul>{list.toJSON().map(this.renderTrack)}</ul>
       </div>);
     }
@@ -79,7 +79,7 @@ export default class UserMosaic extends React.Component {
 
   render() {
     return (
-      <div className="user-mosaic">
+      <div className="item-list">
         <h2>
           <a href="#" onClick={() => this.toggleMore()}>
             {this.props.title}&nbsp;
@@ -87,7 +87,7 @@ export default class UserMosaic extends React.Component {
           </a>
         </h2>
         <div className={(this.isMoreToggled ? "more-visible" : "")}>{this.renderMosaic()}</div>
-        <div className="user-mosaic-actions">
+        <div className="item-list-actions">
           {this.renderNextButton()}
         </div>
       </div>
@@ -95,10 +95,10 @@ export default class UserMosaic extends React.Component {
   }
 }
 
-UserMosaic.propTypes = {
+ItemList.propTypes = {
   isMoreToggled: React.PropTypes.bool
 };
 
-UserMosaic.defaultProps = {
+ItemList.defaultProps = {
   isMoreToggled: false
 };

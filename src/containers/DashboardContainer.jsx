@@ -4,7 +4,7 @@ import * as actions from '../actions/index';
 import { HeaderContainer } from '../containers/HeaderContainer';
 import { PlayerContainer } from '../containers/PlayerContainer';
 import { PlaylistContainer } from '../containers/PlaylistContainer';
-import UserMosaic from '../components/UserMosaic';
+import ItemList from '../components/ItemList';
 import Activities from '../components/Activities';
 
 export class Dashboard extends React.Component {
@@ -30,12 +30,12 @@ export class Dashboard extends React.Component {
           />
         </div>
         <div className="dashboard-content-side">
-          <UserMosaic
+          <ItemList
             title="Followings"
             list={followings}
             kind="user"
           />
-          <UserMosaic
+          <ItemList
             title="Followers"
             list={followers}
             nextHref={followersNextHref}
@@ -44,7 +44,7 @@ export class Dashboard extends React.Component {
             fetchMore={fetchFollowers}
             kind="user"
           />
-          <UserMosaic
+          <ItemList
             title="Favorites"
             list={favorites}
             requestInProcess={favoritesRequestInProcess}
