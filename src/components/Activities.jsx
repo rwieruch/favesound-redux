@@ -1,6 +1,7 @@
 import React from 'react';
 import FetchOnScroll from '../components/FetchOnScroll';
 import Track from '../components/Track';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 class Activities extends React.Component {
 
@@ -26,7 +27,7 @@ class Activities extends React.Component {
     const { activitiesRequestInProcess } = this.props;
 
     if (activitiesRequestInProcess) {
-      return <div>Loading ...</div>;
+      return <LoadingSpinner />;
     } else {
       return <div></div>;
     }

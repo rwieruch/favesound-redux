@@ -26,7 +26,7 @@ export class Dashboard extends React.Component {
         <div className="dashboard-content-main">
           <Activities
             {...this.props}
-            scrollFunction={this.fetchActivities}
+            scrollFunction={() => this.fetchActivities()}
           />
         </div>
         <div className="dashboard-content-side">

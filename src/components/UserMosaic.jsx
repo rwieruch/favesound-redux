@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default class UserMosaic extends React.Component {
 
@@ -16,10 +17,14 @@ export default class UserMosaic extends React.Component {
   }
 
   renderNextButton() {
-    const { nextHref, currentUser, fetchMore } = this.props;
+    const { nextHref, currentUser, fetchMore, requestInProcess } = this.props;
 
     if (!nextHref || !this.isMoreToggled) {
       return '';
+    }
+
+    if (requestInProcess) {
+      return <div className="user-mosaic"><LoadingSpinner /></div>;
     }
 
     return (
@@ -53,10 +58,10 @@ export default class UserMosaic extends React.Component {
   }
 
   renderMosaic() {
-    const { list, kind } = this.props;
+    const { list, kind, requestInProcess } = this.props;
 
-    if (!list) {
-      return '';
+    if (!list || requestInProcess) {
+      return <div className="user-mosaic"><LoadingSpinner /></div>;
     }
 
     if (kind === 'user') {
@@ -73,18 +78,20 @@ export default class UserMosaic extends React.Component {
   }
 
   render() {
-    return (<div className="user-mosaic">
-      <h2>
-        <a href="#" onClick={() => this.toggleMore()}>
-          {this.props.title}&nbsp;
-          <i className={"fa " + (this.isMoreToggled ? "fa-chevron-up" : "fa-chevron-down")}></i>
-        </a>
-      </h2>
-      <div className={(this.isMoreToggled ? "more-visible" : "")}>{this.renderMosaic()}</div>
-      <div className="user-mosaic-actions">
-        {this.renderNextButton()}
+    return (
+      <div className="user-mosaic">
+        <h2>
+          <a href="#" onClick={() => this.toggleMore()}>
+            {this.props.title}&nbsp;
+            <i className={"fa " + (this.isMoreToggled ? "fa-chevron-up" : "fa-chevron-down")}></i>
+          </a>
+        </h2>
+        <div className={(this.isMoreToggled ? "more-visible" : "")}>{this.renderMosaic()}</div>
+        <div className="user-mosaic-actions">
+          {this.renderNextButton()}
+        </div>
       </div>
-    </div>);
+    );
   }
 }
 
