@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import { CLIENT_ID } from '../constants/authentification';
+import { routeActions } from 'react-router-redux'
 import * as actionTypes from '../constants/actionTypes';
 import { apiUrl } from '../utils/soundcloudApi';
 import {
@@ -36,6 +37,7 @@ export function login() {
   return (dispatch) => {
     SC.initialize({ client_id, redirect_uri });
 
+    dispatch(routeActions.push('/dashboard'));
     SC.connect().then((session) => {
       Cookies.set(OAUTH_TOKEN, session.oauth_token);
       dispatch(setSession(session));
@@ -47,6 +49,7 @@ export function login() {
 export function logout() {
   return (dispatch) => {
     Cookies.remove(OAUTH_TOKEN);
+    dispatch(routeActions.push('/browse'));
     dispatch(setSession(null));
     dispatch(setUser(null));
     dispatch(setFollowings([]));

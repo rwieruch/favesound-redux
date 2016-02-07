@@ -12,6 +12,7 @@ export class Dashboard extends React.Component {
   getInnerContent() {
     const {
       currentUser,
+      activities,
       followings,
       followers,
       followersNextHref,
@@ -26,6 +27,7 @@ export class Dashboard extends React.Component {
         <div className="dashboard-content-main">
           <Activities
             {...this.props}
+            activities={activities}
             scrollFunction={() => this.fetchActivities()}
           />
         </div>
