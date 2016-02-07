@@ -17,7 +17,7 @@ class Activities extends React.Component {
     const { activities } = this.props;
 
     if (!activities) {
-      return '';
+      return;
     }
 
     return <ul>{activities.toJSON().map(this.renderActivity.bind(this))}</ul>;
@@ -28,8 +28,6 @@ class Activities extends React.Component {
 
     if (activitiesRequestInProcess) {
       return <LoadingSpinner />;
-    } else {
-      return;
     }
   }
 

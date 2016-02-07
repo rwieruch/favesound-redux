@@ -1,6 +1,34 @@
 import * as actionTypes from '../constants/actionTypes';
 import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../utils/soundcloudApi';
 
+export function setFollowings(followings) {
+  return {
+    type: actionTypes.SET_FOLLOWINGS,
+    followings
+  };
+}
+
+export function setFollowers(followers) {
+  return {
+    type: actionTypes.SET_FOLLOWERS,
+    followers
+  };
+}
+
+export function setFavorites(favorites) {
+  return {
+    type: actionTypes.SET_FAVORITES,
+    favorites
+  };
+}
+
+export function setActivities(activities) {
+  return {
+    type: actionTypes.SET_ACTIVITES,
+    activities
+  };
+}
+
 function mergeFollowings(followings) {
   return {
     type: actionTypes.MERGE_FOLLOWINGS,

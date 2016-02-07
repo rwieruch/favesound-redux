@@ -20,7 +20,7 @@ export default class ItemList extends React.Component {
     const { nextHref, currentUser, fetchMore, requestInProcess } = this.props;
 
     if (!nextHref || !this.isMoreToggled) {
-      return '';
+      return;
     }
 
     if (requestInProcess) {
