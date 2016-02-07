@@ -16,7 +16,9 @@ export class Dashboard extends React.Component {
       followers,
       followersNextHref,
       followersRequestInProcess,
-      fetchFollowers
+      fetchFollowers,
+      favorites,
+      favoritesRequestInProcess
     } = this.props;
 
     if (currentUser) {
@@ -30,15 +32,24 @@ export class Dashboard extends React.Component {
         <div className="dashboard-content-side">
           <UserMosaic
             title="Followings"
-            userList={followings}
+            list={followings}
+            kind="user"
           />
           <UserMosaic
             title="Followers"
-            userList={followers}
+            list={followers}
             nextHref={followersNextHref}
             requestInProcess={followersRequestInProcess}
             currentUser={currentUser}
             fetchMore={fetchFollowers}
+            kind="user"
+          />
+          <UserMosaic
+            title="Favorites"
+            list={favorites}
+            requestInProcess={favoritesRequestInProcess}
+            currentUser={currentUser}
+            kind="track"
           />
         </div>
       </div>);
@@ -66,6 +77,8 @@ export class Dashboard extends React.Component {
 function mapStateToProps(state) {
   return {
     currentUser: state.session.get('user'),
+    activeTrack: state.player.get('activeTrack'),
+    isPlaying: state.player.get('isPlaying'),
     followings: state.user.get('followings'),
     activities: state.user.get('activities'),
     activitiesNextHref: state.user.get('activitiesNextHref'),
@@ -73,8 +86,8 @@ function mapStateToProps(state) {
     followers: state.user.get('followers'),
     followersNextHref: state.user.get('followersNextHref'),
     followersRequestInProcess: state.user.get('followersRequestInProcess'),
-    activeTrack: state.player.get('activeTrack'),
-    isPlaying: state.player.get('isPlaying')
+    favorites: state.user.get('favorites'),
+    favoritesRequestInProcess: state.user.get('favoritesRequestInProcess')
   };
 }
 

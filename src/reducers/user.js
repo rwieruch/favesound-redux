@@ -8,7 +8,9 @@ const initialState = Map({
   activitiesRequestInProcess: false,
   followers: List(),
   followersNextHref: null,
-  followersRequestInProcess: false
+  followersRequestInProcess: false,
+  favorites: List(),
+  favoritesRequestInProcess: false
 });
 
 export default function(state = initialState, action) {
@@ -27,6 +29,10 @@ export default function(state = initialState, action) {
     return setFollowersNextHref(state, action.nextHref);
   case actionTypes.SET_FOLLOWERS_REQUEST_IN_RPOCESS:
     return setFollowersRequestInProcess(state, action.inProcess);
+  case actionTypes.MERGE_FAVORITES:
+    return mergeFavorites(state, fromJS(action.favorites));
+  case actionTypes.SET_FAVORITES_REQUEST_IN_RPOCESS:
+    return setFavoritesRequestInProcess(state, action.inProcess);
   }
   return state;
 }
@@ -57,4 +63,12 @@ function setFollowersNextHref(state, nextHref) {
 
 function setFollowersRequestInProcess(state, inProcess) {
   return state.set('followersRequestInProcess', inProcess);
+}
+
+function mergeFavorites(state, favorites) {
+  return state.updateIn(['favorites'], (list) => list.concat(favorites));
+}
+
+function setFavoritesRequestInProcess(state, inProcess) {
+  return state.set('favoritesRequestInProcess', inProcess);
 }

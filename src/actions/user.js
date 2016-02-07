@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
-import {apiUrl, addAccessTokenWith, getLazyLoadingUrl} from '../utils/soundcloudApi';
+import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../utils/soundcloudApi';
 
 function mergeFollowings(followings) {
   return {
@@ -65,7 +65,6 @@ export function fetchActivities(user, nextHref) {
         dispatch(setActivitiesRequestInProcess(false));
       });
   };
-
 }
 
 function mergeFollowers(followers) {
@@ -107,5 +106,37 @@ export function fetchFollowers(user, nextHref) {
         dispatch(setFollowersRequestInProcess(false));
       });
   };
+}
 
+function mergeFavorites(favorites) {
+  return {
+    type: actionTypes.MERGE_FAVORITES,
+    favorites
+  };
+}
+
+function setFavoritesRequestInProcess(inProcess) {
+  return {
+    type: actionTypes.SET_FAVORITES_REQUEST_IN_RPOCESS,
+    inProcess
+  };
+}
+
+export function fetchFavorites(user, nextHref) {
+  return (dispatch, getState) => {
+
+    let url = getLazyLoadingUrl(user, nextHref, 'favorites?limit=200&offset=0');
+    let requestInProcess = getState().user.get('favoritesRequestInProcess');
+
+    if (requestInProcess) { return; }
+
+    dispatch(setFavoritesRequestInProcess(true));
+
+    return fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        dispatch(mergeFavorites(data));
+        dispatch(setFavoritesRequestInProcess(false));
+      });
+  };
 }

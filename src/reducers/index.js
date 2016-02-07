@@ -4,8 +4,8 @@ import player from './player';
 import environment from './environment';
 
 export default {
-    session,
-    user,
-    player,
-    environment
+  session,
+  user,
+  player,
+  environment
 };

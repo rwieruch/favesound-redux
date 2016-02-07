@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie';
-import {CLIENT_ID} from '../constants/authentification';
+import { CLIENT_ID } from '../constants/authentification';
 import * as actionTypes from '../constants/actionTypes';
-import {fetchFollowings, fetchActivities, fetchFollowers} from './user';
-import {apiUrl} from '../utils/soundcloudApi';
+import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites } from './user';
+import { apiUrl } from '../utils/soundcloudApi';
 
 const OAUTH_TOKEN = 'accessToken';
 
@@ -52,6 +52,7 @@ function fetchUser(accessToken) {
         dispatch(setUser(me));
         dispatch(fetchFollowings(me));
         dispatch(fetchFollowers(me));
+        dispatch(fetchFavorites(me));
         dispatch(fetchActivities());
       });
   };

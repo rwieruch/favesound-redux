@@ -32,6 +32,16 @@ export default class UserMosaic extends React.Component {
     );
   }
 
+  renderTrack(track, idx) {
+    return (
+      <li key={idx}>
+        <a href={track.permalink_url}>
+          <img src={track.artwork_url} alt={track.title} height="40" width="40"/>
+        </a>
+      </li>
+    );
+  }
+
   renderUser(user, idx) {
     return (
       <li key={idx}>
@@ -42,16 +52,24 @@ export default class UserMosaic extends React.Component {
     );
   }
 
-  renderUsers() {
-    const { userList } = this.props;
+  renderMosaic() {
+    const { list, kind } = this.props;
 
-    if (!userList) {
+    if (!list) {
       return '';
     }
 
-    return (<div className="user-mosaic-content">
-      <ul>{userList.toJSON().map(this.renderUser)}</ul>
-    </div>);
+    if (kind === 'user') {
+      return (<div className="user-mosaic-content">
+        <ul>{list.toJSON().map(this.renderUser)}</ul>
+      </div>);
+    }
+
+    if (kind === 'track') {
+      return (<div className="user-mosaic-content">
+        <ul>{list.toJSON().map(this.renderTrack)}</ul>
+      </div>);
+    }
   }
 
   render() {
@@ -62,7 +80,7 @@ export default class UserMosaic extends React.Component {
           <i className={"fa " + (this.isMoreToggled ? "fa-chevron-up" : "fa-chevron-down")}></i>
         </a>
       </h2>
-      <div className={(this.isMoreToggled ? "more-visible" : "")}>{this.renderUsers()}</div>
+      <div className={(this.isMoreToggled ? "more-visible" : "")}>{this.renderMosaic()}</div>
       <div className="user-mosaic-actions">
         {this.renderNextButton()}
       </div>
