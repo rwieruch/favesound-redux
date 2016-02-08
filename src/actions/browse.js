@@ -24,7 +24,7 @@ function setActivitiesByGenreRequestInProcess(inProcess) {
   };
 }
 
-export function fetchActivitiesByGenre(nextHref, genre = 'house') {
+export function fetchActivitiesByGenre(nextHref, genre) {
   return (dispatch, getState) => {
 
     const initHref = unauthApiUrl(`tracks?linked_partitioning=1&limit=50&offset=0&tags=${genre}`, '&');

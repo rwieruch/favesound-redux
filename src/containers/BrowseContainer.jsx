@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
+import { DEFAULT_GENRE } from '../constants/browse';
 import { HeaderContainer } from '../containers/HeaderContainer';
 import { PlayerContainer } from '../containers/PlayerContainer';
 import { PlaylistContainer } from '../containers/PlaylistContainer';
@@ -27,13 +28,14 @@ export class Browse extends React.Component {
 
   fetchActivitiesByGenre() {
     const { genre, activitiesByGenreNextHrefs } = this.props;
+    console.log(genre);
     const nextHref = activitiesByGenreNextHrefs.get(genre);
     this.props.fetchActivitiesByGenre(nextHref, genre);
   }
 
   render() {
     return (<div className="browse">
-      <HeaderContainer />
+      <HeaderContainer genre={this.props.genre}/>
       {this.getInnerContent()}
       <PlaylistContainer />
       <PlayerContainer />
@@ -51,3 +53,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 export const BrowseContainer = connect(mapStateToProps, actions)(Browse);
+
+Browse.defaultProps = {
+  genre: DEFAULT_GENRE
+};
