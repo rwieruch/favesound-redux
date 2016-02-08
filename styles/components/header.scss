@@ -16,6 +16,19 @@
     justify-content: space-between;
     margin: 0 10%;
 
+    .menu-item {
+      font-size: 13px;
+      text-transform: uppercase;
+      margin: 0 ($padding / 2);
+      padding: ($padding / 8) 0;
+
+      &-selected, &:hover {
+        border-bottom: 1px solid $mainColor;
+      }
+
+    }
+
+
     div {
       margin: auto $padding;
 

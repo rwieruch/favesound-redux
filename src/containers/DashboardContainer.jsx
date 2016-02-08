@@ -70,7 +70,7 @@ export class Dashboard extends React.Component {
 
   render() {
     return (<div className="dashboard">
-      <HeaderContainer />
+      <HeaderContainer genre={this.props.genre} pathname={this.props.pathname}/>
       {this.getInnerContent()}
       <PlaylistContainer />
       <PlayerContainer />
@@ -79,8 +79,10 @@ export class Dashboard extends React.Component {
 
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, routerState) {
   return {
+    pathname: routerState.location.pathname,
+    genre: routerState.location.query.genre,
     currentUser: state.session.get('user'),
     activeTrack: state.player.get('activeTrack'),
     isPlaying: state.player.get('isPlaying'),
