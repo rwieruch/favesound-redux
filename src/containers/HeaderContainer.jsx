@@ -11,13 +11,6 @@ export class Header extends React.Component {
     this.renderMenuItem = this.renderMenuItem.bind(this);
   }
 
-  // fetchActivitiesByGenre(genre) {
-  //   const { activitiesByGenreNextHrefs } = this.props;
-  //   const nextHref = activitiesByGenreNextHrefs.get(genre);
-  //   this.props.fetchActivitiesByGenre(nextHref, genre);
-  // }
-
-        // onClick={this.fetchActivitiesByGenre.bind(this, genre)}
   renderMenuItem(genre, idx) {
     return (
       <Link

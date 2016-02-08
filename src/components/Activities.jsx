@@ -20,7 +20,7 @@ class Activities extends React.Component {
       return;
     }
 
-    return <ul>{activities.toJSON().map(this.renderActivity.bind(this))}</ul>;
+    return <ul>{activities.map(this.renderActivity.bind(this))}</ul>;
   }
 
   renderActivitiesRequestInProcess() {

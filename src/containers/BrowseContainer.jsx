@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { dehydrate } from '../utils/immutableUtil';
 import * as actions from '../actions/index';
 import { DEFAULT_GENRE } from '../constants/browse';
 import { HeaderContainer } from '../containers/HeaderContainer';
@@ -13,9 +14,17 @@ export class Browse extends React.Component {
     this.fetchActivitiesByGenre();
   }
 
+  componentDidUpdate() {
+    this.fetchActivitiesByGenre();
+  }
+
   getInnerContent() {
-    const { activitiesByGenre } = this.props;
-    const filteredActivitiesByGenre = activitiesByGenre; // TODO: filter
+    const { activitiesByGenre, genre } = this.props;
+
+    if (!activitiesByGenre) { return; }
+
+    const activitiesByGenreD = dehydrate(activitiesByGenre);
+    const filteredActivitiesByGenre = activitiesByGenreD.filter(this.byGenre(genre));
 
     return (<div className="browse-content">
         <Activities
@@ -26,9 +35,12 @@ export class Browse extends React.Component {
       </div>);
   }
 
+  byGenre(genre) {
+    return (activity) => activity.origin.tag_list.indexOf(genre) !== -1;
+  }
+
   fetchActivitiesByGenre() {
     const { genre, activitiesByGenreNextHrefs } = this.props;
-    console.log(genre);
     const nextHref = activitiesByGenreNextHrefs.get(genre);
     this.props.fetchActivitiesByGenre(nextHref, genre);
   }
