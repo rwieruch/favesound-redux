@@ -9,16 +9,16 @@
     position: relative;
     width: 100%;
     height: 80px;
-    padding: $padding / 2;
+    padding: ($padding / 2);
+
+    display: flex;
+    flex-direction: column;
 
     &-waveform {
-      position: absolute;
-      top: $padding * 2;
-      left: $padding;
-      height: 30%;
-      width: 90%;
-
+      height: 40px;
+      width: 95%;
       pointer-events: none;
+      margin: ($padding / 2) 0;
 
       opacity: .7;
       transition: opacity 0.2s;

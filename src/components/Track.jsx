@@ -86,7 +86,9 @@ export default class Track extends React.Component {
           {this.renderImage(artwork_url, title, avatar_url)}
         </div>
         <div className="track-content">
-          <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title} {type}</a>
+          <div className="track-content-name">
+            <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title} {type}</a>
+          </div>
           {this.renderWaveform(id, idx, waveform_url)}
           <div className="track-content-info">
             <div className="track-content-info-item">
