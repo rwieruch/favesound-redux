@@ -42,13 +42,13 @@ export default class Track extends React.Component {
   }
 
 
-  renderWaveform(id, idx, waveformUrl) {
+  renderWaveform(id, idx, waveformUrl, title) {
     if (isJsonWaveform(waveformUrl)) {
-      return <div className="track-content-waveform" id={"waveform-" + id + idx}></div>;
+      return <div className="track-content-waveform-json" id={"waveform-" + id + idx}></div>;
     }
 
     if (isPngWaveform(waveformUrl)) {
-      return; // <div className="track-content-waveform" id={"waveform-" + id + idx}></div>
+      return <img className="track-content-waveform-png" src={waveformUrl} alt={title} height="40" width="95%"/>;
     }
 
     return;
@@ -89,7 +89,9 @@ export default class Track extends React.Component {
           <div className="track-content-name">
             <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title} {type}</a>
           </div>
-          {this.renderWaveform(id, idx, waveform_url)}
+          <div className="track-content-waveform">
+            {this.renderWaveform(id, idx, waveform_url, title)}
+          </div>
           <div className="track-content-info">
             <div className="track-content-info-item">
               <i className="fa fa-play"></i>&nbsp;{playback_count}

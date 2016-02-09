@@ -4,6 +4,7 @@
   height: 100px;
   margin: ($padding / 2) 0;
   background: $backgroundSecondary;
+  border: $border;
 
   &-content {
     position: relative;
@@ -15,16 +16,17 @@
     flex-direction: column;
 
     &-waveform {
-      height: 40px;
-      width: 95%;
-      pointer-events: none;
       margin: ($padding / 2) 0;
+      pointer-events: none;
 
-      opacity: .7;
-      transition: opacity 0.2s;
-      -webkit-transition: opacity 0.2s;
-      transition-timing-function: ease;
-      -webkit-transition-timing-function: ease;
+      &-png {
+        background-color: $mainColor;
+      }
+
+      &-json {
+        height: 40px;
+        width: 95%;
+      }
     }
 
     &-info {
@@ -33,12 +35,6 @@
       left: $padding / 2;
       display: flex;
       width: 100%;
-
-      opacity: .7;
-      transition: opacity 0.2s;
-      -webkit-transition: opacity 0.2s;
-      transition-timing-function: ease;
-      -webkit-transition-timing-function: ease;
 
       &-item {
         width: 20%;
@@ -75,14 +71,6 @@
   &:hover .track-content-actions {
     opacity: 1;
     margin-right: ($padding / 2);
-  }
-
-  &:hover .track-content-waveform {
-    opacity: 1;
-  }
-
-  &:hover .track-content-info {
-    opacity: 1;
   }
 
 }
