@@ -3,7 +3,7 @@
   display: flex;
   height: 40px;
   overflow: hidden;
-  border-bottom: $border;
+  border-bottom: $darkBorder;
 
   &:hover &-content-action {
     opacity: 1;
