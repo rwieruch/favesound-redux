@@ -1,3 +1,4 @@
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
@@ -99,3 +100,20 @@ function mapStateToProps(state, routerState) {
 }
 
 export const DashboardContainer = connect(mapStateToProps, actions)(Dashboard);
+
+Dashboard.propTypes = {
+  pathname: React.PropTypes.string.isRequired,
+  genre: React.PropTypes.string,
+  currentUser: React.PropTypes.object,
+  activeTrack: React.PropTypes.object,
+  isPlaying: React.PropTypes.bool.isRequired,
+  followings: ImmutablePropTypes.list.isRequired,
+  activities: ImmutablePropTypes.list.isRequired,
+  activitiesNextHref: React.PropTypes.string,
+  activitiesRequestInProcess: React.PropTypes.bool.isRequired,
+  followers: ImmutablePropTypes.list.isRequired,
+  followersNextHref: React.PropTypes.string,
+  followersRequestInProcess: React.PropTypes.bool.isRequired,
+  favorites: ImmutablePropTypes.list.isRequired,
+  favoritesRequestInProcess: React.PropTypes.bool.isRequired
+};

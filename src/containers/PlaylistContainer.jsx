@@ -1,3 +1,4 @@
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
@@ -35,3 +36,10 @@ function mapStateToProps(state) {
 }
 
 export const PlaylistContainer = connect(mapStateToProps, actions)(Playlist);
+
+Playlist.propTypes = {
+  activeTrack: React.PropTypes.object,
+  isPlaying: React.PropTypes.bool,
+  playlist: ImmutablePropTypes.list.isRequired,
+  isOpenPlaylist: React.PropTypes.bool,
+};

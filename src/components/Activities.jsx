@@ -42,3 +42,8 @@ class Activities extends React.Component {
 }
 
 export default FetchOnScroll(Activities);
+
+Activities.propTypes = {
+  activities: React.PropTypes.array,
+  scrollFunction: React.PropTypes.func
+};

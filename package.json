@@ -41,6 +41,7 @@
     "js-cookie": "^2.1.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
+    "react-immutable-proptypes": "^1.5.1",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0-rc3",
     "react-router-redux": "^2.1.0",

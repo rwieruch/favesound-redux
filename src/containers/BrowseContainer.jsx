@@ -1,3 +1,4 @@
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import React from 'react';
 import { connect } from 'react-redux';
 import { dehydrate } from '../utils/immutableUtil';
@@ -73,6 +74,13 @@ function mapStateToProps(state, routerState) {
 }
 
 export const BrowseContainer = connect(mapStateToProps, actions)(Browse);
+
+Browse.propTypes = {
+  pathname: React.PropTypes.string.isRequired,
+  genre: React.PropTypes.string.isRequired,
+  activitiesByGenre: ImmutablePropTypes.list.isRequired,
+  activitiesByGenreNextHrefs: ImmutablePropTypes.map.isRequired
+};
 
 Browse.defaultProps = {
   genre: DEFAULT_GENRE

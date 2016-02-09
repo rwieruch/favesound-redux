@@ -100,3 +100,9 @@ function mapStateToProps(state) {
 }
 
 export const PlayerContainer = connect(mapStateToProps, actions)(Player);
+
+Player.propTypes = {
+  activeTrack: React.PropTypes.object,
+  isPlaying: React.PropTypes.bool,
+  isOpenPlaylist: React.PropTypes.bool
+};
