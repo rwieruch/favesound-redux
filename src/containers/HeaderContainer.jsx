@@ -12,6 +12,8 @@ export class Header extends React.Component {
     super(props);
     this.renderMenuItemBrowse = this.renderMenuItemBrowse.bind(this);
     this.renderAction = this.renderAction.bind(this);
+    this.login = this.props.login.bind(this);
+    this.logout = this.props.logout.bind(this);
   }
 
   renderLogo() {
@@ -37,17 +39,17 @@ export class Header extends React.Component {
   }
 
   renderAction() {
-    const { currentUser, login, logout } = this.props;
+    const { currentUser } = this.props;
 
     if (currentUser) {
       return (
-        <a href="#" onClick={() => logout()}>
+        <a href="#" onClick={this.logout}>
           Logout
         </a>
       );
     } else {
       return (
-        <a href="#" onClick={() => login()}>
+        <a href="#" onClick={this.login}>
           Login
         </a>
       );

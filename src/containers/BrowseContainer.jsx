@@ -11,6 +11,11 @@ import Activities from '../components/Activities';
 
 export class Browse extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.fetchActivitiesByGenre = this.fetchActivitiesByGenre.bind(this);
+  }
+
   componentDidMount() {
     if (!this.needToFetchActivities()) { return; }
     this.fetchActivitiesByGenre();
@@ -33,13 +38,15 @@ export class Browse extends React.Component {
         <Activities
           {...this.props}
           activities={filteredActivitiesByGenre}
-          scrollFunction={() => this.fetchActivitiesByGenre()}
+          scrollFunction={this.fetchActivitiesByGenre}
         />
       </div>);
   }
 
-  byGenre(genre) {
-    return (activity) => activity.origin.tag_list.indexOf(genre) !== -1;
+  fetchActivitiesByGenre() {
+    const { genre, activitiesByGenreNextHrefs } = this.props;
+    const nextHref = activitiesByGenreNextHrefs.get(genre);
+    this.props.fetchActivitiesByGenre(nextHref, genre);
   }
 
   needToFetchActivities() {
@@ -47,10 +54,8 @@ export class Browse extends React.Component {
     return dehydrate(activitiesByGenre).filter(this.byGenre(genre)).length < 20;
   }
 
-  fetchActivitiesByGenre() {
-    const { genre, activitiesByGenreNextHrefs } = this.props;
-    const nextHref = activitiesByGenreNextHrefs.get(genre);
-    this.props.fetchActivitiesByGenre(nextHref, genre);
+  byGenre(genre) {
+    return (activity) => activity.origin.tag_list.indexOf(genre) !== -1;
   }
 
   render() {

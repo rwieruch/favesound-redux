@@ -7,3 +7,7 @@ export const LoadingSpinner = ({ isLoading }) => {
     return <div></div>;
   }
 };
+
+LoadingSpinner.propTypes = {
+  isLoading: React.PropTypes.bool
+};

@@ -26,42 +26,42 @@ export class Dashboard extends React.Component {
 
     const activitiesD = dehydrate(activities);
 
-    if (currentUser) {
-      return (<div className="dashboard-content">
-        <div className="dashboard-content-main">
-          <Activities
-            {...this.props}
-            activities={activitiesD}
-            scrollFunction={() => this.fetchActivities()}
-          />
-        </div>
-        <div className="dashboard-content-side">
-          <ItemList
-            title="Followings"
-            list={followings}
-            kind="user"
-          />
-          <ItemList
-            title="Followers"
-            list={followers}
-            nextHref={followersNextHref}
-            requestInProcess={followersRequestInProcess}
-            currentUser={currentUser}
-            fetchMore={fetchFollowers}
-            kind="user"
-          />
-          <ItemList
-            title="Favorites"
-            list={favorites}
-            requestInProcess={favoritesRequestInProcess}
-            currentUser={currentUser}
-            kind="track"
-          />
-        </div>
-      </div>);
-    } else {
+    if (!currentUser) {
       return <div></div>;
     }
+
+    return (<div className="dashboard-content">
+      <div className="dashboard-content-main">
+        <Activities
+          {...this.props}
+          activities={activitiesD}
+          scrollFunction={() => this.fetchActivities()}
+        />
+      </div>
+      <div className="dashboard-content-side">
+        <ItemList
+          title="Followings"
+          list={followings}
+          kind="user"
+        />
+        <ItemList
+          title="Followers"
+          list={followers}
+          nextHref={followersNextHref}
+          requestInProcess={followersRequestInProcess}
+          currentUser={currentUser}
+          fetchMore={fetchFollowers}
+          kind="user"
+        />
+        <ItemList
+          title="Favorites"
+          list={favorites}
+          requestInProcess={favoritesRequestInProcess}
+          currentUser={currentUser}
+          kind="track"
+        />
+      </div>
+    </div>);
   }
 
   fetchActivities() {

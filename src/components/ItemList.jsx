@@ -6,6 +6,7 @@ export default class ItemList extends React.Component {
   constructor(props) {
     super(props);
     this.isMoreToggled = props.isMoreToggled;
+    this.toggleMore = this.toggleMore.bind(this);
   }
 
   toggleMore() {
@@ -82,7 +83,7 @@ export default class ItemList extends React.Component {
     return (
       <div className="item-list">
         <h2>
-          <a href="#" onClick={() => this.toggleMore()}>
+          <a href="#" onClick={this.toggleMore}>
             {this.props.title}&nbsp;
             <i className={"fa " + (this.isMoreToggled ? "fa-chevron-up" : "fa-chevron-down")}></i>
           </a>
