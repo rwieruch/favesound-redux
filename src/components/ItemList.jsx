@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadingSpinner from '../components/LoadingSpinner';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 export default class ItemList extends React.Component {
 
@@ -24,7 +24,7 @@ export default class ItemList extends React.Component {
     }
 
     if (requestInProcess) {
-      return <LoadingSpinner />;
+      return <LoadingSpinner isLoading={requestInProcess} />;
     }
 
     return (
@@ -61,7 +61,8 @@ export default class ItemList extends React.Component {
     const { list, kind, requestInProcess } = this.props;
 
     if (!list || requestInProcess) {
-      return <div className="item-list"><LoadingSpinner /></div>;
+      const isLoading = !list || requestInProcess;
+      return <LoadingSpinner isLoading={isLoading} />;
     }
 
     if (kind === 'user') {
