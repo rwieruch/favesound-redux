@@ -1,16 +1,15 @@
-import {Map, List, fromJS} from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
-const initialState = Map({
-  activitiesByGenre: List(),
-  activitiesByGenreNextHrefs: Map(),
+const initialState = {
+  activitiesByGenre: [],
+  activitiesByGenreNextHrefs: {},
   activitiesByGenreInProcess: false
-});
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
   case actionTypes.MERGE_GENRE_ACTIVITIES:
-    return mergeActivities(state, fromJS(action.activities));
+    return mergeActivities(state, action.activities);
   case actionTypes.SET_ACTIVITIES_BY_GENRE_REQUEST_IN_RPOCESS:
     return setActivitiesByGenreInProcess(state, action.inProcess);
   case actionTypes.SET_ACTIVITIES_BY_GENRE_NEXT_HREF:
@@ -20,13 +19,20 @@ export default function(state = initialState, action) {
 }
 
 function mergeActivities(state, activities) {
-  return state.updateIn(['activitiesByGenre'], (list) => list.concat(activities));
+  const activitiesByGenre = [
+    ...state.activitiesByGenre,
+    ...activities
+  ];
+  return Object.assign({}, state, { activitiesByGenre });
 }
 
-function setActivitiesByGenreInProcess(state, inProcess) {
-  return state.set('activitiesByGenreInProcess', inProcess);
+function setActivitiesByGenreInProcess(state, activitiesByGenreInProcess) {
+  return Object.assign({}, state, { activitiesByGenreInProcess });
 }
 
 function setActivitiesByGenreNextHref(state, nextHref, genre) {
-  return state.set('activitiesNextHref', nextHref);
+  const obj = {};
+  obj[genre] = nextHref;
+  const activitiesByGenreNextHrefs = Object.assign({}, state.activitiesByGenreNextHrefs, obj);
+  return Object.assign({}, state, { activitiesByGenreNextHrefs });
 }

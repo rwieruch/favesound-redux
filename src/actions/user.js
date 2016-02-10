@@ -79,7 +79,7 @@ export function fetchActivities(user, nextHref) {
   return (dispatch, getState) => {
 
     let url = getLazyLoadingUrl(user, nextHref, 'activities?limit=50&offset=0');
-    let requestInProcess = getState().user.get('activitiesRequestInProcess');
+    let requestInProcess = getState().user.activitiesRequestInProcess;
 
     if (requestInProcess) { return; }
 
@@ -120,7 +120,7 @@ export function fetchFollowers(user, nextHref) {
   return (dispatch, getState) => {
 
     let url = getLazyLoadingUrl(user, nextHref, 'followers?limit=200&offset=0');
-    let requestInProcess = getState().user.get('followersRequestInProcess');
+    let requestInProcess = getState().user.followersRequestInProcess;
 
     if (requestInProcess) { return; }
 
@@ -154,7 +154,7 @@ export function fetchFavorites(user, nextHref) {
   return (dispatch, getState) => {
 
     let url = getLazyLoadingUrl(user, nextHref, 'favorites?limit=200&offset=0');
-    let requestInProcess = getState().user.get('favoritesRequestInProcess');
+    let requestInProcess = getState().user.favoritesRequestInProcess;
 
     if (requestInProcess) { return; }
 

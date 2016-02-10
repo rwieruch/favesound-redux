@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
-import {isSameTrackAndPlaying} from '../utils/player';
+import { isSameTrackAndPlaying } from '../utils/player';
 
 function setIsOpenPlaylist(isOpen) {
     return {

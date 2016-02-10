@@ -58,7 +58,7 @@ export default class ItemList extends React.Component {
     );
   }
 
-  renderMosaic() {
+  renderList() {
     const { list, kind, requestInProcess } = this.props;
 
     if (!list || requestInProcess) {
@@ -68,13 +68,13 @@ export default class ItemList extends React.Component {
 
     if (kind === 'user') {
       return (<div className="item-list-content">
-        <ul>{list.toJSON().map(this.renderUser)}</ul>
+        <ul>{list.map(this.renderUser)}</ul>
       </div>);
     }
 
     if (kind === 'track') {
       return (<div className="item-list-content">
-        <ul>{list.toJSON().map(this.renderTrack)}</ul>
+        <ul>{list.map(this.renderTrack)}</ul>
       </div>);
     }
   }
@@ -88,7 +88,7 @@ export default class ItemList extends React.Component {
             <i className={"fa " + (this.isMoreToggled ? "fa-chevron-up" : "fa-chevron-down")}></i>
           </a>
         </h2>
-        <div className={(this.isMoreToggled ? "more-visible" : "")}>{this.renderMosaic()}</div>
+        <div className={(this.isMoreToggled ? "more-visible" : "")}>{this.renderList()}</div>
         <div className="item-list-actions">
           {this.renderNextButton()}
         </div>

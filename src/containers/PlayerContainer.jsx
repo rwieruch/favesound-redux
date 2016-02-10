@@ -93,9 +93,9 @@ export class Player extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    activeTrack: state.player.get('activeTrack'),
-    isPlaying: state.player.get('isPlaying'),
-    isOpenPlaylist: state.environment.get('isOpenPlaylist')
+    activeTrack: state.player.activeTrack,
+    isPlaying: state.player.isPlaying,
+    isOpenPlaylist: state.environment.isOpenPlaylist
   };
 }
 

@@ -1,8 +1,6 @@
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
-import { dehydrate } from '../utils/immutableUtil';
 import { HeaderContainer } from '../containers/HeaderContainer';
 import { PlayerContainer } from '../containers/PlayerContainer';
 import { PlaylistContainer } from '../containers/PlaylistContainer';
@@ -24,8 +22,6 @@ export class Dashboard extends React.Component {
       favoritesRequestInProcess
     } = this.props;
 
-    const activitiesD = dehydrate(activities);
-
     if (!currentUser) {
       return <div></div>;
     }
@@ -34,7 +30,7 @@ export class Dashboard extends React.Component {
       <div className="dashboard-content-main">
         <Activities
           {...this.props}
-          activities={activitiesD}
+          activities={activities}
           scrollFunction={() => this.fetchActivities()}
         />
       </div>
@@ -84,18 +80,18 @@ function mapStateToProps(state, routerState) {
   return {
     pathname: routerState.location.pathname,
     genre: routerState.location.query.genre,
-    currentUser: state.session.get('user'),
-    activeTrack: state.player.get('activeTrack'),
-    isPlaying: state.player.get('isPlaying'),
-    followings: state.user.get('followings'),
-    activities: state.user.get('activities'),
-    activitiesNextHref: state.user.get('activitiesNextHref'),
-    activitiesRequestInProcess: state.user.get('activitiesRequestInProcess'),
-    followers: state.user.get('followers'),
-    followersNextHref: state.user.get('followersNextHref'),
-    followersRequestInProcess: state.user.get('followersRequestInProcess'),
-    favorites: state.user.get('favorites'),
-    favoritesRequestInProcess: state.user.get('favoritesRequestInProcess')
+    currentUser: state.session.user,
+    activeTrack: state.player.activeTrack,
+    isPlaying: state.player.isPlaying,
+    followings: state.user.followings,
+    activities: state.user.activities,
+    activitiesNextHref: state.user.activitiesNextHref,
+    activitiesRequestInProcess: state.user.activitiesRequestInProcess,
+    followers: state.user.followers,
+    followersNextHref: state.user.followersNextHref,
+    followersRequestInProcess: state.user.followersRequestInProcess,
+    favorites: state.user.favorites,
+    favoritesRequestInProcess: state.user.favoritesRequestInProcess
   };
 }
 
@@ -107,13 +103,13 @@ Dashboard.propTypes = {
   currentUser: React.PropTypes.object,
   activeTrack: React.PropTypes.object,
   isPlaying: React.PropTypes.bool.isRequired,
-  followings: ImmutablePropTypes.list.isRequired,
-  activities: ImmutablePropTypes.list.isRequired,
+  followings: React.PropTypes.array,
+  activities: React.PropTypes.array,
   activitiesNextHref: React.PropTypes.string,
   activitiesRequestInProcess: React.PropTypes.bool.isRequired,
-  followers: ImmutablePropTypes.list.isRequired,
+  followers: React.PropTypes.array,
   followersNextHref: React.PropTypes.string,
   followersRequestInProcess: React.PropTypes.bool.isRequired,
-  favorites: ImmutablePropTypes.list.isRequired,
+  favorites: React.PropTypes.array,
   favoritesRequestInProcess: React.PropTypes.bool.isRequired
 };

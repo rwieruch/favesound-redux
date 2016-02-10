@@ -30,7 +30,7 @@ export function fetchActivitiesByGenre(nextHref, genre) {
     const initHref = unauthApiUrl(`tracks?linked_partitioning=1&limit=50&offset=0&tags=${genre}`, '&');
     const url = nextHref || initHref;
 
-    let requestInProcess = getState().browse.get('activitiesByGenreInProcess');
+    let requestInProcess = getState().browse.activitiesByGenreInProcess;
 
     if (requestInProcess) { return; }
 

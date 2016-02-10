@@ -1,7 +1,8 @@
+import _ from 'lodash';
 import * as actionTypes from '../constants/actionTypes';
-import {togglePlaylist} from './environment';
-import {isSameTrackAndPlaying, isSameTrack} from '../utils/player';
-import {apiUrl} from '../utils/soundcloudApi';
+import { togglePlaylist } from './environment';
+import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
+import { apiUrl } from '../utils/soundcloudApi';
 
 function setActiveTrack(activeTrack) {
     return {
@@ -40,8 +41,8 @@ function deactivateTrack() {
 
 export function activateTrack(activeTrack) {
     return (dispatch, getState) => {
-        let previousActiveTrack = getState().player.get('activeTrack');
-        let isCurrentlyPlaying = getState().player.get('isPlaying');
+        let previousActiveTrack = getState().player.activeTrack;
+        let isCurrentlyPlaying = getState().player.isPlaying;
         let isPlaying = !isSameTrackAndPlaying(previousActiveTrack, activeTrack, isCurrentlyPlaying);
         dispatch(togglePlayTrack(isPlaying));
         dispatch(setActiveTrack(activeTrack));
@@ -57,7 +58,7 @@ export function togglePlayTrack(isPlaying) {
 
 export function addTrackToPlaylist(track) {
     return (dispatch, getState) => {
-        let playlistSize = getState().player.get('playlist').size;
+        let playlistSize = getState().player.playlist.length;
         if (playlistSize) {
             dispatch(setTrackInPlaylist(track));
         } else {
@@ -68,15 +69,15 @@ export function addTrackToPlaylist(track) {
 
 export function removeTrackFromPlaylist(track) {
     return (dispatch, getState) => {
-        let activeTrack = getState().player.get('activeTrack');
-        let isPlaying = getState().player.get('isPlaying');
+        let activeTrack = getState().player.activeTrack;
+        let isPlaying = getState().player.isPlaying;
         let isRelevantTrack = isSameTrackAndPlaying(activeTrack, track, isPlaying);
 
         if (isRelevantTrack) {
             dispatch(activateIteratedTrack(activeTrack, 1));
         }
 
-        let playlistSize = getState().player.get('playlist').size;
+        let playlistSize = getState().player.playlist.length;
         if (playlistSize < 2) {
             dispatch(deactivateTrack());
             dispatch(togglePlaylist(true));
@@ -88,7 +89,7 @@ export function removeTrackFromPlaylist(track) {
 
 export function activateIteratedTrack(currentActiveTrack, iterate) {
     return (dispatch, getState) => {
-        let playlist = getState().player.get('playlist');
+        let playlist = getState().player.playlist;
         let nextActiveTrack = getIteratedTrack(playlist, currentActiveTrack, iterate);
         if (nextActiveTrack) {
             dispatch(activateTrack(nextActiveTrack));
@@ -99,6 +100,6 @@ export function activateIteratedTrack(currentActiveTrack, iterate) {
 }
 
 function getIteratedTrack(playlist, currentActiveTrack, iterate) {
-    let index = playlist.findIndex(isSameTrack(currentActiveTrack));
-    return playlist.get(index + iterate);
+    let index = _.findIndex(playlist, isSameTrack(currentActiveTrack));
+    return playlist[index + iterate];
 }

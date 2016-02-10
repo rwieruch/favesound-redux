@@ -1,7 +1,5 @@
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import React from 'react';
 import { connect } from 'react-redux';
-import { dehydrate } from '../utils/immutableUtil';
 import * as actions from '../actions/index';
 import { DEFAULT_GENRE } from '../constants/genre';
 import { HeaderContainer } from '../containers/HeaderContainer';
@@ -31,8 +29,7 @@ export class Browse extends React.Component {
 
     if (!activitiesByGenre) { return; }
 
-    const activitiesByGenreD = dehydrate(activitiesByGenre);
-    const filteredActivitiesByGenre = activitiesByGenreD.filter(this.byGenre(genre));
+    const filteredActivitiesByGenre = activitiesByGenre.filter(this.byGenre(genre));
 
     return (<div className="browse-content">
         <Activities
@@ -45,13 +42,13 @@ export class Browse extends React.Component {
 
   fetchActivitiesByGenre() {
     const { genre, activitiesByGenreNextHrefs } = this.props;
-    const nextHref = activitiesByGenreNextHrefs.get(genre);
+    const nextHref = activitiesByGenreNextHrefs[genre];
     this.props.fetchActivitiesByGenre(nextHref, genre);
   }
 
   needToFetchActivities() {
     const { genre, activitiesByGenre } = this.props;
-    return dehydrate(activitiesByGenre).filter(this.byGenre(genre)).length < 20;
+    return activitiesByGenre.filter(this.byGenre(genre)).length < 20;
   }
 
   byGenre(genre) {
@@ -73,8 +70,8 @@ function mapStateToProps(state, routerState) {
   return {
     pathname: routerState.location.pathname,
     genre: routerState.location.query.genre,
-    activitiesByGenre: state.browse.get('activitiesByGenre'),
-    activitiesByGenreNextHrefs: state.browse.get('activitiesByGenreNextHrefs')
+    activitiesByGenre: state.browse.activitiesByGenre,
+    activitiesByGenreNextHrefs: state.browse.activitiesByGenreNextHrefs
   };
 }
 
@@ -83,8 +80,7 @@ export const BrowseContainer = connect(mapStateToProps, actions)(Browse);
 Browse.propTypes = {
   pathname: React.PropTypes.string.isRequired,
   genre: React.PropTypes.string.isRequired,
-  activitiesByGenre: ImmutablePropTypes.list.isRequired,
-  activitiesByGenreNextHrefs: ImmutablePropTypes.map.isRequired
+  activitiesByGenre: React.PropTypes.array
 };
 
 Browse.defaultProps = {

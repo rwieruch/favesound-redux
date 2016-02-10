@@ -1,12 +1,12 @@
-import {Map, List} from 'immutable';
+import _ from 'lodash';
 import * as actionTypes from '../constants/actionTypes';
 import {isSameTrack} from '../utils/player';
 
-const initialState = Map({
+const initialState = {
   activeTrack: null,
   isPlaying: false,
-  playlist: List()
-});
+  playlist: []
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -25,27 +25,35 @@ export default function(state = initialState, action) {
 }
 
 function setActiveTrack(state, activeTrack) {
-  return state.set('activeTrack', activeTrack);
+  return Object.assign({}, state, { activeTrack });
 }
 
 function resetActiveTrack(state) {
-  return state.set('activeTrack', null);
+  return Object.assign({}, state, { activeTrack: null });
 }
 
 function setIsPlaying(state, isPlaying) {
-  return state.set('isPlaying', isPlaying);
+  return Object.assign({}, state, { isPlaying });
 }
 
 function setTrackInPlaylist(state, track) {
-  let item = state.get('playlist').find(isSameTrack(track));
+  let item = _.find(state.playlist, isSameTrack(track));
   if (item) {
     return state;
   } else {
-    return state.updateIn(['playlist'], list => list.push(track));
+    const playlist = [
+      ...state.playlist,
+      track
+    ];
+    return Object.assign({}, state, { playlist });
   }
 }
 
 function removeTrackFromPlaylist(state, track) {
-  let index = state.get('playlist').findIndex(isSameTrack(track));
-  return state.updateIn(['playlist'], list => list.delete(index));
+  let index = _.findIndex(state.playlist, isSameTrack(track));
+  const playlist = [
+    ...state.playlist.slice(0, index),
+    ...state.playlist.slice(index + 1)
+  ];
+  return Object.assign({}, state, { playlist });
 }

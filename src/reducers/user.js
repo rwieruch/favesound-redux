@@ -1,44 +1,43 @@
-import {Map, List, fromJS} from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
-const initialState = Map({
-  followings: List(),
-  activities: List(),
+const initialState = {
+  followings: [],
+  activities: [],
   activitiesNextHref: null,
   activitiesRequestInProcess: false,
-  followers: List(),
+  followers: [],
   followersNextHref: null,
   followersRequestInProcess: false,
-  favorites: List(),
+  favorites: [],
   favoritesRequestInProcess: false
-});
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
   case actionTypes.SET_FOLLOWINGS:
-    return setFollowings(state, fromJS(action.followings));
+    return setFollowings(state, action.followings);
   case actionTypes.MERGE_FOLLOWINGS:
-    return mergeFollowings(state, fromJS(action.followings));
+    return mergeFollowings(state, action.followings);
   case actionTypes.SET_ACTIVITES:
-    return setActivities(state, fromJS(action.activities));
+    return setActivities(state, action.activities);
   case actionTypes.MERGE_ACTIVITIES:
-    return mergeActivities(state, fromJS(action.activities));
+    return mergeActivities(state, action.activities);
   case actionTypes.SET_ACTIVITIES_NEXT_HREF:
     return setActivitiesNextHref(state, action.nextHref);
   case actionTypes.SET_ACTIVITIES_REQUEST_IN_RPOCESS:
     return setActivitiesRequestInProcess(state, action.inProcess);
   case actionTypes.SET_FOLLOWERS:
-    return setFollowers(state, fromJS(action.followers));
+    return setFollowers(state, action.followers);
   case actionTypes.MERGE_FOLLOWERS:
-    return mergeFollowers(state, fromJS(action.followers));
+    return mergeFollowers(state, action.followers);
   case actionTypes.SET_FOLLOWERS_NEXT_HREF:
     return setFollowersNextHref(state, action.nextHref);
   case actionTypes.SET_FOLLOWERS_REQUEST_IN_RPOCESS:
     return setFollowersRequestInProcess(state, action.inProcess);
   case actionTypes.SET_FAVORITES:
-    return setFavorites(state, fromJS(action.favorites));
+    return setFavorites(state, action.favorites);
   case actionTypes.MERGE_FAVORITES:
-    return mergeFavorites(state, fromJS(action.favorites));
+    return mergeFavorites(state, action.favorites);
   case actionTypes.SET_FAVORITES_REQUEST_IN_RPOCESS:
     return setFavoritesRequestInProcess(state, action.inProcess);
   }
@@ -46,53 +45,69 @@ export default function(state = initialState, action) {
 }
 
 function setFollowings(state, followings) {
-  return state.updateIn(['followings'], (list) => followings);
+  return Object.assign({}, state, { followings });
 }
 
-function mergeFollowings(state, followings) {
-  return state.updateIn(['followings'], (list) => list.concat(followings));
+function mergeFollowings(state, list) {
+  const followings = [
+    ...state.followings,
+    ...list
+  ];
+  return Object.assign({}, state, { followings });
 }
 
 function setActivities(state, activities) {
-  return state.updateIn(['activities'], (list) => activities);
+  return Object.assign({}, state, { activities });
 }
 
-function mergeActivities(state, activities) {
-  return state.updateIn(['activities'], (list) => list.concat(activities));
+function mergeActivities(state, list) {
+    const activities = [
+    ...state.activities,
+    ...list
+  ];
+  return Object.assign({}, state, { activities });
 }
 
-function setActivitiesNextHref(state, nextHref) {
-  return state.set('activitiesNextHref', nextHref);
+function setActivitiesNextHref(state, activitiesNextHref) {
+  return Object.assign({}, state, { activitiesNextHref });
 }
 
-function setActivitiesRequestInProcess(state, inProcess) {
-  return state.set('activitiesRequestInProcess', inProcess);
+function setActivitiesRequestInProcess(state, activitiesRequestInProcess) {
+  return Object.assign({}, state, { activitiesRequestInProcess });
 }
 
 function setFollowers(state, followers) {
-  return state.updateIn(['followers'], (list) => followers);
+  return Object.assign({}, state, { followers });
 }
 
-function mergeFollowers(state, followers) {
-  return state.updateIn(['followers'], (list) => list.concat(followers));
+function mergeFollowers(state, list) {
+    const followers = [
+    ...state.followers,
+    ...list
+  ];
+  return Object.assign({}, state, { followers });
 }
 
-function setFollowersNextHref(state, nextHref) {
-  return state.set('followersNextHref', nextHref);
+function setFollowersNextHref(state, followersNextHref) {
+  return Object.assign({}, state, { followersNextHref });
 }
 
-function setFollowersRequestInProcess(state, inProcess) {
-  return state.set('followersRequestInProcess', inProcess);
+function setFollowersRequestInProcess(state, followersRequestInProcess) {
+  return Object.assign({}, state, { followersRequestInProcess });
 }
 
 function setFavorites(state, favorites) {
-  return state.updateIn(['favorites'], (list) => favorites);
+  return Object.assign({}, state, { favorites });
 }
 
-function mergeFavorites(state, favorites) {
-  return state.updateIn(['favorites'], (list) => list.concat(favorites));
+function mergeFavorites(state, list) {
+  const favorites = [
+    ...state.favorites,
+    ...list
+  ];
+  return Object.assign({}, state, { favorites });
 }
 
-function setFavoritesRequestInProcess(state, inProcess) {
-  return state.set('favoritesRequestInProcess', inProcess);
+function setFavoritesRequestInProcess(state, favoritesRequestInProcess) {
+  return Object.assign({}, state, { favoritesRequestInProcess });
 }
