@@ -1,26 +1,41 @@
 import React from 'react';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import TrackItem from '../components/TrackItem';
+import UserItem from '../components/UserItem';
 
 export default class ItemList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.isMoreToggled = props.isMoreToggled;
     this.toggleMore = this.toggleMore.bind(this);
+    this.renderChevron = this.renderChevron.bind(this);
+
+    this.state = {
+      isMoreToggled: false
+    };
   }
 
   toggleMore() {
-    this.isMoreToggled = !this.isMoreToggled;
+    const newToggleState = !this.state.isMoreToggled;
+    this.setState({ isMoreToggled: newToggleState });
   }
 
   fetchMore(nextHref, currentUser, fetchMore) {
     fetchMore(currentUser, nextHref);
   }
 
+  renderChevron() {
+    if (this.props.list.length > 4) {
+      return <i className={"fa " + (this.state.isMoreToggled ? "fa-chevron-up" : "fa-chevron-down")}></i>;
+    } else {
+      return <div></div>;
+    }
+  }
+
   renderNextButton() {
     const { nextHref, currentUser, fetchMore, requestInProcess } = this.props;
 
-    if (!nextHref || !this.isMoreToggled) {
+    if (!nextHref || !this.state.isMoreToggled) {
       return;
     }
 
@@ -41,9 +56,7 @@ export default class ItemList extends React.Component {
   renderTrack(track, idx) {
     return (
       <li key={idx}>
-        <a href={track.permalink_url}>
-          <img src={track.artwork_url} alt={track.title} height="40" width="40"/>
-        </a>
+        <TrackItem track={track} />
       </li>
     );
   }
@@ -51,9 +64,7 @@ export default class ItemList extends React.Component {
   renderUser(user, idx) {
     return (
       <li key={idx}>
-        <a href={user.permalink_url}>
-          <img src={user.avatar_url} alt={user.username} height="40" width="40"/>
-        </a>
+        <UserItem user={user} />
       </li>
     );
   }
@@ -83,12 +94,12 @@ export default class ItemList extends React.Component {
     return (
       <div className="item-list">
         <h2>
-          <a href="#" onClick={this.toggleMore}>
+          <button className="inline" onClick={this.toggleMore}>
             {this.props.title}&nbsp;
-            <i className={"fa " + (this.isMoreToggled ? "fa-chevron-up" : "fa-chevron-down")}></i>
-          </a>
+            {this.renderChevron()}
+          </button>
         </h2>
-        <div className={(this.isMoreToggled ? "more-visible" : "")}>{this.renderList()}</div>
+        <div className={(this.state.isMoreToggled ? "more-visible" : "")}>{this.renderList()}</div>
         <div className="item-list-actions">
           {this.renderNextButton()}
         </div>
@@ -96,11 +107,3 @@ export default class ItemList extends React.Component {
     );
   }
 }
-
-ItemList.propTypes = {
-  isMoreToggled: React.PropTypes.bool
-};
-
-ItemList.defaultProps = {
-  isMoreToggled: false
-};

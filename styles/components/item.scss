@@ -1,0 +1,30 @@
+.item {
+
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+
+  &-content {
+    width: 100%;
+    padding: $padding / 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-name {
+      overflow: hidden;
+      height: 14px;
+    }
+
+    &-info {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+
+      &-item {
+        width: 30%;
+      }
+    }
+  }
+}

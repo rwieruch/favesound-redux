@@ -13,13 +13,22 @@
   }
 
   &-content {
-    height: $padding * 12;
+    height: $padding * 8;
     overflow: hidden;
+    border: $border;
+    background: $backgroundSecondary;
 
-    ul, li, a {
-      display: flex;
-      flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      border-bottom: $border;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
+
   }
 
   .more-visible &-content {

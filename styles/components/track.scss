@@ -42,6 +42,7 @@
       position: absolute;
       right: 0;
       top: 0;
+      margin-right: ($padding / 2);
 
       opacity: 0;
       transition: all 0.2s;
@@ -67,7 +68,6 @@
 
   &:hover .track-content-actions {
     opacity: 1;
-    margin-right: ($padding / 2);
   }
 
 }
