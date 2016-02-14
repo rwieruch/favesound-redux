@@ -17,9 +17,10 @@ export default class Actions extends React.Component {
   render() {
     const { configuration, isVisible } = this.props;
     return (
-      <div className={"action " + (isVisible ? "is-visible" : "")}>
+      <div className={"action " + (isVisible ? "action-visible" : "")}>
         {configuration.map(this.renderAction)}
       </div>
     );
   }
+
 }

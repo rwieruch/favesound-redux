@@ -71,7 +71,7 @@ export class Player extends React.Component {
             onClick={this.activateIteratedTrack.bind(this, activeTrack, 1, activateIteratedTrack)}
           ></i>
         </div>
-        <div>
+        <div className="player-content-name">
           {username} - {title}
         </div>
         <div>

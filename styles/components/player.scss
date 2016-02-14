@@ -25,6 +25,10 @@
     height: 100%;
     margin-left: 25%;
 
+    &-name {
+      width: 50%;
+    }
+
     div {
       margin: auto $padding;
 
