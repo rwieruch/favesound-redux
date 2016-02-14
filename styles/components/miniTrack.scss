@@ -1,49 +1,21 @@
 .mini-track {
 
-  display: flex;
   height: 40px;
+  display: flex;
   overflow: hidden;
   border-bottom: $darkBorder;
 
-  &:hover &-content-action {
+  &:hover .action {
     opacity: 1;
     margin: auto ($padding / 2);
   }
 
   &-content {
+    position: relative;
     padding: $padding / 4;
     background: $nav;
     position: relative;
     width: 100%;
-
-    &-action {
-      position: absolute;
-      right: 0;
-      top: $padding / 2;
-      display: flex;
-
-      opacity: 0;
-      transition: all 0.2s;
-      -webkit-transition: all 0.2s;
-      transition-timing-function: ease;
-      -webkit-transition-timing-function: ease;
-
-      i {
-        margin: 0 ($padding / 4);
-        cursor: pointer;
-        font-size: 15px;
-
-        &:hover {
-            color: $mainColor;
-        }
-      }
-
-    }
-  }
-
-  .active-track &-content-action {
-    opacity: 1;
-    margin-right: ($padding / 2);
   }
 
 }
