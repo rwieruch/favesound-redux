@@ -1,0 +1,28 @@
+.action {
+  position: absolute;
+  right: 0;
+  top: $padding / 2;
+  display: flex;
+
+  opacity: 0;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  transition-timing-function: ease;
+  -webkit-transition-timing-function: ease;
+
+  i {
+    margin: 0 ($padding / 4);
+    cursor: pointer;
+    font-size: 15px;
+
+    &:hover {
+        color: $mainColor;
+    }
+  }
+
+  .is-visible .action {
+    opacity: 1;
+    margin: auto ($padding / 2);
+  }
+
+}

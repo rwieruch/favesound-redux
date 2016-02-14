@@ -39,6 +39,7 @@ export class Dashboard extends React.Component {
           title="Followings"
           list={followings}
           kind="user"
+          {...this.props}
         />
         <ItemList
           title="Followers"
@@ -48,6 +49,7 @@ export class Dashboard extends React.Component {
           currentUser={currentUser}
           fetchMore={fetchFollowers}
           kind="user"
+          {...this.props}
         />
         <ItemList
           title="Favorites"
@@ -55,6 +57,7 @@ export class Dashboard extends React.Component {
           requestInProcess={favoritesRequestInProcess}
           currentUser={currentUser}
           kind="track"
+          {...this.props}
         />
       </div>
     </div>);

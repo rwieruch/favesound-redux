@@ -1,4 +1,6 @@
 import React from 'react';
+import Actions from '../components/Actions';
+import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 
 export default class TrackItem extends React.Component {
 
@@ -7,8 +9,21 @@ export default class TrackItem extends React.Component {
   }
 
   render() {
-    const { track } = this.props;
-    console.log(track);
+    const { track, activateTrack, addTrackToPlaylist, isPlaying, activeTrack } = this.props;
+
+    const isVisible = isSameTrack(activeTrack)({ origin: track });
+    const trackIsPlaying = isSameTrackAndPlaying(activeTrack, { origin: track }, isPlaying);
+    const configuration = [
+      {
+        className: trackIsPlaying ? 'fa fa-pause' : 'fa fa-play',
+        fn: () => activateTrack({ origin: track }),
+      },
+      {
+        className: 'fa fa-th-list',
+        fn: () => addTrackToPlaylist({ origin: track })
+      }
+    ];
+
     return (
       <div className="item">
         <div>
@@ -31,6 +46,7 @@ export default class TrackItem extends React.Component {
               <i className="fa fa-comment"></i>&nbsp;{track.comment_count}
             </div>
           </div>
+          <Actions configuration={configuration} isVisible={isVisible} />
         </div>
       </div>
     );

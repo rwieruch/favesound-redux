@@ -56,7 +56,7 @@ export default class ItemList extends React.Component {
   renderTrack(track, idx) {
     return (
       <li key={idx}>
-        <TrackItem track={track} />
+        <TrackItem track={track} {...this.props} />
       </li>
     );
   }
@@ -64,7 +64,7 @@ export default class ItemList extends React.Component {
   renderUser(user, idx) {
     return (
       <li key={idx}>
-        <UserItem user={user} />
+        <UserItem user={user} {...this.props} />
       </li>
     );
   }
@@ -79,13 +79,13 @@ export default class ItemList extends React.Component {
 
     if (kind === 'user') {
       return (<div className="item-list-content">
-        <ul>{list.map(this.renderUser)}</ul>
+        <ul>{list.map(this.renderUser.bind(this))}</ul>
       </div>);
     }
 
     if (kind === 'track') {
       return (<div className="item-list-content">
-        <ul>{list.map(this.renderTrack)}</ul>
+        <ul>{list.map(this.renderTrack.bind(this))}</ul>
       </div>);
     }
   }

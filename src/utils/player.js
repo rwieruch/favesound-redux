@@ -4,6 +4,6 @@ export function isSameTrackAndPlaying(activeTrack, track, isPlaying) {
 
 export function isSameTrack(track) {
     return function(obj) {
-        return obj.origin.id === track.origin.id;
+        return track && obj && obj.origin.id === track.origin.id;
     }
 }

@@ -4,7 +4,13 @@
   display: flex;
   flex-direction: row;
 
+  &:hover .action {
+    opacity: 1;
+    margin: auto ($padding / 2);
+  }
+
   &-content {
+    position: relative;
     width: 100%;
     padding: $padding / 4;
     display: flex;
