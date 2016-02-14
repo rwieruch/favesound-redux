@@ -1,4 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
+import {isSameTrack} from '../utils/player';
 
 const initialState = {
   followings: [],
@@ -40,6 +41,10 @@ export default function(state = initialState, action) {
     return mergeFavorites(state, action.favorites);
   case actionTypes.SET_FAVORITES_REQUEST_IN_RPOCESS:
     return setFavoritesRequestInProcess(state, action.inProcess);
+  case actionTypes.REMOVE_FROM_FAVORITES:
+    return removeFromFavorites(state, action.track);
+  case actionTypes.ADD_TO_FAVORITES:
+    return addToFavorites(state, action.track)
   }
   return state;
 }
@@ -110,4 +115,23 @@ function mergeFavorites(state, list) {
 
 function setFavoritesRequestInProcess(state, favoritesRequestInProcess) {
   return Object.assign({}, state, { favoritesRequestInProcess });
+}
+
+function removeFromFavorites(state, track) {
+  console.log(track, state.favorites);
+  let index = _.findIndex(state.favorites, isSameTrack(track));
+  const favorites = [
+    ...state.favorites.slice(0, index),
+    ...state.favorites.slice(index + 1)
+  ];
+  return Object.assign({}, state, { favorites });
+}
+
+function addToFavorites(state, track) {
+  console.log(track, state.favorites);
+  const favorites = [
+    ...state.favorites,
+    track
+  ];
+  return Object.assign({}, state, { favorites });
 }

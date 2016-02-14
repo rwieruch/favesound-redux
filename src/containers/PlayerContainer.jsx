@@ -20,11 +20,7 @@ export class Player extends React.Component {
   }
 
   togglePlay(togglePlayTrack, isPlaying) {
-    if (isPlaying) {
-      togglePlayTrack(!isPlaying);
-    } else {
-      togglePlayTrack(!isPlaying);
-    }
+    togglePlayTrack(!isPlaying);
   }
 
   togglePlaylist(isOpenPlaylist, togglePlaylist) {
@@ -35,6 +31,10 @@ export class Player extends React.Component {
     activateIteratedTrack(activeTrack, iterate);
   }
 
+  like(activeTrack, like) {
+    like(activeTrack);
+  }
+
   renderNav() {
     const {
       activeTrack,
@@ -42,7 +42,8 @@ export class Player extends React.Component {
       isOpenPlaylist,
       togglePlayTrack,
       togglePlaylist,
-      activateIteratedTrack
+      activateIteratedTrack,
+      like
     } = this.props;
 
     if (!activeTrack) { return; }
@@ -78,6 +79,12 @@ export class Player extends React.Component {
           <i
             className="fa fa-th-list"
             onClick={this.togglePlaylist.bind(this, isOpenPlaylist, togglePlaylist)}
+          ></i>
+        </div>
+        <div>
+          <i
+            className={"fa fa-heart " + (origin.user_favorite ? "active" : "")}
+            onClick={this.like.bind(this, activeTrack, like)}
           ></i>
         </div>
         <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>

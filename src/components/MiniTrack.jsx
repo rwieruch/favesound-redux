@@ -48,7 +48,8 @@ export default class MiniTrack extends React.Component {
           </div>
           {this.renderActions()}
         </div>
-      </div>);
-    }
+      </div>
+    );
+  }
 
 }

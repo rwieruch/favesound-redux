@@ -3,6 +3,7 @@ import { changeLocation } from './location';
 import { fetchActivities, fetchFollowers, fetchFavorites } from './user';
 import { togglePlaylist } from './environment';
 import { fetchActivitiesByGenre } from './browse';
+import { like } from './track';
 import {
   activateTrack,
   activateIteratedTrack,
@@ -23,6 +24,7 @@ export {
   addTrackToPlaylist,
   removeTrackFromPlaylist,
   activateIteratedTrack,
+  like,
   togglePlaylist,
   fetchActivitiesByGenre
 };

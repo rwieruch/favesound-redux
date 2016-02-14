@@ -41,7 +41,12 @@
           color: $mainColor;
         }
 
+        &.active {
+          color: $mainColor;
+        }
+
       }
+
     }
 
   }

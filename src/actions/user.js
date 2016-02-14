@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as actionTypes from '../constants/actionTypes';
 import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../utils/soundcloudApi';
 
@@ -163,8 +164,12 @@ export function fetchFavorites(user, nextHref) {
     return fetch(url)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeFavorites(data));
+        dispatch(mergeFavorites(_.map(data, mapToOrigin)));
         dispatch(setFavoritesRequestInProcess(false));
       });
   };
+}
+
+function mapToOrigin(origin) {
+  return { origin, type: 'favorite' };
 }

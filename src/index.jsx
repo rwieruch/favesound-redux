@@ -25,6 +25,7 @@ ReactDOM.render(
         <Route path="/dashboard" component={DashboardContainer} />
         <Route path="/browse" component={BrowseContainer}/>
         <Route path="/" component={BrowseContainer}/>
+        <Route path="*" component={BrowseContainer} />
       </Route>
     </Router>
   </Provider>,

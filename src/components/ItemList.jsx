@@ -53,10 +53,10 @@ export default class ItemList extends React.Component {
     );
   }
 
-  renderTrack(track, idx) {
+  renderTrack(activity, idx) {
     return (
       <li key={idx}>
-        <TrackItem track={track} {...this.props} />
+        <TrackItem activity={activity} {...this.props} />
       </li>
     );
   }
