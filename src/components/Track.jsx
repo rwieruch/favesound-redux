@@ -1,7 +1,9 @@
+/* eslint-disable max-len */
 import React from 'react';
 import Waveform from 'waveform.js';
-import { getTrackIcon, isNoTrack, normalizeSamples, isJsonWaveform, isPngWaveform } from '../utils/track';
+import { getTrackIcon, isNoTrack, normalizeSamples, isJsonWaveform, isPngWaveform, durationFormat, fromNow } from '../utils/track';
 import { isSameTrackAndPlaying } from '../utils/player';
+/* eslint-enable max-len */
 
 export default class Track extends React.Component {
 
@@ -63,7 +65,7 @@ export default class Track extends React.Component {
   }
 
   renderImage(artwork_url, title, avatar_url) {
-    return <img src={artwork_url || avatar_url} alt={title} height="100" width="100"/>;
+    return <img src={artwork_url || avatar_url} alt={title} height="80" width="80"/>;
   }
 
   renderTrack() {
@@ -75,6 +77,7 @@ export default class Track extends React.Component {
     const {
       user,
       title,
+      duration,
       reposts_count,
       playback_count,
       comment_count,
@@ -82,6 +85,7 @@ export default class Track extends React.Component {
       likes_count,
       artwork_url,
       permalink_url,
+      created_at,
       id
     } = origin;
 
@@ -94,7 +98,12 @@ export default class Track extends React.Component {
         </div>
         <div className="track-content">
           <div className="track-content-name">
-            <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title} {type}</a>
+            <div><a href={user.permalink_url}>{username}</a></div>
+            <div>{fromNow(created_at)}</div>
+          </div>
+          <div className="track-content-meta">
+            <div><a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{title}</a></div>
+            <div>{durationFormat(duration)}</div>
           </div>
           <div className="track-content-waveform">
             {this.renderWaveform(id, idx)}

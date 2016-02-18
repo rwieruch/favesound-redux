@@ -1,18 +1,11 @@
+/* eslint-disable max-len */
 import Cookies from 'js-cookie';
 import { CLIENT_ID } from '../constants/authentification';
 import * as actionTypes from '../constants/actionTypes';
 import { apiUrl } from '../utils/soundcloudApi';
 import { changeLocation } from './location';
-import {
-  fetchFollowings,
-  fetchActivities,
-  fetchFollowers,
-  fetchFavorites,
-  setFollowings,
-  setFollowers,
-  setFavorites,
-  setActivities
-} from './user';
+import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites, setFollowings, setFollowers, setFavorites, setActivities } from './user';
+/* eslint-enable max-len */
 
 const OAUTH_TOKEN = 'accessToken';
 
