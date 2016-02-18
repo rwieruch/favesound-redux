@@ -15,22 +15,39 @@ export default class Track extends React.Component {
 
     if (!waveform_url) { return; }
 
+    const elementId = this.generateElementId(id, idx);
+
     if (isJsonWaveform(waveform_url)) {
-      this.fetchJsonWaveform(id, idx, waveform_url);
+      this.fetchJsonWaveform(elementId, waveform_url);
+    }
+
+    if (isPngWaveform(waveform_url)) {
+      this.fetchPngWaveform(elementId, origin);
     }
   }
 
-  fetchJsonWaveform(id, idx, waveformUrl) {
+  fetchJsonWaveform(elementId, waveformUrl) {
     fetch(waveformUrl)
       .then(response => response.json())
       .then((data) => {
-        const elementId = `waveform-${id}${idx}`;
         new Waveform({
           container: document.getElementById(elementId),
           innerColor: '#61B25A',
           data: normalizeSamples(data.samples)
         });
       });
+  }
+
+  fetchPngWaveform(elementId, origin) {
+    const waveform = new Waveform({
+      container: document.getElementById(elementId),
+      innerColor: '#61B25A'
+    });
+    waveform.dataFromSoundCloudTrack(origin);
+  }
+
+  generateElementId(id, idx) {
+    return `waveform-${id}${idx}`;
   }
 
   activateTrack(activity, activateTrack) {
@@ -41,17 +58,8 @@ export default class Track extends React.Component {
     addTrackToPlaylist(activity);
   }
 
-
-  renderWaveform(id, idx, waveformUrl, title) {
-    if (isJsonWaveform(waveformUrl)) {
-      return <div className="track-content-waveform-json" id={"waveform-" + id + idx}></div>;
-    }
-
-    if (isPngWaveform(waveformUrl)) {
-      return <img className="track-content-waveform-png" src={waveformUrl} alt={title} height="40" width="95%"/>;
-    }
-
-    return;
+  renderWaveform(id, idx) {
+    return <div className="track-content-waveform-json" id={"waveform-" + id + idx}></div>;
   }
 
   renderImage(artwork_url, title, avatar_url) {
@@ -74,7 +82,6 @@ export default class Track extends React.Component {
       likes_count,
       artwork_url,
       permalink_url,
-      waveform_url,
       id
     } = origin;
 
@@ -90,7 +97,7 @@ export default class Track extends React.Component {
             <a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{username} - {title} {type}</a>
           </div>
           <div className="track-content-waveform">
-            {this.renderWaveform(id, idx, waveform_url, title)}
+            {this.renderWaveform(id, idx)}
           </div>
           <div className="track-content-info">
             <div className="track-content-info-item">
