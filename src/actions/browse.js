@@ -1,5 +1,6 @@
 import { CLIENT_ID } from '../constants/authentification';
 import { unauthApiUrl } from '../utils/soundcloudApi';
+import { mapInOrigin } from '../utils/track';
 import * as actionTypes from '../constants/actionTypes';
 
 function mergeActivitiesByGenre(activities) {
@@ -39,14 +40,10 @@ export function fetchActivitiesByGenre(nextHref, genre) {
     return fetch(url)
       .then(response => response.json())
       .then(data => {
-        const activities = data.collection.map(wrapInOrigin);
+        const activities = data.collection.map(mapInOrigin('browse'));
         dispatch(mergeActivitiesByGenre(activities));
         dispatch(setActivitiesByGenreNextHref(data.next_href, genre));
         dispatch(setActivitiesByGenreRequestInProcess(false));
       });
   };
-}
-
-function wrapInOrigin(activity) {
-    return { origin: activity, type: 'track' };
 }

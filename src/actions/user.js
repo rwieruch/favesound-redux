@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import * as actionTypes from '../constants/actionTypes';
+import { mapInOrigin } from '../utils/track';
 import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../utils/soundcloudApi';
 
 export function setFollowings(followings) {
@@ -187,13 +188,9 @@ export function fetchFavorites(user, nextHref) {
     return fetch(url)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeFavorites(_.map(data.collection, mapToOrigin)));
+        dispatch(mergeFavorites(_.map(data.collection, mapInOrigin('favorite'))));
         dispatch(setFavoritesNextHref(data.next_href));
         dispatch(setFavoritesRequestInProcess(false));
       });
   };
-}
-
-function mapToOrigin(origin) {
-  return { origin, type: 'favorite' };
 }

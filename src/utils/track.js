@@ -62,3 +62,9 @@ export function durationFormat(ms) {
 export function fromNow(createdAt) {
   return moment(createdAt).from(moment());
 }
+
+export function mapInOrigin(type) {
+  return function (origin) {
+    return { origin, type };
+  };
+}
