@@ -19,7 +19,9 @@ export class Dashboard extends React.Component {
       followersRequestInProcess,
       fetchFollowers,
       favorites,
-      favoritesRequestInProcess
+      favoritesNextHref,
+      favoritesRequestInProcess,
+      fetchFavorites
     } = this.props;
 
     if (!currentUser) {
@@ -54,8 +56,10 @@ export class Dashboard extends React.Component {
         <ItemList
           title="Favorites"
           list={favorites}
+          nextHref={favoritesNextHref}
           requestInProcess={favoritesRequestInProcess}
           currentUser={currentUser}
+          fetchMore={fetchFavorites}
           kind="track"
           {...this.props}
         />
@@ -94,6 +98,7 @@ function mapStateToProps(state, routerState) {
     followersNextHref: state.user.followersNextHref,
     followersRequestInProcess: state.user.followersRequestInProcess,
     favorites: state.user.favorites,
+    favoritesNextHref: state.user.favoritesNextHref,
     favoritesRequestInProcess: state.user.favoritesRequestInProcess
   };
 }

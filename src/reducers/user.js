@@ -10,6 +10,7 @@ const initialState = {
   followersNextHref: null,
   followersRequestInProcess: false,
   favorites: [],
+  favoritesNextHref: null,
   favoritesRequestInProcess: false
 };
 
@@ -39,6 +40,8 @@ export default function(state = initialState, action) {
     return setFavorites(state, action.favorites);
   case actionTypes.MERGE_FAVORITES:
     return mergeFavorites(state, action.favorites);
+    case actionTypes.SET_FAVORITES_NEXT_HREF:
+    return setFavoritesNextHref(state, action.nextHref);
   case actionTypes.SET_FAVORITES_REQUEST_IN_RPOCESS:
     return setFavoritesRequestInProcess(state, action.inProcess);
   case actionTypes.REMOVE_FROM_FAVORITES:
@@ -111,6 +114,10 @@ function mergeFavorites(state, list) {
     ...list
   ];
   return Object.assign({}, state, { favorites });
+}
+
+function setFavoritesNextHref(state, favoritesNextHref) {
+  return Object.assign({}, state, { favoritesNextHref });
 }
 
 function setFavoritesRequestInProcess(state, favoritesRequestInProcess) {

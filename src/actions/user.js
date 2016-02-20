@@ -79,7 +79,7 @@ function setActivitiesRequestInProcess(inProcess) {
 export function fetchActivities(user, nextHref) {
   return (dispatch, getState) => {
 
-    let url = getLazyLoadingUrl(user, nextHref, 'activities?limit=50&offset=0');
+    let url = getLazyLoadingUrl(user, nextHref, 'activities?limit=20&offset=0');
     let requestInProcess = getState().user.activitiesRequestInProcess;
 
     if (requestInProcess) { return; }
@@ -120,7 +120,7 @@ function setFollowersRequestInProcess(inProcess) {
 export function fetchFollowers(user, nextHref) {
   return (dispatch, getState) => {
 
-    let url = getLazyLoadingUrl(user, nextHref, 'followers?limit=200&offset=0');
+    let url = getLazyLoadingUrl(user, nextHref, 'followers?limit=20&offset=0');
     let requestInProcess = getState().user.followersRequestInProcess;
 
     if (requestInProcess) { return; }
@@ -144,6 +144,13 @@ function mergeFavorites(favorites) {
   };
 }
 
+function setFavoritesNextHref(nextHref) {
+  return {
+    type: actionTypes.SET_FAVORITES_NEXT_HREF,
+    nextHref
+  };
+}
+
 function setFavoritesRequestInProcess(inProcess) {
   return {
     type: actionTypes.SET_FAVORITES_REQUEST_IN_RPOCESS,
@@ -154,7 +161,7 @@ function setFavoritesRequestInProcess(inProcess) {
 export function fetchFavorites(user, nextHref) {
   return (dispatch, getState) => {
 
-    let url = getLazyLoadingUrl(user, nextHref, 'favorites?limit=200&offset=0');
+    let url = getLazyLoadingUrl(user, nextHref, 'favorites?linked_partitioning=1&limit=20&offset=0');
     let requestInProcess = getState().user.favoritesRequestInProcess;
 
     if (requestInProcess) { return; }
@@ -164,7 +171,8 @@ export function fetchFavorites(user, nextHref) {
     return fetch(url)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeFavorites(_.map(data, mapToOrigin)));
+        dispatch(mergeFavorites(_.map(data.collection, mapToOrigin)));
+        dispatch(setFavoritesNextHref(data.next_href));
         dispatch(setFavoritesRequestInProcess(false));
       });
   };

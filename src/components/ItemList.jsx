@@ -72,7 +72,7 @@ export default class ItemList extends React.Component {
   renderList() {
     const { list, kind, requestInProcess } = this.props;
 
-    if (!list || requestInProcess) {
+    if (!list) {
       const isLoading = !list || requestInProcess;
       return <LoadingSpinner isLoading={isLoading} />;
     }
