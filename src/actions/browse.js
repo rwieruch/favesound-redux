@@ -1,7 +1,9 @@
 import { CLIENT_ID } from '../constants/authentification';
 import { unauthApiUrl } from '../utils/soundcloudApi';
 import { mapInOrigin } from '../utils/track';
+import { setRequestInProcess } from '../actions/request';
 import * as actionTypes from '../constants/actionTypes';
+import * as requestTypes from '../constants/requestTypes';
 
 function mergeActivitiesByGenre(activities) {
   return {
@@ -18,24 +20,17 @@ function setActivitiesByGenreNextHref(nextHref, genre) {
   };
 }
 
-function setActivitiesByGenreRequestInProcess(inProcess) {
-  return {
-    type: actionTypes.SET_ACTIVITIES_BY_GENRE_REQUEST_IN_RPOCESS,
-    inProcess
-  };
-}
-
 export function fetchActivitiesByGenre(nextHref, genre) {
   return (dispatch, getState) => {
 
-    const initHref = unauthApiUrl(`tracks?linked_partitioning=1&limit=20&offset=0&tags=${genre}`, '&');
-    const url = nextHref || initHref;
-
-    let requestInProcess = getState().browse.activitiesByGenreInProcess;
+    let requestType = requestTypes.GENRES;
+    let initHref = unauthApiUrl(`tracks?linked_partitioning=1&limit=20&offset=0&tags=${genre}`, '&');
+    let url = nextHref || initHref;
+    let requestInProcess = getState().request[requestType];
 
     if (requestInProcess) { return; }
 
-    dispatch(setActivitiesByGenreRequestInProcess(true));
+    dispatch(setRequestInProcess(true, requestType));
 
     return fetch(url)
       .then(response => response.json())
@@ -43,7 +38,7 @@ export function fetchActivitiesByGenre(nextHref, genre) {
         const activities = data.collection.map(mapInOrigin('browse'));
         dispatch(mergeActivitiesByGenre(activities));
         dispatch(setActivitiesByGenreNextHref(data.next_href, genre));
-        dispatch(setActivitiesByGenreRequestInProcess(false));
+        dispatch(setRequestInProcess(false, requestType));
       });
   };
 }

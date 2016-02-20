@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
+import * as requestTypes from '../constants/requestTypes';
 import { DEFAULT_GENRE } from '../constants/genre';
 import { HeaderContainer } from '../containers/HeaderContainer';
 import { PlayerContainer } from '../containers/PlayerContainer';
@@ -25,7 +26,7 @@ export class Browse extends React.Component {
   }
 
   getInnerContent() {
-    const { activitiesByGenre, genre } = this.props;
+    const { activitiesByGenre, genre, requestsInProcess } = this.props;
 
     if (!activitiesByGenre) { return; }
 
@@ -34,6 +35,7 @@ export class Browse extends React.Component {
     return (<div className="browse-content">
         <Activities
           {...this.props}
+          requestInProcess={requestsInProcess[requestTypes.GENRES]}
           activities={filteredActivitiesByGenre}
           scrollFunction={this.fetchActivitiesByGenre}
         />
@@ -71,7 +73,8 @@ function mapStateToProps(state, routerState) {
     pathname: routerState.location.pathname,
     genre: routerState.location.query.genre,
     activitiesByGenre: state.browse.activitiesByGenre,
-    activitiesByGenreNextHrefs: state.browse.activitiesByGenreNextHrefs
+    activitiesByGenreNextHrefs: state.browse.activitiesByGenreNextHrefs,
+    requestsInProcess: state.request
   };
 }
 
