@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
+import * as requestTypes from '../constants/requestTypes';
 import { HeaderContainer } from '../containers/HeaderContainer';
 import { PlayerContainer } from '../containers/PlayerContainer';
 import { PlaylistContainer } from '../containers/PlaylistContainer';
@@ -17,16 +18,14 @@ export class Dashboard extends React.Component {
       fetchActivities,
       followings,
       followingsNextHref,
-      followingsRequestInProcess,
       fetchFollowings,
       followers,
       followersNextHref,
-      followersRequestInProcess,
       fetchFollowers,
       favorites,
       favoritesNextHref,
-      favoritesRequestInProcess,
-      fetchFavorites
+      fetchFavorites,
+      requestsInProcess
     } = this.props;
 
     if (!currentUser) {
@@ -37,6 +36,7 @@ export class Dashboard extends React.Component {
       <div className="dashboard-content-main">
         <Activities
           {...this.props}
+          requestInProcess={requestsInProcess[requestTypes.ACTIVITIES]}
           activities={activities}
           scrollFunction={() => fetchActivities(null, activitiesNextHref)}
         />
@@ -46,7 +46,7 @@ export class Dashboard extends React.Component {
           title="Followings"
           list={followings}
           nextHref={followingsNextHref}
-          requestInProcess={followingsRequestInProcess}
+          requestInProcess={requestsInProcess[requestTypes.FOLLOWINGS]}
           currentUser={currentUser}
           fetchMore={fetchFollowings}
           kind="user"
@@ -56,7 +56,7 @@ export class Dashboard extends React.Component {
           title="Followers"
           list={followers}
           nextHref={followersNextHref}
-          requestInProcess={followersRequestInProcess}
+          requestInProcess={requestsInProcess[requestTypes.FOLLOWERS]}
           currentUser={currentUser}
           fetchMore={fetchFollowers}
           kind="user"
@@ -66,7 +66,7 @@ export class Dashboard extends React.Component {
           title="Favorites"
           list={favorites}
           nextHref={favoritesNextHref}
-          requestInProcess={favoritesRequestInProcess}
+          requestInProcess={requestsInProcess[requestTypes.FAVORITES]}
           currentUser={currentUser}
           fetchMore={fetchFavorites}
           kind="track"
@@ -96,16 +96,13 @@ function mapStateToProps(state, routerState) {
     isPlaying: state.player.isPlaying,
     followings: state.user.followings,
     followingsNextHref: state.user.followingsNextHref,
-    followingsRequestInProcess: state.user.followingsRequestInProcess,
     activities: state.user.activities,
     activitiesNextHref: state.user.activitiesNextHref,
-    activitiesRequestInProcess: state.user.activitiesRequestInProcess,
     followers: state.user.followers,
     followersNextHref: state.user.followersNextHref,
-    followersRequestInProcess: state.user.followersRequestInProcess,
     favorites: state.user.favorites,
     favoritesNextHref: state.user.favoritesNextHref,
-    favoritesRequestInProcess: state.user.favoritesRequestInProcess
+    requestsInProcess: state.request
   };
 }
 
@@ -120,10 +117,7 @@ Dashboard.propTypes = {
   followings: React.PropTypes.array,
   activities: React.PropTypes.array,
   activitiesNextHref: React.PropTypes.string,
-  activitiesRequestInProcess: React.PropTypes.bool.isRequired,
   followers: React.PropTypes.array,
   followersNextHref: React.PropTypes.string,
-  followersRequestInProcess: React.PropTypes.bool.isRequired,
-  favorites: React.PropTypes.array,
-  favoritesRequestInProcess: React.PropTypes.bool.isRequired
+  favorites: React.PropTypes.array
 };

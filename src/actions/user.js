@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import * as actionTypes from '../constants/actionTypes';
+import * as requestTypes from '../constants/requestTypes';
+import { setRequestInProcess } from '../actions/request';
 import { mapInOrigin } from '../utils/track';
 import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../utils/soundcloudApi';
 
@@ -45,29 +47,23 @@ function setFollowingsNextHref(nextHref) {
   };
 }
 
-function setFollowingsRequestInProcess(inProcess) {
-  return {
-    type: actionTypes.SET_FOLLOWINGS_REQUEST_IN_RPOCESS,
-    inProcess
-  };
-}
-
 export function fetchFollowings(user, nextHref) {
   return (dispatch, getState) => {
 
+    let requestType = requestTypes.FOLLOWINGS;
     let url = getLazyLoadingUrl(user, nextHref, 'followings?limit=20&offset=0');
-    let requestInProcess = getState().user.followingsRequestInProcess;
+    let requestInProcess = getState().request[requestType];
 
     if (requestInProcess) { return; }
 
-    dispatch(setFollowingsRequestInProcess(true));
+    dispatch(setRequestInProcess(true, requestType));
 
     return fetch(url)
       .then(response => response.json())
       .then(data => {
         dispatch(mergeFollowings(data.collection));
         dispatch(setFollowingsNextHref(data.next_href));
-        dispatch(setFollowingsRequestInProcess(false));
+        dispatch(setRequestInProcess(false, requestType));
       });
   };
 }
@@ -86,29 +82,23 @@ function setActivitiesNextHref(nextHref) {
   };
 }
 
-function setActivitiesRequestInProcess(inProcess) {
-  return {
-    type: actionTypes.SET_ACTIVITIES_REQUEST_IN_RPOCESS,
-    inProcess
-  };
-}
-
 export function fetchActivities(user, nextHref) {
   return (dispatch, getState) => {
 
+    let requestType = requestTypes.ACTIVITIES;
     let url = getLazyLoadingUrl(user, nextHref, 'activities?limit=20&offset=0');
-    let requestInProcess = getState().user.activitiesRequestInProcess;
+    let requestInProcess = getState().request[requestType];
 
     if (requestInProcess) { return; }
 
-    dispatch(setActivitiesRequestInProcess(true));
+    dispatch(setRequestInProcess(true, requestType));
 
     return fetch(url)
       .then(response => response.json())
       .then(data => {
         dispatch(mergeActivities(data.collection));
         dispatch(setActivitiesNextHref(data.next_href));
-        dispatch(setActivitiesRequestInProcess(false));
+        dispatch(setRequestInProcess(false, requestType));
       });
   };
 }
@@ -127,29 +117,23 @@ function setFollowersNextHref(nextHref) {
   };
 }
 
-function setFollowersRequestInProcess(inProcess) {
-  return {
-    type: actionTypes.SET_FOLLOWERS_REQUEST_IN_RPOCESS,
-    inProcess
-  };
-}
-
 export function fetchFollowers(user, nextHref) {
   return (dispatch, getState) => {
 
+    let requestType = requestTypes.FOLLOWERS;
     let url = getLazyLoadingUrl(user, nextHref, 'followers?limit=20&offset=0');
-    let requestInProcess = getState().user.followersRequestInProcess;
+    let requestInProcess = getState().request[requestType];
 
     if (requestInProcess) { return; }
 
-    dispatch(setFollowersRequestInProcess(true));
+    dispatch(setRequestInProcess(true, requestType));
 
     return fetch(url)
       .then(response => response.json())
       .then(data => {
         dispatch(mergeFollowers(data.collection));
         dispatch(setFollowersNextHref(data.next_href));
-        dispatch(setFollowersRequestInProcess(false));
+        dispatch(setRequestInProcess(false, requestType));
       });
   };
 }
@@ -168,29 +152,23 @@ function setFavoritesNextHref(nextHref) {
   };
 }
 
-function setFavoritesRequestInProcess(inProcess) {
-  return {
-    type: actionTypes.SET_FAVORITES_REQUEST_IN_RPOCESS,
-    inProcess
-  };
-}
-
 export function fetchFavorites(user, nextHref) {
   return (dispatch, getState) => {
 
+    let requestType = requestTypes.FAVORITES;
     let url = getLazyLoadingUrl(user, nextHref, 'favorites?linked_partitioning=1&limit=20&offset=0');
-    let requestInProcess = getState().user.favoritesRequestInProcess;
+    let requestInProcess = getState().request[requestType];
 
     if (requestInProcess) { return; }
 
-    dispatch(setFavoritesRequestInProcess(true));
+    dispatch(setRequestInProcess(true, requestType));
 
     return fetch(url)
       .then(response => response.json())
       .then(data => {
         dispatch(mergeFavorites(_.map(data.collection, mapInOrigin('favorite'))));
         dispatch(setFavoritesNextHref(data.next_href));
-        dispatch(setFavoritesRequestInProcess(false));
+        dispatch(setRequestInProcess(false, requestType));
       });
   };
 }

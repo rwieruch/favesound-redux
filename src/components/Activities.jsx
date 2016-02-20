@@ -27,7 +27,7 @@ class Activities extends React.Component {
     return (
       <div>
         <div>{this.renderActivities()}</div>
-        <LoadingSpinner isLoading={this.props.activitiesRequestInProcess}/>
+        <LoadingSpinner isLoading={this.props.requestInProcess}/>
       </div>);
   }
 
