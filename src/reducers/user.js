@@ -3,6 +3,8 @@ import {isSameTrack} from '../utils/player';
 
 const initialState = {
   followings: [],
+  followingsNextHref: null,
+  followingsRequestInProcess: false,
   activities: [],
   activitiesNextHref: null,
   activitiesRequestInProcess: false,
@@ -20,6 +22,10 @@ export default function(state = initialState, action) {
     return setFollowings(state, action.followings);
   case actionTypes.MERGE_FOLLOWINGS:
     return mergeFollowings(state, action.followings);
+  case actionTypes.SET_FOLLOWINGS_NEXT_HREF:
+    return setFollowingsNextHref(state, action.nextHref);
+  case actionTypes.SET_FOLLOWINGS_REQUEST_IN_RPOCESS:
+    return setFollowingsRequestInProcess(state, action.inProcess);
   case actionTypes.SET_ACTIVITES:
     return setActivities(state, action.activities);
   case actionTypes.MERGE_ACTIVITIES:
@@ -62,6 +68,14 @@ function mergeFollowings(state, list) {
     ...list
   ];
   return Object.assign({}, state, { followings });
+}
+
+function setFollowingsNextHref(state, followingsNextHref) {
+  return Object.assign({}, state, { followingsNextHref });
+}
+
+function setFollowingsRequestInProcess(state, followingsRequestInProcess) {
+  return Object.assign({}, state, { followingsRequestInProcess });
 }
 
 function setActivities(state, activities) {

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { login, logout } from './session';
 import { changeLocation } from './location';
-import { fetchActivities, fetchFollowers, fetchFavorites } from './user';
+import { fetchActivities, fetchFollowers, fetchFavorites, fetchFollowings } from './user';
 import { togglePlaylist } from './environment';
 import { fetchActivitiesByGenre } from './browse';
 import { like } from './track';
@@ -13,6 +13,7 @@ export {
   logout,
   changeLocation,
   fetchActivities,
+  fetchFollowings,
   fetchFollowers,
   fetchFavorites,
   activateTrack,

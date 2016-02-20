@@ -13,7 +13,12 @@ export class Dashboard extends React.Component {
     const {
       currentUser,
       activities,
+      activitiesNextHref,
+      fetchActivities,
       followings,
+      followingsNextHref,
+      followingsRequestInProcess,
+      fetchFollowings,
       followers,
       followersNextHref,
       followersRequestInProcess,
@@ -33,13 +38,17 @@ export class Dashboard extends React.Component {
         <Activities
           {...this.props}
           activities={activities}
-          scrollFunction={() => this.fetchActivities()}
+          scrollFunction={() => fetchActivities(null, activitiesNextHref)}
         />
       </div>
       <div className="dashboard-content-side">
         <ItemList
           title="Followings"
           list={followings}
+          nextHref={followingsNextHref}
+          requestInProcess={followingsRequestInProcess}
+          currentUser={currentUser}
+          fetchMore={fetchFollowings}
           kind="user"
           {...this.props}
         />
@@ -67,11 +76,6 @@ export class Dashboard extends React.Component {
     </div>);
   }
 
-  fetchActivities() {
-    const { activitiesNextHref } = this.props;
-    this.props.fetchActivities(null, activitiesNextHref);
-  }
-
   render() {
     return (<div className="dashboard">
       <HeaderContainer genre={this.props.genre} pathname={this.props.pathname}/>
@@ -91,6 +95,8 @@ function mapStateToProps(state, routerState) {
     activeTrack: state.player.activeTrack,
     isPlaying: state.player.isPlaying,
     followings: state.user.followings,
+    followingsNextHref: state.user.followingsNextHref,
+    followingsRequestInProcess: state.user.followingsRequestInProcess,
     activities: state.user.activities,
     activitiesNextHref: state.user.activitiesNextHref,
     activitiesRequestInProcess: state.user.activitiesRequestInProcess,

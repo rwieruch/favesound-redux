@@ -37,20 +37,36 @@ function mergeFollowings(followings) {
   };
 }
 
+function setFollowingsNextHref(nextHref) {
+  return {
+    type: actionTypes.SET_FOLLOWINGS_NEXT_HREF,
+    nextHref
+  };
+}
+
+function setFollowingsRequestInProcess(inProcess) {
+  return {
+    type: actionTypes.SET_FOLLOWINGS_REQUEST_IN_RPOCESS,
+    inProcess
+  };
+}
+
 export function fetchFollowings(user, nextHref) {
+  return (dispatch, getState) => {
 
-  const initHref = apiUrl(`users/${user.id}/followings?limit=200&offset=0`, '&');
-  const followingsUrl = nextHref || initHref;
+    let url = getLazyLoadingUrl(user, nextHref, 'followings?limit=20&offset=0');
+    let requestInProcess = getState().user.followingsRequestInProcess;
 
-  return dispatch => {
-    return fetch(followingsUrl)
+    if (requestInProcess) { return; }
+
+    dispatch(setFollowingsRequestInProcess(true));
+
+    return fetch(url)
       .then(response => response.json())
       .then(data => {
         dispatch(mergeFollowings(data.collection));
-
-        if (data.next_href) {
-          dispatch(fetchFollowings(user, data.next_href));
-        }
+        dispatch(setFollowingsNextHref(data.next_href));
+        dispatch(setFollowingsRequestInProcess(false));
       });
   };
 }
