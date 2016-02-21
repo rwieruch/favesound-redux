@@ -4,6 +4,7 @@ import player from './player';
 import environment from './environment';
 import browse from './browse';
 import request from './request';
+import paginate from './paginate';
 
 export default {
   session,
@@ -11,5 +12,6 @@ export default {
   player,
   environment,
   browse,
-  request
+  request,
+  paginate
 };

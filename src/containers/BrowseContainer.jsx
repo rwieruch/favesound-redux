@@ -43,8 +43,8 @@ export class Browse extends React.Component {
   }
 
   fetchActivitiesByGenre() {
-    const { genre, activitiesByGenreNextHrefs } = this.props;
-    const nextHref = activitiesByGenreNextHrefs[genre];
+    const { genre, paginateLinks } = this.props;
+    const nextHref = paginateLinks[genre];
     this.props.fetchActivitiesByGenre(nextHref, genre);
   }
 
@@ -73,8 +73,8 @@ function mapStateToProps(state, routerState) {
     pathname: routerState.location.pathname,
     genre: routerState.location.query.genre,
     activitiesByGenre: state.browse.activitiesByGenre,
-    activitiesByGenreNextHrefs: state.browse.activitiesByGenreNextHrefs,
-    requestsInProcess: state.request
+    requestsInProcess: state.request,
+    paginateLinks: state.paginate
   };
 }
 

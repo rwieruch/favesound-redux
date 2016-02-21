@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import * as requestTypes from '../constants/requestTypes';
+import * as paginateLinkTypes from '../constants/paginateLinkTypes';
 import { HeaderContainer } from '../containers/HeaderContainer';
 import { PlayerContainer } from '../containers/PlayerContainer';
 import { PlaylistContainer } from '../containers/PlaylistContainer';
@@ -14,18 +15,15 @@ export class Dashboard extends React.Component {
     const {
       currentUser,
       activities,
-      activitiesNextHref,
       fetchActivities,
       followings,
-      followingsNextHref,
       fetchFollowings,
       followers,
-      followersNextHref,
       fetchFollowers,
       favorites,
-      favoritesNextHref,
       fetchFavorites,
-      requestsInProcess
+      requestsInProcess,
+      paginateLinks
     } = this.props;
 
     if (!currentUser) {
@@ -38,14 +36,14 @@ export class Dashboard extends React.Component {
           {...this.props}
           requestInProcess={requestsInProcess[requestTypes.ACTIVITIES]}
           activities={activities}
-          scrollFunction={() => fetchActivities(null, activitiesNextHref)}
+          scrollFunction={() => fetchActivities(null, paginateLinks[paginateLinkTypes.ACTIVITIES])}
         />
       </div>
       <div className="dashboard-content-side">
         <ItemList
           title="Followings"
           list={followings}
-          nextHref={followingsNextHref}
+          nextHref={paginateLinks[paginateLinkTypes.FOLLOWINGS]}
           requestInProcess={requestsInProcess[requestTypes.FOLLOWINGS]}
           currentUser={currentUser}
           fetchMore={fetchFollowings}
@@ -55,7 +53,7 @@ export class Dashboard extends React.Component {
         <ItemList
           title="Followers"
           list={followers}
-          nextHref={followersNextHref}
+          nextHref={paginateLinks[paginateLinkTypes.FOLLOWERS]}
           requestInProcess={requestsInProcess[requestTypes.FOLLOWERS]}
           currentUser={currentUser}
           fetchMore={fetchFollowers}
@@ -65,7 +63,7 @@ export class Dashboard extends React.Component {
         <ItemList
           title="Favorites"
           list={favorites}
-          nextHref={favoritesNextHref}
+          nextHref={paginateLinks[paginateLinkTypes.FAVORITES]}
           requestInProcess={requestsInProcess[requestTypes.FAVORITES]}
           currentUser={currentUser}
           fetchMore={fetchFavorites}
@@ -95,14 +93,11 @@ function mapStateToProps(state, routerState) {
     activeTrack: state.player.activeTrack,
     isPlaying: state.player.isPlaying,
     followings: state.user.followings,
-    followingsNextHref: state.user.followingsNextHref,
     activities: state.user.activities,
-    activitiesNextHref: state.user.activitiesNextHref,
     followers: state.user.followers,
-    followersNextHref: state.user.followersNextHref,
     favorites: state.user.favorites,
-    favoritesNextHref: state.user.favoritesNextHref,
-    requestsInProcess: state.request
+    requestsInProcess: state.request,
+    paginateLinks: state.paginate
   };
 }
 
@@ -116,8 +111,6 @@ Dashboard.propTypes = {
   isPlaying: React.PropTypes.bool.isRequired,
   followings: React.PropTypes.array,
   activities: React.PropTypes.array,
-  activitiesNextHref: React.PropTypes.string,
   followers: React.PropTypes.array,
-  followersNextHref: React.PropTypes.string,
   favorites: React.PropTypes.array
 };
