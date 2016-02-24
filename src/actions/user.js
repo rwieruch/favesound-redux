@@ -1,9 +1,12 @@
 import _ from 'lodash';
+import { arrayOf, normalize } from 'normalizr';
+import { songSchema, userSchema } from '../constants/schemas';
 import * as actionTypes from '../constants/actionTypes';
 import * as requestTypes from '../constants/requestTypes';
 import * as paginateLinkTypes from '../constants/paginateLinkTypes';
 import { setRequestInProcess } from '../actions/request';
 import { setPaginateLink } from '../actions/paginate';
+import { mergeUserEntities } from '../actions/userEntities';
 import { mapInOrigin } from '../utils/track';
 import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../utils/soundcloudApi';
 
@@ -56,7 +59,9 @@ export function fetchFollowings(user, nextHref) {
     return fetch(url)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeFollowings(data.collection));
+        const normalized = normalize(data.collection, arrayOf(userSchema));
+        dispatch(mergeUserEntities(normalized.entities.users));
+        dispatch(mergeFollowings(normalized.result));
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FOLLOWINGS));
         dispatch(setRequestInProcess(false, requestType));
       });
@@ -112,7 +117,9 @@ export function fetchFollowers(user, nextHref) {
     return fetch(url)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeFollowers(data.collection));
+        const normalized = normalize(data.collection, arrayOf(userSchema));
+        dispatch(mergeUserEntities(normalized.entities.users));
+        dispatch(mergeFollowers(normalized.result));
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FOLLOWERS));
         dispatch(setRequestInProcess(false, requestType));
       });

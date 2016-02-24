@@ -23,7 +23,8 @@ export class Dashboard extends React.Component {
       favorites,
       fetchFavorites,
       requestsInProcess,
-      paginateLinks
+      paginateLinks,
+      userEntities
     } = this.props;
 
     if (!currentUser) {
@@ -42,7 +43,8 @@ export class Dashboard extends React.Component {
       <div className="dashboard-content-side">
         <ItemList
           title="Followings"
-          list={followings}
+          ids={followings}
+          entities={userEntities}
           nextHref={paginateLinks[paginateLinkTypes.FOLLOWINGS]}
           requestInProcess={requestsInProcess[requestTypes.FOLLOWINGS]}
           currentUser={currentUser}
@@ -52,7 +54,8 @@ export class Dashboard extends React.Component {
         />
         <ItemList
           title="Followers"
-          list={followers}
+          ids={followers}
+          entities={userEntities}
           nextHref={paginateLinks[paginateLinkTypes.FOLLOWERS]}
           requestInProcess={requestsInProcess[requestTypes.FOLLOWERS]}
           currentUser={currentUser}
@@ -62,7 +65,7 @@ export class Dashboard extends React.Component {
         />
         <ItemList
           title="Favorites"
-          list={favorites}
+          ids={favorites}
           nextHref={paginateLinks[paginateLinkTypes.FAVORITES]}
           requestInProcess={requestsInProcess[requestTypes.FAVORITES]}
           currentUser={currentUser}
@@ -92,6 +95,7 @@ function mapStateToProps(state, routerState) {
     currentUser: state.session.user,
     activeTrack: state.player.activeTrack,
     isPlaying: state.player.isPlaying,
+    userEntities: state.userEntities,
     followings: state.user.followings,
     activities: state.user.activities,
     followers: state.user.followers,
@@ -112,5 +116,6 @@ Dashboard.propTypes = {
   followings: React.PropTypes.array,
   activities: React.PropTypes.array,
   followers: React.PropTypes.array,
-  favorites: React.PropTypes.array
+  favorites: React.PropTypes.array,
+  userEntities: React.PropTypes.object
 };

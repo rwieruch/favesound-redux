@@ -38,6 +38,7 @@
     "css-loader": "^0.23.1",
     "js-cookie": "^2.1.0",
     "lodash": "^4.3.0",
+    "normalizr": "^2.0.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",

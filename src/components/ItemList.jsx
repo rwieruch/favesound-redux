@@ -25,7 +25,7 @@ export default class ItemList extends React.Component {
   }
 
   renderChevron() {
-    if (this.props.list.length > 4) {
+    if (this.props.ids.length > 4) {
       return <i className={"fa " + (this.state.isMoreToggled ? "fa-chevron-up" : "fa-chevron-down")}></i>;
     } else {
       return <div></div>;
@@ -53,39 +53,42 @@ export default class ItemList extends React.Component {
     );
   }
 
-  renderTrack(activity, idx) {
+  renderTrack(activityId, idx) {
+    // const { entities } = this.props;
+    // const activity = entities[activityId];
     return (
       <li key={idx}>
-        <TrackItem activity={activity} {...this.props} />
+        <TrackItem activity={activityId} {...this.props} />
       </li>
     );
   }
 
-  renderUser(user, idx) {
+  renderUser(userId, idx) {
+    const { entities } = this.props;
     return (
       <li key={idx}>
-        <UserItem user={user} {...this.props} />
+        <UserItem user={entities[userId]} {...this.props} />
       </li>
     );
   }
 
   renderList() {
-    const { list, kind, requestInProcess } = this.props;
+    const { ids, kind, requestInProcess } = this.props;
 
-    if (!list) {
-      const isLoading = !list || requestInProcess;
+    if (!ids) {
+      const isLoading = !ids || requestInProcess;
       return <LoadingSpinner isLoading={isLoading} />;
     }
 
     if (kind === 'user') {
       return (<div className="item-list-content">
-        <ul>{list.map(this.renderUser.bind(this))}</ul>
+        <ul>{ids.map(this.renderUser.bind(this))}</ul>
       </div>);
     }
 
     if (kind === 'track') {
       return (<div className="item-list-content">
-        <ul>{list.map(this.renderTrack.bind(this))}</ul>
+        <ul>{ids.map(this.renderTrack.bind(this))}</ul>
       </div>);
     }
   }

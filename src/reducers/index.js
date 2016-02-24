@@ -5,6 +5,7 @@ import environment from './environment';
 import browse from './browse';
 import request from './request';
 import paginate from './paginate';
+import userEntities from './userEntities';
 
 export default {
   session,
@@ -13,5 +14,6 @@ export default {
   environment,
   browse,
   request,
-  paginate
+  paginate,
+  userEntities
 };
