@@ -95,7 +95,7 @@ function mapStateToProps(state, routerState) {
     currentUser: state.session.user,
     activeTrack: state.player.activeTrack,
     isPlaying: state.player.isPlaying,
-    userEntities: state.userEntities,
+    userEntities: state.entities.users,
     followings: state.user.followings,
     activities: state.user.activities,
     followers: state.user.followers,

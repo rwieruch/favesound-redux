@@ -6,7 +6,7 @@ import * as requestTypes from '../constants/requestTypes';
 import * as paginateLinkTypes from '../constants/paginateLinkTypes';
 import { setRequestInProcess } from '../actions/request';
 import { setPaginateLink } from '../actions/paginate';
-import { mergeUserEntities } from '../actions/userEntities';
+import { mergeEntities } from '../actions/entities';
 import { mapInOrigin } from '../utils/track';
 import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../utils/soundcloudApi';
 
@@ -60,7 +60,7 @@ export function fetchFollowings(user, nextHref) {
       .then(response => response.json())
       .then(data => {
         const normalized = normalize(data.collection, arrayOf(userSchema));
-        dispatch(mergeUserEntities(normalized.entities.users));
+        dispatch(mergeEntities(normalized.entities));
         dispatch(mergeFollowings(normalized.result));
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FOLLOWINGS));
         dispatch(setRequestInProcess(false, requestType));
@@ -118,7 +118,7 @@ export function fetchFollowers(user, nextHref) {
       .then(response => response.json())
       .then(data => {
         const normalized = normalize(data.collection, arrayOf(userSchema));
-        dispatch(mergeUserEntities(normalized.entities.users));
+        dispatch(mergeEntities(normalized.entities));
         dispatch(mergeFollowers(normalized.result));
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FOLLOWERS));
         dispatch(setRequestInProcess(false, requestType));
