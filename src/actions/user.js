@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { arrayOf, normalize } from 'normalizr';
-import { songSchema, userSchema } from '../constants/schemas';
+import { trackSchema, userSchema } from '../constants/schemas';
 import * as actionTypes from '../constants/actionTypes';
 import * as requestTypes from '../constants/requestTypes';
 import * as paginateLinkTypes from '../constants/paginateLinkTypes';
@@ -147,7 +147,10 @@ export function fetchFavorites(user, nextHref) {
     return fetch(url)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeFavorites(_.map(data.collection, mapInOrigin('favorite'))));
+        const normalized = normalize(data.collection, arrayOf(trackSchema));
+        normalized.entities.tracks = _.mapValues(normalized.entities.tracks, mapInOrigin('favorite'));
+        dispatch(mergeEntities(normalized.entities));
+        dispatch(mergeFavorites(normalized.result));
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FAVORITES));
         dispatch(setRequestInProcess(false, requestType));
       });

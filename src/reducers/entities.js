@@ -2,7 +2,8 @@ import * as actionTypes from '../constants/actionTypes';
 import _ from 'lodash';
 
 const initialState = {
-    users: {}
+    users: {},
+    tracks: {}
 };
 
 export default function(state = initialState, action) {

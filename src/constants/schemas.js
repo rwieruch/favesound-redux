@@ -1,11 +1,11 @@
 import { normalize, Schema, arrayOf } from 'normalizr';
 
-let song = new Schema('songs');
+let track = new Schema('tracks');
 let user = new Schema('users');
 
-song.define({
+track.define({
     user: user
 });
 
-export const songSchema = song;
+export const trackSchema = track;
 export const userSchema = user;

@@ -53,12 +53,11 @@ export default class ItemList extends React.Component {
     );
   }
 
-  renderTrack(activityId, idx) {
-    // const { entities } = this.props;
-    // const activity = entities[activityId];
+  renderTrack(trackId, idx) {
+    const { entities } = this.props;
     return (
       <li key={idx}>
-        <TrackItem activity={activityId} {...this.props} />
+        <TrackItem activity={entities[trackId]} {...this.props} />
       </li>
     );
   }
