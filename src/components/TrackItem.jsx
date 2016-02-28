@@ -8,15 +8,20 @@ export default class TrackItem extends React.Component {
     super(props);
   }
 
-  render() {
-    const { activity, activateTrack, addTrackToPlaylist, isPlaying, activeTrack } = this.props;
+  renderImage(artwork_url, title, avatar_url) {
+    return <img src={artwork_url || avatar_url} alt={title} height="40" width="40"/>;
+  }
 
-    const isVisible = isSameTrack(activeTrack)(activity);
-    const trackIsPlaying = isSameTrackAndPlaying(activeTrack, activity, isPlaying);
+  render() {
+    const { activity, activateTrack, addTrackToPlaylist, isPlaying, activeTrackId, userEntities } = this.props;
+    const { avatar_url, username } = userEntities[activity.user];
+
+    const isVisible = isSameTrack(activeTrackId)(activity.id);
+    const trackIsPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
     const configuration = [
       {
         className: trackIsPlaying ? 'fa fa-pause' : 'fa fa-play',
-        fn: () => activateTrack(activity),
+        fn: () => activateTrack(activity.id),
       },
       {
         className: 'fa fa-th-list',
@@ -27,12 +32,12 @@ export default class TrackItem extends React.Component {
     return (
       <div className="item">
         <div>
-          <img src={activity.artwork_url} alt={activity.title} height="40" width="40"/>
+          {this.renderImage(activity.artwork_url, activity.title, avatar_url)}
         </div>
         <div className="item-content">
           <div className="item-content-name">
             <a href={activity.permalink_url}>
-              {activity.title}
+              {username} - {activity.title}
             </a>
           </div>
           <div className="item-content-info">

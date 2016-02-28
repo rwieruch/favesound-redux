@@ -5,10 +5,11 @@ import MiniTrack from '../components/MiniTrack';
 
 export class Playlist extends React.Component {
 
-  renderMiniTrack(activity, idx) {
+  renderMiniTrack(id, idx) {
+    const { trackEntities } = this.props;
     return (
       <li key={idx}>
-        <MiniTrack activity={activity} {...this.props}/>
+        <MiniTrack activity={trackEntities[id]} {...this.props}/>
       </li>
     );
   }
@@ -27,18 +28,22 @@ export class Playlist extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    activeTrack: state.player.activeTrack,
+    activeTrackId: state.player.activeTrackId,
     isPlaying: state.player.isPlaying,
     playlist: state.player.playlist,
-    isOpenPlaylist: state.environment.isOpenPlaylist
+    isOpenPlaylist: state.environment.isOpenPlaylist,
+    trackEntities: state.entities.tracks,
+    userEntities: state.entities.users
   };
 }
 
 export const PlaylistContainer = connect(mapStateToProps, actions)(Playlist);
 
 Playlist.propTypes = {
-  activeTrack: React.PropTypes.object,
+  activeTrackId: React.PropTypes.number,
   isPlaying: React.PropTypes.bool,
   playlist: React.PropTypes.array,
   isOpenPlaylist: React.PropTypes.bool,
+  trackEntities: React.PropTypes.object,
+  userEntities: React.PropTypes.object
 };

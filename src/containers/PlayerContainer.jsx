@@ -27,29 +27,31 @@ export class Player extends React.Component {
     togglePlaylist(isOpenPlaylist);
   }
 
-  activateIteratedTrack(activeTrack, iterate, activateIteratedTrack) {
-    activateIteratedTrack(activeTrack, iterate);
+  activateIteratedTrack(activeTrackId, iterate, activateIteratedTrack) {
+    activateIteratedTrack(activeTrackId, iterate);
   }
 
-  like(activeTrack, like) {
-    like(activeTrack);
+  like(track, like) {
+    like(track);
   }
 
   renderNav() {
     const {
-      activeTrack,
+      activeTrackId,
       isPlaying,
       isOpenPlaylist,
       togglePlayTrack,
       togglePlaylist,
       activateIteratedTrack,
       like,
-      userEntities
+      userEntities,
+      trackEntities
     } = this.props;
 
-    if (!activeTrack) { return; }
+    if (!activeTrackId) { return; }
 
-    const { user, title, stream_url } = activeTrack;
+    const track = trackEntities[activeTrackId];
+    const { user, title, stream_url } = track;
     const { username } = userEntities[user];
 
     return (
@@ -57,7 +59,7 @@ export class Player extends React.Component {
         <div>
           <i
             className="fa fa-step-backward"
-            onClick={this.activateIteratedTrack.bind(this, activeTrack, -1, activateIteratedTrack)}
+            onClick={this.activateIteratedTrack.bind(this, activeTrackId, -1, activateIteratedTrack)}
           ></i>
         </div>
         <div>
@@ -69,7 +71,7 @@ export class Player extends React.Component {
         <div>
           <i
             className="fa fa-step-forward"
-            onClick={this.activateIteratedTrack.bind(this, activeTrack, 1, activateIteratedTrack)}
+            onClick={this.activateIteratedTrack.bind(this, activeTrackId, 1, activateIteratedTrack)}
           ></i>
         </div>
         <div className="player-content-name">
@@ -83,8 +85,8 @@ export class Player extends React.Component {
         </div>
         <div>
           <i
-            className={"fa fa-heart " + (activeTrack.user_favorite ? "active" : "")}
-            onClick={this.like.bind(this, activeTrack, like)}
+            className={"fa fa-heart " + (activeTrackId.user_favorite ? "active" : "")}
+            onClick={this.like.bind(this, track, like)}
           ></i>
         </div>
         <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
@@ -93,14 +95,14 @@ export class Player extends React.Component {
   }
 
   render() {
-    return <div className={this.props.activeTrack ? "player player-visible" : "player"}>{this.renderNav()}</div>;
+    return <div className={this.props.activeTrackId ? "player player-visible" : "player"}>{this.renderNav()}</div>;
   }
 
 }
 
 function mapStateToProps(state) {
   return {
-    activeTrack: state.player.activeTrack,
+    activeTrackId: state.player.activeTrackId,
     isPlaying: state.player.isPlaying,
     isOpenPlaylist: state.environment.isOpenPlaylist,
     userEntities: state.entities.users,
@@ -111,7 +113,7 @@ function mapStateToProps(state) {
 export const PlayerContainer = connect(mapStateToProps, actions)(Player);
 
 Player.propTypes = {
-  activeTrack: React.PropTypes.object,
+  activeTrackId: React.PropTypes.number,
   isPlaying: React.PropTypes.bool,
   isOpenPlaylist: React.PropTypes.bool,
   userEntities: React.PropTypes.object,

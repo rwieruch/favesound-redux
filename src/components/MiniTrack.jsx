@@ -9,15 +9,15 @@ export default class MiniTrack extends React.Component {
   }
 
   renderActions() {
-    const { activity, activeTrack, activateTrack, removeTrackFromPlaylist, isPlaying } = this.props;
+    const { activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying } = this.props;
 
-    const trackIsPlaying = isSameTrackAndPlaying(activeTrack, activity, isPlaying);
-    const isVisible = isSameTrack(activeTrack)(activity);
+    const trackIsPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
+    const isVisible = isSameTrack(activeTrackId)(activity.id);
 
     const configuration = [
       {
         className: trackIsPlaying ? 'fa fa-pause' : 'fa fa-play',
-        fn: () => activateTrack(activity),
+        fn: () => activateTrack(activity.id),
       },
       {
         className: 'fa fa-times',
@@ -29,12 +29,12 @@ export default class MiniTrack extends React.Component {
   }
 
   render() {
-    const { activity } = this.props;
+    const { activity, userEntities } = this.props;
 
     if (!activity) { return; }
 
     const { user, title, permalink_url, artwork_url } = activity;
-    const { avatar_url, username } = user;
+    const { avatar_url, username } = userEntities[user];
 
     return (
       <div className="mini-track">

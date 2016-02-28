@@ -52,7 +52,7 @@ export default class Track extends React.Component {
   }
 
   activateTrack(activity, activateTrack) {
-    activateTrack(activity);
+    activateTrack(activity.id);
   }
 
   addTrackToPlaylist(activity, addTrackToPlaylist) {
@@ -68,7 +68,7 @@ export default class Track extends React.Component {
   }
 
   renderTrack() {
-    const { activity, activeTrack, activateTrack, addTrackToPlaylist, isPlaying, idx, userEntities } = this.props;
+    const { activity, activeTrackId, activateTrack, addTrackToPlaylist, isPlaying, idx, userEntities } = this.props;
 
     const {
       user,
@@ -124,7 +124,7 @@ export default class Track extends React.Component {
           <div className="track-content-actions">
             <div className="track-content-actions-item">
               <i
-                className={"fa " + (isSameTrackAndPlaying(activeTrack, activity, isPlaying) ? "fa-pause" : "fa-play")}
+                className={"fa " + (isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying) ? "fa-pause" : "fa-play")}
                 onClick={this.activateTrack.bind(this, activity, activateTrack)}
               ></i>
             </div>

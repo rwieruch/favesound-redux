@@ -4,10 +4,10 @@ import { togglePlaylist } from './environment';
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 import { apiUrl } from '../utils/soundcloudApi';
 
-export function setActiveTrack(activeTrack) {
+export function setActiveTrack(activeTrackId) {
     return {
         type: actionTypes.SET_ACTIVE_TRACK,
-        activeTrack
+        activeTrackId
     };
 }
 
@@ -18,17 +18,17 @@ function setIsPlaying(isPlaying) {
     };
 }
 
-function setTrackInPlaylist(track) {
+function setTrackInPlaylist(trackId) {
     return {
         type: actionTypes.SET_TRACK_IN_PLAYLIST,
-        track
+        trackId
     }
 }
 
-function removeFromPlaylist(track) {
+function removeFromPlaylist(trackId) {
     return {
         type: actionTypes.REMOVE_TRACK_FROM_PLAYLIST,
-        track
+        trackId
     };
 }
 
@@ -39,14 +39,19 @@ function deactivateTrack() {
     };
 }
 
-export function activateTrack(activeTrack) {
+export function activateTrack(trackId) {
     return (dispatch, getState) => {
-        let previousActiveTrack = getState().player.activeTrack;
+        let playlist = getState().player.playlist;
+        let previousActiveTrackId = getState().player.activeTrackId;
         let isCurrentlyPlaying = getState().player.isPlaying;
-        let isPlaying = !isSameTrackAndPlaying(previousActiveTrack, activeTrack, isCurrentlyPlaying);
+        let isPlaying = !isSameTrackAndPlaying(previousActiveTrackId, trackId, isCurrentlyPlaying);
+
         dispatch(togglePlayTrack(isPlaying));
-        dispatch(setActiveTrack(activeTrack));
-        dispatch(setTrackInPlaylist(activeTrack));
+        dispatch(setActiveTrack(trackId));
+
+        if (!isInPlaylist(playlist, trackId)) {
+            dispatch(setTrackInPlaylist(trackId));
+        }
     };
 }
 
@@ -58,23 +63,24 @@ export function togglePlayTrack(isPlaying) {
 
 export function addTrackToPlaylist(track) {
     return (dispatch, getState) => {
-        let playlistSize = getState().player.playlist.length;
-        if (playlistSize) {
-            dispatch(setTrackInPlaylist(track));
+        let playlist = getState().player.playlist;
+
+        if (playlist.length && !isInPlaylist(playlist, track.id)) {
+            dispatch(setTrackInPlaylist(track.id));
         } else {
-            dispatch(activateTrack(track));
+            dispatch(activateTrack(track.id));
         }
     };
 }
 
 export function removeTrackFromPlaylist(track) {
     return (dispatch, getState) => {
-        let activeTrack = getState().player.activeTrack;
+        let activeTrackId = getState().player.activeTrackId;
         let isPlaying = getState().player.isPlaying;
-        let isRelevantTrack = isSameTrackAndPlaying(activeTrack, track, isPlaying);
+        let isRelevantTrack = isSameTrackAndPlaying(activeTrackId, track.id, isPlaying);
 
         if (isRelevantTrack) {
-            dispatch(activateIteratedTrack(activeTrack, 1));
+            dispatch(activateIteratedTrack(activeTrackId, 1));
         }
 
         let playlistSize = getState().player.playlist.length;
@@ -83,23 +89,27 @@ export function removeTrackFromPlaylist(track) {
             dispatch(togglePlaylist(true));
         }
 
-        dispatch(removeFromPlaylist(track));
+        dispatch(removeFromPlaylist(track.id));
     };
 }
 
-export function activateIteratedTrack(currentActiveTrack, iterate) {
+export function activateIteratedTrack(currentActiveTrackId, iterate) {
     return (dispatch, getState) => {
         let playlist = getState().player.playlist;
-        let nextActiveTrack = getIteratedTrack(playlist, currentActiveTrack, iterate);
-        if (nextActiveTrack) {
-            dispatch(activateTrack(nextActiveTrack));
+        let nextActiveTrackId = getIteratedTrack(playlist, currentActiveTrackId, iterate);
+        if (nextActiveTrackId) {
+            dispatch(activateTrack(nextActiveTrackId));
         } else {
             dispatch(togglePlayTrack(false));
         }
     };
 }
 
-function getIteratedTrack(playlist, currentActiveTrack, iterate) {
-    let index = _.findIndex(playlist, isSameTrack(currentActiveTrack));
+function getIteratedTrack(playlist, currentActiveTrackId, iterate) {
+    let index = _.findIndex(playlist, isSameTrack(currentActiveTrackId));
     return playlist[index + iterate];
+}
+
+function isInPlaylist(playlist, trackId) {
+    return _.find(playlist, isSameTrack(trackId));
 }

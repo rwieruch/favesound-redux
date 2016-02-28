@@ -23,7 +23,6 @@ export function like(track) {
         }
 
         const updateEntity = Object.assign({}, track, { user_favorite: !track.user_favorite });
-        console.log(updateEntity);
         dispatch(syncEntities(updateEntity, 'tracks'));
       });
   };
