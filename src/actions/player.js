@@ -99,6 +99,7 @@ export function activateIteratedTrack(currentActiveTrackId, iterate) {
     return (dispatch, getState) => {
         let playlist = getState().player.playlist;
         let nextActiveTrackId = getIteratedTrack(playlist, currentActiveTrackId, iterate);
+
         if (nextActiveTrackId) {
             dispatch(activateTrack(nextActiveTrackId));
         } else {
