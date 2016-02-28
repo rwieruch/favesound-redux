@@ -65,9 +65,11 @@ export function addTrackToPlaylist(track) {
     return (dispatch, getState) => {
         let playlist = getState().player.playlist;
 
-        if (playlist.length && !isInPlaylist(playlist, track.id)) {
+        if (!isInPlaylist(playlist, track.id)) {
             dispatch(setTrackInPlaylist(track.id));
-        } else {
+        }
+
+        if (!playlist.length) {
             dispatch(activateTrack(track.id));
         }
     };
