@@ -43,14 +43,14 @@ export class Player extends React.Component {
       togglePlayTrack,
       togglePlaylist,
       activateIteratedTrack,
-      like
+      like,
+      userEntities
     } = this.props;
 
     if (!activeTrack) { return; }
 
-    const { origin } = activeTrack;
-    const { user, title, stream_url } = origin;
-    const { username } = user;
+    const { user, title, stream_url } = activeTrack;
+    const { username } = userEntities[user];
 
     return (
       <div className="player-content">
@@ -83,7 +83,7 @@ export class Player extends React.Component {
         </div>
         <div>
           <i
-            className={"fa fa-heart " + (origin.user_favorite ? "active" : "")}
+            className={"fa fa-heart " + (activeTrack.user_favorite ? "active" : "")}
             onClick={this.like.bind(this, activeTrack, like)}
           ></i>
         </div>
@@ -102,7 +102,9 @@ function mapStateToProps(state) {
   return {
     activeTrack: state.player.activeTrack,
     isPlaying: state.player.isPlaying,
-    isOpenPlaylist: state.environment.isOpenPlaylist
+    isOpenPlaylist: state.environment.isOpenPlaylist,
+    userEntities: state.entities.users,
+    trackEntities: state.entities.tracks,
   };
 }
 
@@ -111,5 +113,7 @@ export const PlayerContainer = connect(mapStateToProps, actions)(Player);
 Player.propTypes = {
   activeTrack: React.PropTypes.object,
   isPlaying: React.PropTypes.bool,
-  isOpenPlaylist: React.PropTypes.bool
+  isOpenPlaylist: React.PropTypes.bool,
+  userEntities: React.PropTypes.object,
+  trackEntities: React.PropTypes.object
 };

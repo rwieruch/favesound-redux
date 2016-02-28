@@ -5,22 +5,23 @@ import { LoadingSpinner } from '../components/LoadingSpinner';
 
 class Activities extends React.Component {
 
-  renderActivity(activity, idx) {
+  renderActivity(id, idx) {
+    const { entities } = this.props;
     return (
       <li key={idx}>
-        <Track activity={activity} idx={idx} {...this.props}/>
+        <Track activity={entities[id]} idx={idx} {...this.props}/>
       </li>
     );
   }
 
   renderActivities() {
-    const { activities } = this.props;
+    const { ids } = this.props;
 
-    if (!activities) {
+    if (!ids) {
       return;
     }
 
-    return <ul>{activities.map(this.renderActivity.bind(this))}</ul>;
+    return <ul>{ids.map(this.renderActivity.bind(this))}</ul>;
   }
 
   render() {

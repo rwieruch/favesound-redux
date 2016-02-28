@@ -7,34 +7,13 @@ import * as paginateLinkTypes from '../constants/paginateLinkTypes';
 import { setRequestInProcess } from '../actions/request';
 import { setPaginateLink } from '../actions/paginate';
 import { mergeEntities } from '../actions/entities';
-import { mapInOrigin } from '../utils/track';
+import { isTrack } from '../utils/track';
 import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../utils/soundcloudApi';
 
 export function setFollowings(followings) {
   return {
     type: actionTypes.SET_FOLLOWINGS,
     followings
-  };
-}
-
-export function setFollowers(followers) {
-  return {
-    type: actionTypes.SET_FOLLOWERS,
-    followers
-  };
-}
-
-export function setFavorites(favorites) {
-  return {
-    type: actionTypes.SET_FAVORITES,
-    favorites
-  };
-}
-
-export function setActivities(activities) {
-  return {
-    type: actionTypes.SET_ACTIVITES,
-    activities
   };
 }
 
@@ -68,6 +47,13 @@ export function fetchFollowings(user, nextHref) {
   };
 }
 
+export function setActivities(activities) {
+  return {
+    type: actionTypes.SET_ACTIVITES,
+    activities
+  };
+}
+
 function mergeActivities(activities) {
   return {
     type: actionTypes.MERGE_ACTIVITIES,
@@ -89,10 +75,20 @@ export function fetchActivities(user, nextHref) {
     return fetch(url)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeActivities(data.collection));
+        const mapAndFiltered = _.chain(data.collection).filter(isTrack).map('origin').value();
+        const normalized = normalize(mapAndFiltered, arrayOf(trackSchema));
+        dispatch(mergeEntities(normalized.entities));
+        dispatch(mergeActivities(normalized.result));
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.ACTIVITIES));
         dispatch(setRequestInProcess(false, requestType));
       });
+  };
+}
+
+export function setFollowers(followers) {
+  return {
+    type: actionTypes.SET_FOLLOWERS,
+    followers
   };
 }
 
@@ -126,7 +122,14 @@ export function fetchFollowers(user, nextHref) {
   };
 }
 
-function mergeFavorites(favorites) {
+export function setFavorites(favorites) {
+  return {
+    type: actionTypes.SET_FAVORITES,
+    favorites
+  };
+}
+
+export function mergeFavorites(favorites) {
   return {
     type: actionTypes.MERGE_FAVORITES,
     favorites
@@ -148,7 +151,6 @@ export function fetchFavorites(user, nextHref) {
       .then(response => response.json())
       .then(data => {
         const normalized = normalize(data.collection, arrayOf(trackSchema));
-        normalized.entities.tracks = _.mapValues(normalized.entities.tracks, mapInOrigin('favorite'));
         dispatch(mergeEntities(normalized.entities));
         dispatch(mergeFavorites(normalized.result));
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FAVORITES));

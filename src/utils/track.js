@@ -1,29 +1,8 @@
 import moment from 'moment';
 
-const ACTIVITY_TYPES = {
-  trackRepost: 'track-repost',
-  playlistRepost: 'playlist-repost',
-  playlist: 'playlist',
-  track: 'track'
-};
-
-export function getTrackIcon(type) {
-  if (type === ACTIVITY_TYPES.trackRepost) {
-    return 'fa fa-retweet';
-  }
-
-  if (type === ACTIVITY_TYPES.playlist || type === ACTIVITY_TYPES.playlistRepost) {
-    return 'fa fa-list';
-  }
-
-  if (type === ACTIVITY_TYPES.track) {
-    return 'fa fa-play';
-  }
-}
-
-export function isNoTrack(track) {
+export function isTrack(track) {
   let { origin, type } = track;
-  return !origin || !type || type === 'playlist' || type === 'playlist-repost'
+  return origin && type && type !== 'playlist' && type !== 'playlist-repost';
 }
 
 export function normalizeSamples(samples) {
@@ -61,10 +40,4 @@ export function durationFormat(ms) {
 
 export function fromNow(createdAt) {
   return moment(createdAt).from(moment());
-}
-
-export function mapInOrigin(type) {
-  return function (origin) {
-    return { origin, type };
-  };
 }

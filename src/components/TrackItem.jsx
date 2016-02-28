@@ -10,7 +10,6 @@ export default class TrackItem extends React.Component {
 
   render() {
     const { activity, activateTrack, addTrackToPlaylist, isPlaying, activeTrack } = this.props;
-    const { origin } = activity;
 
     const isVisible = isSameTrack(activeTrack)(activity);
     const trackIsPlaying = isSameTrackAndPlaying(activeTrack, activity, isPlaying);
@@ -28,23 +27,23 @@ export default class TrackItem extends React.Component {
     return (
       <div className="item">
         <div>
-          <img src={origin.artwork_url} alt={origin.title} height="40" width="40"/>
+          <img src={activity.artwork_url} alt={activity.title} height="40" width="40"/>
         </div>
         <div className="item-content">
           <div className="item-content-name">
-            <a href={origin.permalink_url}>
-              {origin.title}
+            <a href={activity.permalink_url}>
+              {activity.title}
             </a>
           </div>
           <div className="item-content-info">
             <div className="item-content-info-item">
-              <i className="fa fa-play"></i>&nbsp;{origin.playback_count}
+              <i className="fa fa-play"></i>&nbsp;{activity.playback_count}
             </div>
             <div className="item-content-info-item">
-              <i className="fa fa-heart"></i>&nbsp;{origin.favoritings_count}
+              <i className="fa fa-heart"></i>&nbsp;{activity.favoritings_count}
             </div>
             <div className="item-content-info-item">
-              <i className="fa fa-comment"></i>&nbsp;{origin.comment_count}
+              <i className="fa fa-comment"></i>&nbsp;{activity.comment_count}
             </div>
           </div>
           <Actions configuration={configuration} isVisible={isVisible} />

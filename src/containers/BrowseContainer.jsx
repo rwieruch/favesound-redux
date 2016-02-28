@@ -26,17 +26,16 @@ export class Browse extends React.Component {
   }
 
   getInnerContent() {
-    const { activitiesByGenre, genre, requestsInProcess } = this.props;
+    const { browseActivities, genre, requestsInProcess, trackEntities } = this.props;
 
-    if (!activitiesByGenre) { return; }
-
-    const filteredActivitiesByGenre = activitiesByGenre.filter(this.byGenre(genre));
+    if (!browseActivities) { return; }
 
     return (<div className="browse-content">
         <Activities
           {...this.props}
           requestInProcess={requestsInProcess[requestTypes.GENRES]}
-          activities={filteredActivitiesByGenre}
+          ids={browseActivities[genre]}
+          entities={trackEntities}
           scrollFunction={this.fetchActivitiesByGenre}
         />
       </div>);
@@ -49,12 +48,8 @@ export class Browse extends React.Component {
   }
 
   needToFetchActivities() {
-    const { genre, activitiesByGenre } = this.props;
-    return activitiesByGenre.filter(this.byGenre(genre)).length < 20;
-  }
-
-  byGenre(genre) {
-    return (activity) => activity.origin.tag_list.indexOf(genre) !== -1;
+    const { genre, browseActivities } = this.props;
+    return !browseActivities[genre] || browseActivities[genre].length < 20;
   }
 
   render() {
@@ -72,9 +67,11 @@ function mapStateToProps(state, routerState) {
   return {
     pathname: routerState.location.pathname,
     genre: routerState.location.query.genre,
-    activitiesByGenre: state.browse.activitiesByGenre,
+    browseActivities: state.browse,
     requestsInProcess: state.request,
-    paginateLinks: state.paginate
+    paginateLinks: state.paginate,
+    trackEntities: state.entities.tracks,
+    userEntities: state.entities.users
   };
 }
 
@@ -83,7 +80,7 @@ export const BrowseContainer = connect(mapStateToProps, actions)(Browse);
 Browse.propTypes = {
   pathname: React.PropTypes.string.isRequired,
   genre: React.PropTypes.string.isRequired,
-  activitiesByGenre: React.PropTypes.array
+  browseActivities: React.PropTypes.object
 };
 
 Browse.defaultProps = {

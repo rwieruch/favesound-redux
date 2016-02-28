@@ -30,11 +30,10 @@ export default class MiniTrack extends React.Component {
 
   render() {
     const { activity } = this.props;
-    const { origin } = activity;
 
-    if (!origin) { return; }
+    if (!activity) { return; }
 
-    const { user, title, permalink_url, artwork_url } = origin;
+    const { user, title, permalink_url, artwork_url } = activity;
     const { avatar_url, username } = user;
 
     return (

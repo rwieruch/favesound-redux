@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import Waveform from 'waveform.js';
-import { getTrackIcon, isNoTrack, normalizeSamples, isJsonWaveform, isPngWaveform, durationFormat, fromNow } from '../utils/track';
+import { normalizeSamples, isJsonWaveform, isPngWaveform, durationFormat, fromNow } from '../utils/track';
 import { isSameTrackAndPlaying } from '../utils/player';
 /* eslint-enable max-len */
 
@@ -9,11 +9,10 @@ export default class Track extends React.Component {
 
   componentDidMount() {
     const { activity, idx } = this.props;
-    const { origin } = activity;
 
-    if (!origin) { return; }
+    if (!activity) { return; }
 
-    const { waveform_url, id } = origin;
+    const { waveform_url, id } = activity;
 
     if (!waveform_url) { return; }
 
@@ -24,7 +23,7 @@ export default class Track extends React.Component {
     }
 
     if (isPngWaveform(waveform_url)) {
-      this.fetchPngWaveform(elementId, origin);
+      this.fetchPngWaveform(elementId, activity);
     }
   }
 
@@ -40,12 +39,12 @@ export default class Track extends React.Component {
       });
   }
 
-  fetchPngWaveform(elementId, origin) {
+  fetchPngWaveform(elementId, activity) {
     const waveform = new Waveform({
       container: document.getElementById(elementId),
       innerColor: '#61B25A'
     });
-    waveform.dataFromSoundCloudTrack(origin);
+    waveform.dataFromSoundCloudTrack(activity);
   }
 
   generateElementId(id, idx) {
@@ -69,10 +68,7 @@ export default class Track extends React.Component {
   }
 
   renderTrack() {
-    const { activity, activeTrack, activateTrack, addTrackToPlaylist, isPlaying, idx } = this.props;
-    const { origin, type } = activity;
-
-    if (isNoTrack(activity)) { return; }
+    const { activity, activeTrack, activateTrack, addTrackToPlaylist, isPlaying, idx, userEntities } = this.props;
 
     const {
       user,
@@ -87,9 +83,9 @@ export default class Track extends React.Component {
       permalink_url,
       created_at,
       id
-    } = origin;
+    } = activity;
 
-    const { avatar_url, username } = user;
+    const { avatar_url, username } = userEntities[user];
 
     return (
       <div className="track">
@@ -102,7 +98,7 @@ export default class Track extends React.Component {
             <div>{fromNow(created_at)}</div>
           </div>
           <div className="track-content-meta">
-            <div><a href={permalink_url}><i className={getTrackIcon(type)}></i>&nbsp;{title}</a></div>
+            <div><a href={permalink_url}>{title}</a></div>
             <div>{durationFormat(duration)}</div>
           </div>
           <div className="track-content-waveform">

@@ -27,9 +27,7 @@ export default function(state = initialState, action) {
   case actionTypes.MERGE_FAVORITES:
     return mergeFavorites(state, action.favorites);
   case actionTypes.REMOVE_FROM_FAVORITES:
-    return removeFromFavorites(state, action.track);
-  case actionTypes.ADD_TO_FAVORITES:
-    return addToFavorites(state, action.track)
+    return removeFromFavorites(state, action.trackId);
   }
   return state;
 }
@@ -82,21 +80,16 @@ function mergeFavorites(state, list) {
   return Object.assign({}, state, { favorites });
 }
 
-function removeFromFavorites(state, track) {
-  console.log(track, state.favorites);
-  let index = _.findIndex(state.favorites, isSameTrack(track));
-  const favorites = [
-    ...state.favorites.slice(0, index),
-    ...state.favorites.slice(index + 1)
-  ];
-  return Object.assign({}, state, { favorites });
-}
+function removeFromFavorites(state, trackId) {
+  let index = state.favorites.indexOf(trackId);
 
-function addToFavorites(state, track) {
-  console.log(track, state.favorites);
-  const favorites = [
-    ...state.favorites,
-    track
-  ];
-  return Object.assign({}, state, { favorites });
+  if (index !== -1) {
+    const favorites = [
+      ...state.favorites.slice(0, index),
+      ...state.favorites.slice(index + 1)
+    ];
+    return Object.assign({}, state, { favorites });
+  } else {
+    return state;
+  }
 }

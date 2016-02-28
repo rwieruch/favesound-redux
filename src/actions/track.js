@@ -1,37 +1,30 @@
 import * as actionTypes from '../constants/actionTypes';
 import { apiUrl } from '../utils/soundcloudApi';
-import { setActiveTrack } from '../actions/player';
+import { mergeFavorites } from '../actions/user';
+import { syncEntities } from '../actions/entities';
 
-function addToFavorites(track) {
-  return {
-    type: actionTypes.ADD_TO_FAVORITES,
-    track
-  };
-}
-
-function removeFromFavorites(track) {
+function removeFromFavorites(trackId) {
   return {
     type: actionTypes.REMOVE_FROM_FAVORITES,
-    track
+    trackId
   };
 }
 
 export function like(track) {
   return dispatch => {
-    fetch(apiUrl(`me/favorites/${track.origin.id}`, '?'), {method: track.origin.user_favorite ? 'delete' : 'put'})
+    fetch(apiUrl(`me/favorites/${track.id}`, '?'), { method: track.user_favorite ? 'delete' : 'put' })
       .then(response => response.json())
       .then(() => {
-        const { user_favorite } = track.origin;
-        const origin = Object.assign({}, track.origin, { user_favorite: !user_favorite });
-        const updatedTrack = Object.assign({}, track, { origin });
 
-        if (updatedTrack.origin.user_favorite) {
-          dispatch(addToFavorites(updatedTrack));
+        if (track.user_favorite) {
+          dispatch(removeFromFavorites(track.id));
         } else {
-          dispatch(removeFromFavorites(updatedTrack));
+          dispatch(mergeFavorites([track.id]));
         }
 
-        dispatch(setActiveTrack(updatedTrack));
+        const updateEntity = Object.assign({}, track, { user_favorite: !track.user_favorite });
+        console.log(updateEntity);
+        dispatch(syncEntities(updateEntity, 'tracks'));
       });
   };
 }

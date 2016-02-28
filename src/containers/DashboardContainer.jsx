@@ -37,7 +37,8 @@ export class Dashboard extends React.Component {
         <Activities
           {...this.props}
           requestInProcess={requestsInProcess[requestTypes.ACTIVITIES]}
-          activities={activities}
+          entities={trackEntities}
+          ids={activities}
           scrollFunction={() => fetchActivities(null, paginateLinks[paginateLinkTypes.ACTIVITIES])}
         />
       </div>

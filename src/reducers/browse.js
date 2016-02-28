@@ -1,21 +1,24 @@
 import * as actionTypes from '../constants/actionTypes';
 
-const initialState = {
-  activitiesByGenre: []
-};
+const initialState = {};
 
 export default function(state = initialState, action) {
   switch (action.type) {
   case actionTypes.MERGE_GENRE_ACTIVITIES:
-    return mergeActivities(state, action.activities);
+    return mergeActivities(state, action.activities, action.genre);
   }
   return state;
 }
 
-function mergeActivities(state, activities) {
-  const activitiesByGenre = [
-    ...state.activitiesByGenre,
-    ...activities
+function mergeActivities(state, list, genre) {
+  const oldList = state[genre] || [];
+
+  const newList = [
+    ...oldList,
+    ...list
   ];
-  return Object.assign({}, state, { activitiesByGenre });
+
+  const obj = {};
+  obj[genre] = newList;
+  return Object.assign({}, state, obj);
 }

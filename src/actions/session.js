@@ -58,10 +58,10 @@ function fetchUser(accessToken) {
       .then(response => response.json())
       .then(me => {
         dispatch(setUser(me));
+        dispatch(fetchActivities());
+        dispatch(fetchFavorites(me));
         dispatch(fetchFollowings(me));
         dispatch(fetchFollowers(me));
-        dispatch(fetchFavorites(me));
-        dispatch(fetchActivities());
       });
   };
 }
