@@ -2,7 +2,7 @@
 import React from 'react';
 import Waveform from 'waveform.js';
 import { normalizeSamples, isJsonWaveform, isPngWaveform, durationFormat, fromNow } from '../utils/track';
-import { isSameTrackAndPlaying } from '../utils/player';
+import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 /* eslint-enable max-len */
 
 export default class Track extends React.Component {
@@ -86,9 +86,10 @@ export default class Track extends React.Component {
     } = activity;
 
     const { avatar_url, username } = userEntities[user];
+    const isVisible = isSameTrack(activeTrackId)(activity.id);
 
     return (
-      <div className="track">
+      <div className={"track " + (isVisible ? "track-visible" : "")}>
         <div className="track-img">
           {this.renderImage(artwork_url, title, avatar_url)}
         </div>
@@ -130,7 +131,7 @@ export default class Track extends React.Component {
             </div>
             <div className="track-content-actions-item">
               <i
-                className={"fa fa-th-list"}
+                className="fa fa-th-list"
                 onClick={this.addTrackToPlaylist.bind(this, activity, addTrackToPlaylist)}
               ></i>
             </div>
