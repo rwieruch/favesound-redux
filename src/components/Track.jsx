@@ -87,6 +87,7 @@ export default class Track extends React.Component {
 
     const { avatar_url, username } = userEntities[user];
     const isVisible = isSameTrack(activeTrackId)(activity.id);
+    const isSameAndPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
 
     return (
       <div className={"track " + (isVisible ? "track-visible" : "")}>
@@ -125,7 +126,7 @@ export default class Track extends React.Component {
           <div className="track-content-actions">
             <div className="track-content-actions-item">
               <i
-                className={"fa " + (isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying) ? "fa-pause" : "fa-play")}
+                className={"fa " + (isSameAndPlaying ? "fa-pause" : "fa-play")}
                 onClick={this.activateTrack.bind(this, activity, activateTrack)}
               ></i>
             </div>

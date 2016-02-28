@@ -1,4 +1,6 @@
 import React from 'react';
+import _ from 'lodash';
+import Actions from '../components/Actions';
 
 export default class UserItem extends React.Component {
 
@@ -7,7 +9,14 @@ export default class UserItem extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, follow, followings } = this.props;
+
+    const configuration = [
+      {
+        className: _.find(followings, (following) => following === user.id) ? 'fa fa-group is-active' : 'fa fa-group',
+        fn: () => follow(user)
+      }
+    ];
 
     return (
       <div className="item">
@@ -31,6 +40,7 @@ export default class UserItem extends React.Component {
               <i className="fa fa-music"></i>&nbsp;{user.track_count}
             </div>
           </div>
+          <Actions configuration={configuration} />
         </div>
       </div>
     );

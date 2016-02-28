@@ -14,6 +14,8 @@ export default function(state = initialState, action) {
     return setFollowings(state, action.followings);
   case actionTypes.MERGE_FOLLOWINGS:
     return mergeFollowings(state, action.followings);
+  case actionTypes.REMOVE_FROM_FOLLOWINGS:
+    return removeFromFollowings(state, action.userId);
   case actionTypes.SET_ACTIVITES:
     return setActivities(state, action.activities);
   case actionTypes.MERGE_ACTIVITIES:
@@ -42,6 +44,20 @@ function mergeFollowings(state, list) {
     ...list
   ];
   return Object.assign({}, state, { followings });
+}
+
+function removeFromFollowings(state, userId) {
+  let index = state.followings.indexOf(userId);
+
+  if (index !== -1) {
+    const followings = [
+      ...state.followings.slice(0, index),
+      ...state.followings.slice(index + 1)
+    ];
+    return Object.assign({}, state, { followings });
+  } else {
+    return state;
+  }
 }
 
 function setActivities(state, activities) {

@@ -4,6 +4,7 @@ import { CLIENT_ID } from '../constants/authentification';
 import * as actionTypes from '../constants/actionTypes';
 import { apiUrl } from '../utils/soundcloudApi';
 import { changeLocation } from './location';
+import { browse, dashboard } from '../constants/pathnames';
 import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites, setFollowings, setFollowers, setFavorites, setActivities } from './user';
 /* eslint-enable max-len */
 
@@ -30,7 +31,7 @@ export function login() {
   return (dispatch) => {
     SC.initialize({ client_id, redirect_uri });
 
-    dispatch(changeLocation('/dashboard'));
+    dispatch(changeLocation(dashboard));
     SC.connect().then((session) => {
       Cookies.set(OAUTH_TOKEN, session.oauth_token);
       dispatch(setSession(session));
@@ -42,7 +43,7 @@ export function login() {
 export function logout() {
   return (dispatch) => {
     Cookies.remove(OAUTH_TOKEN);
-    dispatch(changeLocation('/browse'));
+    dispatch(changeLocation(browse));
     dispatch(setSession(null));
     dispatch(setUser(null));
     dispatch(setFollowings([]));

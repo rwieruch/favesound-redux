@@ -5,6 +5,7 @@ import { fetchActivities, fetchFollowers, fetchFavorites, fetchFollowings } from
 import { togglePlaylist } from './environment';
 import { fetchActivitiesByGenre } from './browse';
 import { like } from './track';
+import { follow } from './following';
 import { activateTrack, activateIteratedTrack, togglePlayTrack, addTrackToPlaylist, removeTrackFromPlaylist, clearPlaylist } from './player';
 /* eslint-enable max-len */
 
@@ -23,6 +24,7 @@ export {
   clearPlaylist,
   activateIteratedTrack,
   like,
+  follow,
   togglePlaylist,
   fetchActivitiesByGenre
 };
