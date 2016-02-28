@@ -85,7 +85,7 @@ export class Player extends React.Component {
         </div>
         <div>
           <i
-            className={"fa fa-heart " + (activeTrackId.user_favorite ? "active" : "")}
+            className={"fa fa-heart " + (track.user_favorite ? "is-favorite" : "")}
             onClick={this.like.bind(this, track, like)}
           ></i>
         </div>

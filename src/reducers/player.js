@@ -41,8 +41,8 @@ function setTrackInPlaylist(state, trackId) {
     return state;
   } else {
     const playlist = [
-      ...state.playlist,
-      trackId
+      trackId,
+      ...state.playlist
     ];
     return Object.assign({}, state, { playlist });
   }
