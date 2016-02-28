@@ -21,28 +21,13 @@
     pointer-events: all;
   }
 
-  &-content {
-    position: relative;
+  &-menu {
     display: flex;
-    justify-content: start;
-    height: 100%;
-    margin-left: 25%;
+    justify-content: space-between;
+    height: $padding;
+    padding: $padding / 2;
+    border-bottom: $darkBorder;
 
-    div {
-      margin: auto $padding;
-
-      i {
-        cursor: pointer;
-        font-size: 20px;
-        width: 20px;
-
-        &:hover {
-          color: $mainColor;
-        }
-
-      }
-    }
-
+    font-size: $menuSize;
   }
-
 }

@@ -19,9 +19,23 @@ export class Playlist extends React.Component {
     return (<ul>{playlist.map(this.renderMiniTrack.bind(this))}</ul>);
   }
 
+  renderMenu() {
+    return (
+      <div className="playlist-menu">
+        <div>Player Queue</div>
+        <div>
+          <button className="inline" onClick={this.props.clearPlaylist.bind(this)}>
+            Clear Queue
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (<div className={this.props.isOpenPlaylist ? 'playlist playlist-visible' : 'playlist'}>
-        {this.renderPlaylist()}
+      {this.renderMenu()}
+      {this.renderPlaylist()}
     </div>);
   }
 }

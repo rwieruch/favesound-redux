@@ -20,6 +20,8 @@ export default function(state = initialState, action) {
     return setTrackInPlaylist(state, action.trackId);
   case actionTypes.REMOVE_TRACK_FROM_PLAYLIST:
     return removeTrackFromPlaylist(state, action.trackId);
+  case actionTypes.EMPTY_PLAYLIST:
+    return emptyPlaylist(state);
   }
   return state;
 }
@@ -55,4 +57,8 @@ function removeTrackFromPlaylist(state, trackId) {
     ...state.playlist.slice(index + 1)
   ];
   return Object.assign({}, state, { playlist });
+}
+
+function emptyPlaylist(state) {
+  return Object.assign({}, state, { playlist: [] });
 }

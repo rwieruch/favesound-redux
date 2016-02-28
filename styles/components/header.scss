@@ -17,7 +17,7 @@
     margin: 0 10%;
 
     .menu-item {
-      font-size: 13px;
+      font-size: $menuSize;
       text-transform: uppercase;
       margin: 0 ($padding / 2);
       padding: ($padding / 8) 0;
