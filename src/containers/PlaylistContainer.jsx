@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
-import MiniTrack from '../components/MiniTrack';
+import { MiniTrackContainer } from '../components/MiniTrack';
 
 export class Playlist extends React.Component {
 
@@ -9,7 +9,7 @@ export class Playlist extends React.Component {
     const { trackEntities } = this.props;
     return (
       <li key={idx}>
-        <MiniTrack activity={trackEntities[id]} {...this.props}/>
+        <MiniTrackContainer activity={trackEntities[id]}/>
       </li>
     );
   }

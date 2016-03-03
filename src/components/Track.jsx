@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
-import Waveform from 'waveform.js';
 import { connect } from 'react-redux';
+import Waveform from 'waveform.js';
 import * as actions from '../actions/index';
 import { normalizeSamples, isJsonWaveform, isPngWaveform, durationFormat, fromNow } from '../utils/track';
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
