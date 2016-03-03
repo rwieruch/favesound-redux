@@ -45,6 +45,7 @@
     "react-router": "^1.0.0-rc3",
     "react-router-redux": "^2.1.0",
     "redux": "^3.0.4",
+    "redux-logger": "^2.6.1",
     "redux-thunk": "^1.0.0",
     "sass-loader": "^3.1.2",
     "scroll-behavior": "^0.3.1",
