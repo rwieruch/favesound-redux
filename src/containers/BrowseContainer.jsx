@@ -32,7 +32,6 @@ export class Browse extends React.Component {
 
     return (<div className="browse-content">
         <Activities
-          {...this.props}
           requestInProcess={requestsInProcess[requestTypes.GENRES]}
           ids={browseActivities[genre]}
           entities={trackEntities}

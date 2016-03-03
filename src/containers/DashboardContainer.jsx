@@ -35,7 +35,6 @@ export class Dashboard extends React.Component {
     return (<div className="dashboard-content">
       <div className="dashboard-content-main">
         <Activities
-          {...this.props}
           requestInProcess={requestsInProcess[requestTypes.ACTIVITIES]}
           entities={trackEntities}
           ids={activities}
