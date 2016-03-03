@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import Actions from '../components/Actions';
+import { Actions } from '../components/Actions';
 
 export default class UserItem extends React.Component {
 

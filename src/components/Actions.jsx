@@ -1,26 +1,26 @@
 import React from 'react';
 
-export default class Actions extends React.Component {
-
-  renderAction(action, idx) {
-    return (
-      <div key={idx} className="action-item">
-        <i
-          className={action.className}
-          onClick={action.fn}
-        >
-        </i>
-      </div>
-    );
-  }
-
-  render() {
-    const { configuration, isVisible } = this.props;
-    return (
-      <div className={"action " + (isVisible ? "action-visible" : "")}>
-        {configuration.map(this.renderAction)}
-      </div>
-    );
-  }
-
+function renderAction(action, idx) {
+  return (
+    <div key={idx} className="action-item">
+      <i
+        className={action.className}
+        onClick={action.fn}
+      >
+      </i>
+    </div>
+  );
 }
+
+export const Actions = ({ configuration, isVisible }) => {
+  return (
+    <div className={"action " + (isVisible ? "action-visible" : "")}>
+      {configuration.map(renderAction)}
+    </div>
+  );
+};
+
+Actions.propTypes = {
+  configuration: React.PropTypes.object,
+  isVisible: React.PropTypes.bool,
+};

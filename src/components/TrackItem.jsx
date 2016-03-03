@@ -1,5 +1,5 @@
 import React from 'react';
-import Actions from '../components/Actions';
+import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 
 export default class TrackItem extends React.Component {
