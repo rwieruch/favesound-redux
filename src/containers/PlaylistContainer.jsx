@@ -16,7 +16,7 @@ export class Playlist extends React.Component {
 
   renderPlaylist() {
     const { playlist } = this.props;
-    return (<ul>{playlist.map(this.renderMiniTrack.bind(this))}</ul>);
+    return <ul>{playlist.map(this.renderMiniTrack.bind(this))}</ul>;
   }
 
   renderMenu() {
@@ -33,10 +33,12 @@ export class Playlist extends React.Component {
   }
 
   render() {
-    return (<div className={this.props.isOpenPlaylist ? 'playlist playlist-visible' : 'playlist'}>
-      {this.renderMenu()}
-      {this.renderPlaylist()}
-    </div>);
+    return (
+      <div className={this.props.isOpenPlaylist ? 'playlist playlist-visible' : 'playlist'}>
+        {this.renderMenu()}
+        {this.renderPlaylist()}
+      </div>
+    );
   }
 }
 

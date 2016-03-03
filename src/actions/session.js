@@ -24,45 +24,39 @@ function setUser(user) {
   };
 }
 
-export function login() {
+export const login = () => (dispatch) => {
   const client_id = CLIENT_ID;
   const redirect_uri = `${window.location.protocol}//${window.location.host}/callback`;
 
-  return (dispatch) => {
-    SC.initialize({ client_id, redirect_uri });
+  SC.initialize({ client_id, redirect_uri });
 
-    dispatch(changeLocation(dashboard));
-    SC.connect().then((session) => {
-      Cookies.set(OAUTH_TOKEN, session.oauth_token);
-      dispatch(setSession(session));
-      dispatch(fetchUser(session.oauth_token));
+  dispatch(changeLocation(dashboard));
+  SC.connect().then((session) => {
+    Cookies.set(OAUTH_TOKEN, session.oauth_token);
+    dispatch(setSession(session));
+    dispatch(fetchUser(session.oauth_token));
+  });
+}
+
+export const logout = () => (dispatch) => {
+  Cookies.remove(OAUTH_TOKEN);
+  dispatch(changeLocation(browse));
+  dispatch(setSession(null));
+  dispatch(setUser(null));
+  dispatch(setFollowings([]));
+  dispatch(setFollowers([]));
+  dispatch(setFavorites([]));
+  dispatch(setActivities([]));
+}
+
+const fetchUser = (accessToken) => (dispatch) => {
+  fetch(apiUrl(`me`, '?'))
+    .then(response => response.json())
+    .then(me => {
+      dispatch(setUser(me));
+      dispatch(fetchActivities());
+      dispatch(fetchFavorites(me));
+      dispatch(fetchFollowings(me));
+      dispatch(fetchFollowers(me));
     });
-  }
-}
-
-export function logout() {
-  return (dispatch) => {
-    Cookies.remove(OAUTH_TOKEN);
-    dispatch(changeLocation(browse));
-    dispatch(setSession(null));
-    dispatch(setUser(null));
-    dispatch(setFollowings([]));
-    dispatch(setFollowers([]));
-    dispatch(setFavorites([]));
-    dispatch(setActivities([]));
-  }
-}
-
-function fetchUser(accessToken) {
-  return dispatch => {
-    fetch(apiUrl(`me`, '?'))
-      .then(response => response.json())
-      .then(me => {
-        dispatch(setUser(me));
-        dispatch(fetchActivities());
-        dispatch(fetchFavorites(me));
-        dispatch(fetchFollowings(me));
-        dispatch(fetchFollowers(me));
-      });
-  };
 }

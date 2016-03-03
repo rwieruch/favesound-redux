@@ -1,7 +1,5 @@
 import { routeActions } from 'react-router-redux'
 
-export function changeLocation(path) {
-    return dispatch => {
-        dispatch(routeActions.push(path));
-    }
+export const changeLocation = (path) => (dispatch) => {
+  dispatch(routeActions.push(path));
 }

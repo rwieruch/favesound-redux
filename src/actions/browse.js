@@ -16,26 +16,23 @@ function mergeActivitiesByGenre(activities, genre) {
   };
 }
 
-export function fetchActivitiesByGenre(nextHref, genre) {
-  return (dispatch, getState) => {
+export const fetchActivitiesByGenre = (nextHref, genre) => (dispatch, getState) => {
+  let requestType = requestTypes.GENRES;
+  let initHref = unauthApiUrl(`tracks?linked_partitioning=1&limit=20&offset=0&tags=${genre}`, '&');
+  let url = nextHref || initHref;
+  let requestInProcess = getState().request[requestType];
 
-    let requestType = requestTypes.GENRES;
-    let initHref = unauthApiUrl(`tracks?linked_partitioning=1&limit=20&offset=0&tags=${genre}`, '&');
-    let url = nextHref || initHref;
-    let requestInProcess = getState().request[requestType];
+  if (requestInProcess) { return; }
 
-    if (requestInProcess) { return; }
+  dispatch(setRequestInProcess(true, requestType));
 
-    dispatch(setRequestInProcess(true, requestType));
-
-    return fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        const normalized = normalize(data.collection, arrayOf(trackSchema));
-        dispatch(mergeEntities(normalized.entities));
-        dispatch(mergeActivitiesByGenre(normalized.result, genre));
-        dispatch(setPaginateLink(data.next_href, genre));
-        dispatch(setRequestInProcess(false, requestType));
-      });
-  };
+  return fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const normalized = normalize(data.collection, arrayOf(trackSchema));
+      dispatch(mergeEntities(normalized.entities));
+      dispatch(mergeActivitiesByGenre(normalized.result, genre));
+      dispatch(setPaginateLink(data.next_href, genre));
+      dispatch(setRequestInProcess(false, requestType));
+    });
 }

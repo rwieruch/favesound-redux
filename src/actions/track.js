@@ -10,20 +10,18 @@ function removeFromFavorites(trackId) {
   };
 }
 
-export function like(track) {
-  return dispatch => {
-    fetch(apiUrl(`me/favorites/${track.id}`, '?'), { method: track.user_favorite ? 'delete' : 'put' })
-      .then(response => response.json())
-      .then(() => {
+export const like = (track) => (dispatch) => {
+  fetch(apiUrl(`me/favorites/${track.id}`, '?'), { method: track.user_favorite ? 'delete' : 'put' })
+    .then(response => response.json())
+    .then(() => {
 
-        if (track.user_favorite) {
-          dispatch(removeFromFavorites(track.id));
-        } else {
-          dispatch(mergeFavorites([track.id]));
-        }
+      if (track.user_favorite) {
+        dispatch(removeFromFavorites(track.id));
+      } else {
+        dispatch(mergeFavorites([track.id]));
+      }
 
-        const updateEntity = Object.assign({}, track, { user_favorite: !track.user_favorite });
-        dispatch(syncEntities(updateEntity, 'tracks'));
-      });
-  };
+      const updateEntity = Object.assign({}, track, { user_favorite: !track.user_favorite });
+      dispatch(syncEntities(updateEntity, 'tracks'));
+    });
 }

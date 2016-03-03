@@ -30,14 +30,16 @@ export class Browse extends React.Component {
 
     if (!browseActivities) { return; }
 
-    return (<div className="browse-content">
+    return (
+      <div className="browse-content">
         <Activities
           requestInProcess={requestsInProcess[requestTypes.GENRES]}
           ids={browseActivities[genre]}
           entities={trackEntities}
           scrollFunction={this.fetchActivitiesByGenre}
         />
-      </div>);
+      </div>
+    );
   }
 
   fetchActivitiesByGenre() {
@@ -52,12 +54,14 @@ export class Browse extends React.Component {
   }
 
   render() {
-    return (<div className="browse">
-      <HeaderContainer genre={this.props.genre} pathname={this.props.pathname}/>
-      {this.getInnerContent()}
-      <PlaylistContainer />
-      <PlayerContainer />
-    </div>);
+    return (
+      <div className="browse">
+        <HeaderContainer genre={this.props.genre} pathname={this.props.pathname}/>
+        {this.getInnerContent()}
+        <PlaylistContainer />
+        <PlayerContainer />
+      </div>
+    );
   }
 
 }

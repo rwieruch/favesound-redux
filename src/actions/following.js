@@ -9,20 +9,17 @@ function removeFromFollowings(userId) {
   };
 }
 
-export function follow(user) {
-  return (dispatch, getState) => {
+export const follow = (user) => (dispatch, getState) => {
+  let followings = getState().user.followings;
+  let isFollowing = _.find(followings, (following) => following === user.id);
 
-    let followings = getState().user.followings;
-    let isFollowing = _.find(followings, (following) => following === user.id);
-
-    fetch(apiUrl(`me/followings/${user.id}`, '?'), { method: isFollowing ? 'delete' : 'put' })
-      .then(response => response.json())
-      .then(() => {
-        if (isFollowing) {
-          dispatch(removeFromFollowings(user.id));
-        } else {
-          dispatch(mergeFollowings([user.id]));
-        }
-      });
-  };
+  fetch(apiUrl(`me/followings/${user.id}`, '?'), { method: isFollowing ? 'delete' : 'put' })
+    .then(response => response.json())
+    .then(() => {
+      if (isFollowing) {
+        dispatch(removeFromFollowings(user.id));
+      } else {
+        dispatch(mergeFollowings([user.id]));
+      }
+    });
 }

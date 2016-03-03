@@ -32,60 +32,64 @@ export class Dashboard extends React.Component {
       return <div></div>;
     }
 
-    return (<div className="dashboard-content">
-      <div className="dashboard-content-main">
-        <Activities
-          requestInProcess={requestsInProcess[requestTypes.ACTIVITIES]}
-          entities={trackEntities}
-          ids={activities}
-          scrollFunction={() => fetchActivities(null, paginateLinks[paginateLinkTypes.ACTIVITIES])}
-        />
+    return (
+      <div className="dashboard-content">
+        <div className="dashboard-content-main">
+          <Activities
+            requestInProcess={requestsInProcess[requestTypes.ACTIVITIES]}
+            entities={trackEntities}
+            ids={activities}
+            scrollFunction={() => fetchActivities(null, paginateLinks[paginateLinkTypes.ACTIVITIES])}
+          />
+        </div>
+        <div className="dashboard-content-side">
+          <ItemList
+            title="Followings"
+            ids={followings}
+            entities={userEntities}
+            nextHref={paginateLinks[paginateLinkTypes.FOLLOWINGS]}
+            requestInProcess={requestsInProcess[requestTypes.FOLLOWINGS]}
+            currentUser={currentUser}
+            fetchMore={fetchFollowings}
+            kind="user"
+            {...this.props}
+          />
+          <ItemList
+            title="Followers"
+            ids={followers}
+            entities={userEntities}
+            nextHref={paginateLinks[paginateLinkTypes.FOLLOWERS]}
+            requestInProcess={requestsInProcess[requestTypes.FOLLOWERS]}
+            currentUser={currentUser}
+            fetchMore={fetchFollowers}
+            kind="user"
+            {...this.props}
+          />
+          <ItemList
+            title="Favorites"
+            ids={favorites}
+            entities={trackEntities}
+            nextHref={paginateLinks[paginateLinkTypes.FAVORITES]}
+            requestInProcess={requestsInProcess[requestTypes.FAVORITES]}
+            currentUser={currentUser}
+            fetchMore={fetchFavorites}
+            kind="track"
+            {...this.props}
+          />
+        </div>
       </div>
-      <div className="dashboard-content-side">
-        <ItemList
-          title="Followings"
-          ids={followings}
-          entities={userEntities}
-          nextHref={paginateLinks[paginateLinkTypes.FOLLOWINGS]}
-          requestInProcess={requestsInProcess[requestTypes.FOLLOWINGS]}
-          currentUser={currentUser}
-          fetchMore={fetchFollowings}
-          kind="user"
-          {...this.props}
-        />
-        <ItemList
-          title="Followers"
-          ids={followers}
-          entities={userEntities}
-          nextHref={paginateLinks[paginateLinkTypes.FOLLOWERS]}
-          requestInProcess={requestsInProcess[requestTypes.FOLLOWERS]}
-          currentUser={currentUser}
-          fetchMore={fetchFollowers}
-          kind="user"
-          {...this.props}
-        />
-        <ItemList
-          title="Favorites"
-          ids={favorites}
-          entities={trackEntities}
-          nextHref={paginateLinks[paginateLinkTypes.FAVORITES]}
-          requestInProcess={requestsInProcess[requestTypes.FAVORITES]}
-          currentUser={currentUser}
-          fetchMore={fetchFavorites}
-          kind="track"
-          {...this.props}
-        />
-      </div>
-    </div>);
+    );
   }
 
   render() {
-    return (<div className="dashboard">
-      <HeaderContainer genre={this.props.genre} pathname={this.props.pathname}/>
-      {this.getInnerContent()}
-      <PlaylistContainer />
-      <PlayerContainer />
-    </div>);
+    return (
+      <div className="dashboard">
+        <HeaderContainer genre={this.props.genre} pathname={this.props.pathname}/>
+        {this.getInnerContent()}
+        <PlaylistContainer />
+        <PlayerContainer />
+      </div>
+    );
   }
 
 }

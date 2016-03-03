@@ -4,7 +4,7 @@ let track = new Schema('tracks');
 let user = new Schema('users');
 
 track.define({
-    user: user
+  user: user
 });
 
 export const trackSchema = track;
