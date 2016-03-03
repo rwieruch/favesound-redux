@@ -1,7 +1,7 @@
 import React from 'react';
 import FetchOnScroll from '../components/FetchOnScroll';
 import { TrackContainer } from '../components/Track';
-import { LoadingSpinner } from '../components/LoadingSpinner';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const renderActivity = (entities) => (id, idx) => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import { LoadingSpinner } from '../components/LoadingSpinner';
-import TrackItem from '../components/TrackItem';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { TrackItemContainer } from '../components/TrackItem';
 import UserItem from '../components/UserItem';
 
 export default class ItemList extends React.Component {
@@ -57,7 +57,7 @@ export default class ItemList extends React.Component {
     const { entities } = this.props;
     return (
       <li key={idx}>
-        <TrackItem activity={entities[trackId]} {...this.props} />
+        <TrackItemContainer activity={entities[trackId]} />
       </li>
     );
   }

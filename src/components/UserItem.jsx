@@ -1,19 +1,12 @@
 import React from 'react';
-import _ from 'lodash';
+import { find } from 'lodash';
 import { Actions } from '../components/Actions';
 
-export default class UserItem extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { user, follow, followings } = this.props;
+const UserItem = ({ user, follow, followings }) => {
 
     const configuration = [
       {
-        className: _.find(followings, (following) => following === user.id) ? 'fa fa-group is-active' : 'fa fa-group',
+        className: find(followings, (following) => following === user.id) ? 'fa fa-group is-active' : 'fa fa-group',
         fn: () => follow(user)
       }
     ];
@@ -44,5 +37,6 @@ export default class UserItem extends React.Component {
         </div>
       </div>
     );
-  }
 }
+
+export default UserItem;
