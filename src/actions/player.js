@@ -32,7 +32,6 @@ function removeFromPlaylist(trackId) {
   };
 }
 
-
 function deactivateTrack() {
   return {
     type: actionTypes.RESET_ACTIVE_TRACK,
@@ -42,7 +41,7 @@ function deactivateTrack() {
 
 function emptyPlaylist() {
   return {
-    type: actionTypes.EMPTY_PLAYLIST,
+    type: actionTypes.RESET_PLAYLIST,
     null
   };
 }

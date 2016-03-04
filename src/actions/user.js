@@ -10,13 +10,6 @@ import { mergeEntities } from '../actions/entities';
 import { isTrack } from '../utils/track';
 import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../utils/soundcloudApi';
 
-export function setFollowings(followings) {
-  return {
-    type: actionTypes.SET_FOLLOWINGS,
-    followings
-  };
-}
-
 export function mergeFollowings(followings) {
   return {
     type: actionTypes.MERGE_FOLLOWINGS,
@@ -42,13 +35,6 @@ export const fetchFollowings = (user, nextHref) => (dispatch, getState) => {
       dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FOLLOWINGS));
       dispatch(setRequestInProcess(false, requestType));
     });
-}
-
-export function setActivities(activities) {
-  return {
-    type: actionTypes.SET_ACTIVITES,
-    activities
-  };
 }
 
 function mergeActivities(activities) {
@@ -79,13 +65,6 @@ export const fetchActivities = (user, nextHref) => (dispatch, getState) => {
     });
 }
 
-export function setFollowers(followers) {
-  return {
-    type: actionTypes.SET_FOLLOWERS,
-    followers
-  };
-}
-
 function mergeFollowers(followers) {
   return {
     type: actionTypes.MERGE_FOLLOWERS,
@@ -111,13 +90,6 @@ export const fetchFollowers = (user, nextHref) => (dispatch, getState) => {
       dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FOLLOWERS));
       dispatch(setRequestInProcess(false, requestType));
     });
-}
-
-export function setFavorites(favorites) {
-  return {
-    type: actionTypes.SET_FAVORITES,
-    favorites
-  };
 }
 
 export function mergeFavorites(favorites) {

@@ -5,7 +5,7 @@ import * as actionTypes from '../constants/actionTypes';
 import { apiUrl } from '../utils/soundcloudApi';
 import { changeLocation } from './location';
 import { browse, dashboard } from '../constants/pathnames';
-import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites, setFollowings, setFollowers, setFavorites, setActivities } from './user';
+import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites } from './user';
 /* eslint-enable max-len */
 
 const OAUTH_TOKEN = 'accessToken';
@@ -21,6 +21,13 @@ function setUser(user) {
   return {
     type: actionTypes.SET_USER,
     user
+  };
+}
+
+function resetSession() {
+  return {
+    type: actionTypes.RESET_SESSION,
+    null
   };
 }
 
@@ -41,12 +48,13 @@ export const login = () => (dispatch) => {
 export const logout = () => (dispatch) => {
   Cookies.remove(OAUTH_TOKEN);
   dispatch(changeLocation(browse));
-  dispatch(setSession(null));
-  dispatch(setUser(null));
-  dispatch(setFollowings([]));
-  dispatch(setFollowers([]));
-  dispatch(setFavorites([]));
-  dispatch(setActivities([]));
+  dispatch(resetSession());
+  // dispatch(setSession(null));
+  // dispatch(setUser(null));
+  // dispatch(setFollowings([]));
+  // dispatch(setFollowers([]));
+  // dispatch(setFavorites([]));
+  // dispatch(setActivities([]));
 }
 
 const fetchUser = (accessToken) => (dispatch) => {

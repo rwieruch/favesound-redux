@@ -11,14 +11,16 @@ export default function(state = initialState, action) {
     return setSession(state, action.session);
   case actionTypes.SET_USER:
     return setUser(state, action.user);
+  case actionTypes.RESET_SESSION:
+    return initialState;
   }
   return state;
 }
 
 function setSession(state, session) {
-  return  Object.assign({}, state, { session });
+  return { ...state, session: session };
 }
 
 function setUser(state, user) {
-  return  Object.assign({}, state, { user });
+  return { ...state, user: user };
 }
