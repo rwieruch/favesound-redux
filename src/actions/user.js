@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { arrayOf, normalize } from 'normalizr';
-import { trackSchema, userSchema } from '../constants/schemas';
+import userSchema from '../schemas/user';
+import trackSchema from '../schemas/track';
 import * as actionTypes from '../constants/actionTypes';
 import * as requestTypes from '../constants/requestTypes';
 import * as paginateLinkTypes from '../constants/paginateLinkTypes';

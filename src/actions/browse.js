@@ -1,6 +1,6 @@
 import { arrayOf, normalize } from 'normalizr';
 import { CLIENT_ID } from '../constants/authentification';
-import { trackSchema } from '../constants/schemas';
+import trackSchema from '../schemas/track';
 import * as actionTypes from '../constants/actionTypes';
 import * as requestTypes from '../constants/requestTypes';
 import { unauthApiUrl } from '../utils/soundcloudApi';
