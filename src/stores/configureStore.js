@@ -14,7 +14,7 @@ const reduxRouterMiddleware = syncHistory(createBrowserHistory());
 const logger = createLogger();
 
 // const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, reduxRouterMiddleware, logger)(createStore);
-const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, reduxRouterMiddleware, logger)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, reduxRouterMiddleware)(createStore);
 
 export default function configureStore(initialState) {
     return createStoreWithMiddleware(rootReducer, initialState);

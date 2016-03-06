@@ -80,12 +80,6 @@ function mapStateToProps(state, routerState) {
 
 export const BrowseContainer = connect(mapStateToProps, actions)(Browse);
 
-Browse.propTypes = {
-  pathname: React.PropTypes.string.isRequired,
-  genre: React.PropTypes.string.isRequired,
-  browseActivities: React.PropTypes.object
-};
-
 Browse.defaultProps = {
   genre: DEFAULT_GENRE
 };

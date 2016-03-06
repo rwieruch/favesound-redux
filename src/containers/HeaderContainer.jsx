@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import { GENRES, DEFAULT_GENRE } from '../constants/genre';
 import { browse } from '../constants/pathnames';
@@ -69,13 +70,14 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export const HeaderContainer = connect(mapStateToProps, actions)(Header);
+function mapDispatchToProps(dispatch) {
+  return {
+    login: bindActionCreators(actions.login, dispatch),
+    logout: bindActionCreators(actions.logout, dispatch)
+  };
+}
 
-Header.propTypes = {
-  currentUser: React.PropTypes.object,
-  genre: React.PropTypes.string,
-  pathname: React.PropTypes.string
-};
+export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header);
 
 Header.defaultProps = {
   genre: DEFAULT_GENRE
