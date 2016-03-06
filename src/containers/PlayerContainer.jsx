@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import * as toggleTypes from '../constants/toggleTypes';
 import { addAccessTokenWith } from '../utils/soundcloudApi';
@@ -20,54 +21,33 @@ export class Player extends React.Component {
     }
   }
 
-  togglePlay(togglePlayTrack, isPlaying) {
-    togglePlayTrack(!isPlaying);
-  }
-
-  activateIteratedTrack(activeTrackId, iterate, activateIteratedTrack) {
-    activateIteratedTrack(activeTrackId, iterate);
-  }
-
-  like(track, like) {
-    like(track);
-  }
-
   renderNav() {
-    const {
-      activeTrackId,
-      isPlaying,
-      togglePlayTrack,
-      setToggle,
-      activateIteratedTrack,
-      like,
-      userEntities,
-      trackEntities
-    } = this.props;
+    const { activeTrackId, isPlaying, setToggle, activateIteratedTrack, like, entities, togglePlayTrack } = this.props;
 
     if (!activeTrackId) { return; }
 
-    const track = trackEntities[activeTrackId];
+    const track = entities.tracks[activeTrackId];
     const { user, title, stream_url } = track;
-    const { username } = userEntities[user];
+    const { username } = entities.users[user];
 
     return (
       <div className="player-content">
         <div>
           <i
             className="fa fa-step-backward"
-            onClick={this.activateIteratedTrack.bind(this, activeTrackId, -1, activateIteratedTrack)}
+            onClick={activateIteratedTrack.bind(null, activeTrackId, -1)}
           ></i>
         </div>
         <div>
           <i
             className={"fa " + (isPlaying ? "fa-pause" : "fa-play")}
-            onClick={this.togglePlay.bind(this, togglePlayTrack, isPlaying)}
+            onClick={togglePlayTrack.bind(null, !isPlaying)}
           ></i>
         </div>
         <div>
           <i
             className="fa fa-step-forward"
-            onClick={this.activateIteratedTrack.bind(this, activeTrackId, 1, activateIteratedTrack)}
+            onClick={activateIteratedTrack.bind(null, activeTrackId, 1)}
           ></i>
         </div>
         <div className="player-content-name">
@@ -82,7 +62,7 @@ export class Player extends React.Component {
         <div>
           <i
             className={"fa fa-heart " + (track.user_favorite ? "is-favorite" : "")}
-            onClick={this.like.bind(this, track, like)}
+            onClick={like.bind(null, track)}
           ></i>
         </div>
         <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
@@ -100,16 +80,17 @@ function mapStateToProps(state) {
   return {
     activeTrackId: state.player.activeTrackId,
     isPlaying: state.player.isPlaying,
-    userEntities: state.entities.users,
-    trackEntities: state.entities.tracks,
+    entities: state.entities
   };
 }
 
-export const PlayerContainer = connect(mapStateToProps, actions)(Player);
+function mapDispatchToProps(dispatch) {
+  return {
+    togglePlayTrack: bindActionCreators(actions.togglePlayTrack, dispatch),
+    setToggle: bindActionCreators(actions.setToggle, dispatch),
+    activateIteratedTrack: bindActionCreators(actions.activateIteratedTrack, dispatch),
+    like: bindActionCreators(actions.like, dispatch)
+  };
+}
 
-Player.propTypes = {
-  activeTrackId: React.PropTypes.number,
-  isPlaying: React.PropTypes.bool,
-  userEntities: React.PropTypes.object,
-  trackEntities: React.PropTypes.object
-};
+export const PlayerContainer = connect(mapStateToProps, mapDispatchToProps)(Player);

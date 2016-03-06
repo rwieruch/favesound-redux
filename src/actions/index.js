@@ -6,7 +6,7 @@ import { fetchActivitiesByGenre } from './browse';
 import { like } from './track';
 import { follow } from './following';
 import { setToggle } from './toggle';
-import { activateTrack, activateIteratedTrack, togglePlayTrack, addTrackToPlaylist, removeTrackFromPlaylist, clearPlaylist } from './player';
+import { activateTrack, activateIteratedTrack, addTrackToPlaylist, removeTrackFromPlaylist, clearPlaylist, togglePlayTrack } from './player';
 /* eslint-enable max-len */
 
 export {

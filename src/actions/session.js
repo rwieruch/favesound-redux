@@ -49,12 +49,6 @@ export const logout = () => (dispatch) => {
   Cookies.remove(OAUTH_TOKEN);
   dispatch(changeLocation(browse));
   dispatch(resetSession());
-  // dispatch(setSession(null));
-  // dispatch(setUser(null));
-  // dispatch(setFollowings([]));
-  // dispatch(setFollowers([]));
-  // dispatch(setFavorites([]));
-  // dispatch(setActivities([]));
 }
 
 const fetchUser = (accessToken) => (dispatch) => {

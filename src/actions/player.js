@@ -50,7 +50,6 @@ function emptyPlaylist() {
 export const clearPlaylist = () => (dispatch) => {
   dispatch(emptyPlaylist());
   dispatch(deactivateTrack());
-  // dispatch(togglePlaylist(true));
   dispatch(resetToggle(toggleTypes.PLAYLIST));
 }
 
@@ -96,7 +95,6 @@ export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
   let playlistSize = getState().player.playlist.length;
   if (playlistSize < 2) {
     dispatch(deactivateTrack());
-    // dispatch(togglePlaylist(true));
     dispatch(resetToggle(toggleTypes.PLAYLIST));
   }
 
