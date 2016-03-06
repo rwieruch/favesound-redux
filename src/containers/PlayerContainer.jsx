@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
+import * as toggleTypes from '../constants/toggleTypes';
 import { addAccessTokenWith } from '../utils/soundcloudApi';
 
 export class Player extends React.Component {
@@ -23,10 +24,6 @@ export class Player extends React.Component {
     togglePlayTrack(!isPlaying);
   }
 
-  togglePlaylist(isOpenPlaylist, togglePlaylist) {
-    togglePlaylist(isOpenPlaylist);
-  }
-
   activateIteratedTrack(activeTrackId, iterate, activateIteratedTrack) {
     activateIteratedTrack(activeTrackId, iterate);
   }
@@ -39,9 +36,8 @@ export class Player extends React.Component {
     const {
       activeTrackId,
       isPlaying,
-      isOpenPlaylist,
       togglePlayTrack,
-      togglePlaylist,
+      setToggle,
       activateIteratedTrack,
       like,
       userEntities,
@@ -80,7 +76,7 @@ export class Player extends React.Component {
         <div>
           <i
             className="fa fa-th-list"
-            onClick={this.togglePlaylist.bind(this, isOpenPlaylist, togglePlaylist)}
+            onClick={setToggle.bind(this, toggleTypes.PLAYLIST)}
           ></i>
         </div>
         <div>
@@ -104,7 +100,6 @@ function mapStateToProps(state) {
   return {
     activeTrackId: state.player.activeTrackId,
     isPlaying: state.player.isPlaying,
-    isOpenPlaylist: state.environment.isOpenPlaylist,
     userEntities: state.entities.users,
     trackEntities: state.entities.tracks,
   };
@@ -115,7 +110,6 @@ export const PlayerContainer = connect(mapStateToProps, actions)(Player);
 Player.propTypes = {
   activeTrackId: React.PropTypes.number,
   isPlaying: React.PropTypes.bool,
-  isOpenPlaylist: React.PropTypes.bool,
   userEntities: React.PropTypes.object,
   trackEntities: React.PropTypes.object
 };

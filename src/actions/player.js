@@ -1,6 +1,7 @@
 import { find, findIndex } from 'lodash';
 import * as actionTypes from '../constants/actionTypes';
-import { togglePlaylist } from './environment';
+import * as toggleTypes from '../constants/toggleTypes';
+import { resetToggle } from './toggle';
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 import { apiUrl } from '../utils/soundcloudApi';
 
@@ -49,7 +50,8 @@ function emptyPlaylist() {
 export const clearPlaylist = () => (dispatch) => {
   dispatch(emptyPlaylist());
   dispatch(deactivateTrack());
-  dispatch(togglePlaylist(true));
+  // dispatch(togglePlaylist(true));
+  dispatch(resetToggle(toggleTypes.PLAYLIST));
 }
 
 export const activateTrack = (trackId) => (dispatch, getState) => {
@@ -94,7 +96,8 @@ export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
   let playlistSize = getState().player.playlist.length;
   if (playlistSize < 2) {
     dispatch(deactivateTrack());
-    dispatch(togglePlaylist(true));
+    // dispatch(togglePlaylist(true));
+    dispatch(resetToggle(toggleTypes.PLAYLIST));
   }
 
   dispatch(removeFromPlaylist(track.id));

@@ -2,10 +2,10 @@
 import { login, logout } from './session';
 import { changeLocation } from './location';
 import { fetchActivities, fetchFollowers, fetchFavorites, fetchFollowings } from './user';
-import { togglePlaylist } from './environment';
 import { fetchActivitiesByGenre } from './browse';
 import { like } from './track';
 import { follow } from './following';
+import { setToggle } from './toggle';
 import { activateTrack, activateIteratedTrack, togglePlayTrack, addTrackToPlaylist, removeTrackFromPlaylist, clearPlaylist } from './player';
 /* eslint-enable max-len */
 
@@ -25,6 +25,6 @@ export {
   activateIteratedTrack,
   like,
   follow,
-  togglePlaylist,
+  setToggle,
   fetchActivitiesByGenre
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
+import * as toggleTypes from '../constants/toggleTypes';
 import { MiniTrackContainer } from '../components/MiniTrack';
 
 export class Playlist extends React.Component {
@@ -34,7 +35,7 @@ export class Playlist extends React.Component {
 
   render() {
     return (
-      <div className={this.props.isOpenPlaylist ? 'playlist playlist-visible' : 'playlist'}>
+      <div className={this.props.toggle[toggleTypes.PLAYLIST] ? 'playlist playlist-visible' : 'playlist'}>
         {this.renderMenu()}
         {this.renderPlaylist()}
       </div>
@@ -47,7 +48,7 @@ function mapStateToProps(state) {
     activeTrackId: state.player.activeTrackId,
     isPlaying: state.player.isPlaying,
     playlist: state.player.playlist,
-    isOpenPlaylist: state.environment.isOpenPlaylist,
+    toggle: state.toggle,
     trackEntities: state.entities.tracks,
     userEntities: state.entities.users
   };
@@ -59,7 +60,7 @@ Playlist.propTypes = {
   activeTrackId: React.PropTypes.number,
   isPlaying: React.PropTypes.bool,
   playlist: React.PropTypes.array,
-  isOpenPlaylist: React.PropTypes.bool,
+  toggle: React.PropTypes.object,
   trackEntities: React.PropTypes.object,
   userEntities: React.PropTypes.object
 };
