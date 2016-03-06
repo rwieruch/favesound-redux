@@ -5,92 +5,76 @@ import * as actions from '../actions/index';
 import { GENRES, DEFAULT_GENRE } from '../constants/genre';
 import { browse } from '../constants/pathnames';
 
-export class Header extends React.Component {
+const renderLogo = (genre) => {
+  return (
+    <Link to={browse + '?genre=' + genre}>
+      <h1>Favesound</h1>
+    </Link>
+  );
+};
 
-  constructor(props) {
-    super(props);
-    this.renderMenuItemBrowse = this.renderMenuItemBrowse.bind(this);
-    this.renderAction = this.renderAction.bind(this);
-    this.login = this.props.login.bind(this);
-    this.logout = this.props.logout.bind(this);
-  }
+const renderMenuItemBrowse = (pathname, selectedGenre) => (genre, idx) => {
+  if (pathname !== browse) { return; }
 
-  renderLogo() {
+  return (
+    <Link
+      key={idx}
+      to={browse + '?genre=' + genre}
+      className={(genre === selectedGenre ? "menu-item menu-item-selected" : "menu-item")}
+    >
+      {genre}
+    </Link>
+  );
+};
+
+const renderAction = (currentUser, login, logout) => {
+  if (currentUser) {
     return (
-      <Link to={browse + '?genre=' + this.props.genre}>
-        <h1>Favesound</h1>
-      </Link>
+      <a href="#" onClick={logout}>
+        Logout
+      </a>
+    );
+  } else {
+    return (
+      <a href="#" onClick={login}>
+        Login
+      </a>
     );
   }
+};
 
-  renderMenuItemBrowse(genre, idx) {
-    if (this.props.pathname !== browse) { return; }
-
-    return (
-      <Link
-        key={idx}
-        to={browse + '?genre=' + genre}
-        className={(genre === this.props.genre ? "menu-item menu-item-selected" : "menu-item")}
-      >
-        {genre}
-      </Link>
-    );
-  }
-
-  renderAction() {
-    const { currentUser } = this.props;
-
-    if (currentUser) {
-      return (
-        <a href="#" onClick={this.logout}>
-          Logout
-        </a>
-      );
-    } else {
-      return (
-        <a href="#" onClick={this.login}>
-          Login
-        </a>
-      );
-    }
-  }
-
-  renderHeader() {
-    return (
+export const Header = ({ currentUser, genre, pathname, login, logout }) => {
+  return (
+    <div className="header">
       <div className="header-content">
         <div>
-          {this.renderLogo()}
+          {renderLogo(genre)}
         </div>
         <div>
-          {GENRES.map(this.renderMenuItemBrowse)}
+          {GENRES.map(renderMenuItemBrowse(pathname, genre))}
         </div>
         <div>
-          {this.renderAction()}
+          {renderAction(currentUser, login, logout)}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div className="header">
-        {this.renderHeader()}
-      </div>
-    );
-  }
-
-}
-
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    currentUser: state.session.user
+    currentUser: state.session.user,
+    genre: ownProps.genre,
+    pathname: ownProps.pathname
   };
 }
 
 export const HeaderContainer = connect(mapStateToProps, actions)(Header);
 
 Header.propTypes = {
-  currentUser: React.PropTypes.object
+  currentUser: React.PropTypes.object,
+  genre: React.PropTypes.string,
+  pathname: React.PropTypes.string
 };
 
 Header.defaultProps = {
