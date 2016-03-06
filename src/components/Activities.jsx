@@ -19,7 +19,7 @@ const renderActivities = (ids, entities) => {
   return <ul>{ids.map(renderActivity(entities))}</ul>;
 };
 
-const Activities = ({ requestInProcess, ids, entities, scrollFunction }) => {
+const Activities = ({ requestInProcess, ids, entities }) => {
   return (
     <div>
       <div>{renderActivities(ids, entities)}</div>
@@ -31,6 +31,5 @@ const Activities = ({ requestInProcess, ids, entities, scrollFunction }) => {
 export default FetchOnScroll(Activities);
 
 Activities.propTypes = {
-  activities: React.PropTypes.array,
-  scrollFunction: React.PropTypes.func
+  activities: React.PropTypes.array
 };

@@ -6,7 +6,7 @@ import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 
 const renderImage = (artwork_url, title, avatar_url) => {
   return <img src={artwork_url || avatar_url} alt={title} height="40" width="40"/>;
-}
+};
 
 const renderActions = (activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying) => {
   const trackIsPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
@@ -24,10 +24,9 @@ const renderActions = (activity, activeTrackId, activateTrack, removeTrackFromPl
   ];
 
   return <Actions configuration={configuration} isVisible={isVisible} />;
-}
+};
 
 const MiniTrack = ({ activity, userEntities, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying }) => {
-
   if (!activity) {
     return;
   }
@@ -48,8 +47,7 @@ const MiniTrack = ({ activity, userEntities, activeTrackId, activateTrack, remov
       </div>
     </div>
   );
-
-}
+};
 
 function mapStateToProps(state, ownProps) {
   return {

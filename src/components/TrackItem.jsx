@@ -6,10 +6,9 @@ import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 
 const renderImage = (artwork_url, title, avatar_url) => {
   return <img src={artwork_url || avatar_url} alt={title} height="40" width="40"/>;
-}
+};
 
 const TrackItem = ({ activity, activateTrack, addTrackToPlaylist, isPlaying, activeTrackId, userEntities }) => {
-
   const { avatar_url, username } = userEntities[activity.user];
 
   const isVisible = isSameTrack(activeTrackId)(activity.id);
@@ -51,7 +50,7 @@ const TrackItem = ({ activity, activateTrack, addTrackToPlaylist, isPlaying, act
       </div>
     </div>
   );
-}
+};
 
 function mapStateToProps(state, ownProps) {
   return {

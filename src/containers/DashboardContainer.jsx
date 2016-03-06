@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
+import * as toggleTypes from '../constants/toggleTypes';
 import * as requestTypes from '../constants/requestTypes';
 import * as paginateLinkTypes from '../constants/paginateLinkTypes';
 import { HeaderContainer } from '../containers/HeaderContainer';
 import { PlayerContainer } from '../containers/PlayerContainer';
 import { PlaylistContainer } from '../containers/PlaylistContainer';
-import ItemList from '../components/ItemList';
+import { ItemList } from '../components/ItemList';
 import Activities from '../components/Activities';
 
 export class Dashboard extends React.Component {
@@ -25,7 +26,9 @@ export class Dashboard extends React.Component {
       requestsInProcess,
       paginateLinks,
       userEntities,
-      trackEntities
+      trackEntities,
+      toggle,
+      setToggle
     } = this.props;
 
     if (!currentUser) {
@@ -49,10 +52,11 @@ export class Dashboard extends React.Component {
             entities={userEntities}
             nextHref={paginateLinks[paginateLinkTypes.FOLLOWINGS]}
             requestInProcess={requestsInProcess[requestTypes.FOLLOWINGS]}
+            isExpanded={toggle[toggleTypes.FOLLOWINGS]}
+            toggleMore={() => setToggle(toggleTypes.FOLLOWINGS)}
             currentUser={currentUser}
-            fetchMore={fetchFollowings}
-            kind="user"
-            {...this.props}
+            fetchMore={() => fetchFollowings(currentUser, paginateLinks[paginateLinkTypes.FOLLOWINGS])}
+            kind="USER"
           />
           <ItemList
             title="Followers"
@@ -60,10 +64,11 @@ export class Dashboard extends React.Component {
             entities={userEntities}
             nextHref={paginateLinks[paginateLinkTypes.FOLLOWERS]}
             requestInProcess={requestsInProcess[requestTypes.FOLLOWERS]}
+            isExpanded={toggle[toggleTypes.FOLLOWERS]}
+            toggleMore={() => setToggle(toggleTypes.FOLLOWERS)}
             currentUser={currentUser}
-            fetchMore={fetchFollowers}
-            kind="user"
-            {...this.props}
+            fetchMore={() => fetchFollowers(currentUser, paginateLinks[paginateLinkTypes.FOLLOWERS])}
+            kind="USER"
           />
           <ItemList
             title="Favorites"
@@ -71,10 +76,11 @@ export class Dashboard extends React.Component {
             entities={trackEntities}
             nextHref={paginateLinks[paginateLinkTypes.FAVORITES]}
             requestInProcess={requestsInProcess[requestTypes.FAVORITES]}
+            isExpanded={toggle[toggleTypes.FAVORITES]}
+            toggleMore={() => setToggle(toggleTypes.FAVORITES)}
             currentUser={currentUser}
-            fetchMore={fetchFavorites}
-            kind="track"
-            {...this.props}
+            fetchMore={() => fetchFavorites(currentUser, paginateLinks[paginateLinkTypes.FAVORITES])}
+            kind="TRACK"
           />
         </div>
       </div>
@@ -108,7 +114,8 @@ function mapStateToProps(state, routerState) {
     followers: state.user.followers,
     favorites: state.user.favorites,
     requestsInProcess: state.request,
-    paginateLinks: state.paginate
+    paginateLinks: state.paginate,
+    toggle: state.toggle
   };
 }
 
@@ -125,5 +132,6 @@ Dashboard.propTypes = {
   followers: React.PropTypes.array,
   favorites: React.PropTypes.array,
   userEntities: React.PropTypes.object,
-  trackEntities: React.PropTypes.object
+  trackEntities: React.PropTypes.object,
+  toggle: React.PropTypes.object
 };

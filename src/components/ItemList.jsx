@@ -1,111 +1,93 @@
 import React from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { TrackItemContainer } from '../components/TrackItem';
-import UserItem from '../components/UserItem';
+import { UserItemContainer } from '../components/UserItem';
 
-export default class ItemList extends React.Component {
+const renderChevron = (ids, isExpanded) => {
+  if (ids.length > 4) {
+    return <i className={"fa " + (isExpanded ? "fa-chevron-up" : "fa-chevron-down")}></i>;
+  } else {
+    return <div></div>;
+  }
+};
 
-  constructor(props) {
-    super(props);
-    this.toggleMore = this.toggleMore.bind(this);
-    this.renderChevron = this.renderChevron.bind(this);
-
-    this.state = {
-      isMoreToggled: false
-    };
+const renderNextButton = (nextHref, fetchMore, requestInProcess, isExpanded) => {
+  if (!nextHref || !isExpanded) {
+    return;
   }
 
-  toggleMore() {
-    const newToggleState = !this.state.isMoreToggled;
-    this.setState({ isMoreToggled: newToggleState });
+  if (requestInProcess) {
+    return <LoadingSpinner isLoading={requestInProcess} />;
   }
 
-  fetchMore(nextHref, currentUser, fetchMore) {
-    fetchMore(currentUser, nextHref);
+  return (
+    <button
+      className="ghost"
+      onClick={fetchMore}
+    >
+      More
+    </button>
+  );
+};
+
+const renderTrack = (entities) => (trackId) => {
+  return (
+    <li>
+      <TrackItemContainer activity={entities[trackId]} />
+    </li>
+  );
+};
+
+const renderUser = (entities) => (userId) => {
+  return (
+    <li>
+      <UserItemContainer user={entities[userId]} />
+    </li>
+  );
+};
+
+const renderList = (ids, kind, requestInProcess, entities) => {
+  if (!ids) {
+    const isLoading = !ids || requestInProcess;
+    return <LoadingSpinner isLoading={isLoading} />;
   }
 
-  renderChevron() {
-    if (this.props.ids.length > 4) {
-      return <i className={"fa " + (this.state.isMoreToggled ? "fa-chevron-up" : "fa-chevron-down")}></i>;
-    } else {
-      return <div></div>;
-    }
+  if (kind === 'USER') {
+    return (<div className="item-list-content">
+      <ul>{ids.map(renderUser(entities))}</ul>
+    </div>);
   }
 
-  renderNextButton() {
-    const { nextHref, currentUser, fetchMore, requestInProcess } = this.props;
-
-    if (!nextHref || !this.state.isMoreToggled) {
-      return;
-    }
-
-    if (requestInProcess) {
-      return <LoadingSpinner isLoading={requestInProcess} />;
-    }
-
-    return (
-      <button
-        className="ghost"
-        onClick={this.fetchMore.bind(this, nextHref, currentUser, fetchMore)}
-      >
-        More
-      </button>
-    );
+  if (kind === 'TRACK') {
+    return (<div className="item-list-content">
+      <ul>{ids.map(renderTrack(entities))}</ul>
+    </div>);
   }
+};
 
-  renderTrack(trackId, idx) {
-    const { entities } = this.props;
-    return (
-      <li key={idx}>
-        <TrackItemContainer activity={entities[trackId]} />
-      </li>
-    );
-  }
-
-  renderUser(userId, idx) {
-    const { entities } = this.props;
-    return (
-      <li key={idx}>
-        <UserItem user={entities[userId]} {...this.props} />
-      </li>
-    );
-  }
-
-  renderList() {
-    const { ids, kind, requestInProcess } = this.props;
-
-    if (!ids) {
-      const isLoading = !ids || requestInProcess;
-      return <LoadingSpinner isLoading={isLoading} />;
-    }
-
-    if (kind === 'user') {
-      return (<div className="item-list-content">
-        <ul>{ids.map(this.renderUser.bind(this))}</ul>
-      </div>);
-    }
-
-    if (kind === 'track') {
-      return (<div className="item-list-content">
-        <ul>{ids.map(this.renderTrack.bind(this))}</ul>
-      </div>);
-    }
-  }
-
-  render() {
-    return (
-      <div className="item-list">
-        <h2>
-          <button className="inline" onClick={this.toggleMore}>
-            {this.props.title}&nbsp;
-            {this.renderChevron()}
-          </button>
-        </h2>
-        <div className={(this.state.isMoreToggled ? "more-visible" : "")}>{this.renderList()}</div>
-        <div className="item-list-actions">
-          {this.renderNextButton()}
-        </div>
+export const ItemList = ({
+  ids,
+  isExpanded,
+  title,
+  kind,
+  requestInProcess,
+  entities,
+  toggleMore,
+  nextHref,
+  fetchMore
+}) => {
+  return (
+    <div className="item-list">
+      <h2>
+        <button className="inline" onClick={toggleMore}>
+          {title}&nbsp;
+          {renderChevron(ids, isExpanded)}
+        </button>
+      </h2>
+      <div className={(isExpanded ? "more-visible" : "")}>{renderList(ids, kind, requestInProcess, entities)}</div>
+      <div className="item-list-actions">
+        {renderNextButton(nextHref, fetchMore, requestInProcess, isExpanded)}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
