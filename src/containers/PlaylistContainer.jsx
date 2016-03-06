@@ -1,66 +1,56 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import * as toggleTypes from '../constants/toggleTypes';
 import { MiniTrackContainer } from '../components/MiniTrack';
 
-export class Playlist extends React.Component {
+const renderMiniTrack = (trackEntities) => (id) => {
+  return (
+    <li>
+      <MiniTrackContainer activity={trackEntities[id]}/>
+    </li>
+  );
+}
 
-  renderMiniTrack(id, idx) {
-    const { trackEntities } = this.props;
-    return (
-      <li key={idx}>
-        <MiniTrackContainer activity={trackEntities[id]}/>
-      </li>
-    );
-  }
+const renderPlaylist = (playlist, trackEntities) => {
+  return <ul>{playlist.map(renderMiniTrack(trackEntities))}</ul>;
+}
 
-  renderPlaylist() {
-    const { playlist } = this.props;
-    return <ul>{playlist.map(this.renderMiniTrack.bind(this))}</ul>;
-  }
-
-  renderMenu() {
-    return (
-      <div className="playlist-menu">
-        <div>Player Queue</div>
-        <div>
-          <button className="inline" onClick={this.props.clearPlaylist.bind(this)}>
-            Clear Queue
-          </button>
-        </div>
+const renderMenu = (clearPlaylist) => {
+  return (
+    <div className="playlist-menu">
+      <div>Player Queue</div>
+      <div>
+        <button className="inline" onClick={clearPlaylist}>
+          Clear Queue
+        </button>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
-  render() {
-    return (
-      <div className={this.props.toggle[toggleTypes.PLAYLIST] ? 'playlist playlist-visible' : 'playlist'}>
-        {this.renderMenu()}
-        {this.renderPlaylist()}
-      </div>
-    );
-  }
+export const Playlist = ({ toggle, playlist, trackEntities, clearPlaylist }) => {
+  return (
+    <div className={toggle[toggleTypes.PLAYLIST] ? 'playlist playlist-visible' : 'playlist'}>
+      {renderMenu(clearPlaylist)}
+      {renderPlaylist(playlist, trackEntities)}
+    </div>
+  );
 }
 
 function mapStateToProps(state) {
   return {
-    activeTrackId: state.player.activeTrackId,
-    isPlaying: state.player.isPlaying,
-    playlist: state.player.playlist,
     toggle: state.toggle,
-    trackEntities: state.entities.tracks,
-    userEntities: state.entities.users
+    playlist: state.player.playlist,
+    trackEntities: state.entities.tracks
   };
 }
 
-export const PlaylistContainer = connect(mapStateToProps, actions)(Playlist);
+function mapDispatchToProps(dispatch) {
+  return {
+    clearPlaylist: bindActionCreators(actions.clearPlaylist, dispatch),
+  };
+}
 
-Playlist.propTypes = {
-  activeTrackId: React.PropTypes.number,
-  isPlaying: React.PropTypes.bool,
-  playlist: React.PropTypes.array,
-  toggle: React.PropTypes.object,
-  trackEntities: React.PropTypes.object,
-  userEntities: React.PropTypes.object
-};
+export const PlaylistContainer = connect(mapStateToProps, mapDispatchToProps)(Playlist);

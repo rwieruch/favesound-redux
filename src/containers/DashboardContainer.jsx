@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import * as toggleTypes from '../constants/toggleTypes';
 import * as requestTypes from '../constants/requestTypes';
@@ -10,32 +11,28 @@ import { PlaylistContainer } from '../containers/PlaylistContainer';
 import { ItemList } from '../components/ItemList';
 import Activities from '../components/Activities';
 
-export class Dashboard extends React.Component {
-
-  getInnerContent() {
-    const {
-      currentUser,
-      activities,
-      fetchActivities,
-      followings,
-      fetchFollowings,
-      followers,
-      fetchFollowers,
-      favorites,
-      fetchFavorites,
-      requestsInProcess,
-      paginateLinks,
-      userEntities,
-      trackEntities,
-      toggle,
-      setToggle
-    } = this.props;
-
-    if (!currentUser) {
-      return <div></div>;
-    }
-
-    return (
+export const Dashboard = ({
+  genre,
+  pathname,
+  currentUser,
+  activities,
+  followings,
+  followers,
+  favorites,
+  requestsInProcess,
+  paginateLinks,
+  userEntities,
+  trackEntities,
+  toggle,
+  setToggle,
+  fetchActivities,
+  fetchFollowings,
+  fetchFollowers,
+  fetchFavorites
+}) => {
+  return (
+    <div className="dashboard">
+      <HeaderContainer genre={genre} pathname={pathname}/>
       <div className="dashboard-content">
         <div className="dashboard-content-main">
           <Activities
@@ -84,20 +81,10 @@ export class Dashboard extends React.Component {
           />
         </div>
       </div>
-    );
-  }
-
-  render() {
-    return (
-      <div className="dashboard">
-        <HeaderContainer genre={this.props.genre} pathname={this.props.pathname}/>
-        {this.getInnerContent()}
-        <PlaylistContainer />
-        <PlayerContainer />
-      </div>
-    );
-  }
-
+      <PlaylistContainer />
+      <PlayerContainer />
+    </div>
+  );
 }
 
 function mapStateToProps(state, routerState) {
@@ -119,19 +106,14 @@ function mapStateToProps(state, routerState) {
   };
 }
 
-export const DashboardContainer = connect(mapStateToProps, actions)(Dashboard);
+function mapDispatchToProps(dispatch) {
+  return {
+    setToggle: bindActionCreators(actions.setToggle, dispatch),
+    fetchActivities: bindActionCreators(actions.fetchActivities, dispatch),
+    fetchFollowings: bindActionCreators(actions.fetchFollowings, dispatch),
+    fetchFollowers: bindActionCreators(actions.fetchFollowers, dispatch),
+    fetchFavorites: bindActionCreators(actions.fetchFavorites, dispatch)
+  };
+}
 
-Dashboard.propTypes = {
-  pathname: React.PropTypes.string.isRequired,
-  genre: React.PropTypes.string,
-  currentUser: React.PropTypes.object,
-  activeTrackId: React.PropTypes.number,
-  isPlaying: React.PropTypes.bool.isRequired,
-  followings: React.PropTypes.array,
-  activities: React.PropTypes.array,
-  followers: React.PropTypes.array,
-  favorites: React.PropTypes.array,
-  userEntities: React.PropTypes.object,
-  trackEntities: React.PropTypes.object,
-  toggle: React.PropTypes.object
-};
+export const DashboardContainer = connect(mapStateToProps, mapDispatchToProps)(Dashboard);

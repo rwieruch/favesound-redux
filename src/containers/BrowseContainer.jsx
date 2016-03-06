@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import * as requestTypes from '../constants/requestTypes';
 import { DEFAULT_GENRE } from '../constants/genre';
@@ -78,7 +79,13 @@ function mapStateToProps(state, routerState) {
   };
 }
 
-export const BrowseContainer = connect(mapStateToProps, actions)(Browse);
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchActivitiesByGenre: bindActionCreators(actions.fetchActivitiesByGenre, dispatch)
+  };
+}
+
+export const BrowseContainer = connect(mapStateToProps, mapDispatchToProps)(Browse);
 
 Browse.defaultProps = {
   genre: DEFAULT_GENRE
