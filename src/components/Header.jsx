@@ -18,14 +18,14 @@ const renderMenuItemBrowse = (pathname, selectedGenre) => (genre, idx) => {
   if (pathname !== browse) { return; }
 
   return (
-    <li key={idx}>
+    <span key={idx}>
       <Link
         to={browse + '?genre=' + genre}
         className={(genre === selectedGenre ? "menu-item menu-item-selected" : "menu-item")}
       >
         {genre}
       </Link>
-    </li>
+    </span>
   );
 };
 
@@ -53,9 +53,7 @@ export const Header = ({ currentUser, genre, pathname, login, logout }) => {
           {renderLogo(genre)}
         </div>
         <div>
-          <ul>
-            {GENRES.map(renderMenuItemBrowse(pathname, genre))}
-          </ul>
+          {GENRES.map(renderMenuItemBrowse(pathname, genre))}
         </div>
         <div>
           {renderAction(currentUser, login, logout)}

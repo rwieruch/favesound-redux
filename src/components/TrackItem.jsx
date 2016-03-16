@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Actions } from '../components/Actions';
 import * as actions from '../actions/index';
+import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 
 const renderImage = (artwork_url, title, avatar_url) => {
