@@ -1,14 +1,10 @@
-/* eslint-disable max-len */
 import Cookies from 'js-cookie';
-import { CLIENT_ID } from '../constants/authentification';
+import { CLIENT_ID, OAUTH_TOKEN } from '../constants/authentification';
 import * as actionTypes from '../constants/actionTypes';
 import { apiUrl } from '../utils/soundcloudApi';
 import { changeLocation } from './location';
 import { browse, dashboard } from '../constants/pathnames';
 import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites } from './user';
-/* eslint-enable max-len */
-
-const OAUTH_TOKEN = 'accessToken';
 
 function setSession(session) {
   return {

@@ -85,7 +85,7 @@ export const Dashboard = ({
       <PlayerContainer />
     </div>
   );
-}
+};
 
 function mapStateToProps(state, routerState) {
   return {

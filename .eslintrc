@@ -12,6 +12,7 @@
       "quotes": 0,
       "new-cap": 0,
       "no-else-return": 0,
+      "arrow-body-style": 0,
       "max-len": [1, 120, 2, {ignoreComments: true}]
   }
 }

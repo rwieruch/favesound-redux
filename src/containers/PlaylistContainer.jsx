@@ -11,11 +11,11 @@ const renderMiniTrack = (trackEntities) => (id) => {
       <MiniTrackContainer activity={trackEntities[id]}/>
     </li>
   );
-}
+};
 
 const renderPlaylist = (playlist, trackEntities) => {
   return <ul>{playlist.map(renderMiniTrack(trackEntities))}</ul>;
-}
+};
 
 const renderMenu = (clearPlaylist) => {
   return (
@@ -28,7 +28,7 @@ const renderMenu = (clearPlaylist) => {
       </div>
     </div>
   );
-}
+};
 
 export const Playlist = ({ toggle, playlist, trackEntities, clearPlaylist }) => {
   return (
@@ -37,7 +37,7 @@ export const Playlist = ({ toggle, playlist, trackEntities, clearPlaylist }) => 
       {renderPlaylist(playlist, trackEntities)}
     </div>
   );
-}
+};
 
 function mapStateToProps(state) {
   return {
