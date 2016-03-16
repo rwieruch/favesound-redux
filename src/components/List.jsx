@@ -53,13 +53,13 @@ const renderList = (ids, kind, requestInProcess, entities) => {
   }
 
   if (kind === 'USER') {
-    return (<div className="item-list-content">
+    return (<div className="list-content">
       <ul>{ids.map(renderUser(entities))}</ul>
     </div>);
   }
 
   if (kind === 'TRACK') {
-    return (<div className="item-list-content">
+    return (<div className="list-content">
       <ul>{ids.map(renderTrack(entities))}</ul>
     </div>);
   }
@@ -77,7 +77,7 @@ export const List = ({
   fetchMore
 }) => {
   return (
-    <div className="item-list">
+    <div className="list">
       <h2>
         <button className="inline" onClick={toggleMore}>
           {title}&nbsp;
@@ -85,7 +85,7 @@ export const List = ({
         </button>
       </h2>
       <div className={(isExpanded ? "more-visible" : "")}>{renderList(ids, kind, requestInProcess, entities)}</div>
-      <div className="item-list-actions">
+      <div className="list-actions">
         {renderNextButton(nextHref, fetchMore, requestInProcess, isExpanded)}
       </div>
     </div>
