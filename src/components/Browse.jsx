@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import * as requestTypes from '../constants/requestTypes';
 import { DEFAULT_GENRE } from '../constants/genre';
-import { HeaderContainer } from '../containers/HeaderContainer';
-import { PlayerContainer } from '../containers/PlayerContainer';
-import { PlaylistContainer } from '../containers/PlaylistContainer';
+import { HeaderContainer } from '../components/Header';
+import { PlayerContainer } from '../components/Player';
+import { PlaylistContainer } from '../components/Playlist';
 import Activities from '../components/Activities';
 
 export class Browse extends React.Component {
