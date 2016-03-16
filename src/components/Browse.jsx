@@ -57,7 +57,10 @@ export class Browse extends React.Component {
   render() {
     return (
       <div className="browse">
-        <HeaderContainer genre={this.props.genre} pathname={this.props.pathname}/>
+        <HeaderContainer
+          genre={this.props.genre}
+          pathname={this.props.pathname}
+        />
         {this.getInnerContent()}
         <PlaylistContainer />
         <PlayerContainer />

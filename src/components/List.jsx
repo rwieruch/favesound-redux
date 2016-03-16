@@ -30,17 +30,17 @@ const renderNextButton = (nextHref, fetchMore, requestInProcess, isExpanded) => 
   );
 };
 
-const renderTrack = (entities) => (trackId) => {
+const renderTrack = (entities) => (trackId, idx) => {
   return (
-    <li>
+    <li key={idx}>
       <TrackItemContainer activity={entities[trackId]} />
     </li>
   );
 };
 
-const renderUser = (entities) => (userId) => {
+const renderUser = (entities) => (userId, idx) => {
   return (
-    <li>
+    <li key={idx}>
       <UserItemContainer user={entities[userId]} />
     </li>
   );

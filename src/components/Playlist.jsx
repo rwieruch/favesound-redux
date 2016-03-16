@@ -5,9 +5,9 @@ import * as actions from '../actions/index';
 import * as toggleTypes from '../constants/toggleTypes';
 import { MiniTrackContainer } from '../components/MiniTrack';
 
-const renderMiniTrack = (trackEntities) => (id) => {
+const renderMiniTrack = (trackEntities) => (id, idx) => {
   return (
-    <li>
+    <li key={idx}>
       <MiniTrackContainer activity={trackEntities[id]}/>
     </li>
   );

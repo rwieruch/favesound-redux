@@ -2,13 +2,13 @@ import React from 'react';
 
 function renderAction(action, idx) {
   return (
-    <div key={idx} className="action-item">
+    <span key={idx} className="action-item">
       <i
         className={action.className}
         onClick={action.fn}
       >
       </i>
-    </div>
+    </span>
   );
 }
 
@@ -21,6 +21,6 @@ export const Actions = ({ configuration, isVisible }) => {
 };
 
 Actions.propTypes = {
-  configuration: React.PropTypes.object,
+  configuration: React.PropTypes.array,
   isVisible: React.PropTypes.bool,
 };
