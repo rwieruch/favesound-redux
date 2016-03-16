@@ -65,7 +65,7 @@ const renderList = (ids, kind, requestInProcess, entities) => {
   }
 };
 
-export const ItemList = ({
+export const List = ({
   ids,
   isExpanded,
   title,
