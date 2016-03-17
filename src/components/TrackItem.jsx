@@ -1,12 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
+import { Artwork } from '../components/Artwork';
 import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
-
-const renderImage = (artwork_url, title, avatar_url) => {
-  return <img src={artwork_url || avatar_url} alt={title} height="40" width="40"/>;
-};
 
 const TrackItem = ({ activity, activateTrack, addTrackToPlaylist, isPlaying, activeTrackId, userEntities }) => {
   const { avatar_url, username } = userEntities[activity.user];
@@ -27,7 +24,7 @@ const TrackItem = ({ activity, activateTrack, addTrackToPlaylist, isPlaying, act
   return (
     <div className="item">
       <div>
-        {renderImage(activity.artwork_url, activity.title, avatar_url)}
+        <Artwork image={activity.artwork_url} title={activity.title} optionalImage={avatar_url} size={40} />
       </div>
       <div className="item-content">
         <div className="item-content-name">

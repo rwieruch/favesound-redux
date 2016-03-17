@@ -2,12 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import { WaveformSc } from '../components/WaveformSc';
+import { Artwork } from '../components/Artwork';
 import { durationFormat, fromNow } from '../utils/track';
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
-
-const renderImage = (artwork_url, title, avatar_url) => {
-  return <img src={artwork_url || avatar_url} alt={title} height="80" width="80"/>;
-};
 
 const Track = ({ activity, activeTrackId, activateTrack, addTrackToPlaylist, isPlaying, idx, userEntities }) => {
   const {
@@ -31,7 +28,7 @@ const Track = ({ activity, activeTrackId, activateTrack, addTrackToPlaylist, isP
   return (
     <div className={"track " + (isVisible ? "track-visible" : "")}>
       <div className="track-img">
-        {renderImage(artwork_url, title, avatar_url)}
+        <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={80} />
       </div>
       <div className="track-content">
         <div className="track-content-name">
