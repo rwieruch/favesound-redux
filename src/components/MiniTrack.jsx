@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import { Artwork } from '../components/Artwork';
 import { Actions } from '../components/Actions';
@@ -23,7 +24,7 @@ const renderActions = (activity, activeTrackId, activateTrack, removeTrackFromPl
   return <Actions configuration={configuration} isVisible={isVisible} />;
 };
 
-const MiniTrack = ({ activity, userEntities, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying }) => {
+const MiniTrack = ({ activity, userEntities, activeTrackId, isPlaying, activateTrack, removeTrackFromPlaylist }) => {
   if (!activity) {
     return;
   }
@@ -40,8 +41,8 @@ const MiniTrack = ({ activity, userEntities, activeTrackId, activateTrack, remov
         <div className="mini-track-content-name">
           <a href={permalink_url}>{username} - {title}</a>
         </div>
-        {renderActions(activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying)}
       </div>
+      {renderActions(activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying)}
     </div>
   );
 };
@@ -55,4 +56,11 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export const MiniTrackContainer = connect(mapStateToProps, actions)(MiniTrack);
+function mapDispatchToProps(dispatch) {
+  return {
+    activateTrack: bindActionCreators(actions.activateTrack, dispatch),
+    removeTrackFromPlaylist: bindActionCreators(actions.removeTrackFromPlaylist, dispatch)
+  };
+}
+
+export const MiniTrackContainer = connect(mapStateToProps, mapDispatchToProps)(MiniTrack);

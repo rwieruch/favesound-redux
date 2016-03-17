@@ -1,6 +1,7 @@
 import React from 'react';
 import { find } from 'lodash';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { InfoList } from '../components/InfoList';
 import { Actions } from '../components/Actions';
 import * as actions from '../actions/index';
@@ -48,10 +49,17 @@ const UserItem = ({ user, followings, follow }) => {
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     followings: state.user.followings,
+    user: ownProps.user
   };
 }
 
-export const UserItemContainer = connect(mapStateToProps, actions)(UserItem);
+function mapDispatchToProps(dispatch) {
+  return {
+    follow: bindActionCreators(actions.follow, dispatch)
+  };
+}
+
+export const UserItemContainer = connect(mapStateToProps, mapDispatchToProps)(UserItem);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import { WaveformSc } from '../components/WaveformSc';
 import { Artwork } from '../components/Artwork';
@@ -7,7 +8,7 @@ import { InfoList } from '../components/InfoList';
 import { durationFormat, fromNow } from '../utils/track';
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 
-const Track = ({ activity, activeTrackId, activateTrack, addTrackToPlaylist, isPlaying, idx, userEntities }) => {
+const Track = ({ activity, activeTrackId, isPlaying, idx, userEntities, activateTrack, addTrackToPlaylist }) => {
   const {
     user,
     title,
@@ -90,8 +91,17 @@ function mapStateToProps(state, ownProps) {
   return {
     userEntities: state.entities.users,
     activity: ownProps.activity,
+    isPlaying: state.player.isPlaying,
+    activeTrackId: state.player.activeTrackId,
     idx: ownProps.idx
   };
 }
 
-export const TrackContainer = connect(mapStateToProps, actions)(Track);
+function mapDispatchToProps(dispatch) {
+  return {
+    activateTrack: bindActionCreators(actions.activateTrack, dispatch),
+    addTrackToPlaylist: bindActionCreators(actions.addTrackToPlaylist, dispatch)
+  };
+}
+
+export const TrackContainer = connect(mapStateToProps, mapDispatchToProps)(Track);

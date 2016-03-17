@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import { Artwork } from '../components/Artwork';
 import { InfoList } from '../components/InfoList';
 import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 
-const TrackItem = ({ activity, activateTrack, addTrackToPlaylist, isPlaying, activeTrackId, userEntities }) => {
+const TrackItem = ({ activity, isPlaying, activeTrackId, userEntities, activateTrack, addTrackToPlaylist }) => {
   const { avatar_url, username } = userEntities[activity.user];
   const { playback_count, favoritings_count, comment_count } = activity;
 
@@ -66,4 +67,11 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export const TrackItemContainer = connect(mapStateToProps, actions)(TrackItem);
+function mapDispatchToProps(dispatch) {
+  return {
+    activateTrack: bindActionCreators(actions.activateTrack, dispatch),
+    addTrackToPlaylist: bindActionCreators(actions.addTrackToPlaylist, dispatch)
+  };
+}
+
+export const TrackItemContainer = connect(mapStateToProps, mapDispatchToProps)(TrackItem);
