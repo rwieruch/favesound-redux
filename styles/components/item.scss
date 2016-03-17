@@ -20,17 +20,6 @@
       overflow: hidden;
       height: 14px;
     }
-
-    &-info {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: start;
-
-      &-item {
-        width: 30%;
-      }
-    }
   }
 
   .is-active {

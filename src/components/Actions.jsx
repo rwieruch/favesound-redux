@@ -22,5 +22,5 @@ export const Actions = ({ configuration, isVisible }) => {
 
 Actions.propTypes = {
   configuration: React.PropTypes.array,
-  isVisible: React.PropTypes.bool,
+  isVisible: React.PropTypes.bool
 };

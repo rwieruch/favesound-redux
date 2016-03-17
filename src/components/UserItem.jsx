@@ -1,14 +1,32 @@
 import React from 'react';
 import { find } from 'lodash';
 import { connect } from 'react-redux';
+import { InfoList } from '../components/InfoList';
 import { Actions } from '../components/Actions';
 import * as actions from '../actions/index';
 
 const UserItem = ({ user, followings, follow }) => {
+  const { followings_count, followers_count, track_count } = user;
+
   const configuration = [
     {
       className: find(followings, (following) => following === user.id) ? 'fa fa-group is-active' : 'fa fa-group',
       fn: () => follow(user)
+    }
+  ];
+
+  const information = [
+    {
+      className: 'fa fa-plus',
+      count: followings_count
+    },
+    {
+      className: 'fa fa-group',
+      count: followers_count
+    },
+    {
+      className: 'fa fa-music',
+      count: track_count
     }
   ];
 
@@ -23,17 +41,7 @@ const UserItem = ({ user, followings, follow }) => {
             {user.username}
           </a>
         </div>
-        <div className="item-content-info">
-          <div className="item-content-info-item">
-            <i className="fa fa-user-plus"></i>&nbsp;{user.followings_count}
-          </div>
-          <div className="item-content-info-item">
-            <i className="fa fa-group"></i>&nbsp;{user.followers_count}
-          </div>
-          <div className="item-content-info-item">
-            <i className="fa fa-music"></i>&nbsp;{user.track_count}
-          </div>
-        </div>
+        <InfoList information={information} />
         <Actions configuration={configuration} />
       </div>
     </div>

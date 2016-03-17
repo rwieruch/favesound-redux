@@ -2,14 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import { Artwork } from '../components/Artwork';
+import { InfoList } from '../components/InfoList';
 import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
 
 const TrackItem = ({ activity, activateTrack, addTrackToPlaylist, isPlaying, activeTrackId, userEntities }) => {
   const { avatar_url, username } = userEntities[activity.user];
+  const { playback_count, favoritings_count, comment_count } = activity;
 
   const isVisible = isSameTrack(activeTrackId)(activity.id);
   const trackIsPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
+
   const configuration = [
     {
       className: trackIsPlaying ? 'fa fa-pause' : 'fa fa-play',
@@ -18,6 +21,21 @@ const TrackItem = ({ activity, activateTrack, addTrackToPlaylist, isPlaying, act
     {
       className: 'fa fa-th-list',
       fn: () => addTrackToPlaylist(activity)
+    }
+  ];
+
+  const information = [
+    {
+      className: 'fa fa-play',
+      count: playback_count
+    },
+    {
+      className: 'fa fa-heart',
+      count: favoritings_count
+    },
+    {
+      className: 'fa fa-comment',
+      count: comment_count
     }
   ];
 
@@ -32,17 +50,7 @@ const TrackItem = ({ activity, activateTrack, addTrackToPlaylist, isPlaying, act
             {username} - {activity.title}
           </a>
         </div>
-        <div className="item-content-info">
-          <div className="item-content-info-item">
-            <i className="fa fa-play"></i>&nbsp;{activity.playback_count}
-          </div>
-          <div className="item-content-info-item">
-            <i className="fa fa-heart"></i>&nbsp;{activity.favoritings_count}
-          </div>
-          <div className="item-content-info-item">
-            <i className="fa fa-comment"></i>&nbsp;{activity.comment_count}
-          </div>
-        </div>
+        <InfoList information={information} />
         <Actions configuration={configuration} isVisible={isVisible} />
       </div>
     </div>
