@@ -2,9 +2,8 @@ import React from 'react';
 
 function renderInfo(info, idx) {
   return (
-    <div className="info-list-item">
+    <div className="info-list-item" key={idx}>
       <i
-        key={idx}
         className={info.className}
       >
         &nbsp;{info.count}

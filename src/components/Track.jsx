@@ -51,7 +51,7 @@ const Track = ({ activity, activeTrackId, activateTrack, addTrackToPlaylist, isP
 
   return (
     <div className={"track " + (isVisible ? "track-visible" : "")}>
-      <div className="track-img">
+      <div>
         <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={80} />
       </div>
       <div className="track-content">

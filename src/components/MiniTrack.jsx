@@ -33,7 +33,7 @@ const MiniTrack = ({ activity, userEntities, activeTrackId, activateTrack, remov
 
   return (
     <div className="mini-track">
-      <div className="mini-track-img">
+      <div>
         <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={40} />
       </div>
       <div className="mini-track-content">
