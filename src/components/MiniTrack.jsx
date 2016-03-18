@@ -41,8 +41,8 @@ const MiniTrack = ({ activity, userEntities, activeTrackId, isPlaying, activateT
       </div>
       <div className="mini-track-content">
         <Permalink link={permalink_url} text={linkText} />
+        {renderActions(activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying)}
       </div>
-      {renderActions(activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying)}
     </div>
   );
 };
