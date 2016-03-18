@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import { Artwork } from '../components/Artwork';
+import { Permalink } from '../components/Permalink';
 import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
@@ -31,6 +32,7 @@ const MiniTrack = ({ activity, userEntities, activeTrackId, isPlaying, activateT
 
   const { user, title, permalink_url, artwork_url } = activity;
   const { avatar_url, username } = userEntities[user];
+  const linkText = username + ' - ' + title;
 
   return (
     <div className="mini-track">
@@ -38,9 +40,7 @@ const MiniTrack = ({ activity, userEntities, activeTrackId, isPlaying, activateT
         <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={40} />
       </div>
       <div className="mini-track-content">
-        <div className="mini-track-content-name">
-          <a href={permalink_url}>{username} - {title}</a>
-        </div>
+        <Permalink link={permalink_url} text={linkText} />
       </div>
       {renderActions(activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying)}
     </div>

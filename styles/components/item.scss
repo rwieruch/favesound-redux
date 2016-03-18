@@ -16,10 +16,11 @@
     flex-direction: column;
     justify-content: space-between;
 
-    &-name {
+    a {
       overflow: hidden;
       height: 14px;
     }
+
   }
 
   .is-active {

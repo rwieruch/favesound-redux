@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import { Artwork } from '../components/Artwork';
+import { Permalink } from '../components/Permalink';
 import { InfoList } from '../components/InfoList';
 import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
@@ -13,6 +14,7 @@ const TrackItem = ({ activity, isPlaying, activeTrackId, userEntities, activateT
 
   const isVisible = isSameTrack(activeTrackId)(activity.id);
   const trackIsPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
+  const linkText = username + ' - ' + activity.title;
 
   const configuration = [
     {
@@ -46,11 +48,7 @@ const TrackItem = ({ activity, isPlaying, activeTrackId, userEntities, activateT
         <Artwork image={activity.artwork_url} title={activity.title} optionalImage={avatar_url} size={40} />
       </div>
       <div className="item-content">
-        <div className="item-content-name">
-          <a href={activity.permalink_url}>
-            {username} - {activity.title}
-          </a>
-        </div>
+        <Permalink link={activity.permalink_url} text={linkText} />
         <InfoList information={information} />
         <Actions configuration={configuration} isVisible={isVisible} />
       </div>

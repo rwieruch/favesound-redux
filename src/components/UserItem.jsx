@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { InfoList } from '../components/InfoList';
 import { Actions } from '../components/Actions';
+import { Artwork } from '../components/Artwork';
+import { Permalink } from '../components/Permalink';
 import * as actions from '../actions/index';
 
 const UserItem = ({ user, followings, follow }) => {
-  const { followings_count, followers_count, track_count } = user;
+  const { followings_count, followers_count, track_count, avatar_url, username, permalink_url } = user;
 
   const configuration = [
     {
@@ -34,14 +36,10 @@ const UserItem = ({ user, followings, follow }) => {
   return (
     <div className="item">
       <div>
-        <img src={user.avatar_url} alt={user.username} height="40" width="40"/>
+        <Artwork image={avatar_url} title={username} size={40} />
       </div>
       <div className="item-content">
-        <div className="item-content-name">
-          <a href={user.permalink_url}>
-            {user.username}
-          </a>
-        </div>
+        <Permalink link={permalink_url} text={username} />
         <InfoList information={information} />
         <Actions configuration={configuration} />
       </div>

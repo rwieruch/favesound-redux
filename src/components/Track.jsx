@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import { WaveformSc } from '../components/WaveformSc';
 import { Artwork } from '../components/Artwork';
+import { Permalink } from '../components/Permalink';
 import { InfoList } from '../components/InfoList';
 import { durationFormat, fromNow } from '../services/track';
 import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
@@ -23,7 +24,8 @@ const Track = ({ activity, activeTrackId, isPlaying, idx, userEntities, activate
     created_at
   } = activity;
 
-  const { avatar_url, username } = userEntities[user];
+  const userEntity = userEntities[user];
+  const { avatar_url, username } = userEntity;
   const isVisible = isSameTrack(activeTrackId)(activity.id);
   const isSameAndPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
 
@@ -57,11 +59,11 @@ const Track = ({ activity, activeTrackId, isPlaying, idx, userEntities, activate
       </div>
       <div className="track-content">
         <div className="track-content-name">
-          <div><a href={user.permalink_url}>{username}</a></div>
+          <Permalink link={userEntity.permalink_url} text={username} />
           <div>{fromNow(created_at)}</div>
         </div>
         <div className="track-content-meta">
-          <div><a href={permalink_url}>{title}</a></div>
+          <Permalink link={permalink_url} text={title} />
           <div>{durationFormat(duration)}</div>
         </div>
         <div className="track-content-waveform">
