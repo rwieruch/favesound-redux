@@ -3,7 +3,7 @@ import { CLIENT_ID } from '../constants/authentification';
 import trackSchema from '../schemas/track';
 import * as actionTypes from '../constants/actionTypes';
 import * as requestTypes from '../constants/requestTypes';
-import { unauthApiUrl } from '../utils/soundcloudApi';
+import { unauthApiUrl } from '../services/api';
 import { setRequestInProcess } from '../actions/request';
 import { setPaginateLink } from '../actions/paginate';
 import { mergeEntities } from '../actions/entities';

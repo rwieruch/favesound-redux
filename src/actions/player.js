@@ -2,8 +2,8 @@ import { find, findIndex } from 'lodash';
 import * as actionTypes from '../constants/actionTypes';
 import * as toggleTypes from '../constants/toggleTypes';
 import { resetToggle } from './toggle';
-import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
-import { apiUrl } from '../utils/soundcloudApi';
+import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
+import { apiUrl } from '../services/api';
 
 export function setActiveTrack(activeTrackId) {
   return {

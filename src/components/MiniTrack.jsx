@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import { Artwork } from '../components/Artwork';
 import { Actions } from '../components/Actions';
-import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
+import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
 const renderActions = (activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying) => {
   const trackIsPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);

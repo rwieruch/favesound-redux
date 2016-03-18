@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
-import {isSameTrack} from '../utils/player';
+import {isSameTrack} from '../services/player';
 
 const initialState = {
   followings: [],

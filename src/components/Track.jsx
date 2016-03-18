@@ -5,8 +5,8 @@ import * as actions from '../actions/index';
 import { WaveformSc } from '../components/WaveformSc';
 import { Artwork } from '../components/Artwork';
 import { InfoList } from '../components/InfoList';
-import { durationFormat, fromNow } from '../utils/track';
-import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
+import { durationFormat, fromNow } from '../services/track';
+import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
 const Track = ({ activity, activeTrackId, isPlaying, idx, userEntities, activateTrack, addTrackToPlaylist }) => {
   const {

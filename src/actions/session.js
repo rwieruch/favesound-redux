@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { CLIENT_ID, OAUTH_TOKEN } from '../constants/authentification';
 import * as actionTypes from '../constants/actionTypes';
-import { apiUrl } from '../utils/soundcloudApi';
+import { apiUrl } from '../services/api';
 import { changeLocation } from './location';
 import { browse, dashboard } from '../constants/pathnames';
 import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites } from './user';

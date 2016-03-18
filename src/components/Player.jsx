@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import * as toggleTypes from '../constants/toggleTypes';
-import { addAccessTokenWith } from '../utils/soundcloudApi';
+import { addAccessTokenWith } from '../services/api';
 
 export class Player extends React.Component {
 

@@ -5,7 +5,7 @@ import * as actions from '../actions/index';
 import { Artwork } from '../components/Artwork';
 import { InfoList } from '../components/InfoList';
 import { Actions } from '../components/Actions';
-import { isSameTrackAndPlaying, isSameTrack } from '../utils/player';
+import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
 const TrackItem = ({ activity, isPlaying, activeTrackId, userEntities, activateTrack, addTrackToPlaylist }) => {
   const { avatar_url, username } = userEntities[activity.user];

@@ -1,6 +1,6 @@
 import React from 'react';
 import Waveform from 'waveform.js';
-import { normalizeSamples, isJsonWaveform, isPngWaveform } from '../utils/track';
+import { normalizeSamples, isJsonWaveform, isPngWaveform } from '../services/track';
 
 export class WaveformSc extends React.Component {
 

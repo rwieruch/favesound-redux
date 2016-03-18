@@ -8,8 +8,8 @@ import * as paginateLinkTypes from '../constants/paginateLinkTypes';
 import { setRequestInProcess } from '../actions/request';
 import { setPaginateLink } from '../actions/paginate';
 import { mergeEntities } from '../actions/entities';
-import { isTrack } from '../utils/track';
-import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../utils/soundcloudApi';
+import { isTrack } from '../services/track';
+import { apiUrl, addAccessTokenWith, getLazyLoadingUrl } from '../services/api';
 
 export function mergeFollowings(followings) {
   return {

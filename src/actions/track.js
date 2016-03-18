@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
-import { apiUrl } from '../utils/soundcloudApi';
+import { apiUrl } from '../services/api';
 import { mergeFavorites } from '../actions/user';
 import { syncEntities } from '../actions/entities';
 
