@@ -1,3 +1,4 @@
+import mixpanel from './mixpanel'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import {createStore, applyMiddleware} from 'redux';
 import { syncHistory, routeReducer } from 'react-router-redux'
@@ -14,7 +15,7 @@ const reduxRouterMiddleware = syncHistory(createBrowserHistory());
 const logger = createLogger();
 
 // const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, reduxRouterMiddleware, logger)(createStore);
-const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, reduxRouterMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, reduxRouterMiddleware, mixpanel)(createStore);
 
 export default function configureStore(initialState) {
     return createStoreWithMiddleware(rootReducer, initialState);
