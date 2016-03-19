@@ -1,4 +1,5 @@
-import { find, findIndex } from 'lodash';
+import find from 'lodash/fp/find';
+import findIndex from 'lodash/fp/findIndex';
 import * as actionTypes from '../constants/actionTypes';
 import * as toggleTypes from '../constants/toggleTypes';
 import { resetToggle } from './toggle';
@@ -113,10 +114,10 @@ export const activateIteratedTrack = (currentActiveTrackId, iterate) => (dispatc
 }
 
 function getIteratedTrack(playlist, currentActiveTrackId, iterate) {
-  let index = findIndex(playlist, isSameTrack(currentActiveTrackId));
+  let index = findIndex(isSameTrack(currentActiveTrackId), playlist);
   return playlist[index + iterate];
 }
 
 function isInPlaylist(playlist, trackId) {
-  return find(playlist, isSameTrack(trackId));
+  return find(isSameTrack(trackId), playlist);
 }

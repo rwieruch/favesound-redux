@@ -1,5 +1,5 @@
 import React from 'react';
-import { find } from 'lodash';
+import find from 'lodash/fp/find';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { InfoList } from '../components/InfoList';
@@ -13,7 +13,7 @@ const UserItem = ({ user, followings, follow }) => {
 
   const configuration = [
     {
-      className: find(followings, (following) => following === user.id) ? 'fa fa-group is-active' : 'fa fa-group',
+      className: find((following) => following === user.id, followings) ? 'fa fa-group is-active' : 'fa fa-group',
       fn: () => follow(user)
     }
   ];

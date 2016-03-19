@@ -39,7 +39,7 @@
   "dependencies": {
     "css-loader": "^0.23.1",
     "js-cookie": "^2.1.0",
-    "lodash": "^4.3.0",
+    "lodash-fp": "^0.10.4",
     "normalizr": "^2.0.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",

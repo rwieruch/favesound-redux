@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
-import _ from 'lodash';
+import merge from 'lodash/fp/merge';
 
 const initialState = {
   users: {},
@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
 }
 
 function mergeEntities(state, entities) {
-  return _.merge({}, state, entities);
+  return merge(entities, state, {});
 }
 
 function syncEntities(state, entity, key) {
@@ -27,5 +27,5 @@ function syncEntities(state, entity, key) {
   const entities = {};
   entities[key] = Object.assign({}, state[key], obj);
 
-  return _.merge({}, state, entities);
+  return merge(entities, state, {});
 }

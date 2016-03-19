@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import flow from 'lodash/fp/flow';
+import map from 'lodash/fp/map';
+import filter from 'lodash/fp/filter';
 import { arrayOf, normalize } from 'normalizr';
 import userSchema from '../schemas/user';
 import trackSchema from '../schemas/track';
@@ -57,7 +59,10 @@ export const fetchActivities = (user, nextHref) => (dispatch, getState) => {
   return fetch(url)
     .then(response => response.json())
     .then(data => {
-      const mapAndFiltered = _.chain(data.collection).filter(isTrack).map('origin').value();
+      const mapAndFiltered = flow(
+        filter(isTrack),
+        map('origin')
+      )(data.collection);
       const normalized = normalize(mapAndFiltered, arrayOf(trackSchema));
       dispatch(mergeEntities(normalized.entities));
       dispatch(mergeActivities(normalized.result));
