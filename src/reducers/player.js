@@ -40,7 +40,7 @@ function setTrackInPlaylist(state, trackId) {
   if (state.playlist.indexOf(trackId) !== -1) {
     return state;
   } else {
-    return { ...state, playlist: [trackId, ...state.playlist] };
+    return { ...state, playlist: [...state.playlist, trackId] };
   }
 }
 

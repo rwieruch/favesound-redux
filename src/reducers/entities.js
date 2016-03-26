@@ -21,11 +21,5 @@ function mergeEntities(state, entities) {
 }
 
 function syncEntities(state, entity, key) {
-  const obj = {};
-  obj[entity.id] = entity;
-
-  const entities = {};
-  entities[key] = Object.assign({}, state[key], obj);
-
-  return merge(entities, state, {});
+  return { ...state, [key]: { ...state[key], [entity.id]: entity } }
 }

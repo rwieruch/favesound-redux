@@ -18,7 +18,9 @@ function mergeActivities(state, list, genre) {
     ...list
   ];
 
+
   const obj = {};
   obj[genre] = newList;
+
   return Object.assign({}, state, obj);
 }
