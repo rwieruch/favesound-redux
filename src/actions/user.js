@@ -40,7 +40,7 @@ export const fetchFollowings = (user, nextHref) => (dispatch, getState) => {
     });
 }
 
-function mergeActivities(activities) {
+export function mergeActivities(activities) {
   return {
     type: actionTypes.MERGE_ACTIVITIES,
     activities
@@ -71,7 +71,7 @@ export const fetchActivities = (user, nextHref) => (dispatch, getState) => {
     });
 }
 
-function mergeFollowers(followers) {
+export function mergeFollowers(followers) {
   return {
     type: actionTypes.MERGE_FOLLOWERS,
     followers

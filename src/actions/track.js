@@ -3,7 +3,7 @@ import { apiUrl } from '../services/api';
 import { mergeFavorites } from '../actions/user';
 import { syncEntities } from '../actions/entities';
 
-function removeFromFavorites(trackId) {
+export function removeFromFavorites(trackId) {
   return {
     type: actionTypes.REMOVE_FROM_FAVORITES,
     trackId
