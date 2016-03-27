@@ -1,5 +1,6 @@
 import React from 'react';
 import map from 'lodash/fp/map';
+import classNames from 'classnames';
 
 function Action({ action }) {
   return (
@@ -14,8 +15,15 @@ function Action({ action }) {
 }
 
 export function Actions({ configuration, isVisible }) {
+  const actionsClass = classNames(
+    'action',
+    {
+      'action-visible': isVisible
+    }
+  );
+
   return (
-    <div className={"action " + (isVisible ? "action-visible" : "")}>
+    <div className={actionsClass}>
       {map((action, idx) => {
         return <Action key={idx} action={action} />;
       }, configuration)}
