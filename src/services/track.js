@@ -39,5 +39,5 @@ export function durationFormat(ms) {
 }
 
 export function fromNow(createdAt) {
-  return moment(createdAt).from(moment());
+  return moment(new Date(createdAt)).from(moment());
 }
