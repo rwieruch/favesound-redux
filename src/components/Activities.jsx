@@ -1,35 +1,39 @@
 import React from 'react';
+import map from 'lodash/fp/map';
 import FetchOnScroll from '../components/FetchOnScroll';
 import { TrackContainer } from '../components/Track';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-const renderActivity = (entities) => (id, idx) => {
+function Activity({ entities, id, idx }) {
   return (
     <li key={idx}>
       <TrackContainer activity={entities[id]} idx={idx} />
     </li>
   );
-};
+}
 
-const renderActivities = (ids, entities) => {
+function Activities({ requestInProcess, ids, entities }) {
   if (!ids) {
     return;
   }
 
-  return <ul>{ids.map(renderActivity(entities))}</ul>;
-};
-
-const Activities = ({ requestInProcess, ids, entities }) => {
   return (
     <div>
-      <div>{renderActivities(ids, entities)}</div>
+      <div>
+        <ul>{map((id, idx) => {
+          const props = { entities, id, idx };
+          return <Activity { ...props } />;
+        }, ids)}</ul>
+      </div>
       <LoadingSpinner isLoading={requestInProcess}/>
     </div>
   );
-};
+}
 
 export default FetchOnScroll(Activities);
 
 Activities.propTypes = {
-  activities: React.PropTypes.array
+  requestInProcess: React.PropTypes.bool,
+  ids: React.PropTypes.array,
+  entities: React.PropTypes.object
 };
