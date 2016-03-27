@@ -39,8 +39,10 @@ module.exports = {
   },
   eslint: {
     configFile: './.eslintrc'
-  }//,
-  // plugins: [
-  //   new webpack.HotModuleReplacementPlugin()
-  // ]
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
+  ]
 };
