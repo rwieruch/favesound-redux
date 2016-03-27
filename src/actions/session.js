@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { CLIENT_ID, OAUTH_TOKEN } from '../constants/authentification';
+import { CLIENT_ID, OAUTH_TOKEN, REDIRECT_URI } from '../constants/authentification';
 import * as actionTypes from '../constants/actionTypes';
 import { apiUrl } from '../services/api';
 import { changeLocation } from './location';
@@ -29,7 +29,7 @@ function resetSession() {
 
 export const login = () => (dispatch) => {
   const client_id = CLIENT_ID;
-  const redirect_uri = `${window.location.protocol}//${window.location.host}/callback`;
+  const redirect_uri = REDIRECT_URI;
 
   SC.initialize({ client_id, redirect_uri });
 
