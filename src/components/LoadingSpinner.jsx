@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoadingSpinner = ({ isLoading }) => {
+function LoadingSpinner({ isLoading }) {
   if (isLoading) {
     return (
       <div className="loading-spinner">
@@ -10,7 +10,7 @@ const LoadingSpinner = ({ isLoading }) => {
   } else {
     return <div></div>;
   }
-};
+}
 
 LoadingSpinner.propTypes = {
   isLoading: React.PropTypes.bool

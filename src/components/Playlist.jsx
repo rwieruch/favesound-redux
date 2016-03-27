@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import * as toggleTypes from '../constants/toggleTypes';
-import { MiniTrackContainer } from '../components/MiniTrack';
+import { PlaylistTrackContainer } from '../components/PlaylistTrack';
 
-const renderMiniTrack = (trackEntities) => (id, idx) => {
+const renderPlaylistTrack = (trackEntities) => (id, idx) => {
   return (
     <li key={idx}>
-      <MiniTrackContainer activity={trackEntities[id]}/>
+      <PlaylistTrackContainer activity={trackEntities[id]}/>
     </li>
   );
 };
 
 const renderPlaylist = (playlist, trackEntities) => {
-  return <ul>{playlist.map(renderMiniTrack(trackEntities))}</ul>;
+  return <ul>{playlist.map(renderPlaylistTrack(trackEntities))}</ul>;
 };
 
 const renderMenu = (clearPlaylist) => {

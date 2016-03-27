@@ -1,8 +1,9 @@
 import React from 'react';
+import map from 'lodash/fp/map';
 
-function renderAction(action, idx) {
+function Action({ action }) {
   return (
-    <span key={idx} className="action-item">
+    <span className="action-item">
       <i
         className={action.className}
         onClick={action.fn}
@@ -12,13 +13,15 @@ function renderAction(action, idx) {
   );
 }
 
-export const Actions = ({ configuration, isVisible }) => {
+export function Actions({ configuration, isVisible }) {
   return (
     <div className={"action " + (isVisible ? "action-visible" : "")}>
-      {configuration.map(renderAction)}
+      {map((action, idx) => {
+        return <Action key={idx} action={action} />;
+      }, configuration)}
     </div>
   );
-};
+}
 
 Actions.propTypes = {
   configuration: React.PropTypes.array,

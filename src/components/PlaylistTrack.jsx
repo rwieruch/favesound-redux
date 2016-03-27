@@ -7,7 +7,7 @@ import { Permalink } from '../components/Permalink';
 import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
-const renderActions = (activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying) => {
+function ActionsWrapper({ activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying }) {
   const trackIsPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
   const isVisible = isSameTrack(activeTrackId)(activity.id);
 
@@ -23,9 +23,9 @@ const renderActions = (activity, activeTrackId, activateTrack, removeTrackFromPl
   ];
 
   return <Actions configuration={configuration} isVisible={isVisible} />;
-};
+}
 
-const MiniTrack = ({ activity, userEntities, activeTrackId, isPlaying, activateTrack, removeTrackFromPlaylist }) => {
+function PlaylistTrack({ activity, userEntities, activeTrackId, isPlaying, activateTrack, removeTrackFromPlaylist }) {
   if (!activity) {
     return;
   }
@@ -33,19 +33,20 @@ const MiniTrack = ({ activity, userEntities, activeTrackId, isPlaying, activateT
   const { user, title, permalink_url, artwork_url } = activity;
   const { avatar_url, username } = userEntities[user];
   const linkText = username + ' - ' + title;
+  const actionsWrapperProps = { activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying };
 
   return (
-    <div className="mini-track">
+    <div className="playlist-track">
       <div>
         <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={40} />
       </div>
-      <div className="mini-track-content">
+      <div className="playlist-track-content">
         <Permalink link={permalink_url} text={linkText} />
-        {renderActions(activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying)}
+        <ActionsWrapper { ...actionsWrapperProps } />
       </div>
     </div>
   );
-};
+}
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -63,4 +64,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const MiniTrackContainer = connect(mapStateToProps, mapDispatchToProps)(MiniTrack);
+export const PlaylistTrackContainer = connect(mapStateToProps, mapDispatchToProps)(PlaylistTrack);
