@@ -1,25 +1,31 @@
 import React from 'react';
+import map from 'lodash/fp/map';
 
-function renderInfo(info, idx) {
+function Info({ info }) {
   return (
-    <div className="info-list-item" key={idx}>
+    <div className="info-list-item">
       <i
         className={info.className}
-      >
-        &nbsp;{info.count}
+      > {info.count}
       </i>
     </div>
   );
 }
 
-export const InfoList = ({ information }) => {
+function InfoList({ information }) {
   return (
     <div className="info-list">
-      {information.map(renderInfo)}
+      {map((info, idx) => {
+        return <Info key={idx} info={info} />;
+      }, information)}
     </div>
   );
-};
+}
 
 InfoList.propTypes = {
   information: React.PropTypes.array
+};
+
+export {
+  InfoList
 };

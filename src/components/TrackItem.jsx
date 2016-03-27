@@ -8,7 +8,14 @@ import { InfoList } from '../components/InfoList';
 import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
-const TrackItem = ({ activity, isPlaying, activeTrackId, userEntities, activateTrack, addTrackToPlaylist }) => {
+function TrackItem({
+  activity,
+  isPlaying,
+  activeTrackId,
+  userEntities,
+  activateTrack,
+  addTrackToPlaylist }
+) {
   const { avatar_url, username } = userEntities[activity.user];
   const { playback_count, favoritings_count, comment_count } = activity;
 
@@ -54,7 +61,7 @@ const TrackItem = ({ activity, isPlaying, activeTrackId, userEntities, activateT
       </div>
     </div>
   );
-};
+}
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -72,4 +79,18 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const TrackItemContainer = connect(mapStateToProps, mapDispatchToProps)(TrackItem);
+TrackItem.propTypes = {
+  userEntities: React.PropTypes.object,
+  activity: React.PropTypes.object,
+  isPlaying: React.PropTypes.bool,
+  activeTrackId: React.PropTypes.number,
+  activateTrack: React.PropTypes.func,
+  addTrackToPlaylist: React.PropTypes.func
+};
+
+const TrackItemContainer = connect(mapStateToProps, mapDispatchToProps)(TrackItem);
+
+export {
+  TrackItem,
+  TrackItemContainer
+};

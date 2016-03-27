@@ -2,7 +2,7 @@ import React from 'react';
 import map from 'lodash/fp/map';
 import FetchOnScroll from '../components/FetchOnScroll';
 import { TrackContainer } from '../components/Track';
-import LoadingSpinner from '../components/LoadingSpinner';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 function Activity({ entities, id, idx }) {
   return (
@@ -32,10 +32,10 @@ function Activities({ requestInProcess, ids, entities }) {
   );
 }
 
-export default FetchOnScroll(Activities);
-
 Activities.propTypes = {
   requestInProcess: React.PropTypes.bool,
   ids: React.PropTypes.array,
   entities: React.PropTypes.object
 };
+
+export default FetchOnScroll(Activities);

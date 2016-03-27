@@ -2,7 +2,9 @@ import React from 'react';
 import Waveform from 'waveform.js';
 import { normalizeSamples, isJsonWaveform, isPngWaveform } from '../services/track';
 
-export class WaveformSc extends React.Component {
+const WAVE_COLOR = '#61B25A';
+
+class WaveformSc extends React.Component {
 
   componentDidMount() {
     const { activity, idx } = this.props;
@@ -30,7 +32,7 @@ export class WaveformSc extends React.Component {
       .then((data) => {
         new Waveform({
           container: document.getElementById(elementId),
-          innerColor: '#61B25A',
+          innerColor: WAVE_COLOR,
           data: normalizeSamples(data.samples)
         });
       });
@@ -39,7 +41,7 @@ export class WaveformSc extends React.Component {
   fetchPngWaveform(elementId, activity) {
     const waveform = new Waveform({
       container: document.getElementById(elementId),
-      innerColor: '#61B25A'
+      innerColor: WAVE_COLOR
     });
     waveform.dataFromSoundCloudTrack(activity);
   }
@@ -56,3 +58,12 @@ export class WaveformSc extends React.Component {
   }
 
 }
+
+WaveformSc.propTypes = {
+  activity: React.PropTypes.object,
+  idx: React.PropTypes.number
+};
+
+export {
+  WaveformSc
+};

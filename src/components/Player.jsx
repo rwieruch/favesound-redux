@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import * as toggleTypes from '../constants/toggleTypes';
 import { addAccessTokenWith } from '../services/api';
 
-export class Player extends React.Component {
+class Player extends React.Component {
 
   componentDidUpdate() {
     const audioElement = ReactDOM.findDOMNode(this.refs.audio);
@@ -29,6 +30,19 @@ export class Player extends React.Component {
     const track = entities.tracks[activeTrackId];
     const { user, title, stream_url } = track;
     const { username } = entities.users[user];
+    const playClass = classNames(
+      'fa',
+      {
+        'fa-pause': isPlaying,
+        'fa-play': !isPlaying
+      }
+    );
+    const likeClass = classNames(
+      'fa fa-heart',
+      {
+        'is-favorite': track.user_favorite
+      }
+    );
 
     return (
       <div className="player-content">
@@ -40,7 +54,7 @@ export class Player extends React.Component {
         </div>
         <div>
           <i
-            className={"fa " + (isPlaying ? "fa-pause" : "fa-play")}
+            className={playClass}
             onClick={togglePlayTrack.bind(null, !isPlaying)}
           ></i>
         </div>
@@ -61,7 +75,7 @@ export class Player extends React.Component {
         </div>
         <div>
           <i
-            className={"fa fa-heart " + (track.user_favorite ? "is-favorite" : "")}
+            className={likeClass}
             onClick={like.bind(null, track)}
           ></i>
         </div>
@@ -71,7 +85,14 @@ export class Player extends React.Component {
   }
 
   render() {
-    return <div className={this.props.activeTrackId ? "player player-visible" : "player"}>{this.renderNav()}</div>;
+    const playerClass = classNames(
+      'player',
+      {
+        'player-visible': this.props.activeTrackId
+      }
+    );
+
+    return <div className={playerClass}>{this.renderNav()}</div>;
   }
 
 }
@@ -93,4 +114,19 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const PlayerContainer = connect(mapStateToProps, mapDispatchToProps)(Player);
+Player.propTypes = {
+  activeTrackId: React.PropTypes.number,
+  isPlaying: React.PropTypes.bool,
+  entities: React.PropTypes.object,
+  togglePlayTrack: React.PropTypes.func,
+  setToggle: React.PropTypes.func,
+  activateIteratedTrack: React.PropTypes.func,
+  like: React.PropTypes.func
+};
+
+const PlayerContainer = connect(mapStateToProps, mapDispatchToProps)(Player);
+
+export {
+  Player,
+  PlayerContainer
+};

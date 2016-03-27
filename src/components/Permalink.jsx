@@ -1,9 +1,18 @@
 import React from 'react';
 
-export const Permalink = ({ link, text }) => {
+function Permalink({ link, text }) {
   return (
     <a href={link}>
       {text}
     </a>
   );
+}
+
+Permalink.propTypes = {
+  link: React.PropTypes.string,
+  text: React.PropTypes.string
+};
+
+export {
+  Permalink
 };

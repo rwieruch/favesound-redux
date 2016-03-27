@@ -8,7 +8,7 @@ function LoadingSpinner({ isLoading }) {
       </div>
     );
   } else {
-    return <div></div>;
+    return <span></span>;
   }
 }
 
@@ -16,4 +16,6 @@ LoadingSpinner.propTypes = {
   isLoading: React.PropTypes.bool
 };
 
-export default LoadingSpinner;
+export {
+  LoadingSpinner
+};

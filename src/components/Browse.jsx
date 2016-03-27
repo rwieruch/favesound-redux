@@ -88,6 +88,17 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+Browse.propTypes = {
+  pathname: React.PropTypes.string,
+  genre: React.PropTypes.string,
+  browseActivities: React.PropTypes.object,
+  requestsInProcess: React.PropTypes.object,
+  paginateLinks: React.PropTypes.object,
+  trackEntities: React.PropTypes.object,
+  userEntities: React.PropTypes.object,
+  fetchActivitiesByGenre: React.PropTypes.func
+};
+
 Browse.defaultProps = {
   genre: DEFAULT_GENRE
 };

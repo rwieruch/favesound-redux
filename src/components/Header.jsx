@@ -1,4 +1,6 @@
 import React from 'react';
+import map from 'lodash/fp/map';
+import classNames from 'classnames';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -6,30 +8,39 @@ import * as actions from '../actions/index';
 import { GENRES, DEFAULT_GENRE } from '../constants/genre';
 import { browse } from '../constants/pathnames';
 
-const renderLogo = (genre) => {
+function Logo({ genre }) {
   return (
     <Link to={browse + '?genre=' + genre}>
       <h1>Favesound</h1>
     </Link>
   );
-};
+}
 
-const renderMenuItemBrowse = (pathname, selectedGenre) => (genre, idx) => {
-  if (pathname !== browse) { return; }
+function MenuItemBrowse({ pathname, selectedGenre, genre }) {
+  if (pathname !== browse) {
+    return <span></span>;
+  }
+
+  const linkClass = classNames(
+    'menu-item',
+    {
+      'menu-item-selected': genre === selectedGenre
+    }
+  );
 
   return (
-    <span key={idx}>
+    <span>
       <Link
         to={browse + '?genre=' + genre}
-        className={(genre === selectedGenre ? "menu-item menu-item-selected" : "menu-item")}
+        className={linkClass}
       >
         {genre}
       </Link>
     </span>
   );
-};
+}
 
-const renderAction = (currentUser, login, logout) => {
+function SessionAction({ currentUser, login, logout }) {
   if (currentUser) {
     return (
       <a href="#" onClick={logout}>
@@ -43,25 +54,28 @@ const renderAction = (currentUser, login, logout) => {
       </a>
     );
   }
-};
+}
 
-export const Header = ({ currentUser, genre, pathname, login, logout }) => {
+function Header({ currentUser, genre, pathname, login, logout }) {
   return (
     <div className="header">
       <div className="header-content">
         <div>
-          {renderLogo(genre)}
+          <Logo genre={genre} />
         </div>
         <div>
-          {GENRES.map(renderMenuItemBrowse(pathname, genre))}
+          {map((availableGenre, idx) => {
+            const props = { genre: availableGenre, selectedGenre: genre, pathname };
+            return <MenuItemBrowse key={idx} { ...props } />;
+          }, GENRES)}
         </div>
         <div>
-          {renderAction(currentUser, login, logout)}
+          <SessionAction currentUser={currentUser} login={login} logout={logout} />
         </div>
       </div>
     </div>
   );
-};
+}
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -78,8 +92,21 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header);
+Header.propTypes = {
+  currentUser: React.PropTypes.object,
+  genre: React.PropTypes.string,
+  pathname: React.PropTypes.string,
+  login: React.PropTypes.func,
+  logout: React.PropTypes.func
+};
 
 Header.defaultProps = {
   genre: DEFAULT_GENRE
+};
+
+const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header);
+
+export {
+  Header,
+  HeaderContainer
 };

@@ -6,13 +6,13 @@ import * as requestTypes from '../constants/requestTypes';
 import * as paginateLinkTypes from '../constants/paginateLinkTypes';
 import Activities from '../components/Activities';
 
-export const StreamActivities = ({
+function StreamActivities({
   activities,
   requestsInProcess,
   paginateLinks,
   trackEntities,
   fetchActivities
-}) => {
+}) {
   return (
     <Activities
       requestInProcess={requestsInProcess[requestTypes.ACTIVITIES]}
@@ -21,7 +21,7 @@ export const StreamActivities = ({
       scrollFunction={() => fetchActivities(null, paginateLinks[paginateLinkTypes.ACTIVITIES])}
     />
   );
-};
+}
 
 function mapStateToProps(state) {
   return {
@@ -38,4 +38,17 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const StreamActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(StreamActivities);
+StreamActivities.propTypes = {
+  trackEntities: React.PropTypes.object,
+  activities: React.PropTypes.array,
+  requestsInProcess: React.PropTypes.object,
+  paginateLinks: React.PropTypes.object,
+  fetchActivities: React.PropTypes.func
+};
+
+const StreamActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(StreamActivities);
+
+export {
+  StreamActivities,
+  StreamActivitiesContainer
+};

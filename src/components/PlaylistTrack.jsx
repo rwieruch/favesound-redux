@@ -27,7 +27,7 @@ function ActionsWrapper({ activity, activeTrackId, activateTrack, removeTrackFro
 
 function PlaylistTrack({ activity, userEntities, activeTrackId, isPlaying, activateTrack, removeTrackFromPlaylist }) {
   if (!activity) {
-    return;
+    return <span></span>;
   }
 
   const { user, title, permalink_url, artwork_url } = activity;
@@ -64,4 +64,18 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const PlaylistTrackContainer = connect(mapStateToProps, mapDispatchToProps)(PlaylistTrack);
+PlaylistTrack.propTypes = {
+  activity: React.PropTypes.object,
+  userEntities: React.PropTypes.object,
+  isPlaying: React.PropTypes.bool,
+  activeTrackId: React.PropTypes.number,
+  activateTrack: React.PropTypes.func,
+  removeTrackFromPlaylist: React.PropTypes.func
+};
+
+const PlaylistTrackContainer = connect(mapStateToProps, mapDispatchToProps)(PlaylistTrack);
+
+export {
+  PlaylistTrack,
+  PlaylistTrackContainer
+};

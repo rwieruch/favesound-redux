@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
@@ -9,7 +10,15 @@ import { InfoList } from '../components/InfoList';
 import { durationFormat, fromNow } from '../services/track';
 import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
-const Track = ({ activity, activeTrackId, isPlaying, idx, userEntities, activateTrack, addTrackToPlaylist }) => {
+function Track({
+  activity,
+  activeTrackId,
+  isPlaying,
+  idx,
+  userEntities,
+  activateTrack,
+  addTrackToPlaylist
+}) {
   const {
     user,
     title,
@@ -28,6 +37,21 @@ const Track = ({ activity, activeTrackId, isPlaying, idx, userEntities, activate
   const { avatar_url, username } = userEntity;
   const isVisible = isSameTrack(activeTrackId)(activity.id);
   const isSameAndPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
+
+  const trackClass = classNames(
+    'track',
+    {
+      'track-visible': isVisible
+    }
+  );
+
+  const playClass = classNames(
+    'fa',
+    {
+      'fa-pause': isSameAndPlaying,
+      'fa-play': !isSameAndPlaying
+    }
+  );
 
   const information = [
     {
@@ -53,7 +77,7 @@ const Track = ({ activity, activeTrackId, isPlaying, idx, userEntities, activate
   ];
 
   return (
-    <div className={"track " + (isVisible ? "track-visible" : "")}>
+    <div className={trackClass}>
       <div>
         <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={80} />
       </div>
@@ -73,7 +97,7 @@ const Track = ({ activity, activeTrackId, isPlaying, idx, userEntities, activate
         <div className="track-content-actions">
           <div className="track-content-actions-item">
             <i
-              className={"fa " + (isSameAndPlaying ? "fa-pause" : "fa-play")}
+              className={playClass}
               onClick={activateTrack.bind(null, activity.id)}
             ></i>
           </div>
@@ -87,7 +111,7 @@ const Track = ({ activity, activeTrackId, isPlaying, idx, userEntities, activate
       </div>
     </div>
   );
-};
+}
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -106,4 +130,19 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const TrackContainer = connect(mapStateToProps, mapDispatchToProps)(Track);
+Track.propTypes = {
+  userEntities: React.PropTypes.object,
+  activity: React.PropTypes.object,
+  isPlaying: React.PropTypes.bool,
+  activeTrackId: React.PropTypes.number,
+  idx: React.PropTypes.number,
+  activateTrack: React.PropTypes.func,
+  addTrackToPlaylist: React.PropTypes.func
+};
+
+const TrackContainer = connect(mapStateToProps, mapDispatchToProps)(Track);
+
+export {
+  Track,
+  TrackContainer
+};

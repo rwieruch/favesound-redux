@@ -2,7 +2,10 @@
 
 Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
 
-Uses redux, redux-thunk, normalizr, react and the Soundcloud API.
+Uses redux, redux-thunk, normalizr, react, lodash-fp, airbnb-extended eslint and the Soundcloud API.
+Broad use of functional stateless components.
+
+Feedback appreciated.
 
 ## Run locally without own backend
 
