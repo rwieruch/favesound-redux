@@ -6,7 +6,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 function Activity({ entities, id, idx }) {
   return (
-    <li key={idx}>
+    <li>
       <TrackContainer activity={entities[id]} idx={idx} />
     </li>
   );
@@ -14,16 +14,18 @@ function Activity({ entities, id, idx }) {
 
 function Activities({ requestInProcess, ids, entities }) {
   if (!ids) {
-    return;
+    return <span></span>;
   }
 
   return (
     <div>
       <div>
-        <ul>{map((id, idx) => {
-          const props = { entities, id, idx };
-          return <Activity { ...props } />;
-        }, ids)}</ul>
+        <ul>
+          {map((id, idx) => {
+            const props = { entities, id, idx };
+            return <Activity key={idx} { ...props } />;
+          }, ids)}
+        </ul>
       </div>
       <LoadingSpinner isLoading={requestInProcess}/>
     </div>

@@ -7,7 +7,7 @@ import * as requestTypes from '../constants/requestTypes';
 import * as paginateLinkTypes from '../constants/paginateLinkTypes';
 import { List } from '../components/List';
 
-export const FavoritesList = ({
+function FavoritesList({
   currentUser,
   trackEntities,
   favorites,
@@ -16,7 +16,7 @@ export const FavoritesList = ({
   toggle,
   setToggle,
   fetchFavorites
-}) => {
+}) {
   return (
     <List
       title="Favorites"
@@ -31,7 +31,7 @@ export const FavoritesList = ({
       kind="TRACK"
     />
   );
-};
+}
 
 function mapStateToProps(state) {
   return {
@@ -51,4 +51,20 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const FavoritesListContainer = connect(mapStateToProps, mapDispatchToProps)(FavoritesList);
+FavoritesList.propTypes = {
+  currentUser: React.PropTypes.object,
+  trackEntities: React.PropTypes.object,
+  favorites: React.PropTypes.array,
+  requestsInProcess: React.PropTypes.object,
+  paginateLinks: React.PropTypes.object,
+  toggle: React.PropTypes.object,
+  setToggle: React.PropTypes.func,
+  fetchFavorites: React.PropTypes.func
+};
+
+const FavoritesListContainer = connect(mapStateToProps, mapDispatchToProps)(FavoritesList);
+
+export {
+  FavoritesList,
+  FavoritesListContainer
+};

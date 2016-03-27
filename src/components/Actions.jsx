@@ -14,7 +14,7 @@ function Action({ action }) {
   );
 }
 
-export function Actions({ configuration, isVisible }) {
+function Actions({ configuration, isVisible }) {
   const actionsClass = classNames(
     'action',
     {
@@ -34,4 +34,8 @@ export function Actions({ configuration, isVisible }) {
 Actions.propTypes = {
   configuration: React.PropTypes.array,
   isVisible: React.PropTypes.bool
+};
+
+export {
+  Actions
 };

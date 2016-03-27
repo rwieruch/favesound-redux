@@ -9,7 +9,7 @@ import { PlayerContainer } from '../components/Player';
 import { PlaylistContainer } from '../components/Playlist';
 import Activities from '../components/Activities';
 
-export class Browse extends React.Component {
+class Browse extends React.Component {
 
   constructor(props) {
     super(props);
@@ -88,8 +88,13 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const BrowseContainer = connect(mapStateToProps, mapDispatchToProps)(Browse);
-
 Browse.defaultProps = {
   genre: DEFAULT_GENRE
+};
+
+const BrowseContainer = connect(mapStateToProps, mapDispatchToProps)(Browse);
+
+export {
+  Browse,
+  BrowseContainer
 };

@@ -7,7 +7,7 @@ import * as requestTypes from '../constants/requestTypes';
 import * as paginateLinkTypes from '../constants/paginateLinkTypes';
 import { List } from '../components/List';
 
-export const FollowersList = ({
+function FollowersList({
   currentUser,
   userEntities,
   followers,
@@ -16,7 +16,7 @@ export const FollowersList = ({
   toggle,
   setToggle,
   fetchFollowers
-}) => {
+}) {
   return (
     <List
       title="Followers"
@@ -31,7 +31,7 @@ export const FollowersList = ({
       kind="USER"
     />
   );
-};
+}
 
 function mapStateToProps(state) {
   return {
@@ -51,4 +51,20 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const FollowersListContainer = connect(mapStateToProps, mapDispatchToProps)(FollowersList);
+FollowersList.propTypes = {
+  currentUser: React.PropTypes.object,
+  userEntities: React.PropTypes.object,
+  followers: React.PropTypes.array,
+  requestsInProcess: React.PropTypes.object,
+  paginateLinks: React.PropTypes.object,
+  toggle: React.PropTypes.object,
+  setToggle: React.PropTypes.func,
+  fetchFollowers: React.PropTypes.func
+};
+
+const FollowersListContainer = connect(mapStateToProps, mapDispatchToProps)(FollowersList);
+
+export {
+  FollowersList,
+  FollowersListContainer
+};

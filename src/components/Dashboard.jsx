@@ -8,10 +8,7 @@ import { FollowersListContainer } from '../components/FollowersList';
 import { FollowingsListContainer } from '../components/FollowingsList';
 import { FavoritesListContainer } from '../components/FavoritesList';
 
-export const Dashboard = ({
-  genre,
-  pathname
-}) => {
+function Dashboard({ genre, pathname }) {
   return (
     <div className="dashboard">
       <HeaderContainer
@@ -32,7 +29,7 @@ export const Dashboard = ({
       <PlayerContainer />
     </div>
   );
-};
+}
 
 function mapStateToProps(state, routerState) {
   return {
@@ -41,4 +38,14 @@ function mapStateToProps(state, routerState) {
   };
 }
 
-export const DashboardContainer = connect(mapStateToProps)(Dashboard);
+Dashboard.propTypes = {
+  genre: React.PropTypes.string,
+  pathname: React.PropTypes.string
+};
+
+const DashboardContainer = connect(mapStateToProps)(Dashboard);
+
+export {
+  Dashboard,
+  DashboardContainer
+};
