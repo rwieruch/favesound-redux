@@ -5,7 +5,7 @@ import { LoadingSpinner } from '../components/LoadingSpinner';
 import { TrackItemContainer } from '../components/TrackItem';
 import { UserItemContainer } from '../components/UserItem';
 
-function Chevron({ ids, isExpanded }) {
+export function Chevron({ ids, isExpanded }) {
   const chevronClass = classNames(
     'fa',
     {
@@ -21,7 +21,7 @@ function Chevron({ ids, isExpanded }) {
   }
 }
 
-function NextButton({ nextHref, fetchMore, requestInProcess, isExpanded }) {
+export function NextButton({ nextHref, fetchMore, requestInProcess, isExpanded }) {
   if (!nextHref || !isExpanded) {
     return <span></span>;
   }
@@ -56,7 +56,7 @@ function SpecificItemUser({ entities, userId }) {
   );
 }
 
-function SpecificList({ ids, kind, requestInProcess, entities }) {
+export function SpecificList({ ids, kind, requestInProcess, entities }) {
   if (!ids) {
     const isLoading = !ids || requestInProcess;
     return <LoadingSpinner isLoading={isLoading} />;
