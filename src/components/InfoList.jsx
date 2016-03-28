@@ -27,5 +27,7 @@ InfoList.propTypes = {
 };
 
 export {
-  InfoList
+  InfoList,
+
+  Info
 };
