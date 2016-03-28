@@ -11,9 +11,9 @@ function FavoritesList({
   currentUser,
   trackEntities,
   favorites,
-  requestsInProcess,
-  paginateLinks,
-  toggle,
+  nextHref,
+  requestInProcess,
+  isExpanded,
   setToggle,
   fetchFavorites
 }) {
@@ -22,25 +22,29 @@ function FavoritesList({
       title="Favorites"
       ids={favorites}
       entities={trackEntities}
-      nextHref={paginateLinks[paginateLinkTypes.FAVORITES]}
-      requestInProcess={requestsInProcess[requestTypes.FAVORITES]}
-      isExpanded={toggle[toggleTypes.FAVORITES]}
+      nextHref={nextHref}
+      requestInProcess={requestInProcess}
+      isExpanded={isExpanded}
       toggleMore={() => setToggle(toggleTypes.FAVORITES)}
       currentUser={currentUser}
-      fetchMore={() => fetchFavorites(currentUser, paginateLinks[paginateLinkTypes.FAVORITES])}
+      fetchMore={() => fetchFavorites(currentUser, nextHref)}
       kind="TRACK"
     />
   );
 }
 
 function mapStateToProps(state) {
+  const nextHref = state.paginate[paginateLinkTypes.FAVORITES];
+  const requestInProcess = state.paginate[requestTypes.FAVORITES];
+  const isExpanded = state.toggle[toggleTypes.FAVORITES];
+
   return {
     currentUser: state.session.user,
     trackEntities: state.entities.tracks,
     favorites: state.user.favorites,
-    requestsInProcess: state.request,
-    paginateLinks: state.paginate,
-    toggle: state.toggle
+    nextHref,
+    requestInProcess,
+    isExpanded
   };
 }
 

@@ -11,9 +11,9 @@ function FollowingsList({
   currentUser,
   userEntities,
   followings,
-  requestsInProcess,
-  paginateLinks,
-  toggle,
+  nextHref,
+  requestInProcess,
+  isExpanded,
   setToggle,
   fetchFollowings
 }) {
@@ -22,25 +22,29 @@ function FollowingsList({
       title="Followings"
       ids={followings}
       entities={userEntities}
-      nextHref={paginateLinks[paginateLinkTypes.FOLLOWINGS]}
-      requestInProcess={requestsInProcess[requestTypes.FOLLOWINGS]}
-      isExpanded={toggle[toggleTypes.FOLLOWINGS]}
+      nextHref={nextHref}
+      requestInProcess={requestInProcess}
+      isExpanded={isExpanded}
       toggleMore={() => setToggle(toggleTypes.FOLLOWINGS)}
       currentUser={currentUser}
-      fetchMore={() => fetchFollowings(currentUser, paginateLinks[paginateLinkTypes.FOLLOWINGS])}
+      fetchMore={() => fetchFollowings(currentUser, nextHref)}
       kind="USER"
     />
   );
 }
 
 function mapStateToProps(state) {
+  const nextHref = state.paginate[paginateLinkTypes.FOLLOWERS];
+  const requestInProcess = state.paginate[requestTypes.FOLLOWERS];
+  const isExpanded = state.toggle[toggleTypes.FOLLOWERS];
+
   return {
     currentUser: state.session.user,
     userEntities: state.entities.users,
     followings: state.user.followings,
-    requestsInProcess: state.request,
-    paginateLinks: state.paginate,
-    toggle: state.toggle
+    nextHref,
+    requestInProcess,
+    isExpanded
   };
 }
 
