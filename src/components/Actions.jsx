@@ -37,5 +37,7 @@ Actions.propTypes = {
 };
 
 export {
-  Actions
+  Actions,
+
+  Action
 };
