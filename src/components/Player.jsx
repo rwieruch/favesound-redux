@@ -23,7 +23,16 @@ class Player extends React.Component {
   }
 
   renderNav() {
-    const { activeTrackId, isPlaying, setToggle, activateIteratedTrack, like, entities, togglePlayTrack } = this.props;
+    const {
+      currentUser,
+      activeTrackId,
+      isPlaying,
+      setToggle,
+      activateIteratedTrack,
+      like,
+      entities,
+      togglePlayTrack
+    } = this.props;
 
     if (!activeTrackId) { return; }
 
@@ -74,10 +83,13 @@ class Player extends React.Component {
           ></i>
         </div>
         <div>
-          <i
-            className={likeClass}
-            onClick={like.bind(null, track)}
-          ></i>
+          {
+            currentUser ?
+            <i
+              className={likeClass}
+              onClick={like.bind(null, track)}
+            ></i> : <span></span>
+          }
         </div>
         <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
       </div>
@@ -99,6 +111,7 @@ class Player extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    currentUser: state.session.user,
     activeTrackId: state.player.activeTrackId,
     isPlaying: state.player.isPlaying,
     entities: state.entities
@@ -115,6 +128,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 Player.propTypes = {
+  currentUser: React.PropTypes.object,
   activeTrackId: React.PropTypes.number,
   isPlaying: React.PropTypes.bool,
   entities: React.PropTypes.object,
