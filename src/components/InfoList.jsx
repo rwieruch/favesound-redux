@@ -1,5 +1,5 @@
 import React from 'react';
-import map from 'lodash/fp/map';
+import map from 'lodash/map';
 
 function Info({ info }) {
   return (
@@ -15,9 +15,9 @@ function Info({ info }) {
 function InfoList({ information }) {
   return (
     <div className="info-list">
-      {map((info, idx) => {
+      {map(information, (info, idx) => {
         return <Info key={idx} info={info} />;
-      }, information)}
+      })}
     </div>
   );
 }

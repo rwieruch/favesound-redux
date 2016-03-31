@@ -1,5 +1,5 @@
 import React from 'react';
-import map from 'lodash/fp/map';
+import map from 'lodash/map';
 import classNames from 'classnames';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { TrackItemContainer } from '../components/TrackItem';
@@ -66,10 +66,10 @@ function SpecificList({ ids, kind, requestInProcess, entities }) {
     return (
       <div className="list-content">
         <ul>
-          {map((id, idx) => {
+          {map(ids, (id, idx) => {
             const props = { userId: id, entities };
             return <SpecificItemUser key={idx} { ...props } />;
-          }, ids)}
+          })}
         </ul>
       </div>
     );
@@ -79,10 +79,10 @@ function SpecificList({ ids, kind, requestInProcess, entities }) {
     return (
       <div className="list-content">
         <ul>
-          {map((id, idx) => {
+          {map(ids, (id, idx) => {
             const props = { trackId: id, entities };
             return <SpecificItemTrack key={idx} { ...props } />;
-          }, ids)}
+          })}
         </ul>
       </div>
     );

@@ -35,7 +35,7 @@ function FollowersList({
 
 function mapStateToProps(state) {
   const nextHref = state.paginate[paginateLinkTypes.FOLLOWERS];
-  const requestInProcess = state.paginate[requestTypes.FOLLOWERS];
+  const requestInProcess = state.request[requestTypes.FOLLOWERS];
   const isExpanded = state.toggle[toggleTypes.FOLLOWERS];
 
   return {

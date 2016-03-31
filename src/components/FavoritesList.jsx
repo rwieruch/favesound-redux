@@ -35,7 +35,7 @@ function FavoritesList({
 
 function mapStateToProps(state) {
   const nextHref = state.paginate[paginateLinkTypes.FAVORITES];
-  const requestInProcess = state.paginate[requestTypes.FAVORITES];
+  const requestInProcess = state.request[requestTypes.FAVORITES];
   const isExpanded = state.toggle[toggleTypes.FAVORITES];
 
   return {
