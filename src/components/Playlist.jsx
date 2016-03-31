@@ -1,5 +1,5 @@
 import React from 'react';
-import map from 'lodash/fp/map';
+import map from 'lodash/map';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -40,10 +40,10 @@ function Playlist({ toggle, playlist, trackEntities, clearPlaylist }) {
     <div className={playlistClass}>
       <PlaylistMenu clearPlaylist={clearPlaylist} />
       <ul>
-        {map((id, idx) => {
+        {map(playlist, (id, idx) => {
           const props = { id, trackEntities };
           return <PlaylistItem key={idx} { ...props } />;
-        }, playlist)}
+        })}
       </ul>
     </div>
   );
