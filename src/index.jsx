@@ -8,7 +8,7 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import useScrollToTop from 'scroll-behavior/lib/useScrollToTop';
 import { Provider } from 'react-redux';
 import configureStore from './stores/configureStore';
-import { DashboardContainer } from './components/Dashboard';
+import { Dashboard } from './components/Dashboard';
 import { BrowseContainer } from './components/Browse';
 import Callback from './components/Callback';
 import App from './components/App';
@@ -24,7 +24,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRedirect to={browse} />
         <Route path={callback} component={Callback} />
-        <Route path={dashboard} component={DashboardContainer} />
+        <Route path={dashboard} component={Dashboard} />
         <Route path={browse} component={BrowseContainer}/>
         <Route path="*" component={BrowseContainer} />
       </Route>

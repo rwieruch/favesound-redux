@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import * as requestTypes from '../constants/requestTypes';
-import { DEFAULT_GENRE } from '../constants/genre';
-import { HeaderContainer } from '../components/Header';
-import { PlayerContainer } from '../components/Player';
-import { PlaylistContainer } from '../components/Playlist';
 import Activities from '../components/Activities';
 
 class Browse extends React.Component {
@@ -26,23 +22,6 @@ class Browse extends React.Component {
     this.fetchActivitiesByGenre();
   }
 
-  getInnerContent() {
-    const { browseActivities, genre, requestsInProcess, trackEntities } = this.props;
-
-    if (!browseActivities) { return; }
-
-    return (
-      <div className="browse-content">
-        <Activities
-          requestInProcess={requestsInProcess[requestTypes.GENRES]}
-          ids={browseActivities[genre]}
-          entities={trackEntities}
-          scrollFunction={this.fetchActivitiesByGenre}
-        />
-      </div>
-    );
-  }
-
   fetchActivitiesByGenre() {
     const { genre, paginateLinks } = this.props;
     const nextHref = paginateLinks[genre];
@@ -55,25 +34,26 @@ class Browse extends React.Component {
   }
 
   render() {
+    const { browseActivities, genre, requestsInProcess, trackEntities } = this.props;
+
+    if (!browseActivities) { return; }
+
     return (
       <div className="browse">
-        <HeaderContainer
-          genre={this.props.genre}
-          pathname={this.props.pathname}
+        <Activities
+          requestInProcess={requestsInProcess[requestTypes.GENRES]}
+          ids={browseActivities[genre]}
+          entities={trackEntities}
+          scrollFunction={this.fetchActivitiesByGenre}
         />
-        {this.getInnerContent()}
-        <PlaylistContainer />
-        <PlayerContainer />
       </div>
     );
   }
 
 }
 
-function mapStateToProps(state, routerState) {
+function mapStateToProps(state) {
   return {
-    pathname: routerState.location.pathname,
-    genre: routerState.location.query.genre,
     browseActivities: state.browse,
     requestsInProcess: state.request,
     paginateLinks: state.paginate,
@@ -89,18 +69,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 Browse.propTypes = {
-  pathname: React.PropTypes.string,
-  genre: React.PropTypes.string,
   browseActivities: React.PropTypes.object,
   requestsInProcess: React.PropTypes.object,
   paginateLinks: React.PropTypes.object,
   trackEntities: React.PropTypes.object,
   userEntities: React.PropTypes.object,
   fetchActivitiesByGenre: React.PropTypes.func
-};
-
-Browse.defaultProps = {
-  genre: DEFAULT_GENRE
 };
 
 const BrowseContainer = connect(mapStateToProps, mapDispatchToProps)(Browse);

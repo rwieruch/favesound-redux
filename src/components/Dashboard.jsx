@@ -1,51 +1,24 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { HeaderContainer } from '../components/Header';
-import { PlayerContainer } from '../components/Player';
-import { PlaylistContainer } from '../components/Playlist';
 import { StreamActivitiesContainer } from '../components/StreamActivities';
 import { FollowersListContainer } from '../components/FollowersList';
 import { FollowingsListContainer } from '../components/FollowingsList';
 import { FavoritesListContainer } from '../components/FavoritesList';
 
-function Dashboard({ genre, pathname }) {
+function Dashboard() {
   return (
     <div className="dashboard">
-      <HeaderContainer
-        genre={genre}
-        pathname={pathname}
-      />
-      <div className="dashboard-content">
-        <div className="dashboard-content-main">
-          <StreamActivitiesContainer />
-        </div>
-        <div className="dashboard-content-side">
-          <FollowingsListContainer />
-          <FollowersListContainer />
-          <FavoritesListContainer />
-        </div>
+      <div className="dashboard-main">
+        <StreamActivitiesContainer />
       </div>
-      <PlaylistContainer />
-      <PlayerContainer />
+      <div className="dashboard-side">
+        <FollowingsListContainer />
+        <FollowersListContainer />
+        <FavoritesListContainer />
+      </div>
     </div>
   );
 }
 
-function mapStateToProps(state, routerState) {
-  return {
-    pathname: routerState.location.pathname,
-    genre: routerState.location.query.genre
-  };
-}
-
-Dashboard.propTypes = {
-  genre: React.PropTypes.string,
-  pathname: React.PropTypes.string
-};
-
-const DashboardContainer = connect(mapStateToProps)(Dashboard);
-
 export {
-  Dashboard,
-  DashboardContainer
+  Dashboard
 };
