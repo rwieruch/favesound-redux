@@ -9,6 +9,13 @@
   border-bottom: $darkBorder;
   z-index: 1;
 
+  &-hidden {
+    opacity: 0;
+    cursor: pointer;
+    width: 20px;
+    position: absolute;
+  }
+
   &-content {
     position: relative;
     display: flex;

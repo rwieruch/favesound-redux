@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import { GENRES, DEFAULT_GENRE } from '../constants/genre';
-import { browse } from '../constants/pathnames';
+import { browse, fave } from '../constants/pathnames';
 
 function Logo({ genre }) {
   return (
@@ -56,7 +56,7 @@ function SessionAction({ currentUser, login, logout }) {
   }
 }
 
-function Header({ currentUser, genre, pathname, login, logout }) {
+function Header({ currentUser, genre, pathname, login, logout, changeLocation }) {
   return (
     <div className="header">
       <div className="header-content">
@@ -73,6 +73,9 @@ function Header({ currentUser, genre, pathname, login, logout }) {
           <SessionAction currentUser={currentUser} login={login} logout={logout} />
         </div>
       </div>
+      <div className="header-hidden">
+        <a href="#" onClick={() => changeLocation(fave)}>...</a>
+      </div>
     </div>
   );
 }
@@ -88,7 +91,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     login: bindActionCreators(actions.login, dispatch),
-    logout: bindActionCreators(actions.logout, dispatch)
+    logout: bindActionCreators(actions.logout, dispatch),
+    changeLocation: bindActionCreators(actions.changeLocation, dispatch)
   };
 }
 
@@ -97,7 +101,8 @@ Header.propTypes = {
   genre: React.PropTypes.string,
   pathname: React.PropTypes.string,
   login: React.PropTypes.func,
-  logout: React.PropTypes.func
+  logout: React.PropTypes.func,
+  changeLocation: React.PropTypes.func
 };
 
 Header.defaultProps = {
