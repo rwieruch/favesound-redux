@@ -20,12 +20,12 @@ export function mergeFollowings(followings) {
   };
 }
 
-export const fetchFollowings = (user, nextHref) => (dispatch, getState) => {
+export const fetchFollowings = (user, nextHref, ignoreInProgress) => (dispatch, getState) => {
   let requestType = requestTypes.FOLLOWINGS;
   let url = getLazyLoadingUrl(user, nextHref, 'followings?limit=20&offset=0');
   let requestInProcess = getState().request[requestType];
 
-  if (requestInProcess) { return; }
+  if (requestInProcess && !ignoreInProgress) { return; }
 
   dispatch(setRequestInProcess(true, requestType));
 
@@ -123,4 +123,18 @@ export const fetchFavorites = (user, nextHref) => (dispatch, getState) => {
       dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FAVORITES));
       dispatch(setRequestInProcess(false, requestType));
     });
+}
+
+export const fetchAllFollowings = () => (dispatch, getState) => {
+  let nextHref = getState().paginate[paginateLinkTypes.FOLLOWINGS];
+  let modifiedNextHref = nextHref ? nextHref.replace("page_size=20", "page_size=199") : null;
+  let ignoreInProgress = true;
+
+  let promise = dispatch(fetchFollowings(null, modifiedNextHref, ignoreInProgress));
+
+  promise.then(() => {
+    if (getState().paginate[paginateLinkTypes.FOLLOWINGS]) {
+      dispatch(fetchAllFollowings());
+    }
+  });
 }
