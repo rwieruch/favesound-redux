@@ -37,8 +37,6 @@ class Browse extends React.Component {
   render() {
     const { browseActivities, genre, requestsInProcess, trackEntities } = this.props;
 
-    if (!browseActivities) { return; }
-
     return (
       <div className="browse">
         <Activities

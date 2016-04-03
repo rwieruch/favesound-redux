@@ -14,7 +14,7 @@ function Activity({ entities, id, idx }) {
 
 function Activities({ requestInProcess, ids, entities }) {
   if (!ids) {
-    return <span></span>;
+    return <LoadingSpinner isLoading={requestInProcess}/>;
   }
 
   return (
