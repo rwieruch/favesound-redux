@@ -1,16 +1,16 @@
 # favesound-redux
 
-React / Redux Soundcloud Client.
-
-Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
+React / Redux Soundcloud Client made with passion!
 
 Live: http://www.favesound.de/
 
 Uses redux, redux-thunk, normalizr, react, lodash-fp, airbnb-extended eslint and the Soundcloud API.
 
-Feedback appreciated via directly GitHub or Twitter.
+Feedback is more than appreciated via GitHub or Twitter :)
 
 https://twitter.com/rwieruch
+
+Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
 
 ## Run
 
