@@ -125,7 +125,8 @@ export const fetchFavorites = (user, nextHref) => (dispatch, getState) => {
     });
 }
 
-export const fetchAllFollowings = () => (dispatch, getState) => {
+export const fetchAllFollowingsWithFavorites = () => (dispatch, getState) => {
+
   let nextHref = getState().paginate[paginateLinkTypes.FOLLOWINGS];
   let modifiedNextHref = nextHref ? nextHref.replace("page_size=20", "page_size=199") : null;
   let ignoreInProgress = true;
@@ -133,8 +134,36 @@ export const fetchAllFollowings = () => (dispatch, getState) => {
   let promise = dispatch(fetchFollowings(null, modifiedNextHref, ignoreInProgress));
 
   promise.then(() => {
+    dispatch(fetchFavoritesOfFollowings());
+
     if (getState().paginate[paginateLinkTypes.FOLLOWINGS]) {
-      dispatch(fetchAllFollowings());
+      dispatch(fetchAllFollowingsWithFavorites());
     }
   });
+}
+
+const fetchFavoritesOfFollowings = () => (dispatch, getState) => {
+  let { followings } = getState().user;
+
+  if (followings) {
+    map((following) => {
+      if (!getState().followings[following.id]) {
+        dispatch(fetchFavoritesOfFollowing(following, ));
+      }
+    }, followings);
+  }
+}
+
+const fetchFavoritesOfFollowing = (user, nextHref) => (dispatch, getState) => {
+  let requestType = requestTypes.FAVORITES;
+  let url = getLazyLoadingUrl(user, nextHref, 'favorites?linked_partitioning=1&limit=200&offset=0');
+  let requestInProcess = getState().request[requestType];
+
+  return fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const normalized = normalize(data.collection, arrayOf(trackSchema));
+      dispatch(mergeEntities(normalized.entities));
+      dispatch(mergeFollowingsFavorites(user.id, normalized.result));
+    });
 }
