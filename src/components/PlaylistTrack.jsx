@@ -1,7 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../actions/index';
 import { Artwork } from '../components/Artwork';
 import { Permalink } from '../components/Permalink';
 import { Actions } from '../components/Actions';
@@ -48,22 +45,6 @@ function PlaylistTrack({ activity, userEntities, activeTrackId, isPlaying, activ
   );
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    activity: ownProps.activity,
-    userEntities: state.entities.users,
-    isPlaying: state.player.isPlaying,
-    activeTrackId: state.player.activeTrackId
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    activateTrack: bindActionCreators(actions.activateTrack, dispatch),
-    removeTrackFromPlaylist: bindActionCreators(actions.removeTrackFromPlaylist, dispatch)
-  };
-}
-
 PlaylistTrack.propTypes = {
   activity: React.PropTypes.object,
   userEntities: React.PropTypes.object,
@@ -73,9 +54,6 @@ PlaylistTrack.propTypes = {
   removeTrackFromPlaylist: React.PropTypes.func
 };
 
-const PlaylistTrackContainer = connect(mapStateToProps, mapDispatchToProps)(PlaylistTrack);
-
 export {
-  PlaylistTrack,
-  PlaylistTrackContainer
+  PlaylistTrack
 };

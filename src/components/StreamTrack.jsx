@@ -1,8 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../actions/index';
 import { WaveformSc } from '../components/WaveformSc';
 import { Artwork } from '../components/Artwork';
 import { Permalink } from '../components/Permalink';
@@ -10,7 +7,7 @@ import { InfoList } from '../components/InfoList';
 import { durationFormat, fromNow } from '../services/track';
 import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
-function Track({
+function StreamTrack({
   activity,
   activeTrackId,
   isPlaying,
@@ -113,24 +110,7 @@ function Track({
   );
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    userEntities: state.entities.users,
-    activity: ownProps.activity,
-    isPlaying: state.player.isPlaying,
-    activeTrackId: state.player.activeTrackId,
-    idx: ownProps.idx
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    activateTrack: bindActionCreators(actions.activateTrack, dispatch),
-    addTrackToPlaylist: bindActionCreators(actions.addTrackToPlaylist, dispatch)
-  };
-}
-
-Track.propTypes = {
+StreamTrack.propTypes = {
   userEntities: React.PropTypes.object,
   activity: React.PropTypes.object,
   isPlaying: React.PropTypes.bool,
@@ -140,9 +120,6 @@ Track.propTypes = {
   addTrackToPlaylist: React.PropTypes.func
 };
 
-const TrackContainer = connect(mapStateToProps, mapDispatchToProps)(Track);
-
 export {
-  Track,
-  TrackContainer
+  StreamTrack
 };

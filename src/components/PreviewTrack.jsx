@@ -1,21 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../actions/index';
 import { Artwork } from '../components/Artwork';
 import { Permalink } from '../components/Permalink';
 import { InfoList } from '../components/InfoList';
 import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
-function TrackItem({
+function PreviewTrack({
   activity,
   isPlaying,
   activeTrackId,
   userEntities,
   activateTrack,
-  addTrackToPlaylist }
-) {
+  addTrackToPlaylist
+}) {
   const { avatar_url, username } = userEntities[activity.user];
   const { playback_count, favoritings_count, comment_count } = activity;
 
@@ -63,23 +60,7 @@ function TrackItem({
   );
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    activity: ownProps.activity,
-    userEntities: state.entities.users,
-    isPlaying: state.player.isPlaying,
-    activeTrackId: state.player.activeTrackId
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    activateTrack: bindActionCreators(actions.activateTrack, dispatch),
-    addTrackToPlaylist: bindActionCreators(actions.addTrackToPlaylist, dispatch)
-  };
-}
-
-TrackItem.propTypes = {
+PreviewTrack.propTypes = {
   userEntities: React.PropTypes.object,
   activity: React.PropTypes.object,
   isPlaying: React.PropTypes.bool,
@@ -88,9 +69,6 @@ TrackItem.propTypes = {
   addTrackToPlaylist: React.PropTypes.func
 };
 
-const TrackItemContainer = connect(mapStateToProps, mapDispatchToProps)(TrackItem);
-
 export {
-  TrackItem,
-  TrackItemContainer
+  PreviewTrack
 };

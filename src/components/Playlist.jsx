@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
 import * as toggleTypes from '../constants/toggleTypes';
-import { PlaylistTrackContainer } from '../components/PlaylistTrack';
+import { PlaylistTrackContainer } from '../components/TrackContainer';
 
 function PlaylistItem({ trackEntities, id }) {
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import map from 'lodash/map';
 import classNames from 'classnames';
 import { LoadingSpinner } from '../components/LoadingSpinner';
-import { TrackItemContainer } from '../components/TrackItem';
+import { PreviewTrackContainer } from '../components/TrackContainer';
 import { UserItemContainer } from '../components/UserItem';
 
 function Chevron({ ids, isExpanded }) {
@@ -43,7 +43,7 @@ function NextButton({ nextHref, fetchMore, requestInProcess, isExpanded }) {
 function SpecificItemTrack({ entities, trackId }) {
   return (
     <li>
-      <TrackItemContainer activity={entities[trackId]} />
+      <PreviewTrackContainer activity={entities[trackId]} />
     </li>
   );
 }
