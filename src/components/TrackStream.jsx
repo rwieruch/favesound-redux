@@ -7,7 +7,7 @@ import { InfoList } from '../components/InfoList';
 import { durationFormat, fromNow } from '../services/track';
 import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
-function StreamTrack({
+function TrackStream({
   activity,
   activeTrackId,
   isPlaying,
@@ -110,7 +110,7 @@ function StreamTrack({
   );
 }
 
-StreamTrack.propTypes = {
+TrackStream.propTypes = {
   userEntities: React.PropTypes.object,
   activity: React.PropTypes.object,
   isPlaying: React.PropTypes.bool,
@@ -121,5 +121,5 @@ StreamTrack.propTypes = {
 };
 
 export {
-  StreamTrack
+  TrackStream
 };

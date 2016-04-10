@@ -8,7 +8,7 @@ import { Artwork } from '../components/Artwork';
 import { Permalink } from '../components/Permalink';
 import * as actions from '../actions/index';
 
-function UserItem({ user, followings, follow }) {
+function UserPreview({ user, followings, follow }) {
   const { followings_count, followers_count, track_count, avatar_url, username, permalink_url } = user;
 
   const configuration = [
@@ -60,15 +60,15 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-UserItem.propTypes = {
+UserPreview.propTypes = {
   followings: React.PropTypes.array,
   user: React.PropTypes.object,
   follow: React.PropTypes.func
 };
 
-const UserItemContainer = connect(mapStateToProps, mapDispatchToProps)(UserItem);
+const UserPreviewContainer = connect(mapStateToProps, mapDispatchToProps)(UserPreview);
 
 export {
-  UserItem,
-  UserItemContainer
+  UserPreview,
+  UserPreviewContainer
 };

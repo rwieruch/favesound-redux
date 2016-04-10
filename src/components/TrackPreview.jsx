@@ -5,7 +5,7 @@ import { InfoList } from '../components/InfoList';
 import { Actions } from '../components/Actions';
 import { isSameTrackAndPlaying, isSameTrack } from '../services/player';
 
-function PreviewTrack({
+function TrackPreview({
   activity,
   isPlaying,
   activeTrackId,
@@ -60,7 +60,7 @@ function PreviewTrack({
   );
 }
 
-PreviewTrack.propTypes = {
+TrackPreview.propTypes = {
   userEntities: React.PropTypes.object,
   activity: React.PropTypes.object,
   isPlaying: React.PropTypes.bool,
@@ -70,5 +70,5 @@ PreviewTrack.propTypes = {
 };
 
 export {
-  PreviewTrack
+  TrackPreview
 };

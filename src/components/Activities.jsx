@@ -1,13 +1,13 @@
 import React from 'react';
 import map from 'lodash/map';
 import FetchOnScroll from '../components/FetchOnScroll';
-import { StreamTrackContainer } from '../components/TrackContainer';
+import { TrackStreamContainer } from '../components/TrackContainer';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 
 function Activity({ entities, id, idx }) {
   return (
     <li>
-      <StreamTrackContainer activity={entities[id]} idx={idx} />
+      <TrackStreamContainer activity={entities[id]} idx={idx} />
     </li>
   );
 }

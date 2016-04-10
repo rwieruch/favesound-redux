@@ -22,7 +22,7 @@ function ActionsWrapper({ activity, activeTrackId, activateTrack, removeTrackFro
   return <Actions configuration={configuration} isVisible={isVisible} />;
 }
 
-function PlaylistTrack({ activity, userEntities, activeTrackId, isPlaying, activateTrack, removeTrackFromPlaylist }) {
+function TrackPlaylist({ activity, userEntities, activeTrackId, isPlaying, activateTrack, removeTrackFromPlaylist }) {
   if (!activity) {
     return <span></span>;
   }
@@ -45,7 +45,7 @@ function PlaylistTrack({ activity, userEntities, activeTrackId, isPlaying, activ
   );
 }
 
-PlaylistTrack.propTypes = {
+TrackPlaylist.propTypes = {
   activity: React.PropTypes.object,
   userEntities: React.PropTypes.object,
   isPlaying: React.PropTypes.bool,
@@ -55,5 +55,5 @@ PlaylistTrack.propTypes = {
 };
 
 export {
-  PlaylistTrack
+  TrackPlaylist
 };

@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/index';
-import { PlaylistTrack } from '../components/PlaylistTrack';
-import { StreamTrack } from '../components/StreamTrack';
-import { PreviewTrack } from '../components/PreviewTrack';
+import { TrackPlaylist } from '../components/TrackPlaylist';
+import { TrackPreview } from '../components/TrackPreview';
+import { TrackStream } from '../components/TrackStream';
 
 function mapStateToProps(state, props) {
   return {
@@ -23,12 +23,12 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const PlaylistTrackContainer = connect(mapStateToProps, mapDispatchToProps)(PlaylistTrack);
-const PreviewTrackContainer = connect(mapStateToProps, mapDispatchToProps)(PreviewTrack);
-const StreamTrackContainer = connect(mapStateToProps, mapDispatchToProps)(StreamTrack);
+const TrackPlaylistContainer = connect(mapStateToProps, mapDispatchToProps)(TrackPlaylist);
+const TrackPreviewContainer = connect(mapStateToProps, mapDispatchToProps)(TrackPreview);
+const TrackStreamContainer = connect(mapStateToProps, mapDispatchToProps)(TrackStream);
 
 export {
-  PlaylistTrackContainer,
-  PreviewTrackContainer,
-  StreamTrackContainer,
+  TrackPlaylistContainer,
+  TrackPreviewContainer,
+  TrackStreamContainer,
 };
