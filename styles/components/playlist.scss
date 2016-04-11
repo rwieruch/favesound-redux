@@ -6,8 +6,9 @@
   bottom: $padding * 3;
   width: $padding * 18;
   height: $padding * 15;
+  max-height: $padding * 15;
   border: $darkBorder;
-  overflow: scroll;
+  overflow: auto;
   opacity: 0;
   pointer-events: none;
 
