@@ -15,7 +15,7 @@ Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
 ## Run
 
 1. Clone Repository: git clone git@github.com:rwieruch/favesound-redux.git
-2. Exchange CLIENT_ID in ../src/constants/authentification.js with your own from [SoundCloud for Developers](https://developers.soundcloud.com/) and use http://localhost:8080/callback as Redirect URI
+2. Exchange CLIENT_ID in ../src/constants/authentification.js with your own from [SoundCloud for Developers](https://developers.soundcloud.com/) and use http://localhost:8080/callback as Redirect URI for your Soundcloud App
 3. npm install
 4. npm start
 5. npm test
