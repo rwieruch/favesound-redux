@@ -1,3 +1,4 @@
 node_modules/
-dist/
+dist/bundle.js
+dist/server
 npm-debug.log
