@@ -1,5 +1,5 @@
 import React from 'react';
-import map from 'lodash/map';
+import map from '../../services/map';
 import classNames from 'classnames';
 
 function Action({ action }) {
@@ -24,9 +24,9 @@ function Actions({ configuration, isVisible }) {
 
   return (
     <div className={actionsClass}>
-      {map(configuration, (action, idx) => {
+      {map((action, idx) => {
         return <Action key={idx} action={action} />;
-      })}
+      }, configuration)}
     </div>
   );
 }

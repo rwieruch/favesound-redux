@@ -1,5 +1,5 @@
 import React from 'react';
-import map from 'lodash/map';
+import map from '../../services/map';
 import classNames from 'classnames';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
@@ -64,10 +64,10 @@ function Header({ currentUser, genre, pathname, login, logout, changeLocation })
           <Logo genre={genre} />
         </div>
         <div>
-          {map(GENRES, (availableGenre, idx) => {
+          {map((availableGenre, idx) => {
             const props = { genre: availableGenre, selectedGenre: genre, pathname };
             return <MenuItemBrowse key={idx} { ...props } />;
-          })}
+          }, GENRES)}
         </div>
         <div>
           <SessionAction currentUser={currentUser} login={login} logout={logout} />

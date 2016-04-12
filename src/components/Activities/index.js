@@ -1,5 +1,5 @@
 import React from 'react';
-import map from 'lodash/map';
+import map from '../../services/map';
 import FetchOnScroll from '../../components/FetchOnScroll';
 import { TrackStreamContainer } from '../../components/Track';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
@@ -21,10 +21,10 @@ function Activities({ requestInProcess, ids, entities }) {
     <div>
       <div>
         <ul>
-          {map(ids, (id, idx) => {
+          {map((id, idx) => {
             const props = { entities, id, idx };
             return <Activity key={idx} { ...props } />;
-          })}
+          }, ids)}
         </ul>
       </div>
       <LoadingSpinner isLoading={requestInProcess}/>
