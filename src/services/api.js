@@ -33,3 +33,11 @@ export function getLazyLoadingUrl(user, nextHref, initHref) {
     return apiUrl(`${urlPrefix}/${initHref}`, '&');
   }
 }
+
+export function getLazyLoadingCommentsUrl(nextHref, initHref) {
+  if (nextHref) {
+    return addAccessTokenWith(nextHref, '&');
+  } else {
+    return apiUrl(`${initHref}`, '&');
+  }
+}
