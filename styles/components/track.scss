@@ -15,8 +15,9 @@
     display: flex;
     flex-direction: column;
 
-    &-name, &-meta {
+    &-name, &-meta, &-information {
       display: inline-flex;
+      align-items: center;
       justify-content: space-between;
       width: 96%;
     }

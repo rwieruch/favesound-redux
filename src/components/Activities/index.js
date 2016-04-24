@@ -2,12 +2,16 @@ import React from 'react';
 import map from '../../services/map';
 import FetchOnScroll from '../../components/FetchOnScroll';
 import { TrackStreamContainer } from '../../components/Track';
+import { TrackExtensionContainer } from '../../components/TrackExtension';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 
 function Activity({ entities, id, idx }) {
+  const activity = entities[id];
+
   return (
     <li>
-      <TrackStreamContainer activity={entities[id]} idx={idx} />
+      <TrackStreamContainer activity={activity} idx={idx} />
+      <TrackExtensionContainer activity={activity} />
     </li>
   );
 }

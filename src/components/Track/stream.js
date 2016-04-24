@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { WaveformSc } from '../../components/WaveformSc';
+import { TrackActionsContainer } from '../../components/TrackActions';
 import { Artwork } from '../../components/Artwork';
 import { Permalink } from '../../components/Permalink';
 import { InfoList } from '../../components/InfoList';
@@ -14,7 +15,7 @@ function TrackStream({
   idx,
   userEntities,
   activateTrack,
-  addTrackToPlaylist
+  addTrackToPlaylist,
 }) {
   const {
     user,
@@ -90,7 +91,10 @@ function TrackStream({
         <div className="track-content-waveform">
           <WaveformSc activity={activity} idx={idx} />
         </div>
-        <InfoList information={information} />
+        <div className="track-content-information">
+          <TrackActionsContainer activity={activity} />
+          <InfoList information={information} />
+        </div>
         <div className="track-content-actions">
           <div className="track-content-actions-item">
             <i

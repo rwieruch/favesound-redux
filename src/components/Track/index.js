@@ -6,10 +6,12 @@ import { TrackPreview } from './preview';
 import { TrackStream } from './stream';
 
 function mapStateToProps(state, props) {
+  const { idx, activity } = props;
+
   return {
-    idx: props.idx,
+    idx,
+    activity,
     userEntities: state.entities.users,
-    activity: props.activity,
     isPlaying: state.player.isPlaying,
     activeTrackId: state.player.activeTrackId,
   };

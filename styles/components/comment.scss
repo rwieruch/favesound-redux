@@ -1,0 +1,8 @@
+.comment {
+
+  display: flex;
+
+  &-body {
+    padding: $padding / 4;
+  }
+}

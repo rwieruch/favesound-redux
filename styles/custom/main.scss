@@ -72,6 +72,11 @@ button.ghost {
   cursor: pointer;
   -webkit-backface-visibility: hidden;
 
+  &.small {
+    height: $padding / 2;
+    line-height: $padding / 2;
+  }
+
   &:hover {
     -webkit-transition: 0.2s ease;
     -moz-transition: 0.2s ease;
