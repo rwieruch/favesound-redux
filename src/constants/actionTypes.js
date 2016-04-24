@@ -34,4 +34,5 @@ export const SET_PAGINATE_LINK = 'SET_PAGINATE_LINK';
 export const SET_TOGGLED = 'SET_TOGGLED';
 export const RESET_TOGGLED = 'RESET_TOGGLED';
 
+export const OPEN_COMMENTS = 'OPEN_COMMENTS';
 export const MERGE_COMMENTS = 'MERGE_COMMENTS';

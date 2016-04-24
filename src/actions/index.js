@@ -7,6 +7,7 @@ import { like } from './track';
 import { follow } from './following';
 import { setToggle } from './toggle';
 import { activateTrack, activateIteratedTrack, addTrackToPlaylist, removeTrackFromPlaylist, clearPlaylist, togglePlayTrack } from './player';
+import { openComments } from './comments';
 /* eslint-enable max-len */
 
 export {
@@ -26,5 +27,6 @@ export {
   like,
   follow,
   setToggle,
-  fetchActivitiesByGenre
+  fetchActivitiesByGenre,
+  openComments
 };

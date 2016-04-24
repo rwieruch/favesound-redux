@@ -6,6 +6,7 @@ import request from './request';
 import paginate from './paginate';
 import entities from './entities';
 import toggle from './toggle';
+import comment from './comment';
 
 export default {
   session,
@@ -15,5 +16,6 @@ export default {
   request,
   paginate,
   entities,
-  toggle
+  toggle,
+  comment
 };
