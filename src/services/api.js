@@ -3,6 +3,11 @@ import { CLIENT_ID } from '../constants/authentification';
 
 export function apiUrl(url, symbol) {
   const accessToken = Cookies.get('accessToken');
+
+  if (!accessToken) { // Fallback
+    return unauthApiUrl(url, symbol);
+  }
+
   return `//api.soundcloud.com/${url}${symbol}oauth_token=${accessToken}`;
 }
 
@@ -19,18 +24,16 @@ export function addAccessTokenWith(url, symbol) {
   }
 }
 
-export function getLazyLoadingUrl(user, nextHref, initHref) {
-  let urlPrefix;
-  if (user) {
-    urlPrefix = `users/${user.id}`;
-  } else {
-    urlPrefix = `me`;
+export function getLazyLoadingUsersUrl(user, nextHref, initHref) {
+
+  function getUrlPrefix(user) {
+    return user ? `users/${user.id}`: `me`;
   }
 
   if (nextHref) {
     return addAccessTokenWith(nextHref, '&');
   } else {
-    return apiUrl(`${urlPrefix}/${initHref}`, '&');
+    return apiUrl(`${getUrlPrefix(user)}/${initHref}`, '&');
   }
 }
 
@@ -38,6 +41,6 @@ export function getLazyLoadingCommentsUrl(nextHref, initHref) {
   if (nextHref) {
     return addAccessTokenWith(nextHref, '&');
   } else {
-    return apiUrl(`${initHref}`, '&');
+    return apiUrl(initHref, '&');
   }
 }
