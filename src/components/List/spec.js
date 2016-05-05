@@ -63,48 +63,6 @@ describe('Chevron', () => {
 
 });
 
-describe('NextButton', () => {
-
-  let props;
-
-  beforeEach(() => {
-    props = {
-      nextHref: '/foo',
-      fetchMore: () => {},
-      requestInProcess: false,
-      isExpanded: true
-    };
-  });
-
-  it('renders, when list is expanded and there is a next link', () => {
-    const element = shallow(<NextButton { ...props } />);
-    expect(element.find('button')).to.have.length(1);
-  });
-
-  it('does not render, when list is collapsed', () => {
-    props.isExpanded = false;
-    const element = shallow(<NextButton { ...props } />);
-    expect(element.find('button')).to.have.length(0);
-  });
-
-  it('does not render, when there is no next link', () => {
-    props.nextHref = null;
-    const element = shallow(<NextButton { ...props } />);
-    expect(element.find('button')).to.have.length(0);
-  });
-
-  it('renders a loading spinner instead, when request is in process', () => {
-    props.requestInProcess = true;
-    const element = shallow(<NextButton { ...props } />);
-    expect(element.find('LoadingSpinner')).to.have.length(1);
-  });
-
-  it('initiates a callback on click', () => {
-
-  });
-
-});
-
 describe('SpecificList', () => {
 
   let props;
