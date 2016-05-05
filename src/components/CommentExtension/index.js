@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import map from '../../services/map';
 import { getCommentProperty } from '../../services/string';
+import { MoreButton } from '../../components/MoreButton';
 import { Artwork } from '../../components/Artwork';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 
@@ -47,21 +48,6 @@ function CommentExtension({
       <div className="comment-extension-more">
         <MoreButton { ...moreButtonProps } />
       </div>
-    </div>
-  );
-}
-
-function MoreButton({ onClick, requestInProcess, nextHref }) {
-  return (
-    <div>
-      {
-        requestInProcess || !nextHref ?
-        <noscript /> :
-        <button className="ghost" onClick={() => onClick()}>
-          More
-        </button>
-      }
-      <LoadingSpinner isLoading={requestInProcess} />
     </div>
   );
 }
