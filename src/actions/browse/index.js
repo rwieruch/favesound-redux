@@ -1,5 +1,4 @@
 import { arrayOf, normalize } from 'normalizr';
-import { CLIENT_ID } from '../../constants/authentification';
 import trackSchema from '../../schemas/track';
 import * as actionTypes from '../../constants/actionTypes';
 import * as requestTypes from '../../constants/requestTypes';
@@ -17,10 +16,10 @@ function mergeActivitiesByGenre(activities, genre) {
 }
 
 export const fetchActivitiesByGenre = (nextHref, genre) => (dispatch, getState) => {
-  let requestType = requestTypes.GENRES;
-  let initHref = unauthApiUrl(`tracks?linked_partitioning=1&limit=20&offset=0&tags=${genre}`, '&');
-  let url = nextHref || initHref;
-  let requestInProcess = getState().request[requestType];
+  const requestType = requestTypes.GENRES;
+  const initHref = unauthApiUrl(`tracks?linked_partitioning=1&limit=20&offset=0&tags=${genre}`, '&');
+  const url = nextHref || initHref;
+  const requestInProcess = getState().request[requestType];
 
   if (requestInProcess) { return; }
 
@@ -35,4 +34,4 @@ export const fetchActivitiesByGenre = (nextHref, genre) => (dispatch, getState) 
       dispatch(setPaginateLink(data.next_href, genre));
       dispatch(setRequestInProcess(false, requestType));
     });
-}
+};

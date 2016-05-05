@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function (InnerComponent) {
+export default function(InnerComponent) {
   class FetchOnScrollComponent extends React.Component {
     constructor(props) {
       super(props);

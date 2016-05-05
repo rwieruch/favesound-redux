@@ -1,4 +1,5 @@
-import mixpanel from 'rn-redux-mixpanel'
+import mixpanel from 'rn-redux-mixpanel';
+
 import {
   SET_USER,
   MERGE_ACTIVITIES,
@@ -12,7 +13,7 @@ import {
   RESET_TOGGLED,
   SET_REQUEST_IN_PROCESS,
   SYNC_ENTITIES
-} from '../constants/actionTypes'
+} from '../constants/actionTypes';
 
 const blacklist = [
   MERGE_ACTIVITIES,
@@ -36,7 +37,7 @@ export default mixpanel({
 
   token: 'b36e27047a8724f0977edc36dbf8477d',
 
-  selectEventName: (action, state) => action.type,
+  selectEventName: (action) => action.type,
 
   selectDistinctId: (action, state) => {
     if (state.session && state.session.user && state.session.user.permalink) {
@@ -61,12 +62,12 @@ export default mixpanel({
       return generateUserData(user);
     }
   }
-})
+});
 
 function generateUserData(user) {
   return {
-    '$permalink': user.permalink,
-    '$permalink_url': user.permalink_url,
-    '$username': user.username
+    $permalink: user.permalink,
+    $permalink_url: user.permalink_url,
+    $username: user.username
   };
 }

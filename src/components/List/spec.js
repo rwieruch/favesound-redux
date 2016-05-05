@@ -66,7 +66,6 @@ describe('SpecificList', () => {
     props = {
       ids: [1, 2, 4, 6, 7],
       kind: 'USER',
-      requestInProcess: false,
       entities: { 1: { name: 'x' }, 2: { name: 'y' } },
     };
   });

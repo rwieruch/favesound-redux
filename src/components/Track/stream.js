@@ -16,7 +16,6 @@ function TrackStream({
   idx,
   userEntities,
   onActivateTrack,
-  onAddTrackToPlaylist,
 }) {
   const {
     user,
@@ -113,7 +112,6 @@ TrackStream.propTypes = {
   activeTrackId: React.PropTypes.number,
   idx: React.PropTypes.number,
   onActivateTrack: React.PropTypes.func,
-  onAddTrackToPlaylist: React.PropTypes.func
 };
 
 export {

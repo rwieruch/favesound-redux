@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 
 function ButtonGhost({ onClick, isSmall, children }) {
-
   const buttonGhostClass = classNames(
     'button-ghost',
     {

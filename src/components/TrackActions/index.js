@@ -4,16 +4,17 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import { ButtonGhost } from '../../components/ButtonGhost';
 
-function TrackActions({ activity, onOpenComments, onAddTrackToPlaylist }) {
+function TrackActions({ onOpenComments, onAddTrackToPlaylist }) {
+  const isSmall = true;
   return (
     <div className="track-actions-list">
       <div className="track-actions-list-item">
-        <ButtonGhost isSmall={true} onClick={onAddTrackToPlaylist}>
+        <ButtonGhost isSmall={isSmall} onClick={onAddTrackToPlaylist}>
           <i className="fa fa-th-list" /> Add to Playlist
         </ButtonGhost>
       </div>
       <div className="track-actions-list-item">
-        <ButtonGhost isSmall={true} onClick={onOpenComments}>
+        <ButtonGhost isSmall={isSmall} onClick={onOpenComments}>
           <i className="fa fa-comment" /> Comment
         </ButtonGhost>
       </div>
@@ -37,7 +38,6 @@ function mapDispatchToProps(dispatch, props) {
 }
 
 TrackActions.propTypes = {
-  activity: React.PropTypes.object,
   onOpenComments: React.PropTypes.func,
   onAddTrackToPlaylist: React.PropTypes.func,
 };

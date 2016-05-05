@@ -1,7 +1,6 @@
 import React from 'react';
 import map from '../../services/map';
 import classNames from 'classnames';
-import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { TrackPreviewContainer } from '../../components/Track';
 import { UserPreviewContainer } from '../../components/User';
 import { ButtonMore } from '../../components/ButtonMore';
@@ -35,7 +34,7 @@ function SpecificItemUser({ entities, userId }) {
   );
 }
 
-function SpecificList({ ids, kind, requestInProcess, entities }) {
+function SpecificList({ ids, kind, entities }) {
   if (kind === 'USER') {
     return (
       <div className="list-content">
@@ -89,7 +88,6 @@ function List({
         <SpecificList
           ids={ids}
           kind={kind}
-          requestInProcess={requestInProcess}
           entities={entities}
         />
         <ButtonMore

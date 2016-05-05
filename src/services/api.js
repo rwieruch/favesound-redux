@@ -1,6 +1,10 @@
 import Cookies from 'js-cookie';
 import { CLIENT_ID } from '../constants/authentification';
 
+export function unauthApiUrl(url, symbol) {
+  return `//api.soundcloud.com/${url}${symbol}client_id=${CLIENT_ID}`;
+}
+
 export function apiUrl(url, symbol) {
   const accessToken = Cookies.get('accessToken');
 
@@ -9,10 +13,6 @@ export function apiUrl(url, symbol) {
   }
 
   return `//api.soundcloud.com/${url}${symbol}oauth_token=${accessToken}`;
-}
-
-export function unauthApiUrl(url, symbol) {
-  return `//api.soundcloud.com/${url}${symbol}client_id=${CLIENT_ID}`;
 }
 
 export function addAccessTokenWith(url, symbol) {
@@ -25,9 +25,8 @@ export function addAccessTokenWith(url, symbol) {
 }
 
 export function getLazyLoadingUsersUrl(user, nextHref, initHref) {
-
-  function getUrlPrefix(user) {
-    return user ? `users/${user.id}`: `me`;
+  function getUrlPrefix(u) {
+    return u ? `users/${u.id}` : `me`;
   }
 
   if (nextHref) {

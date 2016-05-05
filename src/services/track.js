@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export function isTrack(track) {
-  let { origin, type } = track;
+  const { origin, type } = track;
   return origin && type && type !== 'playlist' && type !== 'playlist-repost';
 }
 
@@ -13,9 +13,9 @@ export function normalizeSamples(samples) {
     }
   }
 
-  let newSamples = [];
+  const newSamples = [];
   for (let j = 0; j <= samples.length; j++) {
-    let newValue = samples[j] / highestValue;
+    const newValue = samples[j] / highestValue;
     newSamples.push(newValue);
   }
   return newSamples;
@@ -30,7 +30,7 @@ export function isPngWaveform(waveformUrl) {
 }
 
 export function durationFormat(ms) {
-  let duration = moment.duration(ms);
+  const duration = moment.duration(ms);
   if (duration.asHours() > 1) {
     return Math.floor(duration.asHours()) + moment.utc(duration.asMilliseconds()).format(":mm:ss");
   } else {

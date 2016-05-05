@@ -4,8 +4,8 @@ const initialState = {};
 
 export default function(state = initialState, action) {
   switch (action.type) {
-  case actionTypes.SET_REQUEST_IN_PROCESS:
-    return setRequestInProcess(state, action);
+    case actionTypes.SET_REQUEST_IN_PROCESS:
+      return setRequestInProcess(state, action);
   }
   return state;
 }

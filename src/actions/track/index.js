@@ -14,7 +14,6 @@ export const like = (track) => (dispatch) => {
   fetch(apiUrl(`me/favorites/${track.id}`, '?'), { method: track.user_favorite ? 'delete' : 'put' })
     .then(response => response.json())
     .then(() => {
-
       if (track.user_favorite) {
         dispatch(removeFromFavorites(track.id));
       } else {
@@ -24,4 +23,4 @@ export const like = (track) => (dispatch) => {
       const updateEntity = Object.assign({}, track, { user_favorite: !track.user_favorite });
       dispatch(syncEntities(updateEntity, 'tracks'));
     });
-}
+};

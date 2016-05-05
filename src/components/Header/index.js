@@ -9,7 +9,7 @@ import { GENRES, DEFAULT_GENRE } from '../../constants/genre';
 import { browse, fave, dashboard } from '../../constants/pathnames';
 
 function getGenreLink(genre) {
-    return browse + '?genre=' + genre;
+  return browse + '?genre=' + genre;
 }
 
 function Logo({ genre }) {

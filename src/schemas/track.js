@@ -1,7 +1,7 @@
-import { normalize, Schema, arrayOf } from 'normalizr';
+import { Schema } from 'normalizr';
 import userSchema from './user';
 
-let trackSchema = new Schema('tracks');
+const trackSchema = new Schema('tracks');
 
 trackSchema.define({
   user: userSchema

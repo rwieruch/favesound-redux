@@ -8,10 +8,10 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-  case actionTypes.MERGE_ENTITIES:
-    return mergeEntities(state, action.entities);
-  case actionTypes.SYNC_ENTITIES:
-    return syncEntities(state, action.entity, action.key);
+    case actionTypes.MERGE_ENTITIES:
+      return mergeEntities(state, action.entities);
+    case actionTypes.SYNC_ENTITIES:
+      return syncEntities(state, action.entity, action.key);
   }
   return state;
 }
@@ -21,5 +21,5 @@ function mergeEntities(state, entities) {
 }
 
 function syncEntities(state, entity, key) {
-  return { ...state, [key]: { ...state[key], [entity.id]: entity } }
+  return { ...state, [key]: { ...state[key], [entity.id]: entity } };
 }

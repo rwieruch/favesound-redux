@@ -3,7 +3,7 @@ export function isSameTrackAndPlaying(activeTrackId, trackId, isPlaying) {
 }
 
 export function isSameTrack(trackId) {
-  return function(id) {
-      return trackId && id && trackId === id;
-  }
+  return function is(id) {
+    return trackId && id && trackId === id;
+  };
 }

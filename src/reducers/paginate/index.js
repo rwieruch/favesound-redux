@@ -4,8 +4,8 @@ const initialState = {};
 
 export default function(state = initialState, action) {
   switch (action.type) {
-  case actionTypes.SET_PAGINATE_LINK:
-    return setPaginateLink(state, action.nextHref, action.paginateType);
+    case actionTypes.SET_PAGINATE_LINK:
+      return setPaginateLink(state, action.nextHref, action.paginateType);
   }
   return state;
 }

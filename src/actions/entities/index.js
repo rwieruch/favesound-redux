@@ -4,7 +4,7 @@ export function mergeEntities(entities) {
   return {
     type: actionTypes.MERGE_ENTITIES,
     entities
-  }
+  };
 }
 
 export function syncEntities(entity, key) {
@@ -12,5 +12,5 @@ export function syncEntities(entity, key) {
     type: actionTypes.SYNC_ENTITIES,
     entity,
     key
-  }
+  };
 }

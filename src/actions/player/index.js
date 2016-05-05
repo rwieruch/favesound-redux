@@ -4,7 +4,6 @@ import * as actionTypes from '../../constants/actionTypes';
 import * as toggleTypes from '../../constants/toggleTypes';
 import { resetToggle } from '../../actions/toggle';
 import { isSameTrackAndPlaying, isSameTrack } from '../../services/player';
-import { apiUrl } from '../../services/api';
 
 export function setActiveTrack(activeTrackId) {
   return {
@@ -24,7 +23,7 @@ function setTrackInPlaylist(trackId) {
   return {
     type: actionTypes.SET_TRACK_IN_PLAYLIST,
     trackId
-  }
+  };
 }
 
 function removeFromPlaylist(trackId) {
@@ -37,14 +36,12 @@ function removeFromPlaylist(trackId) {
 function deactivateTrack() {
   return {
     type: actionTypes.RESET_ACTIVE_TRACK,
-    null
-  }
+  };
 }
 
 function emptyPlaylist() {
   return {
     type: actionTypes.RESET_PLAYLIST,
-    null
   };
 }
 
@@ -52,13 +49,21 @@ export const clearPlaylist = () => (dispatch) => {
   dispatch(emptyPlaylist());
   dispatch(deactivateTrack());
   dispatch(resetToggle(toggleTypes.PLAYLIST));
+};
+
+function isInPlaylist(playlist, trackId) {
+  return find(isSameTrack(trackId), playlist);
 }
 
+export const togglePlayTrack = (isPlaying) => (dispatch) => {
+  dispatch(setIsPlaying(isPlaying));
+};
+
 export const activateTrack = (trackId) => (dispatch, getState) => {
-  let playlist = getState().player.playlist;
-  let previousActiveTrackId = getState().player.activeTrackId;
-  let isCurrentlyPlaying = getState().player.isPlaying;
-  let isPlaying = !isSameTrackAndPlaying(previousActiveTrackId, trackId, isCurrentlyPlaying);
+  const playlist = getState().player.playlist;
+  const previousActiveTrackId = getState().player.activeTrackId;
+  const isCurrentlyPlaying = getState().player.isPlaying;
+  const isPlaying = !isSameTrackAndPlaying(previousActiveTrackId, trackId, isCurrentlyPlaying);
 
   dispatch(togglePlayTrack(isPlaying));
   dispatch(setActiveTrack(trackId));
@@ -66,14 +71,10 @@ export const activateTrack = (trackId) => (dispatch, getState) => {
   if (!isInPlaylist(playlist, trackId)) {
     dispatch(setTrackInPlaylist(trackId));
   }
-}
-
-export const togglePlayTrack = (isPlaying) => (dispatch) => {
-  dispatch(setIsPlaying(isPlaying));
-}
+};
 
 export const addTrackToPlaylist = (track) => (dispatch, getState) => {
-  let playlist = getState().player.playlist;
+  const playlist = getState().player.playlist;
 
   if (!isInPlaylist(playlist, track.id)) {
     dispatch(setTrackInPlaylist(track.id));
@@ -82,42 +83,38 @@ export const addTrackToPlaylist = (track) => (dispatch, getState) => {
   if (!playlist.length) {
     dispatch(activateTrack(track.id));
   }
-}
+};
 
-export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
-  let activeTrackId = getState().player.activeTrackId;
-  let isPlaying = getState().player.isPlaying;
-  let isRelevantTrack = isSameTrackAndPlaying(activeTrackId, track.id, isPlaying);
-
-  if (isRelevantTrack) {
-    dispatch(activateIteratedTrack(activeTrackId, 1));
-  }
-
-  let playlistSize = getState().player.playlist.length;
-  if (playlistSize < 2) {
-    dispatch(deactivateTrack());
-    dispatch(resetToggle(toggleTypes.PLAYLIST));
-  }
-
-  dispatch(removeFromPlaylist(track.id));
+function getIteratedTrack(playlist, currentActiveTrackId, iterate) {
+  const index = findIndex(isSameTrack(currentActiveTrackId), playlist);
+  return playlist[index + iterate];
 }
 
 export const activateIteratedTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
-  let playlist = getState().player.playlist;
-  let nextActiveTrackId = getIteratedTrack(playlist, currentActiveTrackId, iterate);
+  const playlist = getState().player.playlist;
+  const nextActiveTrackId = getIteratedTrack(playlist, currentActiveTrackId, iterate);
 
   if (nextActiveTrackId) {
     dispatch(activateTrack(nextActiveTrackId));
   } else {
     dispatch(togglePlayTrack(false));
   }
-}
+};
 
-function getIteratedTrack(playlist, currentActiveTrackId, iterate) {
-  let index = findIndex(isSameTrack(currentActiveTrackId), playlist);
-  return playlist[index + iterate];
-}
+export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
+  const activeTrackId = getState().player.activeTrackId;
+  const isPlaying = getState().player.isPlaying;
+  const isRelevantTrack = isSameTrackAndPlaying(activeTrackId, track.id, isPlaying);
 
-function isInPlaylist(playlist, trackId) {
-  return find(isSameTrack(trackId), playlist);
-}
+  if (isRelevantTrack) {
+    dispatch(activateIteratedTrack(activeTrackId, 1));
+  }
+
+  const playlistSize = getState().player.playlist.length;
+  if (playlistSize < 2) {
+    dispatch(deactivateTrack());
+    dispatch(resetToggle(toggleTypes.PLAYLIST));
+  }
+
+  dispatch(removeFromPlaylist(track.id));
+};

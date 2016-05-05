@@ -1,5 +1,5 @@
-import { normalize, Schema, arrayOf } from 'normalizr';
+import { Schema } from 'normalizr';
 
-let userSchema = new Schema('users');
+const userSchema = new Schema('users');
 
 export default userSchema;

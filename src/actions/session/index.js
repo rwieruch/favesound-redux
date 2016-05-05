@@ -2,7 +2,6 @@ import Cookies from 'js-cookie';
 import { CLIENT_ID, OAUTH_TOKEN, REDIRECT_URI } from '../../constants/authentification';
 import * as actionTypes from '../../constants/actionTypes';
 import { apiUrl } from '../../services/api';
-import { browse, dashboard } from '../../constants/pathnames';
 import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites } from '../../actions/user';
 
 function setSession(session) {
@@ -25,25 +24,7 @@ function resetSession() {
   };
 }
 
-export const login = () => (dispatch) => {
-  const client_id = CLIENT_ID;
-  const redirect_uri = REDIRECT_URI;
-
-  SC.initialize({ client_id, redirect_uri });
-
-  SC.connect().then((session) => {
-    Cookies.set(OAUTH_TOKEN, session.oauth_token);
-    dispatch(setSession(session));
-    dispatch(fetchUser(session.oauth_token));
-  });
-}
-
-export const logout = () => (dispatch) => {
-  Cookies.remove(OAUTH_TOKEN);
-  dispatch(resetSession());
-}
-
-const fetchUser = (accessToken) => (dispatch) => {
+const fetchUser = () => (dispatch) => {
   fetch(apiUrl(`me`, '?'))
     .then(response => response.json())
     .then(me => {
@@ -53,4 +34,23 @@ const fetchUser = (accessToken) => (dispatch) => {
       dispatch(fetchFollowings(me));
       dispatch(fetchFollowers(me));
     });
-}
+};
+
+export const login = () => (dispatch) => {
+  const client_id = CLIENT_ID;
+  const redirect_uri = REDIRECT_URI;
+  /* eslint-disable no-undef */
+  SC.initialize({ client_id, redirect_uri });
+
+  SC.connect().then((session) => {
+    Cookies.set(OAUTH_TOKEN, session.oauth_token);
+    dispatch(setSession(session));
+    dispatch(fetchUser());
+  });
+  /* eslint-enable no-undef */
+};
+
+export const logout = () => (dispatch) => {
+  Cookies.remove(OAUTH_TOKEN);
+  dispatch(resetSession());
+};

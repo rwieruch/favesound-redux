@@ -4,10 +4,10 @@ const initialState = {};
 
 export default function(state = initialState, action) {
   switch (action.type) {
-  case actionTypes.SET_TOGGLED:
-    return setToggled(state, action.toggleType);
-  case actionTypes.RESET_TOGGLED:
-    return resetToggled(state, action.toggleType);
+    case actionTypes.SET_TOGGLED:
+      return setToggled(state, action.toggleType);
+    case actionTypes.RESET_TOGGLED:
+      return resetToggled(state, action.toggleType);
   }
   return state;
 }

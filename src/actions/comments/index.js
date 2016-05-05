@@ -1,7 +1,6 @@
 import { arrayOf, normalize } from 'normalizr';
 import commentSchema from '../../schemas/comment';
 import * as actionTypes from '../../constants/actionTypes';
-import * as paginateLinkTypes from '../../constants/paginateLinkTypes';
 import { mergeEntities } from '../../actions/entities';
 import { setRequestInProcess } from '../../actions/request';
 import { setPaginateLink } from '../../actions/paginate';
@@ -9,28 +8,18 @@ import { getLazyLoadingCommentsUrl } from '../../services/api';
 import { getCommentProperty } from '../../services/string';
 
 function setOpenComments(trackId) {
-    return {
-        type: actionTypes.OPEN_COMMENTS,
-        trackId
-    };
+  return {
+    type: actionTypes.OPEN_COMMENTS,
+    trackId
+  };
 }
 
 function mergeComments(comments, trackId) {
-    return {
-        type: actionTypes.MERGE_COMMENTS,
-        comments,
-        trackId
-    };
-};
-
-export const openComments = (trackId) => (dispatch, getState) => {
-    const comments = getState().comment.comments[trackId];
-
-    dispatch(setOpenComments(trackId));
-
-    if (!comments) {
-      dispatch(fetchComments(trackId));
-    }
+  return {
+    type: actionTypes.MERGE_COMMENTS,
+    comments,
+    trackId
+  };
 }
 
 export const fetchComments = (trackId, nextHref) => (dispatch, getState) => {
@@ -52,4 +41,14 @@ export const fetchComments = (trackId, nextHref) => (dispatch, getState) => {
       dispatch(setPaginateLink(data.next_href, requestProperty));
       dispatch(setRequestInProcess(false, requestProperty));
     });
-}
+};
+
+export const openComments = (trackId) => (dispatch, getState) => {
+  const comments = getState().comment.comments[trackId];
+
+  dispatch(setOpenComments(trackId));
+
+  if (!comments) {
+    dispatch(fetchComments(trackId));
+  }
+};

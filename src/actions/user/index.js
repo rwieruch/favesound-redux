@@ -11,7 +11,7 @@ import { setRequestInProcess } from '../../actions/request';
 import { setPaginateLink } from '../../actions/paginate';
 import { mergeEntities } from '../../actions/entities';
 import { isTrack } from '../../services/track';
-import { apiUrl, addAccessTokenWith, getLazyLoadingUsersUrl } from '../../services/api';
+import { getLazyLoadingUsersUrl } from '../../services/api';
 
 export function mergeFollowings(followings) {
   return {
@@ -21,9 +21,9 @@ export function mergeFollowings(followings) {
 }
 
 export const fetchFollowings = (user, nextHref, ignoreInProgress) => (dispatch, getState) => {
-  let requestType = requestTypes.FOLLOWINGS;
-  let url = getLazyLoadingUsersUrl(user, nextHref, 'followings?limit=20&offset=0');
-  let requestInProcess = getState().request[requestType];
+  const requestType = requestTypes.FOLLOWINGS;
+  const url = getLazyLoadingUsersUrl(user, nextHref, 'followings?limit=20&offset=0');
+  const requestInProcess = getState().request[requestType];
 
   if (requestInProcess && !ignoreInProgress) { return; }
 
@@ -38,7 +38,7 @@ export const fetchFollowings = (user, nextHref, ignoreInProgress) => (dispatch, 
       dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FOLLOWINGS));
       dispatch(setRequestInProcess(false, requestType));
     });
-}
+};
 
 export function mergeActivities(activities) {
   return {
@@ -48,9 +48,9 @@ export function mergeActivities(activities) {
 }
 
 export const fetchActivities = (user, nextHref) => (dispatch, getState) => {
-  let requestType = requestTypes.ACTIVITIES;
-  let url = getLazyLoadingUsersUrl(user, nextHref, 'activities?limit=20&offset=0');
-  let requestInProcess = getState().request[requestType];
+  const requestType = requestTypes.ACTIVITIES;
+  const url = getLazyLoadingUsersUrl(user, nextHref, 'activities?limit=20&offset=0');
+  const requestInProcess = getState().request[requestType];
 
   if (requestInProcess) { return; }
 
@@ -69,7 +69,7 @@ export const fetchActivities = (user, nextHref) => (dispatch, getState) => {
       dispatch(setPaginateLink(data.next_href, paginateLinkTypes.ACTIVITIES));
       dispatch(setRequestInProcess(false, requestType));
     });
-}
+};
 
 export function mergeFollowers(followers) {
   return {
@@ -79,9 +79,9 @@ export function mergeFollowers(followers) {
 }
 
 export const fetchFollowers = (user, nextHref) => (dispatch, getState) => {
-  let requestType = requestTypes.FOLLOWERS;
-  let url = getLazyLoadingUsersUrl(user, nextHref, 'followers?limit=20&offset=0');
-  let requestInProcess = getState().request[requestType];
+  const requestType = requestTypes.FOLLOWERS;
+  const url = getLazyLoadingUsersUrl(user, nextHref, 'followers?limit=20&offset=0');
+  const requestInProcess = getState().request[requestType];
 
   if (requestInProcess) { return; }
 
@@ -96,7 +96,7 @@ export const fetchFollowers = (user, nextHref) => (dispatch, getState) => {
       dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FOLLOWERS));
       dispatch(setRequestInProcess(false, requestType));
     });
-}
+};
 
 export function mergeFavorites(favorites) {
   return {
@@ -106,9 +106,9 @@ export function mergeFavorites(favorites) {
 }
 
 export const fetchFavorites = (user, nextHref) => (dispatch, getState) => {
-  let requestType = requestTypes.FAVORITES;
-  let url = getLazyLoadingUsersUrl(user, nextHref, 'favorites?linked_partitioning=1&limit=20&offset=0');
-  let requestInProcess = getState().request[requestType];
+  const requestType = requestTypes.FAVORITES;
+  const url = getLazyLoadingUsersUrl(user, nextHref, 'favorites?linked_partitioning=1&limit=20&offset=0');
+  const requestInProcess = getState().request[requestType];
 
   if (requestInProcess) { return; }
 
@@ -123,15 +123,40 @@ export const fetchFavorites = (user, nextHref) => (dispatch, getState) => {
       dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FAVORITES));
       dispatch(setRequestInProcess(false, requestType));
     });
-}
+};
+
+const fetchFavoritesOfFollowing = (user, nextHref) => (dispatch) => {
+  // const requestType = requestTypes.FAVORITES;
+  const url = getLazyLoadingUsersUrl(user, nextHref, 'favorites?linked_partitioning=1&limit=200&offset=0');
+  // const requestInProcess = getState().request[requestType];
+
+  return fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const normalized = normalize(data.collection, arrayOf(trackSchema));
+      dispatch(mergeEntities(normalized.entities));
+      // dispatch(mergeFollowingsFavorites(user.id, normalized.result));
+    });
+};
+
+const fetchFavoritesOfFollowings = () => (dispatch, getState) => {
+  const { followings } = getState().user;
+
+  if (followings) {
+    map((following) => {
+      if (!getState().followings[following.id]) {
+        dispatch(fetchFavoritesOfFollowing());
+      }
+    }, followings);
+  }
+};
 
 export const fetchAllFollowingsWithFavorites = () => (dispatch, getState) => {
+  const nextHref = getState().paginate[paginateLinkTypes.FOLLOWINGS];
+  const modifiedNextHref = nextHref ? nextHref.replace("page_size=20", "page_size=199") : null;
+  const ignoreInProgress = true;
 
-  let nextHref = getState().paginate[paginateLinkTypes.FOLLOWINGS];
-  let modifiedNextHref = nextHref ? nextHref.replace("page_size=20", "page_size=199") : null;
-  let ignoreInProgress = true;
-
-  let promise = dispatch(fetchFollowings(null, modifiedNextHref, ignoreInProgress));
+  const promise = dispatch(fetchFollowings(null, modifiedNextHref, ignoreInProgress));
 
   promise.then(() => {
     dispatch(fetchFavoritesOfFollowings());
@@ -140,30 +165,4 @@ export const fetchAllFollowingsWithFavorites = () => (dispatch, getState) => {
       dispatch(fetchAllFollowingsWithFavorites());
     }
   });
-}
-
-const fetchFavoritesOfFollowings = () => (dispatch, getState) => {
-  let { followings } = getState().user;
-
-  if (followings) {
-    map((following) => {
-      if (!getState().followings[following.id]) {
-        dispatch(fetchFavoritesOfFollowing(following, ));
-      }
-    }, followings);
-  }
-}
-
-const fetchFavoritesOfFollowing = (user, nextHref) => (dispatch, getState) => {
-  let requestType = requestTypes.FAVORITES;
-  let url = getLazyLoadingUsersUrl(user, nextHref, 'favorites?linked_partitioning=1&limit=200&offset=0');
-  let requestInProcess = getState().request[requestType];
-
-  return fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      const normalized = normalize(data.collection, arrayOf(trackSchema));
-      dispatch(mergeEntities(normalized.entities));
-      dispatch(mergeFollowingsFavorites(user.id, normalized.result));
-    });
-}
+};

@@ -1,3 +1,4 @@
+import { find } from 'lodash';
 import * as actionTypes from '../../constants/actionTypes';
 import { apiUrl } from '../../services/api';
 import { mergeFollowings } from '../../actions/user';
@@ -10,8 +11,8 @@ function removeFromFollowings(userId) {
 }
 
 export const follow = (user) => (dispatch, getState) => {
-  let followings = getState().user.followings;
-  let isFollowing = _.find(followings, (following) => following === user.id);
+  const followings = getState().user.followings;
+  const isFollowing = find(followings, (following) => following === user.id);
 
   fetch(apiUrl(`me/followings/${user.id}`, '?'), { method: isFollowing ? 'delete' : 'put' })
     .then(response => response.json())
@@ -22,4 +23,4 @@ export const follow = (user) => (dispatch, getState) => {
         dispatch(mergeFollowings([user.id]));
       }
     });
-}
+};

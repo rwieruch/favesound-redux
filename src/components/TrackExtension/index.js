@@ -5,17 +5,17 @@ import * as actions from '../../actions/index';
 import { CommentExtensionContainer } from '../../components/CommentExtension';
 
 function TrackExtension({ activity, isOpenComment }) {
-    if (isOpenComment) {
-        return <CommentExtensionContainer activity={activity} />;
-    }
+  if (isOpenComment) {
+    return <CommentExtensionContainer activity={activity} />;
+  }
 
-    return <noscript />;
+  return <noscript />;
 }
 
 function mapStateToProps(state, props) {
   const { activity } = props;
   return {
-    activity: activity,
+    activity,
     isOpenComment: state.comment.openComments[activity.id]
   };
 }

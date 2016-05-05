@@ -6,4 +6,4 @@ function getCommentProperty(commentId) {
 
 export {
   getCommentProperty
-}
+};

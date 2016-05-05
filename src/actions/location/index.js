@@ -1,6 +1,6 @@
-import { routeActions } from 'react-router-redux'
+import { routeActions } from 'react-router-redux';
 import { fave } from '../../constants/pathnames';
-import { fetchAllFollowings } from '../../actions/user';
+import { fetchAllFollowingsWithFavorites } from '../../actions/user';
 
 export const changeLocation = (path) => (dispatch) => {
   if (path === fave) {
@@ -8,4 +8,4 @@ export const changeLocation = (path) => (dispatch) => {
   }
 
   dispatch(routeActions.push(path));
-}
+};
