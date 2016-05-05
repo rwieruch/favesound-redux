@@ -4,40 +4,32 @@ import { Permalink } from '../../components/Permalink';
 import { Actions } from '../../components/HoverActions';
 import { isSameTrackAndPlaying, isSameTrack } from '../../services/player';
 
-function ActionsWrapper({ activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying }) {
+function TrackPlaylist({
+  activity,
+  userEntities,
+  activeTrackId,
+  isPlaying,
+  onActivateTrack,
+  onRemoveTrackFromPlaylist
+}) {
+  if (!activity) { return null; }
+
+  const { user, title, permalink_url, artwork_url } = activity;
+  const { avatar_url, username } = userEntities[user];
+
   const trackIsPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
   const isVisible = isSameTrack(activeTrackId)(activity.id);
 
   const configuration = [
     {
       className: trackIsPlaying ? 'fa fa-pause' : 'fa fa-play',
-      fn: () => activateTrack(activity.id),
+      fn: () => onActivateTrack(activity.id),
     },
     {
       className: 'fa fa-times',
-      fn: () => removeTrackFromPlaylist(activity)
+      fn: () => onRemoveTrackFromPlaylist(activity)
     }
   ];
-
-  return <Actions configuration={configuration} isVisible={isVisible} />;
-}
-
-function TrackPlaylist({
-  activity,
-  userEntities,
-  activeTrackId,
-  isPlaying,
-  activateTrack,
-  removeTrackFromPlaylist
-}) {
-  if (!activity) {
-    return <span></span>;
-  }
-
-  const { user, title, permalink_url, artwork_url } = activity;
-  const { avatar_url, username } = userEntities[user];
-  const linkText = username + ' - ' + title;
-  const actionsWrapperProps = { activity, activeTrackId, activateTrack, removeTrackFromPlaylist, isPlaying };
 
   return (
     <div className="playlist-track">
@@ -45,8 +37,8 @@ function TrackPlaylist({
         <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={40} />
       </div>
       <div className="playlist-track-content">
-        <Permalink link={permalink_url} text={linkText} />
-        <ActionsWrapper { ...actionsWrapperProps } />
+        <Permalink link={permalink_url} text={username + ' - ' + title} />
+        <Actions configuration={configuration} isVisible={isVisible} />
       </div>
     </div>
   );
@@ -57,8 +49,8 @@ TrackPlaylist.propTypes = {
   userEntities: React.PropTypes.object,
   isPlaying: React.PropTypes.bool,
   activeTrackId: React.PropTypes.number,
-  activateTrack: React.PropTypes.func,
-  removeTrackFromPlaylist: React.PropTypes.func
+  onActivateTrack: React.PropTypes.func,
+  onRemoveTrackFromPlaylist: React.PropTypes.func
 };
 
 export {

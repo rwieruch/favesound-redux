@@ -5,13 +5,13 @@ import { Actions } from '../../components/HoverActions';
 import { Artwork } from '../../components/Artwork';
 import { Permalink } from '../../components/Permalink';
 
-function UserPreview({ user, followings, follow }) {
+function UserPreview({ user, followings, onFollow }) {
   const { followings_count, followers_count, track_count, avatar_url, username, permalink_url } = user;
 
   const configuration = [
     {
       className: find((following) => following === user.id, followings) ? 'fa fa-group is-active' : 'fa fa-group',
-      fn: () => follow(user)
+      fn: () => onFollow(user)
     }
   ];
 
@@ -44,25 +44,12 @@ function UserPreview({ user, followings, follow }) {
   );
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    followings: state.user.followings,
-    user: ownProps.user
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    follow: bindActionCreators(actions.follow, dispatch)
-  };
-}
-
 UserPreview.propTypes = {
   followings: React.PropTypes.array,
   user: React.PropTypes.object,
-  follow: React.PropTypes.func
+  onFollow: React.PropTypes.func
 };
 
 export {
-    UserPreview
+  UserPreview
 };

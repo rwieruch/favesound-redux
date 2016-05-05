@@ -14,8 +14,8 @@ function FavoritesList({
   nextHref,
   requestInProcess,
   isExpanded,
-  setToggle,
-  fetchFavorites
+  onSetToggle,
+  onFetchFavorites
 }) {
   return (
     <List
@@ -25,9 +25,9 @@ function FavoritesList({
       nextHref={nextHref}
       requestInProcess={requestInProcess}
       isExpanded={isExpanded}
-      toggleMore={() => setToggle(toggleTypes.FAVORITES)}
       currentUser={currentUser}
-      fetchMore={() => fetchFavorites(currentUser, nextHref)}
+      onToggleMore={() => onSetToggle(toggleTypes.FAVORITES)}
+      onFetchMore={() => onFetchFavorites(currentUser, nextHref)}
       kind="TRACK"
     />
   );
@@ -50,8 +50,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setToggle: bindActionCreators(actions.setToggle, dispatch),
-    fetchFavorites: bindActionCreators(actions.fetchFavorites, dispatch)
+    onSetToggle: bindActionCreators(actions.setToggle, dispatch),
+    onFetchFavorites: bindActionCreators(actions.fetchFavorites, dispatch)
   };
 }
 
@@ -62,8 +62,8 @@ FavoritesList.propTypes = {
   requestsInProcess: React.PropTypes.object,
   paginateLinks: React.PropTypes.object,
   toggle: React.PropTypes.object,
-  setToggle: React.PropTypes.func,
-  fetchFavorites: React.PropTypes.func
+  onSetToggle: React.PropTypes.func,
+  onFetchFavorites: React.PropTypes.func
 };
 
 const FavoritesListContainer = connect(mapStateToProps, mapDispatchToProps)(FavoritesList);

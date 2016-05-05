@@ -8,17 +8,17 @@ import Activities from '../../components/Activities';
 
 function StreamActivities({
   activities,
-  requestsInProcess,
-  paginateLinks,
+  requestInProcess,
+  nextHref,
   trackEntities,
-  fetchActivities
+  onFetchActivities
 }) {
   return (
     <Activities
-      requestInProcess={requestsInProcess[requestTypes.ACTIVITIES]}
+      requestInProcess={requestInProcess}
       entities={trackEntities}
       ids={activities}
-      scrollFunction={() => fetchActivities(null, paginateLinks[paginateLinkTypes.ACTIVITIES])}
+      scrollFunction={() => onFetchActivities(null, nextHref)}
     />
   );
 }
@@ -27,23 +27,23 @@ function mapStateToProps(state) {
   return {
     trackEntities: state.entities.tracks,
     activities: state.user.activities,
-    requestsInProcess: state.request,
-    paginateLinks: state.paginate
+    requestInProcess: state.request[requestTypes.ACTIVITIES],
+    nextHref: state.paginate[paginateLinkTypes.ACTIVITIES]
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchActivities: bindActionCreators(actions.fetchActivities, dispatch)
+    onFetchActivities: bindActionCreators(actions.fetchActivities, dispatch)
   };
 }
 
 StreamActivities.propTypes = {
   trackEntities: React.PropTypes.object,
   activities: React.PropTypes.array,
-  requestsInProcess: React.PropTypes.object,
-  paginateLinks: React.PropTypes.object,
-  fetchActivities: React.PropTypes.func
+  requestInProcess: React.PropTypes.bool,
+  nextHref: React.PropTypes.string,
+  onFetchActivities: React.PropTypes.func
 };
 
 const StreamActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(StreamActivities);

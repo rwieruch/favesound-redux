@@ -2,7 +2,6 @@ import Cookies from 'js-cookie';
 import { CLIENT_ID, OAUTH_TOKEN, REDIRECT_URI } from '../../constants/authentification';
 import * as actionTypes from '../../constants/actionTypes';
 import { apiUrl } from '../../services/api';
-import { changeLocation } from '../../actions/location';
 import { browse, dashboard } from '../../constants/pathnames';
 import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites } from '../../actions/user';
 
@@ -22,8 +21,7 @@ function setUser(user) {
 
 function resetSession() {
   return {
-    type: actionTypes.RESET_SESSION,
-    null
+    type: actionTypes.RESET_SESSION
   };
 }
 
@@ -33,7 +31,6 @@ export const login = () => (dispatch) => {
 
   SC.initialize({ client_id, redirect_uri });
 
-  dispatch(changeLocation(dashboard));
   SC.connect().then((session) => {
     Cookies.set(OAUTH_TOKEN, session.oauth_token);
     dispatch(setSession(session));
@@ -43,7 +40,6 @@ export const login = () => (dispatch) => {
 
 export const logout = () => (dispatch) => {
   Cookies.remove(OAUTH_TOKEN);
-  dispatch(changeLocation(browse));
   dispatch(resetSession());
 }
 

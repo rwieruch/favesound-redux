@@ -4,29 +4,21 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import map from '../../services/map';
 import { getCommentProperty } from '../../services/string';
-import { MoreButton } from '../../components/MoreButton';
+import { ButtonMore } from '../../components/ButtonMore';
 import { Artwork } from '../../components/Artwork';
-import { LoadingSpinner } from '../../components/LoadingSpinner';
 
 function CommentExtension({
   activity,
   commentIds,
   commentEntities,
   userEntities,
-  requestsInProcess,
-  nextHrefs,
+  requestInProcess,
+  nextHref,
   onFetchComments
 }) {
-  if (!commentIds) {
-    return <LoadingSpinner isLoading={requestInProcess} />;
-  }
-
-  const requestInProcess = requestsInProcess[getCommentProperty(activity.id)];
-  const nextHref = nextHrefs[getCommentProperty(activity.id)];
-
   const moreButtonProps = {
     onClick: () => onFetchComments(activity.id, nextHref),
-    requestInProcess,
+    requestInProcess: requestInProcess || !commentIds,
     nextHref,
   };
 
@@ -45,21 +37,23 @@ function CommentExtension({
           </div>
         );
       }, commentIds)}
-      <MoreButton { ...moreButtonProps } />
+      <ButtonMore { ...moreButtonProps } />
     </div>
   );
 }
 
 function mapStateToProps(state, props) {
   const { activity } = props;
+  const requestInProcess = state.request[getCommentProperty(activity.id)];
+  const nextHref = state.paginate[getCommentProperty(activity.id)];
 
   return {
     activity,
     commentIds: state.comment.comments[activity.id],
     commentEntities: state.entities.comments,
     userEntities: state.entities.users,
-    requestsInProcess: state.request,
-    nextHrefs: state.paginate,
+    requestInProcess,
+    nextHref,
   };
 }
 
@@ -77,8 +71,8 @@ CommentExtension.propTypes = {
   commentIds: React.PropTypes.array,
   commentEntities: React.PropTypes.object,
   userEntities: React.PropTypes.object,
-  requestsInProcess: React.PropTypes.object,
-  nextHrefs: React.PropTypes.object,
+  requestInProcess: React.PropTypes.bool,
+  nextHref: React.PropTypes.string,
 };
 
 const CommentExtensionContainer = connect(mapStateToProps, mapDispatchToProps)(CommentExtension);

@@ -19,9 +19,9 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    activateTrack: bindActionCreators(actions.activateTrack, dispatch),
-    addTrackToPlaylist: bindActionCreators(actions.addTrackToPlaylist, dispatch),
-    removeTrackFromPlaylist: bindActionCreators(actions.removeTrackFromPlaylist, dispatch),
+    onActivateTrack: bindActionCreators(actions.activateTrack, dispatch),
+    onAddTrackToPlaylist: bindActionCreators(actions.addTrackToPlaylist, dispatch),
+    onRemoveTrackFromPlaylist: bindActionCreators(actions.removeTrackFromPlaylist, dispatch),
   };
 }
 

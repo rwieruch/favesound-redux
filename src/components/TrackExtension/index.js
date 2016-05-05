@@ -13,27 +13,27 @@ function TrackExtension({ activity, isOpenComment }) {
 }
 
 function mapStateToProps(state, props) {
-    const { activity } = props;
-
-    return {
-        activity,
-        isOpenComment: state.comment.openComments[activity.id]
-    };
+  const { activity } = props;
+  return {
+    activity: activity,
+    isOpenComment: state.comment.openComments[activity.id]
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        openComments: bindActionCreators(actions.openComments, dispatch),
-    };
+  return {
+    openComments: bindActionCreators(actions.openComments, dispatch),
+  };
 }
 
 TrackExtension.propTypes = {
-    openComments: React.PropTypes.func,
+  activity: React.PropTypes.object,
+  openComments: React.PropTypes.func,
 };
 
 const TrackExtensionContainer = connect(mapStateToProps, mapDispatchToProps)(TrackExtension);
 
 export {
-    TrackExtension,
-    TrackExtensionContainer
+  TrackExtension,
+  TrackExtensionContainer
 };

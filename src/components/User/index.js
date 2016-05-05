@@ -3,16 +3,16 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import { UserPreview } from './preview';
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, props) {
   return {
     followings: state.user.followings,
-    user: ownProps.user
+    user: props.user
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    follow: bindActionCreators(actions.follow, dispatch)
+    onFollow: bindActionCreators(actions.follow, dispatch)
   };
 }
 

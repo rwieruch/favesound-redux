@@ -1,13 +1,10 @@
 import React from 'react';
 import map from '../../services/map';
 
-function Info({ info }) {
+function InfoItem({ infoItem }) {
   return (
     <div className="info-list-item">
-      <i
-        className={info.className}
-      > {info.count}
-      </i>
+      <i className={infoItem.className} /> {infoItem.count}
     </div>
   );
 }
@@ -15,8 +12,8 @@ function Info({ info }) {
 function InfoList({ information }) {
   return (
     <div className="info-list">
-      {map((info, idx) => {
-        return <Info key={idx} info={info} />;
+      {map((infoItem, idx) => {
+        return <InfoItem key={idx} infoItem={infoItem} />;
       }, information)}
     </div>
   );
@@ -29,5 +26,5 @@ InfoList.propTypes = {
 export {
   InfoList,
 
-  Info
+  InfoItem
 };

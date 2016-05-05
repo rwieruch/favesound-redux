@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { TrackPreviewContainer } from '../../components/Track';
 import { UserPreviewContainer } from '../../components/User';
-import { MoreButton } from '../../components/MoreButton';
+import { ButtonMore } from '../../components/ButtonMore';
+import { ButtonInline } from '../../components/ButtonInline';
 
 function Chevron({ ids, isExpanded }) {
   const chevronClass = classNames(
@@ -15,11 +16,7 @@ function Chevron({ ids, isExpanded }) {
     }
   );
 
-  if (ids.length > 4) {
-    return <i className={chevronClass}></i>;
-  } else {
-    return <span></span>;
-  }
+  return ids.length > 4 ? <i className={chevronClass} /> : null;
 }
 
 function SpecificItemTrack({ entities, trackId }) {
@@ -39,18 +36,13 @@ function SpecificItemUser({ entities, userId }) {
 }
 
 function SpecificList({ ids, kind, requestInProcess, entities }) {
-  if (!ids) {
-    const isLoading = !ids || requestInProcess;
-    return <LoadingSpinner isLoading={isLoading} />;
-  }
-
   if (kind === 'USER') {
     return (
       <div className="list-content">
         <ul>
           {map((id, idx) => {
-            const props = { userId: id, entities };
-            return <SpecificItemUser key={idx} { ...props } />;
+            const userProps = { userId: id, entities };
+            return <SpecificItemUser key={idx} { ...userProps } />;
           }, ids)}
         </ul>
       </div>
@@ -62,8 +54,8 @@ function SpecificList({ ids, kind, requestInProcess, entities }) {
       <div className="list-content">
         <ul>
           {map((id, idx) => {
-            const props = { trackId: id, entities };
-            return <SpecificItemTrack key={idx} { ...props } />;
+            const trackProps = { trackId: id, entities };
+            return <SpecificItemTrack key={idx} { ...trackProps } />;
           }, ids)}
         </ul>
       </div>
@@ -78,9 +70,9 @@ function List({
   kind,
   requestInProcess,
   entities,
-  toggleMore,
+  onToggleMore,
   nextHref,
-  fetchMore
+  onFetchMore
 }) {
   const listClass = classNames({
     'more-visible': isExpanded
@@ -89,9 +81,9 @@ function List({
   return (
     <div className="list">
       <h2>
-        <button className="inline" onClick={toggleMore}>
+        <ButtonInline onClick={onToggleMore}>
           {title} <Chevron ids={ids} isExpanded={isExpanded} />
-        </button>
+        </ButtonInline>
       </h2>
       <div className={listClass}>
         <SpecificList
@@ -100,10 +92,10 @@ function List({
           requestInProcess={requestInProcess}
           entities={entities}
         />
-        <MoreButton
+        <ButtonMore
           nextHref={nextHref}
-          onClick={fetchMore}
-          requestInProcess={requestInProcess}
+          onClick={onFetchMore}
+          requestInProcess={requestInProcess || !ids}
           isHidden={!isExpanded}
         />
       </div>
@@ -118,9 +110,9 @@ List.propTypes = {
   kind: React.PropTypes.string,
   requestInProcess: React.PropTypes.bool,
   entities: React.PropTypes.object,
-  toggleMore: React.PropTypes.func,
   nextHref: React.PropTypes.string,
-  fetchMore: React.PropTypes.func
+  onToggleMore: React.PropTypes.func,
+  onFetchMore: React.PropTypes.func
 };
 
 export {

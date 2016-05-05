@@ -6,29 +6,30 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import { TrackPlaylistContainer } from '../../components/Track';
+import { ButtonInline } from '../../components/ButtonInline';
 
-function PlaylistItem({ trackEntities, id }) {
+function PlaylistItem({ activity }) {
   return (
     <li>
-      <TrackPlaylistContainer activity={trackEntities[id]}/>
+      <TrackPlaylistContainer activity={activity} />
     </li>
   );
 }
 
-function PlaylistMenu({ clearPlaylist }) {
+function PlaylistMenu({ onClearPlaylist }) {
   return (
     <div className="playlist-menu">
       <div>Player Queue</div>
       <div>
-        <button className="inline" onClick={clearPlaylist}>
+        <ButtonInline onClick={onClearPlaylist}>
           Clear Queue
-        </button>
+        </ButtonInline>
       </div>
     </div>
   );
 }
 
-function Playlist({ toggle, playlist, trackEntities, clearPlaylist }) {
+function Playlist({ toggle, playlist, trackEntities, onClearPlaylist }) {
   const playlistClass = classNames(
     'playlist',
     {
@@ -38,11 +39,10 @@ function Playlist({ toggle, playlist, trackEntities, clearPlaylist }) {
 
   return (
     <div className={playlistClass}>
-      <PlaylistMenu clearPlaylist={clearPlaylist} />
+      <PlaylistMenu onClearPlaylist={onClearPlaylist} />
       <ul>
         {map((id, idx) => {
-          const props = { id, trackEntities };
-          return <PlaylistItem key={idx} { ...props } />;
+          return <PlaylistItem key={idx} activity={trackEntities[id]} />;
         }, playlist)}
       </ul>
     </div>
@@ -59,7 +59,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    clearPlaylist: bindActionCreators(actions.clearPlaylist, dispatch),
+    onClearPlaylist: bindActionCreators(actions.clearPlaylist, dispatch),
   };
 }
 
@@ -67,7 +67,7 @@ Playlist.propTypes = {
   toggle: React.PropTypes.object,
   playlist: React.PropTypes.array,
   trackEntities: React.PropTypes.object,
-  clearPlaylist: React.PropTypes.func
+  onClearPlaylist: React.PropTypes.func
 };
 
 const PlaylistContainer = connect(mapStateToProps, mapDispatchToProps)(Playlist);

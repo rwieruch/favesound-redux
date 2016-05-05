@@ -32,11 +32,6 @@ describe('List', () => {
     expect(element.find('.more-visible')).to.have.length(1);
   });
 
-  it('shows a title', () => {
-    const element = shallow(<List { ...props } />);
-    expect(element.find('button.inline').text()).to.contain(props.title);
-  });
-
 });
 
 describe('Chevron', () => {
@@ -86,14 +81,6 @@ describe('SpecificList', () => {
     props.kind = 'TRACK';
     const element = shallow(<SpecificList { ...props } />);
     expect(element.find('SpecificItemTrack')).to.have.length(5);
-  });
-
-  it('renders a loading spinner when there are no ids', () => {
-    props.ids = null;
-    const element = shallow(<SpecificList { ...props } />);
-    expect(element.find('LoadingSpinner')).to.have.length(1);
-    expect(element.find('SpecificItemTrack')).to.have.length(0);
-    expect(element.find('SpecificItemUser')).to.have.length(0);
   });
 
 });

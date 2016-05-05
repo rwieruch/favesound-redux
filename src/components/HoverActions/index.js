@@ -1,15 +1,14 @@
 import React from 'react';
 import map from '../../services/map';
 import classNames from 'classnames';
+import { ButtonInline } from '../../components/ButtonInline';
 
-function Action({ action }) {
+function Action({ actionItem }) {
   return (
     <span className="action-item">
-      <i
-        className={action.className}
-        onClick={action.fn}
-      >
-      </i>
+      <ButtonInline onClick={actionItem.fn}>
+        <i className={actionItem.className} />
+      </ButtonInline>
     </span>
   );
 }
@@ -24,8 +23,8 @@ function Actions({ configuration, isVisible }) {
 
   return (
     <div className={actionsClass}>
-      {map((action, idx) => {
-        return <Action key={idx} action={action} />;
+      {map((actionItem, idx) => {
+        return <Action key={idx} actionItem={actionItem} />;
       }, configuration)}
     </div>
   );

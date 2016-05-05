@@ -38,7 +38,7 @@ describe('Actions', () => {
 describe('Action', () => {
 
   const props = {
-    action: { fn: () => {}, className: 'foo' }
+    actionItem: { fn: () => {}, className: 'foo' }
   };
 
   it('renders', () => {
@@ -48,7 +48,7 @@ describe('Action', () => {
 
   it('shows proper className', () => {
     const element = shallow(<Action { ...props } />);
-    expect(element.find('i').prop('className')).to.equal(props.action.className);
+    expect(element.find('i').prop('className')).to.equal(props.actionItem.className);
   });
 
 });

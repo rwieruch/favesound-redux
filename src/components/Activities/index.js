@@ -5,9 +5,7 @@ import { TrackStreamContainer } from '../../components/Track';
 import { TrackExtensionContainer } from '../../components/TrackExtension';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 
-function Activity({ entities, id, idx }) {
-  const activity = entities[id];
-
+function Activity({ activity, idx }) {
   return (
     <li>
       <TrackStreamContainer activity={activity} idx={idx} />
@@ -17,21 +15,18 @@ function Activity({ entities, id, idx }) {
 }
 
 function Activities({ requestInProcess, ids, entities }) {
-  if (!ids) {
-    return <LoadingSpinner isLoading={requestInProcess}/>;
-  }
-
   return (
     <div>
       <div>
         <ul>
           {map((id, idx) => {
-            const props = { entities, id, idx };
-            return <Activity key={idx} { ...props } />;
+            const activity = entities[id];
+            const activityProps = { activity, idx };
+            return <Activity key={idx} { ...activityProps } />;
           }, ids)}
         </ul>
       </div>
-      <LoadingSpinner isLoading={requestInProcess}/>
+      <LoadingSpinner isLoading={requestInProcess || !ids} />
     </div>
   );
 }

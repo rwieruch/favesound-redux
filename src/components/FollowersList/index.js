@@ -14,8 +14,8 @@ function FollowersList({
   nextHref,
   requestInProcess,
   isExpanded,
-  setToggle,
-  fetchFollowers
+  onSetToggle,
+  onFetchFollowers
 }) {
   return (
     <List
@@ -25,9 +25,9 @@ function FollowersList({
       nextHref={nextHref}
       requestInProcess={requestInProcess}
       isExpanded={isExpanded}
-      toggleMore={() => setToggle(toggleTypes.FOLLOWERS)}
       currentUser={currentUser}
-      fetchMore={() => fetchFollowers(currentUser, nextHref)}
+      onToggleMore={() => onSetToggle(toggleTypes.FOLLOWERS)}
+      onFetchMore={() => onFetchFollowers(currentUser, nextHref)}
       kind="USER"
     />
   );
@@ -50,8 +50,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setToggle: bindActionCreators(actions.setToggle, dispatch),
-    fetchFollowers: bindActionCreators(actions.fetchFollowers, dispatch)
+    onSetToggle: bindActionCreators(actions.setToggle, dispatch),
+    onFetchFollowers: bindActionCreators(actions.fetchFollowers, dispatch)
   };
 }
 
@@ -62,8 +62,8 @@ FollowersList.propTypes = {
   requestsInProcess: React.PropTypes.object,
   paginateLinks: React.PropTypes.object,
   toggle: React.PropTypes.object,
-  setToggle: React.PropTypes.func,
-  fetchFollowers: React.PropTypes.func
+  onSetToggle: React.PropTypes.func,
+  onFetchFollowers: React.PropTypes.func
 };
 
 const FollowersListContainer = connect(mapStateToProps, mapDispatchToProps)(FollowersList);

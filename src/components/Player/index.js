@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import { addAccessTokenWith } from '../../services/api';
+import { ButtonInline } from '../../components/ButtonInline';
 
 class Player extends React.Component {
 
@@ -27,18 +28,19 @@ class Player extends React.Component {
       currentUser,
       activeTrackId,
       isPlaying,
-      setToggle,
-      activateIteratedTrack,
-      like,
       entities,
-      togglePlayTrack
+      onSetToggle,
+      onActivateIteratedTrack,
+      onLike,
+      onTogglePlayTrack
     } = this.props;
 
-    if (!activeTrackId) { return; }
+    if (!activeTrackId) { return null; }
 
     const track = entities.tracks[activeTrackId];
     const { user, title, stream_url } = track;
     const { username } = entities.users[user];
+
     const playClass = classNames(
       'fa',
       {
@@ -46,6 +48,7 @@ class Player extends React.Component {
         'fa-play': !isPlaying
       }
     );
+
     const likeClass = classNames(
       'fa fa-heart',
       {
@@ -56,39 +59,34 @@ class Player extends React.Component {
     return (
       <div className="player-content">
         <div>
-          <i
-            className="fa fa-step-backward"
-            onClick={activateIteratedTrack.bind(null, activeTrackId, -1)}
-          ></i>
+          <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, -1)}>
+            <i className="fa fa-step-backward" />
+          </ButtonInline>
         </div>
         <div>
-          <i
-            className={playClass}
-            onClick={togglePlayTrack.bind(null, !isPlaying)}
-          ></i>
+          <ButtonInline onClick={() => onTogglePlayTrack(!isPlaying)}>
+            <i className={playClass} />
+          </ButtonInline>
         </div>
         <div>
-          <i
-            className="fa fa-step-forward"
-            onClick={activateIteratedTrack.bind(null, activeTrackId, 1)}
-          ></i>
+          <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, 1)}>
+            <i className="fa fa-step-forward" />
+          </ButtonInline>
         </div>
         <div className="player-content-name">
           {username} - {title}
         </div>
         <div>
-          <i
-            className="fa fa-th-list"
-            onClick={setToggle.bind(this, toggleTypes.PLAYLIST)}
-          ></i>
+          <ButtonInline onClick={() => onSetToggle(toggleTypes.PLAYLIST)}>
+            <i className="fa fa-th-list" />
+          </ButtonInline>
         </div>
         <div>
           {
             currentUser ?
-            <i
-              className={likeClass}
-              onClick={like.bind(null, track)}
-            ></i> : <span></span>
+            <ButtonInline onClick={() => onLike(track)}>
+              <i className={likeClass} />
+            </ButtonInline> : null
           }
         </div>
         <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
@@ -120,10 +118,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    togglePlayTrack: bindActionCreators(actions.togglePlayTrack, dispatch),
-    setToggle: bindActionCreators(actions.setToggle, dispatch),
-    activateIteratedTrack: bindActionCreators(actions.activateIteratedTrack, dispatch),
-    like: bindActionCreators(actions.like, dispatch)
+    onTogglePlayTrack: bindActionCreators(actions.togglePlayTrack, dispatch),
+    onSetToggle: bindActionCreators(actions.setToggle, dispatch),
+    onActivateIteratedTrack: bindActionCreators(actions.activateIteratedTrack, dispatch),
+    onLike: bindActionCreators(actions.like, dispatch)
   };
 }
 
@@ -132,10 +130,10 @@ Player.propTypes = {
   activeTrackId: React.PropTypes.number,
   isPlaying: React.PropTypes.bool,
   entities: React.PropTypes.object,
-  togglePlayTrack: React.PropTypes.func,
-  setToggle: React.PropTypes.func,
-  activateIteratedTrack: React.PropTypes.func,
-  like: React.PropTypes.func
+  onTogglePlayTrack: React.PropTypes.func,
+  onSetToggle: React.PropTypes.func,
+  onActivateIteratedTrack: React.PropTypes.func,
+  onLike: React.PropTypes.func
 };
 
 const PlayerContainer = connect(mapStateToProps, mapDispatchToProps)(Player);

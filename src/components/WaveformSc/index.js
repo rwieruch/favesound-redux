@@ -54,7 +54,7 @@ class WaveformSc extends React.Component {
     const { activity, idx } = this.props;
     const { id } = activity;
 
-    return <div className="track-content-waveform-json" id={"waveform-" + id + idx}></div>;
+    return <div className="track-content-waveform-json" id={"waveform-" + id + idx} />;
   }
 
 }

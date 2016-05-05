@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { WaveformSc } from '../../components/WaveformSc';
 import { TrackActionsContainer } from '../../components/TrackActions';
 import { Artwork } from '../../components/Artwork';
-import { ActionArtwork } from '../../components/ActionArtwork';
+import { ArtworkAction } from '../../components/ArtworkAction';
 import { Permalink } from '../../components/Permalink';
 import { InfoList } from '../../components/InfoList';
 import { durationFormat, fromNow } from '../../services/track';
@@ -15,8 +15,8 @@ function TrackStream({
   isPlaying,
   idx,
   userEntities,
-  activateTrack,
-  addTrackToPlaylist,
+  onActivateTrack,
+  onAddTrackToPlaylist,
 }) {
   const {
     user,
@@ -34,6 +34,7 @@ function TrackStream({
 
   const userEntity = userEntities[user];
   const { avatar_url, username } = userEntity;
+
   const isVisible = isSameTrack(activeTrackId)(activity.id);
   const isSameAndPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
 
@@ -78,9 +79,9 @@ function TrackStream({
   return (
     <div className={trackClass}>
       <div>
-        <ActionArtwork action={() => activateTrack(activity.id)} className={playClass} isVisible={isVisible} >
+        <ArtworkAction action={() => onActivateTrack(activity.id)} className={playClass} isVisible={isVisible}>
           <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={80} />
-        </ActionArtwork>
+        </ArtworkAction>
       </div>
       <div className="track-content">
         <div className="track-content-name">
@@ -111,8 +112,8 @@ TrackStream.propTypes = {
   isPlaying: React.PropTypes.bool,
   activeTrackId: React.PropTypes.number,
   idx: React.PropTypes.number,
-  activateTrack: React.PropTypes.func,
-  addTrackToPlaylist: React.PropTypes.func
+  onActivateTrack: React.PropTypes.func,
+  onAddTrackToPlaylist: React.PropTypes.func
 };
 
 export {
