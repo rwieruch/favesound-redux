@@ -45,9 +45,7 @@ function CommentExtension({
           </div>
         );
       }, commentIds)}
-      <div className="comment-extension-more">
-        <MoreButton { ...moreButtonProps } />
-      </div>
+      <MoreButton { ...moreButtonProps } />
     </div>
   );
 }

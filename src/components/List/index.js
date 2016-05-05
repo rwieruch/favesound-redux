@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { TrackPreviewContainer } from '../../components/Track';
 import { UserPreviewContainer } from '../../components/User';
+import { MoreButton } from '../../components/MoreButton';
 
 function Chevron({ ids, isExpanded }) {
   const chevronClass = classNames(
@@ -19,25 +20,6 @@ function Chevron({ ids, isExpanded }) {
   } else {
     return <span></span>;
   }
-}
-
-function NextButton({ nextHref, fetchMore, requestInProcess, isExpanded }) {
-  if (!nextHref || !isExpanded) {
-    return <span></span>;
-  }
-
-  if (requestInProcess) {
-    return <LoadingSpinner isLoading={requestInProcess} />;
-  }
-
-  return (
-    <button
-      className="ghost"
-      onClick={fetchMore}
-    >
-      More
-    </button>
-  );
 }
 
 function SpecificItemTrack({ entities, trackId }) {
@@ -118,13 +100,11 @@ function List({
           requestInProcess={requestInProcess}
           entities={entities}
         />
-      </div>
-      <div className="list-actions">
-        <NextButton
+        <MoreButton
           nextHref={nextHref}
-          fetchMore={fetchMore}
+          onClick={fetchMore}
           requestInProcess={requestInProcess}
-          isExpanded={isExpanded}
+          isHidden={!isExpanded}
         />
       </div>
     </div>
@@ -148,5 +128,4 @@ export {
 
   SpecificList,
   Chevron,
-  NextButton
 };
