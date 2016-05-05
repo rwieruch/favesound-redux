@@ -25,7 +25,8 @@ function CommentExtension({
 
   const moreButtonProps = {
     onClick: () => onFetchComments(activity.id, nextHref),
-    requestInProcess
+    requestInProcess,
+    nextHref,
   };
 
   return (
@@ -50,11 +51,11 @@ function CommentExtension({
   );
 }
 
-function MoreButton({ onClick, requestInProcess }) {
+function MoreButton({ onClick, requestInProcess, nextHref }) {
   return (
     <div>
       {
-        requestInProcess ?
+        requestInProcess || !nextHref ?
         <noscript /> :
         <button className="ghost" onClick={() => onClick()}>
           More
