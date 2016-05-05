@@ -1,8 +1,20 @@
-.comment {
+.comment-extension {
 
-  display: flex;
+  margin: $padding;
 
-  &-body {
-    padding: $padding / 4;
+  &-item {
+    display: flex;
+    border: $border;
+    background-color: $backgroundSecondary;
+
+    &-body {
+      padding: $padding / 4;
+    }
   }
+
+  &-more {
+    margin: ($padding / 2) auto;
+    text-align: center;
+  }
+
 }
