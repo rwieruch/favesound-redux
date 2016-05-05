@@ -20,6 +20,12 @@ Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
 4. npm start
 5. npm test
 
+## Contribute
+
+Feel free to contribute to that project!
+
+Looking forward whether someone is able to wrap it into an electron app or extend it by react native.
+
 ## Future
 
 I want to provide an amazing experience for artists to find new music with the help of their own profile and surroundings like followers, followings etc. This is just the beginning :)
