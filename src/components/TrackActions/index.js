@@ -3,13 +3,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 
-function TrackActions({ activity, isOpen, openComments }) {
-  const onOpenComments = () => openComments(activity.id);
-
+function TrackActions({ activity, onOpenComments, onAddTrackToPlaylist }) {
   return (
     <div className="track-actions-list">
       <div className="track-actions-list-item">
-        <button className="ghost small" type="button" onClick={onOpenComments}>Comment</button>
+        <button className="ghost small" type="button" onClick={() => onOpenComments()}>
+          <i className="fa fa-comment" /> Comment
+        </button>
+      </div>
+      <div className="track-actions-list-item">
+        <button className="ghost small" type="button" onClick={() => onAddTrackToPlaylist()}>
+          <i className="fa fa-th-list" /> Add to Playlist
+        </button>
       </div>
     </div>
   );
@@ -23,14 +28,18 @@ function mapStateToProps(state, props) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, props) {
+
+    const { activity } = props;
     return {
-        openComments: bindActionCreators(actions.openComments, dispatch),
+        onOpenComments: () => bindActionCreators(actions.openComments, dispatch)(activity.id),
+        onAddTrackToPlaylist: () => bindActionCreators(actions.addTrackToPlaylist, dispatch)(activity),
     };
 }
 
 TrackActions.propTypes = {
-    openComments: React.PropTypes.func,
+    onOpenComments: React.PropTypes.func,
+    onAddTrackToPlaylist: React.PropTypes.func,
 };
 
 const TrackActionsContainer = connect(mapStateToProps, mapDispatchToProps)(TrackActions);

@@ -102,20 +102,6 @@ function TrackStream({
     </div>
   );
 }
-        // <div className="track-content-actions">
-        //   <div className="track-content-actions-item">
-        //     <i
-        //       className={playClass}
-        //       onClick={activateTrack.bind(null, activity.id)}
-        //     ></i>
-        //   </div>
-        //   <div className="track-content-actions-item">
-        //     <i
-        //       className="fa fa-th-list"
-        //       onClick={addTrackToPlaylist.bind(null, activity)}
-        //     ></i>
-        //   </div>
-        // </div>
 
 TrackStream.propTypes = {
   userEntities: React.PropTypes.object,

@@ -14,7 +14,7 @@ function CommentExtension({ commentIds, commentEntities, userEntities, requestsI
         const comment = commentEntities[commentId];
         const user = userEntities[comment.user];
         const requestInProcess = requestsInProcess[getCommentProperty(commentId)];
-        console.log(requestInProcess);
+
         if (requestInProcess) {
           return <LoadingSpinner isLoading={requestInProcess} />;
         }

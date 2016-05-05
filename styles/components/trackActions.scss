@@ -1,0 +1,10 @@
+.track-actions {
+    &-list {
+        display: flex;
+
+        &-item {
+            white-space: nowrap;
+            margin: 0 ($padding / 2) 0 0;
+        }
+    }
+}
