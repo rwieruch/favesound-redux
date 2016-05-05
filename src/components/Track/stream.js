@@ -95,7 +95,9 @@ function TrackStream({
           <WaveformSc activity={activity} idx={idx} />
         </div>
         <div className="track-content-information">
-          <TrackActionsContainer activity={activity} />
+          <div className="track-content-information-actions">
+            <TrackActionsContainer activity={activity} />
+          </div>
           <InfoList information={information} />
         </div>
       </div>

@@ -7,13 +7,13 @@ function TrackActions({ activity, onOpenComments, onAddTrackToPlaylist }) {
   return (
     <div className="track-actions-list">
       <div className="track-actions-list-item">
-        <button className="ghost small" type="button" onClick={() => onOpenComments()}>
-          <i className="fa fa-comment" /> Comment
+        <button className="ghost small" type="button" onClick={() => onAddTrackToPlaylist()}>
+          <i className="fa fa-th-list" /> Add to Playlist
         </button>
       </div>
       <div className="track-actions-list-item">
-        <button className="ghost small" type="button" onClick={() => onAddTrackToPlaylist()}>
-          <i className="fa fa-th-list" /> Add to Playlist
+        <button className="ghost small" type="button" onClick={() => onOpenComments()}>
+          <i className="fa fa-comment" /> Comment
         </button>
       </div>
     </div>

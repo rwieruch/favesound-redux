@@ -22,6 +22,11 @@
       width: 100%;
     }
 
+    &-information-actions {
+      transition: opacity .2s;
+      opacity: 0;
+    }
+
     &-waveform {
       padding: ($padding / 4) 0;
       pointer-events: none;
@@ -31,7 +36,6 @@
         height: 15px;
         width: 100%;
       }
-
     }
 
     &-actions {
@@ -64,12 +68,19 @@
     }
   }
 
-  &:hover .track-content-actions {
-    opacity: 1;
-  }
+  &:hover, &-visible {
+    .track-content-actions {
+      opacity: 1;
+    }
 
-  &-visible .track-content-actions {
-    opacity: 1;
+   .track-content-information-actions {
+      opacity: 1;
+    }
+
+    .action-artwork-overlay {
+      background: rgba(89, 89, 89, .5);
+      opacity: 1;
+    }
   }
 
 }
