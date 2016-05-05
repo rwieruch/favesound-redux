@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { WaveformSc } from '../../components/WaveformSc';
 import { TrackActionsContainer } from '../../components/TrackActions';
 import { Artwork } from '../../components/Artwork';
+import { ActionArtwork } from '../../components/ActionArtwork';
 import { Permalink } from '../../components/Permalink';
 import { InfoList } from '../../components/InfoList';
 import { durationFormat, fromNow } from '../../services/track';
@@ -77,7 +78,9 @@ function TrackStream({
   return (
     <div className={trackClass}>
       <div>
-        <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={80} />
+        <ActionArtwork action={() => activateTrack(activity.id)} className={playClass} isVisible={isVisible} >
+          <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={80} />
+        </ActionArtwork>
       </div>
       <div className="track-content">
         <div className="track-content-name">
@@ -95,24 +98,24 @@ function TrackStream({
           <TrackActionsContainer activity={activity} />
           <InfoList information={information} />
         </div>
-        <div className="track-content-actions">
-          <div className="track-content-actions-item">
-            <i
-              className={playClass}
-              onClick={activateTrack.bind(null, activity.id)}
-            ></i>
-          </div>
-          <div className="track-content-actions-item">
-            <i
-              className="fa fa-th-list"
-              onClick={addTrackToPlaylist.bind(null, activity)}
-            ></i>
-          </div>
-        </div>
       </div>
     </div>
   );
 }
+        // <div className="track-content-actions">
+        //   <div className="track-content-actions-item">
+        //     <i
+        //       className={playClass}
+        //       onClick={activateTrack.bind(null, activity.id)}
+        //     ></i>
+        //   </div>
+        //   <div className="track-content-actions-item">
+        //     <i
+        //       className="fa fa-th-list"
+        //       onClick={addTrackToPlaylist.bind(null, activity)}
+        //     ></i>
+        //   </div>
+        // </div>
 
 TrackStream.propTypes = {
   userEntities: React.PropTypes.object,
