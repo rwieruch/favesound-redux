@@ -11,8 +11,8 @@
     position: absolute;
     display: flex;
     top: 0;
-    left: 60px; // artwork size
-    width: calc(100% - 60px); // artwork size
+    left: 120px; // artwork size
+    width: calc(100% - 120px); // artwork size
     height: 100%;
     opacity: 0;
     pointer-events: none;
@@ -20,6 +20,10 @@
     &-json {
       flex: 1;
     }
+  }
+
+  &-artwork {
+    overflow: hidden;
   }
 
   &-content {
@@ -45,6 +49,7 @@
   }
 
   &:hover, &-visible {
+
     .track-waveform {
       opacity: 0.2;
     }

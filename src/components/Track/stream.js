@@ -77,9 +77,9 @@ function TrackStream({
 
   return (
     <div className={trackClass}>
-      <div>
+      <div className="track-artwork">
         <ArtworkAction action={() => onActivateTrack(activity.id)} className={playClass} isVisible={isVisible}>
-          <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={60} />
+          <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={120} />
         </ArtworkAction>
       </div>
       <div className="track-content">
