@@ -6,7 +6,7 @@ body {
   color: $fontColor;
   letter-spacing: .02em;
   position: relative;
-  margin: ($padding * 4) 2%;
+  margin: ($padding * 4) ($padding * 2);
 }
 
 ul, li {
