@@ -34,7 +34,7 @@
     -o-transition: 0.2s ease;
     transition: 0.2s ease;
     background-color: $mainColor;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
   }
 
   &:focus {

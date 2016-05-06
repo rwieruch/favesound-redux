@@ -1,84 +1,63 @@
 .track {
-
   display: flex;
-  height: 80px;
+  height: $padding * 3;
   margin: ($padding / 2) 0;
   background: $backgroundSecondary;
   border: $border;
+  position: relative;
+  transition: all 0.2s;
+
+  &-waveform {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 60px; // artwork size
+    width: calc(100% - 60px); // artwork size
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+
+    &-json {
+      flex: 1;
+    }
+  }
 
   &-content {
-    position: relative;
-    width: 100%;
-    height: 70px;
     padding: ($padding / 4);
-
     display: flex;
+    flex: 1;
     flex-direction: column;
+    justify-content: space-between;
 
-    &-name, &-meta, &-information {
+    &-header, &-footer {
       display: inline-flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       width: 100%;
     }
 
-    &-information-actions {
-      transition: opacity 0.2s;
-      opacity: 0;
-    }
-
-    &-waveform {
-      padding: ($padding / 4) 0;
-      pointer-events: none;
-      flex: 1;
-
-      &-json {
-        height: 15px;
-        width: 100%;
-      }
-    }
-
-    &-actions {
-      position: absolute;
-      right: 0;
-      top: 0;
-      margin-right: ($padding / 2);
-
-      opacity: 0;
-      transition: all 0.2s;
-      -webkit-transition: all 0.2s;
-      transition-timing-function: ease;
-      -webkit-transition-timing-function: ease;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      height: 100%;
-
-      &-item {
-        i {
-          cursor: pointer;
-          font-size: 20px;
-
-          &:hover {
-            color: $mainColor;
-          }
-        }
+    &-footer-actions {
+      .button-ghost {
+        color: $fontColor;
+        border: 1px solid $fontColor;
       }
     }
   }
 
   &:hover, &-visible {
-    .track-content-actions {
-      opacity: 1;
+    .track-waveform {
+      opacity: 0.2;
     }
 
-   .track-content-information-actions {
-      opacity: 1;
+   .track-content-footer-actions {
+      .button-ghost {
+        color: $mainColor;
+        border: 1px solid $mainColor;
+      }
     }
 
-    .action-artwork-overlay {
-      background: rgba(89, 89, 89, .5);
+    .artwork-action-overlay {
+      background: rgba(255, 255, 255, .7);
       opacity: 1;
     }
   }

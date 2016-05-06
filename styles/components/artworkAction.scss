@@ -18,8 +18,8 @@
         transition: opacity 0.2s;
 
         &:hover, &-visible {
-            opacity: 1;
-            background: rgba(89, 89, 89, .5);
+          background: rgba(255, 255, 255, .7);
+          opacity: 1;
         }
 
         i {

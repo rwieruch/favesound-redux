@@ -32,7 +32,10 @@
       &-selected, &:hover {
         border-bottom: 1px solid $mainColor;
       }
+    }
 
+    a.menu-item:visited {
+      color: $fontColor;
     }
 
     div {

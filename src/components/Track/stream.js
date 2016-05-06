@@ -79,27 +79,28 @@ function TrackStream({
     <div className={trackClass}>
       <div>
         <ArtworkAction action={() => onActivateTrack(activity.id)} className={playClass} isVisible={isVisible}>
-          <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={80} />
+          <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={60} />
         </ArtworkAction>
       </div>
       <div className="track-content">
-        <div className="track-content-name">
-          <Permalink link={userEntity.permalink_url} text={username} />
-          <div>{fromNow(created_at)}</div>
+        <div className="track-content-header">
+          <div>
+            <Permalink link={userEntity.permalink_url} text={username} />&nbsp;-&nbsp;
+            <Permalink link={permalink_url} text={title} />
+          </div>
+          <div>{durationFormat(duration)} / {fromNow(created_at)}</div>
         </div>
-        <div className="track-content-meta">
-          <Permalink link={permalink_url} text={title} />
-          <div>{durationFormat(duration)}</div>
-        </div>
-        <div className="track-content-waveform">
-          <WaveformSc activity={activity} idx={idx} />
-        </div>
-        <div className="track-content-information">
-          <div className="track-content-information-actions">
+        <div className="track-content-footer">
+          <div>
+            <InfoList information={information} />
+          </div>
+          <div className="track-content-footer-actions">
             <TrackActionsContainer activity={activity} />
           </div>
-          <InfoList information={information} />
         </div>
+      </div>
+      <div className="track-waveform">
+        <WaveformSc activity={activity} idx={idx} />
       </div>
     </div>
   );
