@@ -29,6 +29,7 @@ class Player extends React.Component {
       activeTrackId,
       isPlaying,
       entities,
+      playlist,
       onSetToggle,
       onActivateIteratedTrack,
       onLike,
@@ -58,17 +59,17 @@ class Player extends React.Component {
 
     return (
       <div className="player-content">
-        <div>
+        <div className="player-content-action">
           <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, -1)}>
             <i className="fa fa-step-backward" />
           </ButtonInline>
         </div>
-        <div>
+        <div className="player-content-action">
           <ButtonInline onClick={() => onTogglePlayTrack(!isPlaying)}>
             <i className={playClass} />
           </ButtonInline>
         </div>
-        <div>
+        <div className="player-content-action">
           <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, 1)}>
             <i className="fa fa-step-forward" />
           </ButtonInline>
@@ -76,12 +77,12 @@ class Player extends React.Component {
         <div className="player-content-name">
           {username} - {title}
         </div>
-        <div>
+        <div className="player-content-action">
           <ButtonInline onClick={() => onSetToggle(toggleTypes.PLAYLIST)}>
-            <i className="fa fa-th-list" />
+            <i className="fa fa-th-list" /> {playlist.length}
           </ButtonInline>
         </div>
-        <div>
+        <div className="player-content-action">
           {
             currentUser ?
             <ButtonInline onClick={() => onLike(track)}>
@@ -112,7 +113,8 @@ function mapStateToProps(state) {
     currentUser: state.session.user,
     activeTrackId: state.player.activeTrackId,
     isPlaying: state.player.isPlaying,
-    entities: state.entities
+    entities: state.entities,
+    playlist: state.player.playlist,
   };
 }
 
@@ -130,6 +132,7 @@ Player.propTypes = {
   activeTrackId: React.PropTypes.number,
   isPlaying: React.PropTypes.bool,
   entities: React.PropTypes.object,
+  playlist: React.PropTypes.array,
   onTogglePlayTrack: React.PropTypes.func,
   onSetToggle: React.PropTypes.func,
   onActivateIteratedTrack: React.PropTypes.func,

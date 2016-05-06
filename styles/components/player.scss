@@ -29,24 +29,25 @@
       width: 50%;
     }
 
-    div {
-      margin: auto $padding;
+    &-action {
+      font-size: 20px;
+      cursor: pointer;
+
+      &:hover {
+        color: $mainColor;
+      }
 
       i {
-        cursor: pointer;
-        font-size: 20px;
         width: 20px;
-
-        &:hover {
-          color: $mainColor;
-        }
 
         &.is-favorite {
           color: $mainColor;
         }
-
       }
+    }
 
+    div {
+      margin: auto $padding;
     }
 
   }
