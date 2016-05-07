@@ -6,6 +6,7 @@ import map from '../../services/map';
 import { getCommentProperty } from '../../services/string';
 import { ButtonMore } from '../../components/ButtonMore';
 import { Artwork } from '../../components/Artwork';
+import { fromNow } from '../../services/track';
 
 function CommentExtension({
   activity,
@@ -27,12 +28,17 @@ function CommentExtension({
       {map((commentId, key) => {
         const comment = commentEntities[commentId];
         const user = userEntities[comment.user];
-
         return (
           <div key={key} className="comment-extension-item">
             <Artwork image={user.avatar_url} title={user.username} size={40} />
             <div className="comment-extension-item-body">
-              {comment.body}
+              <div className="comment-extension-item-body-header">
+                <span>{user.username}</span>
+                <span>{fromNow(comment.created_at)}</span>
+              </div>
+              <div>
+                {comment.body}
+              </div>
             </div>
           </div>
         );

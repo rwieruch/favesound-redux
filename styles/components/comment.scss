@@ -9,6 +9,12 @@
 
     &-body {
       padding: $padding / 4;
+      flex: 1;
+
+      &-header {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   }
 
