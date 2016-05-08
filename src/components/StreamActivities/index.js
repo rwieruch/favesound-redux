@@ -35,8 +35,9 @@ function StreamActivities({
 }
 
 function mapStateToProps(state) {
-  const { durationFilter } = state.filter;
-  const filters = [DURATION_FILTER_FUNCTIONS[durationFilter]];
+  const filters = [
+    DURATION_FILTER_FUNCTIONS[state.filter.durationFilterType]
+  ];
 
   return {
     trackEntities: state.entities.tracks,

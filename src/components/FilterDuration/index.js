@@ -51,7 +51,7 @@ function FilterDuration({
 
 function mapStateToProps(state) {
   return {
-    activeDurationFilter: state.filter.durationFilter
+    activeDurationFilter: state.filter.durationFilterType
   };
 }
 

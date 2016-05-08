@@ -2,7 +2,7 @@ import * as actionTypes from '../../constants/actionTypes';
 import * as filterTypes from '../../constants/filterTypes';
 
 const initialState = {
-  durationFilter: filterTypes.ALL,
+  durationFilterType: filterTypes.ALL,
 };
 
 export default function(state = initialState, action) {
@@ -14,5 +14,5 @@ export default function(state = initialState, action) {
 }
 
 function setDurationFilter(state, filterType) {
-  return { ...state, durationFilter: filterType };
+  return { ...state, durationFilterType: filterType };
 }
