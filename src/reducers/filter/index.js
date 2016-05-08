@@ -2,7 +2,7 @@ import * as actionTypes from '../../constants/actionTypes';
 import * as filterTypes from '../../constants/filterTypes';
 
 const initialState = {
-  durationFilter: filterTypes.NONE,
+  durationFilter: filterTypes.ALL,
 };
 
 export default function(state = initialState, action) {

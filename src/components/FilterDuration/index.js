@@ -27,8 +27,8 @@ function FilterDuration({
 
   return (
     <div className="filter-duration">
-      <div className={filterDurationIconClass}>
-        <ButtonInline onClick={() => onDurationFilter(filterTypes.NONE)}>
+      <div className={filterDurationIconClass} title={'Filter Stream'}>
+        <ButtonInline onClick={() => onDurationFilter(filterTypes.ALL)}>
           <i className="fa fa-filter" />&nbsp;
         </ButtonInline>
       </div>
