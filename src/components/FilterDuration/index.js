@@ -29,7 +29,7 @@ function FilterDuration({
     <div className="stream-interaction">
       <div className={filterDurationIconClass} title={'Filter Stream'}>
         <ButtonInline onClick={() => onDurationFilter(filterTypes.ALL)}>
-          <i className="fa fa-filter" />&nbsp;
+          <i className="fa fa-filter" />
         </ButtonInline>
       </div>
       <div className="stream-interaction-content">

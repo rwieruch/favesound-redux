@@ -28,7 +28,7 @@ function Sort({
     <div className="stream-interaction">
       <div className={sortIconClass} title={'Sort Stream'}>
         <ButtonInline onClick={() => onSort(sortTypes.NONE)}>
-          <i className="fa fa-sort" />&nbsp;
+          <i className="fa fa-sort" />
         </ButtonInline>
       </div>
       <div className="stream-interaction-content">

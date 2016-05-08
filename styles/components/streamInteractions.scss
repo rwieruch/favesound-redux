@@ -16,6 +16,7 @@
 
   &-icon {
     font-size: $mediumIcon;
+    margin-right: ($padding / 4);
 
     &-active {
       color: $mainColor;
