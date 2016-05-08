@@ -7,6 +7,7 @@ import paginate from './paginate';
 import entities from './entities';
 import toggle from './toggle';
 import comment from './comment';
+import filter from './filter';
 
 export default {
   session,
@@ -17,5 +18,6 @@ export default {
   paginate,
   entities,
   toggle,
-  comment
+  comment,
+  filter
 };

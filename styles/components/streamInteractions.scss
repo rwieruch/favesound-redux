@@ -1,0 +1,10 @@
+.stream-interactions {
+  display: flex;
+  padding-bottom: ($padding / 2);
+
+  &-item {
+    background: $backgroundSecondary;
+    border: $border;
+    padding: ($padding / 2);
+  }
+}

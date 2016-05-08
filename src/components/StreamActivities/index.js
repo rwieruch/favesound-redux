@@ -5,6 +5,7 @@ import * as actions from '../../actions/index';
 import * as requestTypes from '../../constants/requestTypes';
 import * as paginateLinkTypes from '../../constants/paginateLinkTypes';
 import Activities from '../../components/Activities';
+import { StreamInteractions } from '../../components/StreamInteractions';
 
 function StreamActivities({
   activities,
@@ -14,12 +15,15 @@ function StreamActivities({
   onFetchActivities
 }) {
   return (
-    <Activities
-      requestInProcess={requestInProcess}
-      entities={trackEntities}
-      ids={activities}
-      scrollFunction={() => onFetchActivities(null, nextHref)}
-    />
+    <div>
+      <StreamInteractions />
+      <Activities
+        requestInProcess={requestInProcess}
+        entities={trackEntities}
+        ids={activities}
+        scrollFunction={() => onFetchActivities(null, nextHref)}
+      />
+    </div>
   );
 }
 

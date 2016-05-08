@@ -30,7 +30,7 @@
     }
 
     &-action {
-      font-size: 20px;
+      font-size: $bigIcon;
       cursor: pointer;
 
       &:hover {
@@ -38,7 +38,7 @@
       }
 
       i {
-        width: 20px;
+        width: $bigIcon;
 
         &.is-favorite {
           color: $mainColor;

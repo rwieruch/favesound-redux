@@ -1,5 +1,9 @@
 .list {
 
+  h2 {
+    margin-top: 0;
+  }
+
   i.fa-chevron-up, i.fa-chevron-down {
     opacity: 0;
     transition: opacity 0.2s;

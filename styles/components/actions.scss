@@ -1,8 +1,10 @@
 .action {
   position: absolute;
   right: 0;
-  top: 12px;
+  top: 0;
+  height: 100%;
   display: flex;
+  align-items: center;
 
   opacity: 0;
   transition: all 0.2s;
@@ -18,7 +20,7 @@
   i {
     margin: 0 ($padding / 4);
     cursor: pointer;
-    font-size: 16px;
+    font-size: $mediumIcon;
 
     &:hover {
         color: $mainColor;
