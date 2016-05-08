@@ -1,5 +1,6 @@
 import React from 'react';
 import map from '../../services/map';
+import filter from 'lodash/fp/filter';
 import FetchOnScroll from '../../components/FetchOnScroll';
 import { TrackStreamContainer } from '../../components/Track';
 import { TrackExtensionContainer } from '../../components/TrackExtension';
@@ -17,23 +18,29 @@ function Activity({
   );
 }
 
+function getMatchedEntities(ids, entities) {
+  return map((id) => entities[id], ids);
+}
+
 function Activities({
   requestInProcess,
   ids,
   entities,
-  activeFilter
+  activeFilter,
+  activeSort,
 }) {
+  const matchedEntities = getMatchedEntities(ids, entities);
+  const filteredEntities = filter(activeFilter, matchedEntities);
+  const sortedEntities = activeSort(filteredEntities);
+
   return (
     <div>
       <div>
         <ul>
-          {map((id, idx) => {
-            const activity = entities[id];
-            if (!activeFilter(activity)) { return null; }
-
+          {map((activity, idx) => {
             const activityProps = { activity, idx };
             return <Activity key={idx} { ...activityProps } />;
-          }, ids)}
+          }, sortedEntities)}
         </ul>
       </div>
       <LoadingSpinner isLoading={requestInProcess || !ids} />
@@ -44,7 +51,9 @@ function Activities({
 Activities.propTypes = {
   requestInProcess: React.PropTypes.bool,
   ids: React.PropTypes.array,
-  entities: React.PropTypes.object
+  entities: React.PropTypes.object,
+  activeFilter: React.PropTypes.func,
+  activeSort: React.PropTypes.func,
 };
 
 export default FetchOnScroll(Activities);

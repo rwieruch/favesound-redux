@@ -8,7 +8,7 @@ import { getAndCombined } from '../../services/filter';
 import Activities from '../../components/Activities';
 import { StreamInteractions } from '../../components/StreamInteractions';
 import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter';
-// import { SORT_FUNCTIONS } from '../../constants/sort';
+import { SORT_FUNCTIONS } from '../../constants/sort';
 
 function StreamActivities({
   activities,
@@ -16,6 +16,7 @@ function StreamActivities({
   nextHref,
   trackEntities,
   activeFilter,
+  activeSort,
   onFetchActivities,
 }) {
   return (
@@ -26,6 +27,7 @@ function StreamActivities({
         entities={trackEntities}
         ids={activities}
         activeFilter={activeFilter}
+        activeSort={activeSort}
         scrollFunction={() => onFetchActivities(null, nextHref)}
       />
     </div>
@@ -36,15 +38,13 @@ function mapStateToProps(state) {
   const { durationFilter } = state.filter;
   const filters = [DURATION_FILTER_FUNCTIONS[durationFilter]];
 
-  // const { sortType } = state.sort;
-  // const sortFn = SORT_FUNCTIONS[sortType];
-
   return {
     trackEntities: state.entities.tracks,
     activities: state.user.activities,
     requestInProcess: state.request[requestTypes.ACTIVITIES],
     nextHref: state.paginate[paginateLinkTypes.ACTIVITIES],
-    activeFilter: getAndCombined(filters)
+    activeFilter: getAndCombined(filters),
+    activeSort: SORT_FUNCTIONS[state.sort.sortType],
   };
 }
 
@@ -60,6 +60,7 @@ StreamActivities.propTypes = {
   requestInProcess: React.PropTypes.bool,
   nextHref: React.PropTypes.string,
   activeFilter: React.PropTypes.func,
+  activeSort: React.PropTypes.func,
   onFetchActivities: React.PropTypes.func,
 };
 

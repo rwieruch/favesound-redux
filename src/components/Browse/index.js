@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { DEFAULT_GENRE } from '../../constants/genre';
+import { SORT_FUNCTIONS } from '../../constants/sort';
+import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter';
 import * as actions from '../../actions/index';
 import * as requestTypes from '../../constants/requestTypes';
 import Activities from '../../components/Activities';
@@ -43,7 +45,8 @@ class Browse extends React.Component {
           requestInProcess={requestsInProcess[requestTypes.GENRES]}
           ids={browseActivities[genre]}
           entities={trackEntities}
-          activeFilter={() => true}
+          activeFilter={DURATION_FILTER_FUNCTIONS.ALL}
+          activeSort={SORT_FUNCTIONS.NONE}
           scrollFunction={this.fetchActivitiesByGenre}
         />
       </div>
