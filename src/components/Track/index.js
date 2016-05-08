@@ -16,6 +16,7 @@ function mapStateToProps(state, props) {
     userEntities: state.entities.users,
     isPlaying: state.player.isPlaying,
     activeTrackId: state.player.activeTrackId,
+    activeSortType: state.sort.sortType,
   };
 }
 

@@ -1,9 +1,17 @@
 import React from 'react';
+import classNames from 'classnames';
 import map from '../../services/map';
 
 function InfoItem({ infoItem }) {
+  const infoItemClass = classNames(
+    'info-list-item',
+    {
+      'info-list-item-active': infoItem.activeSort
+    }
+  );
+
   return (
-    <div className="info-list-item">
+    <div className={infoItemClass}>
       <i className={infoItem.className} /> {infoItem.count}
     </div>
   );

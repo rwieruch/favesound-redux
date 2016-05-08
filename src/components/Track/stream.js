@@ -9,6 +9,7 @@ import { InfoList } from '../../components/InfoList';
 import { durationFormat, fromNow } from '../../services/track';
 import { getPluralizedWithCount } from '../../services/pluralize';
 import { isSameTrackAndPlaying, isSameTrack } from '../../services/player';
+import * as sortTypes from '../../constants/sortTypes';
 
 function TrackStream({
   activity,
@@ -18,6 +19,7 @@ function TrackStream({
   userEntities,
   typeReposts,
   typeTracks,
+  activeSortType,
   onActivateTrack,
 }) {
   const {
@@ -58,15 +60,18 @@ function TrackStream({
   const information = [
     {
       className: 'fa fa-play',
-      count: playback_count
+      count: playback_count,
+      activeSort: activeSortType === sortTypes.SORT_PLAYS
     },
     {
       className: 'fa fa-heart',
-      count: likes_count
+      count: likes_count,
+      activeSort: activeSortType === sortTypes.SORT_FAVORITES
     },
     {
       className: 'fa fa-retweet',
-      count: reposts_count
+      count: reposts_count,
+      activeSort: activeSortType === sortTypes.SORT_REPOSTS
     },
     {
       className: 'fa fa-comment',
@@ -129,6 +134,7 @@ TrackStream.propTypes = {
   isPlaying: React.PropTypes.bool,
   activeTrackId: React.PropTypes.number,
   idx: React.PropTypes.number,
+  activeSortType: React.PropTypes.string,
   onActivateTrack: React.PropTypes.func,
 };
 
