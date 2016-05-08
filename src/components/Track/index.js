@@ -11,6 +11,8 @@ function mapStateToProps(state, props) {
   return {
     idx,
     activity,
+    typeReposts: state.user.typeReposts,
+    typeTracks: state.user.typeTracks,
     userEntities: state.entities.users,
     isPlaying: state.player.isPlaying,
     activeTrackId: state.player.activeTrackId,

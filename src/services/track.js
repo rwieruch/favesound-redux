@@ -5,6 +5,10 @@ export function isTrack(track) {
   return origin && type && type !== 'playlist' && type !== 'playlist-repost';
 }
 
+export function toIdAndType(o) {
+  return { type: o.type, id: o.origin.id };
+}
+
 export function normalizeSamples(samples) {
   let highestValue = 0;
   for (let i = 0; i <= samples.length; i++) {

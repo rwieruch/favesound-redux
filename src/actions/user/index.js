@@ -10,7 +10,7 @@ import * as paginateLinkTypes from '../../constants/paginateLinkTypes';
 import { setRequestInProcess } from '../../actions/request';
 import { setPaginateLink } from '../../actions/paginate';
 import { mergeEntities } from '../../actions/entities';
-import { isTrack } from '../../services/track';
+import { isTrack, toIdAndType } from '../../services/track';
 import { getLazyLoadingUsersUrl } from '../../services/api';
 
 export function mergeFollowings(followings) {
@@ -47,6 +47,20 @@ export function mergeActivities(activities) {
   };
 }
 
+function mergeTrackTypesTrack(tracks) {
+  return {
+    type: actionTypes.MERGE_TRACK_TYPES_TRACK,
+    tracks
+  };
+}
+
+function mergeTrackTypesRepost(reposts) {
+  return {
+    type: actionTypes.MERGE_TRACK_TYPES_REPOST,
+    reposts
+  };
+}
+
 export const fetchActivities = (user, nextHref) => (dispatch, getState) => {
   const requestType = requestTypes.ACTIVITIES;
   const url = getLazyLoadingUsersUrl(user, nextHref, 'activities?limit=20&offset=0');
@@ -59,13 +73,23 @@ export const fetchActivities = (user, nextHref) => (dispatch, getState) => {
   return fetch(url)
     .then(response => response.json())
     .then(data => {
-      const mapAndFiltered = flow(
+      const typeMap = flow(
+        filter(isTrack),
+        map(toIdAndType)
+      )(data.collection);
+
+      dispatch(mergeTrackTypesTrack(filter((value) => value.type === 'track', typeMap)));
+      dispatch(mergeTrackTypesRepost(filter((value) => value.type === 'track-repost', typeMap)));
+
+      const activitiesMap = flow(
         filter(isTrack),
         map('origin')
       )(data.collection);
-      const normalized = normalize(mapAndFiltered, arrayOf(trackSchema));
+
+      const normalized = normalize(activitiesMap, arrayOf(trackSchema));
       dispatch(mergeEntities(normalized.entities));
       dispatch(mergeActivities(normalized.result));
+
       dispatch(setPaginateLink(data.next_href, paginateLinkTypes.ACTIVITIES));
       dispatch(setRequestInProcess(false, requestType));
     });

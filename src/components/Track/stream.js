@@ -7,6 +7,7 @@ import { ArtworkAction } from '../../components/ArtworkAction';
 import { Permalink } from '../../components/Permalink';
 import { InfoList } from '../../components/InfoList';
 import { durationFormat, fromNow } from '../../services/track';
+import { getPluralizedWithCount } from '../../services/pluralize';
 import { isSameTrackAndPlaying, isSameTrack } from '../../services/player';
 
 function TrackStream({
@@ -15,6 +16,8 @@ function TrackStream({
   isPlaying,
   idx,
   userEntities,
+  typeReposts,
+  typeTracks,
   onActivateTrack,
 }) {
   const {
@@ -85,6 +88,8 @@ function TrackStream({
       <div className="track-content">
         <div className="track-content-header">
           <div>
+            <TrackIcon trackCount={typeTracks[activity.id]} />
+            <RepostIcon repostCount={typeReposts[activity.id]} />
             <Permalink link={userEntity.permalink_url} text={username} />&nbsp;-&nbsp;
             <Permalink link={permalink_url} text={title} />
           </div>
@@ -106,8 +111,20 @@ function TrackStream({
   );
 }
 
+function TrackIcon({ trackCount }) {
+  const title = 'Released by ' + getPluralizedWithCount(trackCount, 'guy') + '.';
+  return trackCount ? <span title={title}><i className="fa fa-play" /> </span> : null;
+}
+
+function RepostIcon({ repostCount }) {
+  const title = 'Reposted by ' + getPluralizedWithCount(repostCount, 'guy') + '.';
+  return repostCount ? <span title={title}><i className="fa fa-retweet" /> </span> : null;
+}
+
 TrackStream.propTypes = {
   userEntities: React.PropTypes.object,
+  typeReposts: React.PropTypes.object,
+  typeTracks: React.PropTypes.object,
   activity: React.PropTypes.object,
   isPlaying: React.PropTypes.bool,
   activeTrackId: React.PropTypes.number,
