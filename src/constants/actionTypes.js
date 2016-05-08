@@ -40,3 +40,5 @@ export const OPEN_COMMENTS = 'OPEN_COMMENTS';
 export const MERGE_COMMENTS = 'MERGE_COMMENTS';
 
 export const FILTER_DURATION = 'FILTER_DURATION';
+
+export const SORT_STREAM = 'SORT_STREAM';

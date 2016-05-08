@@ -8,6 +8,7 @@ import entities from './entities';
 import toggle from './toggle';
 import comment from './comment';
 import filter from './filter';
+import sort from './sort';
 
 export default {
   session,
@@ -19,5 +20,6 @@ export default {
   entities,
   toggle,
   comment,
-  filter
+  filter,
+  sort,
 };
