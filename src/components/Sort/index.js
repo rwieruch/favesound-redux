@@ -18,20 +18,20 @@ function Sort({
   onSort,
 }) {
   const sortIconClass = classNames(
-    'filter-duration-icon',
+    'stream-interaction-icon',
     {
-      'filter-duration-icon-active': hasActiveSort(activeSort)
+      'stream-interaction-icon-active': hasActiveSort(activeSort)
     }
   );
 
   return (
-    <div className="filter-duration">
+    <div className="stream-interaction">
       <div className={sortIconClass} title={'Sort Stream'}>
         <ButtonInline onClick={() => onSort(sortTypes.NONE)}>
           <i className="fa fa-sort" />&nbsp;
         </ButtonInline>
       </div>
-      <div className="filter-duration-content">
+      <div className="stream-interaction-content">
         {
           map((value, key) => {
             return (

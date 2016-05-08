@@ -19,20 +19,20 @@ function FilterDuration({
   onDurationFilter,
 }) {
   const filterDurationIconClass = classNames(
-    'filter-duration-icon',
+    'stream-interaction-icon',
     {
-      'filter-duration-icon-active': hasActiveFilter(activeDurationFilter)
+      'stream-interaction-icon-active': hasActiveFilter(activeDurationFilter)
     }
   );
 
   return (
-    <div className="filter-duration">
+    <div className="stream-interaction">
       <div className={filterDurationIconClass} title={'Filter Stream'}>
         <ButtonInline onClick={() => onDurationFilter(filterTypes.ALL)}>
           <i className="fa fa-filter" />&nbsp;
         </ButtonInline>
       </div>
-      <div className="filter-duration-content">
+      <div className="stream-interaction-content">
         {
           map((value, key) => {
             return (
