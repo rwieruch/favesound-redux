@@ -4,6 +4,7 @@ import filter from 'lodash/fp/filter';
 import { arrayOf, normalize } from 'normalizr';
 import userSchema from '../../schemas/user';
 import trackSchema from '../../schemas/track';
+import * as trackTypes from '../../constants/trackTypes';
 import * as actionTypes from '../../constants/actionTypes';
 import * as requestTypes from '../../constants/requestTypes';
 import * as paginateLinkTypes from '../../constants/paginateLinkTypes';
@@ -78,8 +79,8 @@ export const fetchActivities = (user, nextHref) => (dispatch, getState) => {
         map(toIdAndType)
       )(data.collection);
 
-      dispatch(mergeTrackTypesTrack(filter((value) => value.type === 'track', typeMap)));
-      dispatch(mergeTrackTypesRepost(filter((value) => value.type === 'track-repost', typeMap)));
+      dispatch(mergeTrackTypesTrack(filter((value) => value.type === trackTypes.TRACK, typeMap)));
+      dispatch(mergeTrackTypesRepost(filter((value) => value.type === trackTypes.TRACK_REPOST, typeMap)));
 
       const activitiesMap = flow(
         filter(isTrack),

@@ -1,8 +1,9 @@
 import moment from 'moment';
+import * as trackTypes from '../constants/trackTypes';
 
 export function isTrack(track) {
   const { origin, type } = track;
-  return origin && type && type !== 'playlist' && type !== 'playlist-repost';
+  return origin && type && type !== trackTypes.PLAYLIST && type !== trackTypes.PLAYLIST_REPOST;
 }
 
 export function toIdAndType(o) {
