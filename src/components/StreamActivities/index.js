@@ -4,15 +4,18 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as requestTypes from '../../constants/requestTypes';
 import * as paginateLinkTypes from '../../constants/paginateLinkTypes';
+import { getAndCombined } from '../../services/filter';
 import Activities from '../../components/Activities';
 import { StreamInteractions } from '../../components/StreamInteractions';
+import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter';
 
 function StreamActivities({
   activities,
   requestInProcess,
   nextHref,
   trackEntities,
-  onFetchActivities
+  activeFilter,
+  onFetchActivities,
 }) {
   return (
     <div>
@@ -21,6 +24,7 @@ function StreamActivities({
         requestInProcess={requestInProcess}
         entities={trackEntities}
         ids={activities}
+        activeFilter={activeFilter}
         scrollFunction={() => onFetchActivities(null, nextHref)}
       />
     </div>
@@ -28,11 +32,15 @@ function StreamActivities({
 }
 
 function mapStateToProps(state) {
+  const { durationFilter } = state.filter;
+  const filters = [DURATION_FILTER_FUNCTIONS[durationFilter]];
+
   return {
     trackEntities: state.entities.tracks,
     activities: state.user.activities,
     requestInProcess: state.request[requestTypes.ACTIVITIES],
-    nextHref: state.paginate[paginateLinkTypes.ACTIVITIES]
+    nextHref: state.paginate[paginateLinkTypes.ACTIVITIES],
+    activeFilter: getAndCombined(filters)
   };
 }
 
@@ -47,7 +55,8 @@ StreamActivities.propTypes = {
   activities: React.PropTypes.array,
   requestInProcess: React.PropTypes.bool,
   nextHref: React.PropTypes.string,
-  onFetchActivities: React.PropTypes.func
+  activeFilter: React.PropTypes.func,
+  onFetchActivities: React.PropTypes.func,
 };
 
 const StreamActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(StreamActivities);

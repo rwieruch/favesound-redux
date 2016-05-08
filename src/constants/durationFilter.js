@@ -1,3 +1,4 @@
+import moment from 'moment';
 import * as filterTypes from '../constants/filterTypes';
 
 const DURATION_FILTER_NAMES = {
@@ -6,6 +7,17 @@ const DURATION_FILTER_NAMES = {
   [filterTypes.FILTER_DURATION_MIX]: 'MIX',
 };
 
+const DURATION_FILTER_FUNCTIONS = {
+  [filterTypes.NONE]: () => true,
+  [filterTypes.FILTER_DURATION_TRACK]: (activity) => !isMixDuration(activity),
+  [filterTypes.FILTER_DURATION_MIX]: (activity) => isMixDuration(activity),
+};
+
+function isMixDuration(activity) {
+  return moment.duration(activity.duration).asMinutes() > 15;
+}
+
 export {
-  DURATION_FILTER_NAMES
+  DURATION_FILTER_NAMES,
+  DURATION_FILTER_FUNCTIONS,
 };

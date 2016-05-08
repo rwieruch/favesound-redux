@@ -1,22 +1,22 @@
 .filter-duration {
 
+  display: flex;
+  align-items: flex-end;
+
+  &-icon {
+    font-size: $mediumIcon;
+
+    &-active {
+      color: $mainColor;
+    }
+  }
+
+  &-content {
     display: flex;
-    align-items: flex-end;
+    font-size: $menuSize;
 
-    &-icon {
-        font-size: $mediumIcon;
-
-        &-active {
-            color: $mainColor;
-        }
+    div {
+      margin: 0 ($padding / 4);
     }
-
-    &-content {
-        display: flex;
-        font-size: $menuSize;
-
-        div {
-            margin: 0 ($padding / 4);
-        }
-    }
+  }
 }
