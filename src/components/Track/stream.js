@@ -1,5 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import * as sortTypes from '../../constants/sortTypes';
+import * as filterTypes from '../../constants/filterTypes';
 import { WaveformSc } from '../../components/WaveformSc';
 import { TrackActionsContainer } from '../../components/TrackActions';
 import { Artwork } from '../../components/Artwork';
@@ -9,7 +11,18 @@ import { InfoList } from '../../components/InfoList';
 import { durationFormat, fromNow } from '../../services/track';
 import { getPluralizedWithCount } from '../../services/pluralize';
 import { isSameTrackAndPlaying, isSameTrack } from '../../services/player';
-import * as sortTypes from '../../constants/sortTypes';
+
+function Duration({ duration, isActive }) {
+  const durationClass = classNames({
+    'active-duration-filter': isActive
+  });
+
+  return (
+    <span className={durationClass}>
+      {durationFormat(duration)}
+    </span>
+  );
+}
 
 function TrackStream({
   activity,
@@ -20,6 +33,7 @@ function TrackStream({
   typeReposts,
   typeTracks,
   activeSortType,
+  activeDurationFilterType,
   onActivateTrack,
 }) {
   const {
@@ -98,7 +112,11 @@ function TrackStream({
             <Permalink link={userEntity.permalink_url} text={username} />&nbsp;-&nbsp;
             <Permalink link={permalink_url} text={title} />
           </div>
-          <div>{durationFormat(duration)} / {fromNow(created_at)}</div>
+          <div>
+            <Duration
+              duration={duration}
+              isActive={activeDurationFilterType !== filterTypes.ALL}
+            /> / {fromNow(created_at)}</div>
         </div>
         <div className="track-content-footer">
           <div>
@@ -135,6 +153,7 @@ TrackStream.propTypes = {
   activeTrackId: React.PropTypes.number,
   idx: React.PropTypes.number,
   activeSortType: React.PropTypes.string,
+  activeDurationFilterType: React.PropTypes.string,
   onActivateTrack: React.PropTypes.func,
 };
 
