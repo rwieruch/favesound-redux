@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+import { routeReducer } from 'react-router-redux';
 import session from './session';
 import user from './user';
 import player from './player';
@@ -10,7 +12,7 @@ import comment from './comment';
 import filter from './filter';
 import sort from './sort';
 
-export default {
+export default combineReducers({
   session,
   user,
   player,
@@ -22,4 +24,5 @@ export default {
   comment,
   filter,
   sort,
-};
+  routing: routeReducer
+});
