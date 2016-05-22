@@ -3,9 +3,8 @@ import SC from 'soundcloud';
 /*eslint-enable */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRedirect, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-// import useScrollToTop from 'scroll-behavior/lib/useScrollToTop';
 import { Provider } from 'react-redux';
 import configureStore from './stores/configureStore';
 import { Dashboard } from './components/Dashboard';
@@ -18,15 +17,13 @@ import { browse, dashboard, fave, callback } from './constants/pathnames';
 require('../styles/index.scss');
 
 const store = configureStore();
-
-// const history = useScrollToTop(createBrowserHistory)();
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRedirect to={browse} />
+        <IndexRoute component={BrowseContainer} />
         <Route path={callback} component={Callback} />
         <Route path={dashboard} component={Dashboard} />
         <Route path={browse} component={BrowseContainer} />
