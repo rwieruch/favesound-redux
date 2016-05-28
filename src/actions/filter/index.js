@@ -6,3 +6,10 @@ export function filterDuration(filterType) {
     filterType
   };
 }
+
+export function filterName(filterNameQuery) {
+  return {
+    type: actionTypes.FILTER_NAME,
+    filterNameQuery
+  };
+}
