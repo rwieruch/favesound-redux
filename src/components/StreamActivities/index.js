@@ -8,6 +8,7 @@ import { getAndCombined } from '../../services/filter';
 import Activities from '../../components/Activities';
 import { StreamInteractions } from '../../components/StreamInteractions';
 import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter';
+import { getTracknameFilter } from '../../constants/nameFilter';
 import { SORT_FUNCTIONS } from '../../constants/sort';
 
 function StreamActivities({
@@ -36,7 +37,8 @@ function StreamActivities({
 
 function mapStateToProps(state) {
   const filters = [
-    DURATION_FILTER_FUNCTIONS[state.filter.durationFilterType]
+    DURATION_FILTER_FUNCTIONS[state.filter.durationFilterType],
+    getTracknameFilter(state.filter.filterNameQuery)
   ];
 
   return {
