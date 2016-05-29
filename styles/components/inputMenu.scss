@@ -1,0 +1,10 @@
+.input-menu {
+  font-size: $menuSize;
+  color: $fontColor;
+  border: 0;
+  background-color: $backgroundSecondary;
+
+  &:focus {
+    outline: none;
+  }
+}

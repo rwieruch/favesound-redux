@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import { ButtonInline } from '../../components/ButtonInline';
+import { InputMenu } from '../../components/InputMenu';
 
 function FilterName({
   filterNameQuery,
@@ -24,7 +25,11 @@ function FilterName({
         </ButtonInline>
       </div>
       <div className="stream-interaction-content">
-        <input onChange={(event) => onNameFilter(event.target.value.toLowerCase())} value={filterNameQuery} />
+        <InputMenu
+          placeholder="SEARCH..."
+          onChange={(event) => onNameFilter(event.target.value.toLowerCase())}
+          value={filterNameQuery}
+        />
       </div>
     </div>
   );
