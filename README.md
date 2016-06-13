@@ -2,6 +2,8 @@
 
 React / Redux Soundcloud Client made with passion!
 
+![alt tag](http://s31.postimg.org/ye3c63nob/Screen_Shot_2016_06_13_at_12_28_12.png)
+
 Live: http://www.favesound.de/
 
 Tutorial: http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/
