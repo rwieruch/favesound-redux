@@ -26,7 +26,7 @@ Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
 
 ## Contribute
 
-Feel free to contribute to that project! I would love to see a GitHub issue where you want to work on! Moreover it is a perfect project to get started in open source,
+Feel free to contribute to that project! I would love to see a GitHub issue where you want to work on! Moreover I will try to find the time to raise some issues myself where people can contribute. At the end it is a perfect project to get started in open source!
 
 ## Future
 
