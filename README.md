@@ -26,9 +26,7 @@ Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
 
 ## Contribute
 
-Feel free to contribute to that project!
-
-Looking forward whether someone is able to wrap it into an electron app or extend it by react native.
+Feel free to contribute to that project! I would love to see a GitHub issue where you want to work on! Moreover it is a perfect project to get started in open source,
 
 ## Future
 
