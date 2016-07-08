@@ -2,7 +2,7 @@
 
 React / Redux Soundcloud Client made with passion!
 
-![FaveSound](https://s31.postimg.org/ke7kyh2zv/Screen_Shot_2016_07_08_at_18_12_44.png)
+![FaveSound](https://s31.postimg.org/bz6rw0kez/Screen_Shot_2016_07_08_at_18_15_17.png)
 
 Live: http://www.favesound.de/
 
