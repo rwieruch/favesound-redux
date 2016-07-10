@@ -1,18 +1,16 @@
 # favesound-redux
 
-React / Redux Soundcloud Client made with passion!
+React + Redux SoundCloud Client made with passion!
 
 ![FaveSound](https://s31.postimg.org/bz6rw0kez/Screen_Shot_2016_07_08_at_18_15_17.png)
 
 Live: http://www.favesound.de/
 
-Tutorial: http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/
+Comprehensive Guide: http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/
 
 Uses redux, redux-thunk, normalizr, react, lodash-fp, airbnb-extended eslint, enzyme and the Soundcloud API.
 
-Feedback is more than appreciated via GitHub or Twitter :)
-
-https://twitter.com/rwieruch
+Feedback is more than appreciated via GitHub or [Twitter](https://twitter.com/rwieruch) :)
 
 Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
 
@@ -26,7 +24,7 @@ Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
 
 ## Contribute
 
-Feel free to contribute to that project! I would love to see a GitHub issue where you want to work on! Moreover I will try to find the time to raise some issues myself where people can contribute. At the end it is a perfect project to get started in open source!
+I am looking actively for contributors to make this project awesome! Feel free to contribute. It doesn't matter whether you are new to open source or are a veteran. I don't want to extend the project with new routes like: that's my profile page and that's my favorite track page. Moreover I see a lot of value in improving the status quo of the app. Improving the player, the playlist or the interaction overall. I would love to see a GitHub issue where you want to work on. Moreover I will try to find the time to raise some more issues where people can contribute. At the end it is a perfect project to get started in open source!
 
 ## Future
 
