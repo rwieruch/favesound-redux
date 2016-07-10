@@ -24,7 +24,8 @@ Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
 
 ## Contribute
 
-I am looking actively for contributors to make this project awesome! Feel free to contribute. It doesn't matter whether you are new to open source or are a veteran. I don't want to extend the project with new routes like: that's my profile page and that's my favorite track page. Moreover I see a lot of value in improving the status quo of the app. Improving the player, the playlist or the interaction overall. I would love to see a GitHub issue where you want to work on. Moreover I will try to find the time to raise some more issues where people can contribute. At the end it is a perfect project to get started in open source!
+I am looking actively for contributors to make this project awesome! Feel free to contribute. It doesn't matter whether you are new to open source or are a veteran. 
+I woudln't want want to extend the project with new routes like: that's my profile page and that's my favorite track page. Rather I see more value in improving the status quo of the app: Improving the player, the playlist or the interaction overall. I would love to see a GitHub issue where you can state where you want to work on. Moreover I will try to find the time to raise some more issues where people can contribute. At the end it is a perfect project to get started in open source!
 
 ## Future
 
