@@ -6,7 +6,8 @@ React + Redux SoundCloud Client made with passion!
 
 Live: http://www.favesound.de/
 
-Comprehensive Guide: http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/
+[Comprehensive Guide: The SoundCloue Client in React + Redux](http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/)
+[Boilerplate Project](https://github.com/rwieruch/react-redux-soundcloud)
 
 Uses redux, redux-thunk, normalizr, react, lodash-fp, airbnb-extended eslint, enzyme and the Soundcloud API.
 
