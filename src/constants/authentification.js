@@ -5,7 +5,7 @@ export const REDIRECT_URI = isDev ?
   'http://www.favesound.de/callback';
 
 export const CLIENT_ID = isDev ?
-    'a281614d7f34dc30b665dfcaa3ed7505' :
-    '1512fb9cbe8228095fe92c6503e3a071';
+    '7961251d7ec99ca5ed3f53f8ddc1c21a' :
+    'fad359d29a1b84f605b4c235122286d7';
 
 export const OAUTH_TOKEN = 'accessToken';
