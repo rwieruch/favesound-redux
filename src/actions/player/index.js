@@ -45,6 +45,13 @@ function emptyPlaylist() {
   };
 }
 
+function setIsInShuffleMode(isInShuffleMode) {
+  return {
+    type: actionTypes.CHANGE_SHUFFLE_MODE,
+    isInShuffleMode
+  };
+}
+
 export const clearPlaylist = () => (dispatch) => {
   dispatch(emptyPlaylist());
   dispatch(deactivateTrack());
@@ -90,12 +97,32 @@ function getIteratedTrack(playlist, currentActiveTrackId, iterate) {
   return playlist[index + iterate];
 }
 
+function getRandomTrack(playlist, currentActiveTrackId) {
+  const index = findIndex(isSameTrack(currentActiveTrackId), playlist);
+  function getRandomIndex() {
+    const randNum = Math.floor(Math.random() * playlist.length);
+    if (randNum === index) {
+      return getRandomIndex();
+    } else {
+      return randNum;
+    }
+  }
+  return playlist[getRandomIndex()];
+}
+
 export const activateIteratedTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
   const playlist = getState().player.playlist;
   const nextActiveTrackId = getIteratedTrack(playlist, currentActiveTrackId, iterate);
+  const randomActiveTrackId = getRandomTrack(playlist, currentActiveTrackId);
+  const shuffleMode = getState().player.shuffleMode;
+  // const previousActiveTrackId = getState().player.activeTrackId;
 
-  if (nextActiveTrackId) {
+
+  if (nextActiveTrackId && shuffleMode === false) {
     dispatch(activateTrack(nextActiveTrackId));
+  } else if (shuffleMode === true) {
+    dispatch(activateTrack(randomActiveTrackId));
+    // dispatch(removeTrackFromPlaylist(previousActiveTrackId));
   } else {
     dispatch(togglePlayTrack(false));
   }
@@ -117,4 +144,8 @@ export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
   }
 
   dispatch(removeFromPlaylist(track.id));
+};
+
+export const toggleShuffleMode = (isInShuffleMode) => (dispatch) => {
+  dispatch(setIsInShuffleMode(isInShuffleMode));
 };

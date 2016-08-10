@@ -30,10 +30,12 @@ class Player extends React.Component {
       isPlaying,
       entities,
       playlist,
+      shuffleMode,
       onSetToggle,
       onActivateIteratedTrack,
       onLike,
-      onTogglePlayTrack
+      onTogglePlayTrack,
+      onSetShuffleMode
     } = this.props;
 
     if (!activeTrackId) { return null; }
@@ -54,6 +56,13 @@ class Player extends React.Component {
       'fa fa-heart',
       {
         'is-favorite': track.user_favorite
+      }
+    );
+
+    const shuffleClass = classNames(
+      'fa fa-random',
+      {
+        randomSelected: shuffleMode
       }
     );
 
@@ -80,6 +89,11 @@ class Player extends React.Component {
         <div className="player-content-action">
           <ButtonInline onClick={() => onSetToggle(toggleTypes.PLAYLIST)}>
             <i className="fa fa-th-list" /> {playlist.length}
+          </ButtonInline>
+        </div>
+        <div className="player-content-action">
+          <ButtonInline onClick={() => onSetShuffleMode(shuffleMode)}>
+            <i className={shuffleClass} />
           </ButtonInline>
         </div>
         <div className="player-content-action">
@@ -115,6 +129,7 @@ function mapStateToProps(state) {
     isPlaying: state.player.isPlaying,
     entities: state.entities,
     playlist: state.player.playlist,
+    shuffleMode: state.player.shuffleMode
   };
 }
 
@@ -123,7 +138,8 @@ function mapDispatchToProps(dispatch) {
     onTogglePlayTrack: bindActionCreators(actions.togglePlayTrack, dispatch),
     onSetToggle: bindActionCreators(actions.setToggle, dispatch),
     onActivateIteratedTrack: bindActionCreators(actions.activateIteratedTrack, dispatch),
-    onLike: bindActionCreators(actions.like, dispatch)
+    onLike: bindActionCreators(actions.like, dispatch),
+    onSetShuffleMode: bindActionCreators(actions.toggleShuffleMode, dispatch),
   };
 }
 
@@ -136,7 +152,8 @@ Player.propTypes = {
   onTogglePlayTrack: React.PropTypes.func,
   onSetToggle: React.PropTypes.func,
   onActivateIteratedTrack: React.PropTypes.func,
-  onLike: React.PropTypes.func
+  onLike: React.PropTypes.func,
+  onSetShuffleMode: React.PropTypes.func,
 };
 
 const PlayerContainer = connect(mapStateToProps, mapDispatchToProps)(Player);
