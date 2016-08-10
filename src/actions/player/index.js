@@ -122,7 +122,6 @@ export const activateIteratedTrack = (currentActiveTrackId, iterate) => (dispatc
     dispatch(activateTrack(nextActiveTrackId));
   } else if (shuffleMode === true) {
     dispatch(activateTrack(randomActiveTrackId));
-    // dispatch(removeTrackFromPlaylist(previousActiveTrackId));
   } else {
     dispatch(togglePlayTrack(false));
   }
