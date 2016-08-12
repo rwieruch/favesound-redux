@@ -30,7 +30,7 @@ class Player extends React.Component {
       isPlaying,
       entities,
       playlist,
-      shuffleMode,
+      isInShuffleMode,
       onSetToggle,
       onActivateIteratedTrack,
       onLike,
@@ -62,7 +62,7 @@ class Player extends React.Component {
     const shuffleClass = classNames(
       'fa fa-random',
       {
-        randomSelected: shuffleMode
+        randomSelected: isInShuffleMode
       }
     );
 
@@ -92,7 +92,7 @@ class Player extends React.Component {
           </ButtonInline>
         </div>
         <div className="player-content-action">
-          <ButtonInline onClick={() => onSetShuffleMode(shuffleMode)}>
+          <ButtonInline onClick={onSetShuffleMode}>
             <i className={shuffleClass} />
           </ButtonInline>
         </div>
@@ -129,7 +129,7 @@ function mapStateToProps(state) {
     isPlaying: state.player.isPlaying,
     entities: state.entities,
     playlist: state.player.playlist,
-    shuffleMode: state.player.shuffleMode
+    isInShuffleMode: state.player.isInShuffleMode
   };
 }
 
@@ -154,6 +154,7 @@ Player.propTypes = {
   onActivateIteratedTrack: React.PropTypes.func,
   onLike: React.PropTypes.func,
   onSetShuffleMode: React.PropTypes.func,
+  isInShuffleMode: React.PropTypes.bool,
 };
 
 const PlayerContainer = connect(mapStateToProps, mapDispatchToProps)(Player);

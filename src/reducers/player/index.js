@@ -1,7 +1,7 @@
 import * as actionTypes from '../../constants/actionTypes';
 
 const initialState = {
-  shuffleMode: false,
+  isInShuffleMode: false,
   activeTrackId: null,
   isPlaying: false,
   playlist: []
@@ -61,9 +61,5 @@ function emptyPlaylist(state) {
 }
 
 function setShuffleMode(state) {
-  if (state.shuffleMode === false) {
-    return { ...state, shuffleMode: true };
-  } else {
-    return { ...state, shuffleMode: false };
-  }
+  return { ...state, isInShuffleMode: !state.isInShuffleMode };
 }
