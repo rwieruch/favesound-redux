@@ -1,6 +1,7 @@
 import * as actionTypes from '../../constants/actionTypes';
 
 const initialState = {
+  isInShuffleMode: false,
   activeTrackId: null,
   isPlaying: false,
   playlist: []
@@ -20,6 +21,8 @@ export default function(state = initialState, action) {
       return removeTrackFromPlaylist(state, action.trackId);
     case actionTypes.RESET_PLAYLIST:
       return emptyPlaylist(state);
+    case actionTypes.CHANGE_SHUFFLE_MODE:
+      return setShuffleMode(state);
   }
   return state;
 }
@@ -55,4 +58,8 @@ function removeTrackFromPlaylist(state, trackId) {
 
 function emptyPlaylist(state) {
   return { ...state, playlist: [] };
+}
+
+function setShuffleMode(state) {
+  return { ...state, isInShuffleMode: !state.isInShuffleMode };
 }
