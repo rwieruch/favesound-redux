@@ -25,7 +25,7 @@ export default function(state = initialState, action) {
     case actionTypes.SET_SHUFFLE_MODE:
       return setShuffleMode(state);
     case actionTypes.SET_VOLUME:
-      return setVolume(state)
+      return setVolume(state, action.volume);
   }
   return state;
 }
