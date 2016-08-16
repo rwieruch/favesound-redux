@@ -66,6 +66,9 @@ class Player extends React.Component {
       }
     );
 
+    const audio = document.getElementById("audio");
+    audio.volume = 0.5;
+
     return (
       <div className="player-content">
         <div className="player-content-action">
