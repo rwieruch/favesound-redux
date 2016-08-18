@@ -15,12 +15,14 @@ class Player extends React.Component {
 
     if (!audioElement) { return; }
 
-    const { isPlaying } = this.props;
+    const { isPlaying, volume } = this.props;
     if (isPlaying) {
       audioElement.play();
     } else {
       audioElement.pause();
     }
+
+    audioElement.volume = volume / 100;
   }
 
   renderNav() {
@@ -35,7 +37,9 @@ class Player extends React.Component {
       onActivateIteratedTrack,
       onLike,
       onTogglePlayTrack,
-      onSetShuffleMode
+      onSetShuffleMode,
+      onSetVolumeToggle,
+      volume
     } = this.props;
 
     if (!activeTrackId) { return null; }
@@ -65,9 +69,6 @@ class Player extends React.Component {
         randomSelected: isInShuffleMode
       }
     );
-
-    const audio = document.getElementById("audio");
-    audio.volume = 0.5;
 
     return (
       <div className="player-content">
@@ -107,6 +108,11 @@ class Player extends React.Component {
             </ButtonInline> : null
           }
         </div>
+        <div className="player-content-action">
+          <ButtonInline onClick={() => onSetVolumeToggle(toggleTypes.VOLUME)}>
+            <i className="fa fa-volume-up" /> {volume}
+          </ButtonInline>
+        </div>
         <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
       </div>
     );
@@ -132,7 +138,8 @@ function mapStateToProps(state) {
     isPlaying: state.player.isPlaying,
     entities: state.entities,
     playlist: state.player.playlist,
-    isInShuffleMode: state.player.isInShuffleMode
+    isInShuffleMode: state.player.isInShuffleMode,
+    volume: state.player.volume,
   };
 }
 
@@ -143,6 +150,7 @@ function mapDispatchToProps(dispatch) {
     onActivateIteratedTrack: bindActionCreators(actions.activateIteratedTrack, dispatch),
     onLike: bindActionCreators(actions.like, dispatch),
     onSetShuffleMode: bindActionCreators(actions.toggleShuffleMode, dispatch),
+    onSetVolumeToggle: bindActionCreators(actions.setVolumeToggle, dispatch),
   };
 }
 
@@ -158,6 +166,7 @@ Player.propTypes = {
   onLike: React.PropTypes.func,
   onSetShuffleMode: React.PropTypes.func,
   isInShuffleMode: React.PropTypes.bool,
+  onSetVolumeToggle: React.PropTypes.func,
 };
 
 const PlayerContainer = connect(mapStateToProps, mapDispatchToProps)(Player);

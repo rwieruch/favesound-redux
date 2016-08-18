@@ -51,6 +51,13 @@ function setIsInShuffleMode() {
   };
 }
 
+function setTrackVolume(volume) {
+  return {
+    type: actionTypes.SET_VOLUME,
+    volume
+  };
+}
+
 export const clearPlaylist = () => (dispatch) => {
   dispatch(emptyPlaylist());
   dispatch(deactivateTrack());
@@ -145,4 +152,9 @@ export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
 
 export const toggleShuffleMode = (isInShuffleMode) => (dispatch) => {
   dispatch(setIsInShuffleMode(isInShuffleMode));
+};
+
+export const changeVolume = (volume) => (dispatch) => {
+  // const volume = getState().player.volume;
+  dispatch(setTrackVolume(volume));
 };

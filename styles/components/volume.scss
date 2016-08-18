@@ -1,0 +1,34 @@
+.volume {
+
+  background: $nav;
+  position: fixed;
+  right: 2%;
+  bottom: $padding * 3;
+  width: $padding * 5;
+  height: $padding * 15;
+  max-height: $padding * 15;
+  border: $darkBorder;
+  overflow: auto;
+  opacity: 0;
+  pointer-events: none;
+
+  transition: height 0.2s;
+  -webkit-transition: opacity 0.2s;
+  transition-timing-function: ease;
+  -webkit-transition-timing-function: ease;
+
+  &-visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &-menu {
+    display: flex;
+    justify-content: space-between;
+    height: $padding;
+    padding: $padding / 2;
+    border-bottom: $darkBorder;
+
+    font-size: $menuSize;
+  }
+}
