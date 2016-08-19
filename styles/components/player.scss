@@ -32,6 +32,7 @@
     &-action {
       font-size: $bigIcon;
       cursor: pointer;
+      text-align: center;
 
       &:hover {
         color: $mainColor;
@@ -47,7 +48,7 @@
     }
 
     div {
-      margin: auto $padding;
+      margin: auto $paddingVW;
     }
 
   }

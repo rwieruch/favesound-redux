@@ -2,7 +2,7 @@
 
   background: $nav;
   position: fixed;
-  right: 2%;
+  right: 5em;
   bottom: $padding * 3;
   width: $padding * 5;
   height: $padding * 15;
@@ -31,4 +31,52 @@
 
     font-size: $menuSize;
   }
+
+  &-number {
+    text-align: center;
+    color: $mainColor;
+  }
+}
+
+.rangeslider {
+	margin: 20px 0;
+	position: relative;
+  background: $fontColor;
+  .rangeslider__fill, .rangeslider__handle {
+  	position: absolute;
+  }
+  &, .rangeslider__fill {
+  	display: block;
+  	box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  .rangeslider__handle {
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    &:active {
+      background: #999;
+    }
+  }
+}
+
+.rangeslider-vertical {
+	margin: 20px auto;
+	height: 150px;
+	max-width: 10px;
+	.rangeslider__fill {
+		width: 100%;
+		background: $mainColor;
+		box-shadow: none;
+		bottom: 0;
+	}
+	.rangeslider__handle {
+		width: 30px;
+		height: 10px;
+		left: -10px;
+		&:active {
+			box-shadow: none;
+		}
+	}
 }

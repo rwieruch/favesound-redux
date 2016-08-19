@@ -155,6 +155,5 @@ export const toggleShuffleMode = (isInShuffleMode) => (dispatch) => {
 };
 
 export const changeVolume = (volume) => (dispatch) => {
-  // const volume = getState().player.volume;
   dispatch(setTrackVolume(volume));
 };

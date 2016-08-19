@@ -101,17 +101,17 @@ class Player extends React.Component {
           </ButtonInline>
         </div>
         <div className="player-content-action">
+          <ButtonInline onClick={() => onSetVolumeToggle(toggleTypes.VOLUME)}>
+            <i className="fa fa-volume-up" /> {volume}
+          </ButtonInline>
+        </div>
+        <div className="player-content-action">
           {
             currentUser ?
             <ButtonInline onClick={() => onLike(track)}>
               <i className={likeClass} />
             </ButtonInline> : null
           }
-        </div>
-        <div className="player-content-action">
-          <ButtonInline onClick={() => onSetVolumeToggle(toggleTypes.VOLUME)}>
-            <i className="fa fa-volume-up" /> {volume}
-          </ButtonInline>
         </div>
         <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
       </div>
