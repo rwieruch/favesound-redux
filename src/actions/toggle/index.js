@@ -13,10 +13,3 @@ export function resetToggle(toggleType) {
     toggleType
   };
 }
-
-export function setVolumeToggle(toggleType) {
-  return {
-    type: actionTypes.SET_TOGGLED,
-    toggleType
-  };
-}

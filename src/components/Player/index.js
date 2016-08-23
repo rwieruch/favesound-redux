@@ -38,7 +38,6 @@ class Player extends React.Component {
       onLike,
       onTogglePlayTrack,
       onSetShuffleMode,
-      onSetVolumeToggle,
       volume
     } = this.props;
 
@@ -101,7 +100,7 @@ class Player extends React.Component {
           </ButtonInline>
         </div>
         <div className="player-content-action">
-          <ButtonInline onClick={() => onSetVolumeToggle(toggleTypes.VOLUME)}>
+          <ButtonInline onClick={() => onSetToggle(toggleTypes.VOLUME)}>
             <i className="fa fa-volume-up" /> {volume}
           </ButtonInline>
         </div>
@@ -150,7 +149,6 @@ function mapDispatchToProps(dispatch) {
     onActivateIteratedTrack: bindActionCreators(actions.activateIteratedTrack, dispatch),
     onLike: bindActionCreators(actions.like, dispatch),
     onSetShuffleMode: bindActionCreators(actions.toggleShuffleMode, dispatch),
-    onSetVolumeToggle: bindActionCreators(actions.setVolumeToggle, dispatch),
   };
 }
 
@@ -166,7 +164,6 @@ Player.propTypes = {
   onLike: React.PropTypes.func,
   onSetShuffleMode: React.PropTypes.func,
   isInShuffleMode: React.PropTypes.bool,
-  onSetVolumeToggle: React.PropTypes.func,
 };
 
 const PlayerContainer = connect(mapStateToProps, mapDispatchToProps)(Player);
