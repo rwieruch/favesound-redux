@@ -6,7 +6,10 @@ import { SORT_FUNCTIONS } from '../../constants/sort';
 import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter';
 import * as actions from '../../actions/index';
 import * as requestTypes from '../../constants/requestTypes';
+import { StreamInteractions } from '../../components/StreamInteractions';
 import Activities from '../../components/Activities';
+import { getTracknameFilter } from '../../constants/nameFilter';
+import { getAndCombined } from '../../services/filter';
 
 class Browse extends React.Component {
 
@@ -37,16 +40,17 @@ class Browse extends React.Component {
   }
 
   render() {
-    const { browseActivities, genre, requestsInProcess, trackEntities } = this.props;
+    const { browseActivities, genre, requestsInProcess, trackEntities, activeFilter, activeSort } = this.props;
 
     return (
       <div className="browse">
+        <StreamInteractions />
         <Activities
           requestInProcess={requestsInProcess[requestTypes.GENRES]}
           ids={browseActivities[genre]}
           entities={trackEntities}
-          activeFilter={DURATION_FILTER_FUNCTIONS.ALL}
-          activeSort={SORT_FUNCTIONS.NONE}
+          activeFilter={activeFilter}
+          activeSort={activeSort}
           scrollFunction={this.fetchActivitiesByGenre}
         />
       </div>
@@ -56,13 +60,20 @@ class Browse extends React.Component {
 }
 
 function mapStateToProps(state, routerState) {
+  const filters = [
+    DURATION_FILTER_FUNCTIONS[state.filter.durationFilterType],
+    getTracknameFilter(state.filter.filterNameQuery)
+  ];
+
   return {
     genre: routerState.location.query.genre,
     browseActivities: state.browse,
     requestsInProcess: state.request,
     paginateLinks: state.paginate,
     trackEntities: state.entities.tracks,
-    userEntities: state.entities.users
+    userEntities: state.entities.users,
+    activeFilter: getAndCombined(filters),
+    activeSort: SORT_FUNCTIONS[state.sort.sortType],
   };
 }
 
