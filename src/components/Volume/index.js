@@ -6,36 +6,16 @@ import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import Slider from 'react-rangeslider';
 
-class VolumeSlider extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    const { volume } = this.props;
-    this.state = {
-      value: volume
-    };
-  }
-
-  handleChange = (value) => {
-    const { onChangeVolume } = this.props;
-    this.setState({
-      volume: value
-    });
-
-    onChangeVolume(value);
-  }
-
-  render() {
-    const { volume } = this.props;
-    return (
-      <Slider
-        min={0}
-        max={100}
-        value={volume}
-        orientation="vertical"
-        onChange={this.handleChange}
-      />
-    );
-  }
+function VolumeSlider({ volume, onChangeVolume }) {
+  return (
+    <Slider
+      min={0}
+      max={100}
+      value={volume}
+      orientation="vertical"
+      onChange={onChangeVolume}
+    />
+  );
 }
 
 
