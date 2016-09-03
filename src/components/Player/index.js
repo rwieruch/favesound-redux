@@ -47,6 +47,16 @@ class Player extends React.Component {
     const { user, title, stream_url } = track;
     const { username } = entities.users[user];
 
+    const isMuted = !volume;
+
+    const muteClass = classNames(
+      'fa',
+      {
+        'fa-volume-up': !isMuted,
+        'fa-volume-off': isMuted,
+      }
+    );
+
     const playClass = classNames(
       'fa',
       {
@@ -101,7 +111,7 @@ class Player extends React.Component {
         </div>
         <div className="player-content-action">
           <ButtonInline onClick={() => onSetToggle(toggleTypes.VOLUME)}>
-            <i className="fa fa-volume-up" /> {volume}
+            <i className={muteClass} />
           </ButtonInline>
         </div>
         <div className="player-content-action">
