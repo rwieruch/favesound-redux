@@ -172,4 +172,27 @@ describe('player reducer', () => {
 
   });
 
+  describe('SET_VOLUME', () => {
+    it('sets the volume of the active track', () => {
+      const action = {
+        type: actionTypes.SET_VOLUME,
+        activeTrackId: 1,
+        volume: 20
+      };
+
+      const previousState = {
+        type: actionTypes.SET_VOLUME,
+        activeTrackId: 1,
+        volume: 70
+      };
+
+      const expectedState = {
+        type: actionTypes.SET_VOLUME,
+        activeTrackId: 1,
+        volume: 20
+      };
+
+      expect(player(previousState, action)).to.eql(expectedState);
+    });
+  });
 });

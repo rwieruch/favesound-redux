@@ -15,12 +15,14 @@ class Player extends React.Component {
 
     if (!audioElement) { return; }
 
-    const { isPlaying } = this.props;
+    const { isPlaying, volume } = this.props;
     if (isPlaying) {
       audioElement.play();
     } else {
       audioElement.pause();
     }
+
+    audioElement.volume = volume / 100;
   }
 
   renderNav() {
@@ -35,7 +37,8 @@ class Player extends React.Component {
       onActivateIteratedTrack,
       onLike,
       onTogglePlayTrack,
-      onSetShuffleMode
+      onSetShuffleMode,
+      volume
     } = this.props;
 
     if (!activeTrackId) { return null; }
@@ -97,6 +100,11 @@ class Player extends React.Component {
           </ButtonInline>
         </div>
         <div className="player-content-action">
+          <ButtonInline onClick={() => onSetToggle(toggleTypes.VOLUME)}>
+            <i className="fa fa-volume-up" /> {volume}
+          </ButtonInline>
+        </div>
+        <div className="player-content-action">
           {
             currentUser ?
             <ButtonInline onClick={() => onLike(track)}>
@@ -129,7 +137,8 @@ function mapStateToProps(state) {
     isPlaying: state.player.isPlaying,
     entities: state.entities,
     playlist: state.player.playlist,
-    isInShuffleMode: state.player.isInShuffleMode
+    isInShuffleMode: state.player.isInShuffleMode,
+    volume: state.player.volume,
   };
 }
 
