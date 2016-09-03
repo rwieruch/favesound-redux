@@ -2,7 +2,7 @@
 
 The SoundCloud Client in React + Redux made with passion!
 
-![FaveSound](https://s15.postimg.org/3t5581x2j/Screen_Shot_2016_08_25_at_15_18_44.png)
+![FaveSound](https://s9.postimg.org/yp2tvv4m7/Screen_Shot_2016_09_03_at_23_47_30.png)
 
 Live: http://www.favesound.de/
 
