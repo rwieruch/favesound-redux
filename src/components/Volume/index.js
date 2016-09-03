@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import Slider from 'react-rangeslider';
+import { ButtonInline } from '../../components/ButtonInline';
 
 function VolumeSlider({ volume, onChangeVolume }) {
   return (
@@ -27,11 +28,30 @@ function Volume({ toggle, volume, onChangeVolume }) {
     }
   );
 
+  const isMuted = !volume;
+
+  const onMute = isMuted ?
+    () => onChangeVolume(70) :
+    () => onChangeVolume(0);
+
+  const muteClass = classNames(
+  'fa',
+    {
+      'fa-volume-up': !isMuted,
+      'fa-volume-off': isMuted,
+    }
+  );
+
   return (
     <div className={volumeClass}>
       <div>
         <h2 className="volume-number">{ volume }</h2>
         <VolumeSlider volume={volume} onChangeVolume={onChangeVolume}/>
+        <div className="volume-muter">
+          <ButtonInline onClick={onMute}>
+            <i className={muteClass} />
+          </ButtonInline>
+        </div>
       </div>
     </div>
   );
