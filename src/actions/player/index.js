@@ -47,7 +47,7 @@ function emptyPlaylist() {
 
 function setIsInShuffleMode() {
   return {
-    type: actionTypes.CHANGE_SHUFFLE_MODE,
+    type: actionTypes.SET_SHUFFLE_MODE,
   };
 }
 
