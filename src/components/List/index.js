@@ -3,7 +3,7 @@ import map from '../../services/map';
 import classNames from 'classnames';
 import { TrackPreviewContainer } from '../../components/Track';
 import { UserPreviewContainer } from '../../components/User';
-import { ButtonMore } from '../../components/ButtonMore';
+import ButtonMore from '../../components/ButtonMore';
 import { ButtonInline } from '../../components/ButtonInline';
 
 function Chevron({ ids, isExpanded }) {
@@ -93,7 +93,7 @@ function List({
         <ButtonMore
           nextHref={nextHref}
           onClick={onFetchMore}
-          requestInProcess={requestInProcess || !ids}
+          isLoading={requestInProcess || !ids}
           isHidden={!isExpanded}
         />
       </div>

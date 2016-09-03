@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import map from '../../services/map';
 import { getCommentProperty } from '../../services/string';
-import { ButtonMore } from '../../components/ButtonMore';
+import ButtonMore from '../../components/ButtonMore';
 import { Artwork } from '../../components/Artwork';
 import { fromNow } from '../../services/track';
 
@@ -19,7 +19,7 @@ function CommentExtension({
 }) {
   const moreButtonProps = {
     onClick: () => onFetchComments(activity.id, nextHref),
-    requestInProcess: requestInProcess || !commentIds,
+    isLoading: requestInProcess || !commentIds,
     nextHref,
   };
 

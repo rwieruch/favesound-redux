@@ -6,6 +6,7 @@ import * as requestTypes from '../../constants/requestTypes';
 import * as paginateLinkTypes from '../../constants/paginateLinkTypes';
 import { getAndCombined } from '../../services/filter';
 import Activities from '../../components/Activities';
+import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { StreamInteractions } from '../../components/StreamInteractions';
 import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter';
 import { getTracknameFilter } from '../../constants/nameFilter';
@@ -24,13 +25,14 @@ function StreamActivities({
     <div>
       <StreamInteractions />
       <Activities
-        requestInProcess={requestInProcess}
+        isLoading={requestInProcess && !activities}
         entities={trackEntities}
         ids={activities}
         activeFilter={activeFilter}
         activeSort={activeSort}
         scrollFunction={() => onFetchActivities(null, nextHref)}
       />
+      <LoadingSpinner isLoading={requestInProcess && activities} />
     </div>
   );
 }

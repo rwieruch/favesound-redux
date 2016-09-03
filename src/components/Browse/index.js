@@ -8,6 +8,7 @@ import * as actions from '../../actions/index';
 import * as requestTypes from '../../constants/requestTypes';
 import { StreamInteractions } from '../../components/StreamInteractions';
 import Activities from '../../components/Activities';
+import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { getTracknameFilter } from '../../constants/nameFilter';
 import { getAndCombined } from '../../services/filter';
 
@@ -46,13 +47,14 @@ class Browse extends React.Component {
       <div className="browse">
         <StreamInteractions />
         <Activities
-          requestInProcess={requestsInProcess[requestTypes.GENRES]}
+          isLoading={requestsInProcess[requestTypes.GENRES] && !browseActivities[genre]}
           ids={browseActivities[genre]}
           entities={trackEntities}
           activeFilter={activeFilter}
           activeSort={activeSort}
           scrollFunction={this.fetchActivitiesByGenre}
         />
+        <LoadingSpinner isLoading={requestsInProcess[requestTypes.GENRES] && browseActivities[genre]} />
       </div>
     );
   }

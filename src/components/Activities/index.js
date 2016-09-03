@@ -1,10 +1,10 @@
 import React from 'react';
 import map from '../../services/map';
 import filter from 'lodash/fp/filter';
-import FetchOnScroll from '../../components/FetchOnScroll';
+import withFetchOnScroll from '../../components/withFetchOnScroll';
+import withLoadingSpinner from '../../components/withLoadingSpinner';
 import { TrackStreamContainer } from '../../components/Track';
 import { TrackExtensionContainer } from '../../components/TrackExtension';
-import { LoadingSpinner } from '../../components/LoadingSpinner';
 
 function Activity({
   activity,
@@ -23,7 +23,6 @@ function getMatchedEntities(ids, entities) {
 }
 
 function Activities({
-  requestInProcess,
   ids,
   entities,
   activeFilter,
@@ -43,17 +42,15 @@ function Activities({
           }, sortedEntities)}
         </ul>
       </div>
-      <LoadingSpinner isLoading={requestInProcess || !ids} />
     </div>
   );
 }
 
 Activities.propTypes = {
-  requestInProcess: React.PropTypes.bool,
   ids: React.PropTypes.array,
   entities: React.PropTypes.object,
   activeFilter: React.PropTypes.func,
   activeSort: React.PropTypes.func,
 };
 
-export default FetchOnScroll(Activities);
+export default withLoadingSpinner(withFetchOnScroll(Activities));

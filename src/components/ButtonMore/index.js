@@ -1,20 +1,17 @@
 import React from 'react';
-import { LoadingSpinner } from '../../components/LoadingSpinner';
+import withLoadingSpinner from '../../components/withLoadingSpinner';
 import { ButtonGhost } from '../../components/ButtonGhost';
 
-function ButtonMore({ onClick, requestInProcess, nextHref, isHidden }) {
+function ButtonMore({ onClick, nextHref, isHidden }) {
   return (
     <div className="button-more">
       {
-        requestInProcess || !nextHref || isHidden ?
-        <noscript /> :
+        !nextHref || isHidden ?
+        null :
         <ButtonGhost onClick={onClick}>More</ButtonGhost>
       }
-      <LoadingSpinner isLoading={requestInProcess} />
     </div>
   );
 }
 
-export {
-  ButtonMore
-};
+export default withLoadingSpinner(ButtonMore);
