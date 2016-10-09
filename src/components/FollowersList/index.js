@@ -5,7 +5,7 @@ import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import * as requestTypes from '../../constants/requestTypes';
 import * as paginateLinkTypes from '../../constants/paginateLinkTypes';
-import { List } from '../../components/List';
+import List from '../../components/List';
 
 function FollowersList({
   currentUser,
@@ -66,9 +66,5 @@ FollowersList.propTypes = {
   onFetchFollowers: React.PropTypes.func
 };
 
-const FollowersListContainer = connect(mapStateToProps, mapDispatchToProps)(FollowersList);
-
-export {
-  FollowersList,
-  FollowersListContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(FollowersList);
+export { FollowersList };

@@ -1,4 +1,4 @@
-import { List, NextButton, Chevron, SpecificList } from './index';
+import List, { NextButton, Chevron, SpecificList } from './index';
 import { shallow } from 'enzyme';
 
 describe('List', () => {

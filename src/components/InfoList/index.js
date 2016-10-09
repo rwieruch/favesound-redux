@@ -20,8 +20,8 @@ function InfoItem({ infoItem }) {
 function InfoList({ information }) {
   return (
     <div className="info-list">
-      {map((infoItem, idx) => {
-        return <InfoItem key={idx} infoItem={infoItem} />;
+      {map((infoItem, key) => {
+        return <InfoItem key={key} infoItem={infoItem} />;
       }, information)}
     </div>
   );
@@ -31,8 +31,5 @@ InfoList.propTypes = {
   information: React.PropTypes.array
 };
 
-export {
-  InfoList,
-
-  InfoItem
-};
+export default InfoList;
+export { InfoItem };

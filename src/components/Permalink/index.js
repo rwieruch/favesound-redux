@@ -13,6 +13,4 @@ Permalink.propTypes = {
   text: React.PropTypes.string
 };
 
-export {
-  Permalink
-};
+export default Permalink;

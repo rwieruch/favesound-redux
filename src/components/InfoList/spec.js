@@ -1,4 +1,4 @@
-import { InfoList, InfoItem } from './index';
+import InfoList, { InfoItem } from './index';
 import { shallow } from 'enzyme';
 
 describe('InfoList', () => {

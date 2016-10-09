@@ -14,6 +14,4 @@ LoadingSpinner.propTypes = {
   isLoading: React.PropTypes.bool
 };
 
-export {
-  LoadingSpinner
-};
+export default LoadingSpinner;

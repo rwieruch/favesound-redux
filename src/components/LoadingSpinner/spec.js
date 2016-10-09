@@ -1,4 +1,4 @@
-import { LoadingSpinner } from './index';
+import LoadingSpinner from './index';
 import { shallow } from 'enzyme';
 
 describe('InfoList', () => {

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import { addAccessTokenWith } from '../../services/api';
-import { ButtonInline } from '../../components/ButtonInline';
+import ButtonInline from '../../components/ButtonInline';
 
 class Player extends React.Component {
 
@@ -176,9 +176,4 @@ Player.propTypes = {
   isInShuffleMode: React.PropTypes.bool,
 };
 
-const PlayerContainer = connect(mapStateToProps, mapDispatchToProps)(Player);
-
-export {
-  Player,
-  PlayerContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(Player);

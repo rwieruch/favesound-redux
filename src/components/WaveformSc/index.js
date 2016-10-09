@@ -64,6 +64,4 @@ WaveformSc.propTypes = {
   idx: React.PropTypes.number
 };
 
-export {
-  WaveformSc
-};
+export default WaveformSc;

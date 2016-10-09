@@ -2,14 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
-import { CommentExtensionContainer } from '../../components/CommentExtension';
+import CommentExtension from '../../components/CommentExtension';
 
 function TrackExtension({ activity, isOpenComment }) {
-  if (isOpenComment) {
-    return <CommentExtensionContainer activity={activity} />;
-  }
-
-  return <noscript />;
+  return isOpenComment ? <CommentExtension activity={activity} /> : null;
 }
 
 function mapStateToProps(state, props) {
@@ -31,9 +27,4 @@ TrackExtension.propTypes = {
   openComments: React.PropTypes.func,
 };
 
-const TrackExtensionContainer = connect(mapStateToProps, mapDispatchToProps)(TrackExtension);
-
-export {
-  TrackExtension,
-  TrackExtensionContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(TrackExtension);

@@ -26,6 +26,4 @@ ArtworkAction.propTypes = {
   children: React.PropTypes.object,
 };
 
-export {
-  ArtworkAction
-};
+export default ArtworkAction;

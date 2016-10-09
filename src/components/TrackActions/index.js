@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
-import { ButtonGhost } from '../../components/ButtonGhost';
+import ButtonGhost from '../../components/ButtonGhost';
 
 function TrackActions({ onOpenComments, onAddTrackToPlaylist }) {
   const isSmall = true;
@@ -42,9 +42,4 @@ TrackActions.propTypes = {
   onAddTrackToPlaylist: React.PropTypes.func,
 };
 
-const TrackActionsContainer = connect(mapStateToProps, mapDispatchToProps)(TrackActions);
-
-export {
-  TrackActions,
-  TrackActionsContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(TrackActions);

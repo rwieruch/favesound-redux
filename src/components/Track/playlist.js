@@ -1,7 +1,7 @@
 import React from 'react';
-import { Artwork } from '../../components/Artwork';
-import { Permalink } from '../../components/Permalink';
-import { Actions } from '../../components/HoverActions';
+import Artwork from '../../components/Artwork';
+import Permalink from '../../components/Permalink';
+import Actions from '../../components/HoverActions';
 import { isSameTrackAndPlaying, isSameTrack } from '../../services/player';
 
 function TrackPlaylist({

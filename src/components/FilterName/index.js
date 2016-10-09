@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
-import { ButtonInline } from '../../components/ButtonInline';
-import { InputMenu } from '../../components/InputMenu';
+import ButtonInline from '../../components/ButtonInline';
+import InputMenu from '../../components/InputMenu';
 
 function FilterName({
   filterNameQuery,
@@ -52,9 +52,4 @@ FilterName.propTypes = {
   onNameFilter: React.PropTypes.func
 };
 
-const FilterNameContainer = connect(mapStateToProps, mapDispatchToProps)(FilterName);
-
-export {
-  FilterName,
-  FilterNameContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(FilterName);

@@ -16,6 +16,4 @@ function ButtonGhost({ onClick, isSmall, children }) {
   );
 }
 
-export {
-  ButtonGhost
-};
+export default ButtonGhost;

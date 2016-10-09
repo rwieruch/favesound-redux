@@ -5,7 +5,7 @@ import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import * as requestTypes from '../../constants/requestTypes';
 import * as paginateLinkTypes from '../../constants/paginateLinkTypes';
-import { List } from '../../components/List';
+import List from '../../components/List';
 
 function FavoritesList({
   currentUser,
@@ -66,9 +66,5 @@ FavoritesList.propTypes = {
   onFetchFavorites: React.PropTypes.func
 };
 
-const FavoritesListContainer = connect(mapStateToProps, mapDispatchToProps)(FavoritesList);
-
-export {
-  FavoritesList,
-  FavoritesListContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesList);
+export { FavoritesList };

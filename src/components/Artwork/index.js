@@ -11,6 +11,4 @@ Artwork.propTypes = {
   size: React.PropTypes.number
 };
 
-export {
-  Artwork
-};
+export default Artwork;

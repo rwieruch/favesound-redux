@@ -1,6 +1,6 @@
 import React from 'react';
 import withLoadingSpinner from '../../components/withLoadingSpinner';
-import { ButtonGhost } from '../../components/ButtonGhost';
+import ButtonGhost from '../../components/ButtonGhost';
 
 function ButtonMore({ onClick, nextHref, isHidden }) {
   return (

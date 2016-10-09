@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import { TrackPlaylistContainer } from '../../components/Track';
-import { ButtonInline } from '../../components/ButtonInline';
+import ButtonInline from '../../components/ButtonInline';
 
 function PlaylistItem({ activity }) {
   return (
@@ -41,8 +41,8 @@ function Playlist({ toggle, playlist, trackEntities, onClearPlaylist }) {
     <div className={playlistClass}>
       <PlaylistMenu onClearPlaylist={onClearPlaylist} />
       <ul>
-        {map((id, idx) => {
-          return <PlaylistItem key={idx} activity={trackEntities[id]} />;
+        {map((id, key) => {
+          return <PlaylistItem key={key} activity={trackEntities[id]} />;
         }, playlist)}
       </ul>
     </div>
@@ -70,9 +70,4 @@ Playlist.propTypes = {
   onClearPlaylist: React.PropTypes.func
 };
 
-const PlaylistContainer = connect(mapStateToProps, mapDispatchToProps)(Playlist);
-
-export {
-  Playlist,
-  PlaylistContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

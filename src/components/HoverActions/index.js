@@ -1,7 +1,7 @@
 import React from 'react';
 import map from '../../services/map';
 import classNames from 'classnames';
-import { ButtonInline } from '../../components/ButtonInline';
+import ButtonInline from '../../components/ButtonInline';
 
 function Action({ actionItem }) {
   return (
@@ -23,8 +23,8 @@ function Actions({ configuration, isVisible }) {
 
   return (
     <div className={actionsClass}>
-      {map((actionItem, idx) => {
-        return <Action key={idx} actionItem={actionItem} />;
+      {map((actionItem, key) => {
+        return <Action key={key} actionItem={actionItem} />;
       }, configuration)}
     </div>
   );
@@ -35,8 +35,5 @@ Actions.propTypes = {
   isVisible: React.PropTypes.bool
 };
 
-export {
-  Actions,
-
-  Action
-};
+export default Actions;
+export { Action };

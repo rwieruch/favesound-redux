@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { ButtonInline } from '../../components/ButtonInline';
+import ButtonInline from '../../components/ButtonInline';
 
 function ButtonActive({ onClick, isActive, children }) {
   const buttonActiveClass = classNames(
@@ -19,6 +19,4 @@ function ButtonActive({ onClick, isActive, children }) {
   );
 }
 
-export {
-  ButtonActive
-};
+export default ButtonActive;

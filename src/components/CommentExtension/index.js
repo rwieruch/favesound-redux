@@ -5,7 +5,7 @@ import * as actions from '../../actions/index';
 import map from '../../services/map';
 import { getCommentProperty } from '../../services/string';
 import ButtonMore from '../../components/ButtonMore';
-import { Artwork } from '../../components/Artwork';
+import Artwork from '../../components/Artwork';
 import { fromNow } from '../../services/track';
 
 function CommentExtension({
@@ -66,12 +66,10 @@ function mapStateToProps(state, props) {
 function mapDispatchToProps(dispatch) {
   return {
     onFetchComments: bindActionCreators(actions.fetchComments, dispatch),
-    // createComment: bindActionCreators(actions.createComment, dispatch),
   };
 }
 
 CommentExtension.propTypes = {
-  // createComment: React.PropTypes.func,
   onFetchComments: React.PropTypes.func,
   activity: React.PropTypes.object,
   commentIds: React.PropTypes.array,
@@ -81,9 +79,4 @@ CommentExtension.propTypes = {
   nextHref: React.PropTypes.string,
 };
 
-const CommentExtensionContainer = connect(mapStateToProps, mapDispatchToProps)(CommentExtension);
-
-export {
-  CommentExtension,
-  CommentExtensionContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(CommentExtension);

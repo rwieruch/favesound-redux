@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as filterTypes from '../../constants/filterTypes';
 import { DURATION_FILTER_NAMES } from '../../constants/durationFilter';
-import { ButtonActive } from '../../components/ButtonActive';
-import { ButtonInline } from '../../components/ButtonInline';
+import ButtonActive from '../../components/ButtonActive';
+import ButtonInline from '../../components/ButtonInline';
 
 function hasActiveFilter(activeDurationFilter) {
   const { FILTER_DURATION_TRACK, FILTER_DURATION_MIX } = filterTypes;
@@ -66,9 +66,4 @@ FilterDuration.propTypes = {
   onDurationFilter: React.PropTypes.func
 };
 
-const FilterDurationContainer = connect(mapStateToProps, mapDispatchToProps)(FilterDuration);
-
-export {
-  FilterDuration,
-  FilterDurationContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(FilterDuration);

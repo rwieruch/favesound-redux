@@ -8,6 +8,4 @@ function ButtonInline({ onClick, children }) {
   );
 }
 
-export {
-  ButtonInline
-};
+export default ButtonInline;

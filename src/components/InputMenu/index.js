@@ -12,6 +12,4 @@ function InputMenu({ value, onChange, placeholder }) {
   );
 }
 
-export {
-  InputMenu
-};
+export default InputMenu;

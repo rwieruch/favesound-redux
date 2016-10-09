@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import Slider from 'react-rangeslider';
-import { ButtonInline } from '../../components/ButtonInline';
+import ButtonInline from '../../components/ButtonInline';
 
 function VolumeSlider({ volume, onChangeVolume }) {
   return (
@@ -18,7 +18,6 @@ function VolumeSlider({ volume, onChangeVolume }) {
     />
   );
 }
-
 
 function Volume({ toggle, volume, onChangeVolume }) {
   const volumeClass = classNames(
@@ -45,7 +44,7 @@ function Volume({ toggle, volume, onChangeVolume }) {
   return (
     <div className={volumeClass}>
       <div>
-        <h2 className="volume-number">{ volume }</h2>
+        <h2 className="volume-number">{volume}</h2>
         <VolumeSlider volume={volume} onChangeVolume={onChangeVolume}/>
         <div className="volume-muter">
           <ButtonInline onClick={onMute}>
@@ -76,9 +75,4 @@ Volume.propTypes = {
   toggle: React.PropTypes.object
 };
 
-const VolumeContainer = connect(mapStateToProps, mapDispatchToProps)(Volume);
-
-export {
-  Volume,
-  VolumeContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(Volume);

@@ -66,9 +66,9 @@ function SessionAction({ currentUser, onLogin, onLogout }) {
 function MenuList({ selectedGenre, pathname }) {
   return (
     <div>
-      {map((genre, idx) => {
-        const menuItemProps = { genre, selectedGenre, pathname };
-        return <MenuItem key={idx} { ...menuItemProps } />;
+      {map((genre, key) => {
+        const menuItemProps = { genre, selectedGenre, pathname, key };
+        return <MenuItem { ...menuItemProps } />;
       }, GENRES)}
     </div>
   );
@@ -113,9 +113,4 @@ Header.defaultProps = {
   genre: DEFAULT_GENRE
 };
 
-const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header);
-
-export {
-  Header,
-  HeaderContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

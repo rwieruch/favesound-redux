@@ -3,8 +3,8 @@ import map from '../../services/map';
 import filter from 'lodash/fp/filter';
 import withFetchOnScroll from '../../components/withFetchOnScroll';
 import withLoadingSpinner from '../../components/withLoadingSpinner';
+import TrackExtension from '../../components/TrackExtension';
 import { TrackStreamContainer } from '../../components/Track';
-import { TrackExtensionContainer } from '../../components/TrackExtension';
 
 function Activity({
   activity,
@@ -13,7 +13,7 @@ function Activity({
   return (
     <li>
       <TrackStreamContainer activity={activity} idx={idx} />
-      <TrackExtensionContainer activity={activity} />
+      <TrackExtension activity={activity} />
     </li>
   );
 }
@@ -36,9 +36,9 @@ function Activities({
     <div>
       <div>
         <ul>
-          {map((activity, idx) => {
-            const activityProps = { activity, idx };
-            return <Activity key={idx} { ...activityProps } />;
+          {map((activity, key) => {
+            const activityProps = { activity, idx: key, key };
+            return <Activity { ...activityProps } />;
           }, sortedEntities)}
         </ul>
       </div>

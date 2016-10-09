@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as sortTypes from '../../constants/sortTypes';
 import { SORT_NAMES } from '../../constants/sort';
-import { ButtonActive } from '../../components/ButtonActive';
-import { ButtonInline } from '../../components/ButtonInline';
+import ButtonActive from '../../components/ButtonActive';
+import ButtonInline from '../../components/ButtonInline';
 
 function hasActiveSort(activeSort) {
   return activeSort !== sortTypes.NONE;
@@ -65,9 +65,4 @@ Sort.propTypes = {
   onSort: React.PropTypes.func
 };
 
-const SortContainer = connect(mapStateToProps, mapDispatchToProps)(Sort);
-
-export {
-  Sort,
-  SortContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);

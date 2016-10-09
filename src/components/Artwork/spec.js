@@ -1,4 +1,4 @@
-import { Artwork } from './index';
+import Artwork from './index';
 import { shallow } from 'enzyme';
 
 describe('Artwork', () => {

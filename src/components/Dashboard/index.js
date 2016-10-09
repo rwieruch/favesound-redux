@@ -1,24 +1,22 @@
 import React from 'react';
-import { StreamActivitiesContainer } from '../../components/StreamActivities';
-import { FollowersListContainer } from '../../components/FollowersList';
-import { FollowingsListContainer } from '../../components/FollowingsList';
-import { FavoritesListContainer } from '../../components/FavoritesList';
+import StreamActivities from '../../components/StreamActivities';
+import FollowersList from '../../components/FollowersList';
+import FollowingsList from '../../components/FollowingsList';
+import FavoritesList from '../../components/FavoritesList';
 
 function Dashboard() {
   return (
     <div className="dashboard">
       <div className="dashboard-main">
-        <StreamActivitiesContainer />
+        <StreamActivities />
       </div>
       <div className="dashboard-side">
-        <FollowingsListContainer />
-        <FollowersListContainer />
-        <FavoritesListContainer />
+        <FollowingsList />
+        <FollowersList />
+        <FavoritesList />
       </div>
     </div>
   );
 }
 
-export {
-  Dashboard
-};
+export default Dashboard;

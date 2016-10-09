@@ -1,24 +1,22 @@
 import React from 'react';
-import { FilterDurationContainer } from '../../components/FilterDuration';
-import { SortContainer } from '../../components/Sort';
-import { FilterNameContainer } from '../../components/FilterName';
+import FilterDuration from '../../components/FilterDuration';
+import FilterName from '../../components/FilterName';
+import Sort from '../../components/Sort';
 
 function StreamInteractions() {
   return (
     <div className="stream-interactions">
       <div className="stream-interactions-item">
-        <FilterDurationContainer />
+        <FilterDuration />
       </div>
       <div className="stream-interactions-item">
-        <SortContainer />
+        <Sort />
       </div>
       <div className="stream-interactions-item">
-        <FilterNameContainer />
+        <FilterName />
       </div>
     </div>
   );
 }
 
-export {
-  StreamInteractions,
-};
+export default StreamInteractions;

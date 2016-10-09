@@ -6,9 +6,9 @@ import { SORT_FUNCTIONS } from '../../constants/sort';
 import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter';
 import * as actions from '../../actions/index';
 import * as requestTypes from '../../constants/requestTypes';
-import { StreamInteractions } from '../../components/StreamInteractions';
+import StreamInteractions from '../../components/StreamInteractions';
 import Activities from '../../components/Activities';
-import { LoadingSpinner } from '../../components/LoadingSpinner';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import { getTracknameFilter } from '../../constants/nameFilter';
 import { getAndCombined } from '../../services/filter';
 
@@ -54,7 +54,7 @@ class Browse extends React.Component {
           activeSort={activeSort}
           scrollFunction={this.fetchActivitiesByGenre}
         />
-        <LoadingSpinner isLoading={requestsInProcess[requestTypes.GENRES] && browseActivities[genre]} />
+        <LoadingSpinner isLoading={!!(requestsInProcess[requestTypes.GENRES] && browseActivities[genre])} />
       </div>
     );
   }
@@ -99,9 +99,4 @@ Browse.defaultProps = {
   genre: DEFAULT_GENRE
 };
 
-const BrowseContainer = connect(mapStateToProps, mapDispatchToProps)(Browse);
-
-export {
-  Browse,
-  BrowseContainer
-};
+export default connect(mapStateToProps, mapDispatchToProps)(Browse);

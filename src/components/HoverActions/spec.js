@@ -1,4 +1,4 @@
-import { Actions, Action } from './index';
+import Actions, { Action } from './index';
 import { shallow } from 'enzyme';
 
 describe('Actions', () => {

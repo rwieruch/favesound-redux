@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { TrackPreviewContainer } from '../../components/Track';
 import { UserPreviewContainer } from '../../components/User';
 import ButtonMore from '../../components/ButtonMore';
-import { ButtonInline } from '../../components/ButtonInline';
+import ButtonInline from '../../components/ButtonInline';
 
 function Chevron({ ids, isExpanded }) {
   const chevronClass = classNames(
@@ -39,9 +39,9 @@ function SpecificList({ ids, kind, entities }) {
     return (
       <div className="list-content">
         <ul>
-          {map((id, idx) => {
+          {map((id, key) => {
             const userProps = { userId: id, entities };
-            return <SpecificItemUser key={idx} { ...userProps } />;
+            return <SpecificItemUser key={key} { ...userProps } />;
           }, ids)}
         </ul>
       </div>
@@ -52,9 +52,9 @@ function SpecificList({ ids, kind, entities }) {
     return (
       <div className="list-content">
         <ul>
-          {map((id, idx) => {
+          {map((id, key) => {
             const trackProps = { trackId: id, entities };
-            return <SpecificItemTrack key={idx} { ...trackProps } />;
+            return <SpecificItemTrack key={key} { ...trackProps } />;
           }, ids)}
         </ul>
       </div>
@@ -113,9 +113,8 @@ List.propTypes = {
   onFetchMore: React.PropTypes.func
 };
 
+export default List;
 export {
-  List,
-
   SpecificList,
   Chevron,
 };

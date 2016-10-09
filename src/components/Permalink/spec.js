@@ -1,4 +1,4 @@
-import { Permalink } from './index';
+import Permalink from './index';
 import { shallow } from 'enzyme';
 
 describe('Permalink', () => {

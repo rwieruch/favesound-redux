@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function(Component) {
+function withFetchOnScroll(Component) {
   class FetchOnScroll extends React.Component {
     constructor(props) {
       super(props);
@@ -32,3 +32,5 @@ export default function(Component) {
 
   return FetchOnScroll;
 }
+
+export default withFetchOnScroll;
