@@ -21,12 +21,12 @@ export function mergeFollowings(followings) {
   };
 }
 
-export const fetchFollowings = (user, nextHref, ignoreInProgress) => (dispatch, getState) => {
+export const fetchFollowings = (user, nextHref) => (dispatch, getState) => {
   const requestType = requestTypes.FOLLOWINGS;
   const url = getLazyLoadingUsersUrl(user, nextHref, 'followings?limit=20&offset=0');
   const requestInProcess = getState().request[requestType];
 
-  if (requestInProcess && !ignoreInProgress) { return; }
+  if (requestInProcess) { return; }
 
   dispatch(setRequestInProcess(true, requestType));
 
@@ -148,46 +148,4 @@ export const fetchFavorites = (user, nextHref) => (dispatch, getState) => {
       dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FAVORITES));
       dispatch(setRequestInProcess(false, requestType));
     });
-};
-
-const fetchFavoritesOfFollowing = (user, nextHref) => (dispatch) => {
-  // const requestType = requestTypes.FAVORITES;
-  const url = getLazyLoadingUsersUrl(user, nextHref, 'favorites?linked_partitioning=1&limit=200&offset=0');
-  // const requestInProcess = getState().request[requestType];
-
-  return fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      const normalized = normalize(data.collection, arrayOf(trackSchema));
-      dispatch(mergeEntities(normalized.entities));
-      // dispatch(mergeFollowingsFavorites(user.id, normalized.result));
-    });
-};
-
-const fetchFavoritesOfFollowings = () => (dispatch, getState) => {
-  const { followings } = getState().user;
-
-  if (followings) {
-    map((following) => {
-      if (!getState().followings[following.id]) {
-        dispatch(fetchFavoritesOfFollowing());
-      }
-    }, followings);
-  }
-};
-
-export const fetchAllFollowingsWithFavorites = () => (dispatch, getState) => {
-  const nextHref = getState().paginate[paginateLinkTypes.FOLLOWINGS];
-  const modifiedNextHref = nextHref ? nextHref.replace("page_size=20", "page_size=199") : null;
-  const ignoreInProgress = true;
-
-  const promise = dispatch(fetchFollowings(null, modifiedNextHref, ignoreInProgress));
-
-  promise.then(() => {
-    dispatch(fetchFavoritesOfFollowings());
-
-    if (getState().paginate[paginateLinkTypes.FOLLOWINGS]) {
-      dispatch(fetchAllFollowingsWithFavorites());
-    }
-  });
 };

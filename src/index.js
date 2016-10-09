@@ -9,10 +9,9 @@ import { Provider } from 'react-redux';
 import configureStore from './stores/configureStore';
 import { Dashboard } from './components/Dashboard';
 import { BrowseContainer } from './components/Browse';
-import { Fave } from './components/Fave';
 import Callback from './components/Callback';
 import App from './components/App';
-import { browse, dashboard, fave, callback } from './constants/pathnames';
+import { browse, dashboard, callback } from './constants/pathnames';
 
 require('../styles/index.scss');
 
@@ -27,7 +26,6 @@ ReactDOM.render(
         <Route path={callback} component={Callback} />
         <Route path={dashboard} component={Dashboard} />
         <Route path={browse} component={BrowseContainer} />
-        <Route path={fave} component={Fave} />
         <Route path="*" component={BrowseContainer} />
       </Route>
     </Router>

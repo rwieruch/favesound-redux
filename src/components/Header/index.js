@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import { GENRES, DEFAULT_GENRE } from '../../constants/genre';
-import { browse, fave, dashboard } from '../../constants/pathnames';
+import { browse, dashboard } from '../../constants/pathnames';
 
 function getGenreLink(genre) {
   return browse + '?genre=' + genre;
@@ -74,16 +74,13 @@ function MenuList({ selectedGenre, pathname }) {
   );
 }
 
-function Header({ currentUser, genre, pathname, onLogin, onLogout, onChangeLocation }) {
+function Header({ currentUser, genre, pathname, onLogin, onLogout }) {
   return (
     <div className="header">
       <div className="header-content">
         <Logo genre={genre} />
         <MenuList selectedGenre={genre} pathname={pathname} />
         <SessionAction currentUser={currentUser} onLogin={onLogin} onLogout={onLogout} />
-      </div>
-      <div className="header-hidden">
-        <a href="#" onClick={() => onChangeLocation(fave)}>...</a>
       </div>
     </div>
   );
@@ -101,7 +98,6 @@ function mapDispatchToProps(dispatch) {
   return {
     onLogin: bindActionCreators(actions.login, dispatch),
     onLogout: bindActionCreators(actions.logout, dispatch),
-    onChangeLocation: bindActionCreators(actions.changeLocation, dispatch)
   };
 }
 
@@ -111,7 +107,6 @@ Header.propTypes = {
   pathname: React.PropTypes.string,
   onLogin: React.PropTypes.func,
   onLogout: React.PropTypes.func,
-  onChangeLocation: React.PropTypes.func
 };
 
 Header.defaultProps = {
