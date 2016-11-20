@@ -27,6 +27,11 @@
 
     &-name {
       width: 50%;
+
+    }
+    &-link {
+      font-size: 15px;
+      white-space: nowrap;
     }
 
     &-action {
@@ -48,6 +53,7 @@
 
     div {
       margin: auto $padding;
+      min-width: $padding * 2;
     }
 
   }

@@ -7,6 +7,8 @@ import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import { addAccessTokenWith } from '../../services/api';
 import ButtonInline from '../../components/ButtonInline';
+import ReactTooltip from 'react-tooltip';
+import Clipboard from 'react-clipboard.js';
 
 class Player extends React.Component {
 
@@ -121,6 +123,18 @@ class Player extends React.Component {
               <i className={likeClass} />
             </ButtonInline> : null
           }
+        </div>
+        <div className="player-content-action">
+          <a data-tip data-for="global">
+            <Clipboard component="a" data-clipboard-text={track.permalink_url}>
+                <div className="player-content-link">
+                  <i className="fa fa-share" />
+                </div>
+            </Clipboard>
+          </a>
+          <ReactTooltip id="global" event="click" aria-haspopup="true">
+            <p>Song URL copied!</p>
+          </ReactTooltip>
         </div>
         <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
       </div>
