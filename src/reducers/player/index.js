@@ -5,7 +5,7 @@ const initialState = {
   isInShuffleMode: false,
   activeTrackId: null,
   isPlaying: false,
-  playlist: []
+  playlist: [],
 };
 
 export default function(state = initialState, action) {
