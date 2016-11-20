@@ -15,9 +15,9 @@ module.exports = {
       },
     ],
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loader: 'react-hot!babel'
+      loader: "babel-loader"
     },
     {
       test: /\.scss$/,
@@ -41,6 +41,7 @@ module.exports = {
     configFile: './.eslintrc'
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
