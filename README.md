@@ -4,17 +4,35 @@ The SoundCloud Client in React + Redux made with passion!
 
 ![FaveSound](https://s9.postimg.org/yp2tvv4m7/Screen_Shot_2016_09_03_at_23_47_30.png)
 
-Live: http://www.favesound.de/
+[Demo](http://www.favesound.de/)
 
 [Comprehensive Guide: The SoundCloue Client in React + Redux](http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/)
 
 [Boilerplate Project](https://github.com/rwieruch/react-redux-soundcloud)
 
-Uses redux, redux-thunk, normalizr, react, lodash-fp, airbnb-extended eslint, enzyme and the Soundcloud API.
+Includes:
+* react
+* react-router
+* redux
+* redux-thunk
+* normalizr
+* lodash-fp
+* airbnb-extended eslint
+* enzyme
+* Soundcloud API.
 
-Feedback is more than appreciated via GitHub or [Twitter](https://twitter.com/rwieruch) :)
-
-Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
+Features:
+* login to SoundCloud
+* show your personal stream
+* show favorite tracks, followers and followings
+* inifite scroll + paginated fetching
+* follow people
+* like tracks
+* player play/stop/forward/backward track
+* playlist
+* sort tracks by plays, likes, comments, reposts, downloads
+* filter tracks by duration
+* search tracks by name and artist
 
 ## Run
 
@@ -25,10 +43,10 @@ Thanks for the inspiration @ https://github.com/andrewngu/sound-redux
 
 ## Contribute
 
-I am looking actively for contributors to make this project awesome! It doesn't matter if you are new to open source, I would welcome it!
+I am looking actively for contributors to make this project awesome!
 
 I wouldn't want to extend the project with new routes like: that's my profile page and that's my favorite track page. Rather I see more value in improving the status quo of the app: Improving the player, the playlist or the interaction overall. I would love to see a GitHub issue to see where you want to work on. Moreover I will try to find the time to raise some more issues where people can contribute. At the end it is a perfect project to get started in open source!
 
-## Future
+## Improve
 
-I want to provide an amazing experience for artists to find new music with the help of their own profile and surroundings like followers, followings etc. This is just the beginning :)
+Feedback is more than appreciated via [GitHub](https://github.com/rwieruch) or [Twitter](https://twitter.com/rwieruch)
