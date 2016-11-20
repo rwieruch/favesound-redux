@@ -53,6 +53,7 @@
 
     div {
       margin: auto $padding;
+      min-width: $padding * 2;
     }
 
   }

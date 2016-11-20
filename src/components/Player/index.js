@@ -75,6 +75,7 @@ class Player extends React.Component {
     );
 
     const shuffleClass = classNames(
+      'fa fa-random',
       {
         randomSelected: isInShuffleMode
       }
@@ -82,18 +83,6 @@ class Player extends React.Component {
 
     return (
       <div className="player-content">
-        <div className="player-content-action">
-          <a data-tip data-for="global">
-            <Clipboard component="a" data-clipboard-text={track.permalink_url}>
-                <div className="player-content-link">
-                  Share Track
-                </div>
-            </Clipboard>
-          </a>
-          <ReactTooltip id="global" event="click" aria-haspopup="true">
-            <p>Song URL copied!</p>
-          </ReactTooltip>
-        </div>
         <div className="player-content-action">
           <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, -1)}>
             <i className="fa fa-step-backward" />
@@ -134,6 +123,18 @@ class Player extends React.Component {
               <i className={likeClass} />
             </ButtonInline> : null
           }
+        </div>
+        <div className="player-content-action">
+          <a data-tip data-for="global">
+            <Clipboard component="a" data-clipboard-text={track.permalink_url}>
+                <div className="player-content-link">
+                  <i className="fa fa-share" />
+                </div>
+            </Clipboard>
+          </a>
+          <ReactTooltip id="global" event="click" aria-haspopup="true">
+            <p>Song URL copied!</p>
+          </ReactTooltip>
         </div>
         <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
       </div>
