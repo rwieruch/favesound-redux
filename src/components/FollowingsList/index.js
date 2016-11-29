@@ -19,7 +19,7 @@ function FollowingsList({
 }) {
   return (
     <List
-      title="Followings"
+      title="Following"
       ids={followings}
       entities={userEntities}
       nextHref={nextHref}
