@@ -2,3 +2,4 @@ node_modules/
 dist/bundle.js
 dist/server
 npm-debug.log
+.yarn
