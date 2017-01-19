@@ -10,15 +10,6 @@ import ButtonInline from '../../components/ButtonInline';
 import ReactTooltip from 'react-tooltip';
 import Clipboard from 'react-clipboard.js';
 
-function updateProgress(event) {
-  const statusbar = document.getElementById('player-status-bar');
-  let val = 0;
-  if (event.target.currentTime > 0) {
-    val = ((100 / event.target.duration) * event.target.currentTime).toFixed(2);
-  }
-  statusbar.style.width = val + "%";
-}
-
 class Player extends React.Component {
 
   componentDidUpdate() {
@@ -166,6 +157,15 @@ class Player extends React.Component {
     return <div className={playerClass}>{this.renderNav()}</div>;
   }
 
+}
+
+function updateProgress(event) {
+  const statusbar = document.getElementById('player-status-bar');
+  let val = 0;
+  if (event.target.currentTime > 0) {
+    val = ((100 / event.target.duration) * event.target.currentTime).toFixed(2);
+  }
+  statusbar.style.width = val + "%";
 }
 
 function mapStateToProps(state) {
