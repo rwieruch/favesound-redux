@@ -1,7 +1,7 @@
 {
   "name": "favesound-redux",
   "version": "1.0.0",
-  "description": "",
+  "description": "A fork of favesound-redux.",
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack -p --progress --colors --config ./webpack.prod.config.js",
@@ -20,7 +20,7 @@
     ]
   },
   "keywords": [],
-  "author": "",
+  "author": "Kobaine <rodgersbc@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "6.3.15",
@@ -76,5 +76,6 @@
     "soundcloud": "3.0.1",
     "waveform.js": "1.0.0",
     "whatwg-fetch": "2.0.1"
-  }
+  },
+  "repository": "https://github.com/C-Rodg/favesound-redux.git"
 }
