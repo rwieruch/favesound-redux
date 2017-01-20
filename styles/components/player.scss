@@ -15,7 +15,7 @@
   -webkit-transition-timing-function: ease;
 
   &-visible {
-    height: $padding * 3;
+    height: $padding * 3 + 10;
   }
 
   &-content {
@@ -24,6 +24,7 @@
     justify-content: start;
     height: 100%;
     margin-left: 25%;
+    flex-grow: 1;
 
     &-name {
       width: 50%;
@@ -60,6 +61,24 @@
 
   .randomSelected{
     color: $mainColor;
+  }
+
+  .player-container {
+  	display: flex;
+  	flex-direction: column;
+  	height: 100%;
+  }
+
+  .player-status {
+  	height: 10px;
+  	border-bottom: $darkBorder;
+
+  	.player-status-bar {
+	  	width: 0;
+	  	transition: width 0.3s linear;
+	  	background-color: #61B25A;
+	  	height: 100%;
+	}
   }
 
 }
