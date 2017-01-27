@@ -78,7 +78,20 @@
 	  	transition: width 0.3s linear;
 	  	background-color: #61B25A;
 	  	height: 100%;
-	}
+      position: relative;
+
+      .player-status-bar-dragger {
+        width: 20px;
+        height: 10px;
+        position: absolute;
+        right: -8px;
+        background-color: #f5f5f5;
+        border: 1px solid #8dc572;
+        top: -1px;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+	  }
   }
 
 }

@@ -84,7 +84,9 @@ class Player extends React.Component {
     return (
       <div className="player-container">
         <div className="player-status">
-          <div id="player-status-bar" className="player-status-bar"></div>
+          <div id="player-status-bar" className="player-status-bar">
+            <span className="player-status-bar-dragger" onClick={(ev) => console.log(ev)}></span>
+          </div>
         </div>
         <div className="player-content">
           <div className="player-content-action">
