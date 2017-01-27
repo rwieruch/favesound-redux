@@ -20,10 +20,10 @@ class Player extends React.Component {
     const { isPlaying, volume } = this.props;
     if (isPlaying) {
       audioElement.play();
+      audioElement.addEventListener('timeupdate', updateProgress, false);
     } else {
       audioElement.pause();
     }
-
     audioElement.volume = volume / 100;
   }
 
@@ -82,61 +82,66 @@ class Player extends React.Component {
     );
 
     return (
-      <div className="player-content">
-        <div className="player-content-action">
-          <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, -1)}>
-            <i className="fa fa-step-backward" />
-          </ButtonInline>
+      <div className="player-container">
+        <div className="player-status">
+          <div id="player-status-bar" className="player-status-bar"></div>
         </div>
-        <div className="player-content-action">
-          <ButtonInline onClick={() => onTogglePlayTrack(!isPlaying)}>
-            <i className={playClass} />
-          </ButtonInline>
+        <div className="player-content">
+          <div className="player-content-action">
+            <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, -1)}>
+              <i className="fa fa-step-backward" />
+            </ButtonInline>
+          </div>
+          <div className="player-content-action">
+            <ButtonInline onClick={() => onTogglePlayTrack(!isPlaying)}>
+              <i className={playClass} />
+            </ButtonInline>
+          </div>
+          <div className="player-content-action">
+            <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, 1)}>
+              <i className="fa fa-step-forward" />
+            </ButtonInline>
+          </div>
+          <div className="player-content-name">
+            {username} - {title}
+          </div>
+          <div className="player-content-action">
+            <ButtonInline onClick={() => onSetToggle(toggleTypes.PLAYLIST)}>
+              <i className="fa fa-th-list" /> {playlist.length}
+            </ButtonInline>
+          </div>
+          <div className="player-content-action">
+            <ButtonInline onClick={onSetShuffleMode}>
+              <i className={shuffleClass} />
+            </ButtonInline>
+          </div>
+          <div className="player-content-action">
+            <ButtonInline onClick={() => onSetToggle(toggleTypes.VOLUME)}>
+              <i className={muteClass} />
+            </ButtonInline>
+          </div>
+          <div className="player-content-action">
+            {
+              currentUser ?
+              <ButtonInline onClick={() => onLike(track)}>
+                <i className={likeClass} />
+              </ButtonInline> : null
+            }
+          </div>
+          <div className="player-content-action">
+            <a data-tip data-for="global">
+              <Clipboard component="a" data-clipboard-text={track.permalink_url}>
+                  <div className="player-content-link">
+                    <i className="fa fa-share" />
+                  </div>
+              </Clipboard>
+            </a>
+            <ReactTooltip id="global" event="click" aria-haspopup="true">
+              <p>Song URL copied!</p>
+            </ReactTooltip>
+          </div>
+          <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
         </div>
-        <div className="player-content-action">
-          <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, 1)}>
-            <i className="fa fa-step-forward" />
-          </ButtonInline>
-        </div>
-        <div className="player-content-name">
-          {username} - {title}
-        </div>
-        <div className="player-content-action">
-          <ButtonInline onClick={() => onSetToggle(toggleTypes.PLAYLIST)}>
-            <i className="fa fa-th-list" /> {playlist.length}
-          </ButtonInline>
-        </div>
-        <div className="player-content-action">
-          <ButtonInline onClick={onSetShuffleMode}>
-            <i className={shuffleClass} />
-          </ButtonInline>
-        </div>
-        <div className="player-content-action">
-          <ButtonInline onClick={() => onSetToggle(toggleTypes.VOLUME)}>
-            <i className={muteClass} />
-          </ButtonInline>
-        </div>
-        <div className="player-content-action">
-          {
-            currentUser ?
-            <ButtonInline onClick={() => onLike(track)}>
-              <i className={likeClass} />
-            </ButtonInline> : null
-          }
-        </div>
-        <div className="player-content-action">
-          <a data-tip data-for="global">
-            <Clipboard component="a" data-clipboard-text={track.permalink_url}>
-                <div className="player-content-link">
-                  <i className="fa fa-share" />
-                </div>
-            </Clipboard>
-          </a>
-          <ReactTooltip id="global" event="click" aria-haspopup="true">
-            <p>Song URL copied!</p>
-          </ReactTooltip>
-        </div>
-        <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
       </div>
     );
   }
@@ -152,6 +157,15 @@ class Player extends React.Component {
     return <div className={playerClass}>{this.renderNav()}</div>;
   }
 
+}
+
+function updateProgress(event) {
+  const statusbar = document.getElementById('player-status-bar');
+  let val = 0;
+  if (event.target.currentTime > 0) {
+    val = ((100 / event.target.duration) * event.target.currentTime).toFixed(2);
+  }
+  statusbar.style.width = val + "%";
 }
 
 function mapStateToProps(state) {
