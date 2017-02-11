@@ -27,6 +27,14 @@ class Player extends React.Component {
     audioElement.volume = volume / 100;
   }
 
+  setAudioPosition(ev) {
+    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+    if (!audioElement) { return; }
+    const songPercentage = ev.clientX / window.innerWidth;
+    const duration = audioElement.duration;
+    audioElement.currentTime = duration * songPercentage;
+  }
+
   renderNav() {
     const {
       currentUser,
@@ -83,8 +91,10 @@ class Player extends React.Component {
 
     return (
       <div className="player-container">
-        <div className="player-status">
-          <div id="player-status-bar" className="player-status-bar"></div>
+        <div className="player-status" onClick={this.setAudioPosition.bind(this)}>
+          <div id="player-status-bar" className="player-status-bar">
+            <span className="player-status-bar-dragger"></span>
+          </div>
         </div>
         <div className="player-content">
           <div className="player-content-action">
