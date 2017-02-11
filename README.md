@@ -29,8 +29,8 @@ Features:
 * follow people
 * like tracks
 * player play/stop/forward/backward track
-* shuffle tracks
-* show duration of tracks and navigate in it
+* player with shuffle tracks, share link and volume
+* player with duration bar for tracks and navigation
 * playlist
 * sort tracks by plays, likes, comments, reposts, downloads
 * filter tracks by duration
