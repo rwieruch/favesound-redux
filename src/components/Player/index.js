@@ -11,6 +11,12 @@ import ReactTooltip from 'react-tooltip';
 import Clipboard from 'react-clipboard.js';
 
 class Player extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.updateProgress = this.updateProgress.bind(this);
+    this.setAudioPosition = this.setAudioPosition.bind(this);
+  }
 
   componentDidUpdate() {
     const audioElement = ReactDOM.findDOMNode(this.refs.audio);
@@ -20,7 +26,7 @@ class Player extends React.Component {
     const { isPlaying, volume } = this.props;
     if (isPlaying) {
       audioElement.play();
-      audioElement.addEventListener('timeupdate', updateProgress, false);
+      audioElement.addEventListener('timeupdate', this.updateProgress, false);
     } else {
       audioElement.pause();
     }
@@ -33,6 +39,26 @@ class Player extends React.Component {
     const songPercentage = ev.clientX / window.innerWidth;
     const duration = audioElement.duration;
     audioElement.currentTime = duration * songPercentage;
+  }
+
+  updateProgress(event) {
+    const statusbar = document.getElementById('player-status-bar');
+    let val = 0;
+    if (event.target.currentTime > 0) {
+      val = ((100 / event.target.duration) * event.target.currentTime).toFixed(2);
+    }
+    statusbar.style.width = val + "%";
+
+    if (event.target.duration <= event.target.currentTime) {
+      const { playlist, activeTrackId } = this.props;
+      if (playlist) {
+        if (playlist.length >= 1 && (playlist[playlist.length - 1] !== activeTrackId)) {
+          this.props.onActivateIteratedTrack(activeTrackId, 1);
+        } else {
+          this.props.onTogglePlayTrack(false);
+        }
+      }
+    }
   }
 
   renderNav() {
@@ -91,7 +117,7 @@ class Player extends React.Component {
 
     return (
       <div className="player-container">
-        <div className="player-status" onClick={this.setAudioPosition.bind(this)}>
+        <div className="player-status" onClick={this.setAudioPosition}>
           <div id="player-status-bar" className="player-status-bar">
             <span className="player-status-bar-dragger"></span>
           </div>
@@ -167,15 +193,6 @@ class Player extends React.Component {
     return <div className={playerClass}>{this.renderNav()}</div>;
   }
 
-}
-
-function updateProgress(event) {
-  const statusbar = document.getElementById('player-status-bar');
-  let val = 0;
-  if (event.target.currentTime > 0) {
-    val = ((100 / event.target.duration) * event.target.currentTime).toFixed(2);
-  }
-  statusbar.style.width = val + "%";
 }
 
 function mapStateToProps(state) {
