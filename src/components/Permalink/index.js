@@ -11,7 +11,7 @@ function Permalink({ link, text, title }) {
 Permalink.propTypes = {
   link: React.PropTypes.string,
   text: React.PropTypes.string,
-  title: React.PropTypes.string,
+  title: React.PropTypes.string
 };
 
 export default Permalink;
