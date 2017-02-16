@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Permalink({ link, text }) {
+function Permalink({ link, text, title }) {
   return (
-    <a href={link}>
+    <a href={link} title={title}>
       {text}
     </a>
   );
@@ -10,7 +10,8 @@ function Permalink({ link, text }) {
 
 Permalink.propTypes = {
   link: React.PropTypes.string,
-  text: React.PropTypes.string
+  text: React.PropTypes.string,
+  title: React.PropTypes.string,
 };
 
 export default Permalink;
