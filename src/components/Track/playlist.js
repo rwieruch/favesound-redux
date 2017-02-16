@@ -16,6 +16,7 @@ function TrackPlaylist({
 
   const { user, title, permalink_url, artwork_url } = activity;
   const { avatar_url, username } = userEntities[user];
+  const userPermalinkUrl = userEntities[user].permalink_url;
 
   const trackIsPlaying = isSameTrackAndPlaying(activeTrackId, activity.id, isPlaying);
   const isVisible = isSameTrack(activeTrackId)(activity.id);
@@ -37,7 +38,8 @@ function TrackPlaylist({
         <Artwork image={artwork_url} title={title} optionalImage={avatar_url} size={40} />
       </div>
       <div className="playlist-track-content">
-        <Permalink link={permalink_url} text={username + ' - ' + title} />
+        <Permalink link={permalink_url} text={title} title={title}/>
+        <Permalink link={userPermalinkUrl} text={'by: ' + username} title={username}/>
         <Actions configuration={configuration} isVisible={isVisible} />
       </div>
     </div>

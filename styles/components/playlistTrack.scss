@@ -19,7 +19,11 @@
 
     a {
       float: left;
-      width: $padding * 14;
+      width: $padding * 13;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
