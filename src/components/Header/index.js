@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import { GENRES, DEFAULT_GENRE } from '../../constants/genre';
-import { browse, dashboard } from '../../constants/pathnames';
+import { browse, dashboard, callback } from '../../constants/pathnames';
 
 function getGenreLink(genre) {
   return browse + '?genre=' + genre;
@@ -23,7 +23,7 @@ function Logo({ genre }) {
 }
 
 function MenuItem({ pathname, selectedGenre, genre }) {
-  if (pathname !== browse) { return null; }
+  if (pathname === dashboard || pathname === callback) { return null; }
 
   const linkClass = classNames(
     'menu-item',
