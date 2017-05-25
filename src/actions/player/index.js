@@ -12,46 +12,46 @@ export function setActiveTrack(activeTrackId) {
   };
 }
 
-function setIsPlaying(isPlaying) {
+export function setIsPlaying(isPlaying) {
   return {
     type: actionTypes.SET_IS_PLAYING,
     isPlaying
   };
 }
 
-function setTrackInPlaylist(trackId) {
+export function setTrackInPlaylist(trackId) {
   return {
     type: actionTypes.SET_TRACK_IN_PLAYLIST,
     trackId
   };
 }
 
-function removeFromPlaylist(trackId) {
+export function removeFromPlaylist(trackId) {
   return {
     type: actionTypes.REMOVE_TRACK_FROM_PLAYLIST,
     trackId
   };
 }
 
-function deactivateTrack() {
+export function deactivateTrack() {
   return {
     type: actionTypes.RESET_ACTIVE_TRACK,
   };
 }
 
-function emptyPlaylist() {
+export function emptyPlaylist() {
   return {
     type: actionTypes.RESET_PLAYLIST,
   };
 }
 
-function setIsInShuffleMode() {
+export function setIsInShuffleMode() {
   return {
     type: actionTypes.SET_SHUFFLE_MODE,
   };
 }
 
-function setTrackVolume(volume) {
+export function setTrackVolume(volume) {
   return {
     type: actionTypes.SET_VOLUME,
     volume

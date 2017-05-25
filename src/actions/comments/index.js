@@ -7,14 +7,14 @@ import { setPaginateLink } from '../../actions/paginate';
 import { getLazyLoadingCommentsUrl } from '../../services/api';
 import { getCommentProperty } from '../../services/string';
 
-function setOpenComments(trackId) {
+export function setOpenComments(trackId) {
   return {
     type: actionTypes.OPEN_COMMENTS,
     trackId
   };
 }
 
-function mergeComments(comments, trackId) {
+export function mergeComments(comments, trackId) {
   return {
     type: actionTypes.MERGE_COMMENTS,
     comments,
