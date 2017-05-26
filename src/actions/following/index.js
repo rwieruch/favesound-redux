@@ -3,7 +3,7 @@ import * as actionTypes from '../../constants/actionTypes';
 import { apiUrl } from '../../services/api';
 import { mergeFollowings } from '../../actions/user';
 
-function removeFromFollowings(userId) {
+export function removeFromFollowings(userId) {
   return {
     type: actionTypes.REMOVE_FROM_FOLLOWINGS,
     userId
