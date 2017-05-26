@@ -38,9 +38,10 @@ Features:
 ## Run
 
 1. Clone Repository: `git clone git@github.com:rwieruch/favesound-redux.git`
-2. npm install
-3. npm start
-4. npm test
+2. `npm install`
+3. `npm start`
+4. visit http://localhost:8080/
+4. `npm test`
 
 ## Contribute
 
