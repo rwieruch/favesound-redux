@@ -118,7 +118,7 @@ function getRandomTrack(playlist, currentActiveTrackId) {
   return playlist[getRandomIndex()];
 }
 
-export const activateIteratedTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
+export const activateIteratedPlaylistTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
   const playlist = getState().player.playlist;
   const nextActiveTrackId = getIteratedTrack(playlist, currentActiveTrackId, iterate);
   const isInShuffleMode = getState().player.isInShuffleMode;
@@ -128,8 +128,33 @@ export const activateIteratedTrack = (currentActiveTrackId, iterate) => (dispatc
   } else if (isInShuffleMode) {
     const randomActiveTrackId = getRandomTrack(playlist, currentActiveTrackId);
     dispatch(activateTrack(randomActiveTrackId));
+  }
+};
+
+export const activateIteratedStreamTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
+  const playlist = getState().player.playlist;
+  const isInShuffleMode = getState().player.isInShuffleMode;
+
+  let browserList = [];
+  const selectedGenre = getState().browse.selectedGenre;
+  if (selectedGenre) {
+    browserList = getState().browse[selectedGenre];
   } else {
-    dispatch(togglePlayTrack(false));
+    browserList = getState().user.activities;
+  }
+  if (isInShuffleMode) {
+    const randomActiveTrackId = getRandomTrack(browserList, currentActiveTrackId);
+    dispatch(activateTrack(randomActiveTrackId));
+  } else {
+    let nextBrowseTrackId = getIteratedTrack(browserList, currentActiveTrackId, iterate);
+    while (playlist.includes(nextBrowseTrackId)) {
+      nextBrowseTrackId = getIteratedTrack(browserList, nextBrowseTrackId, iterate);
+    }
+    if (nextBrowseTrackId) {
+      dispatch(activateTrack(nextBrowseTrackId));
+    } else {
+      dispatch(togglePlayTrack(false));
+    }
   }
 };
 
@@ -139,7 +164,7 @@ export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
   const isRelevantTrack = isSameTrackAndPlaying(activeTrackId, track.id, isPlaying);
 
   if (isRelevantTrack) {
-    dispatch(activateIteratedTrack(activeTrackId, 1));
+    dispatch(activateIteratedPlaylistTrack(activeTrackId, 1));
   }
 
   const playlistSize = getState().player.playlist.length;

@@ -15,10 +15,10 @@ import Clipboard from 'react-clipboard.js';
 class Player extends React.Component {
   constructor(props) {
     super(props);
-
     this.updateProgress = this.updateProgress.bind(this);
     this.setAudioPosition = this.setAudioPosition.bind(this);
     this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
+    this.handleIteratedTrack = this.handleIteratedTrack.bind(this);
   }
 
   componentDidUpdate() {
@@ -54,14 +54,8 @@ class Player extends React.Component {
     statusbar.style.width = val + "%";
 
     if (event.target.duration <= event.target.currentTime) {
-      const { playlist, activeTrackId } = this.props;
-      if (playlist) {
-        if (playlist.length >= 1 && (playlist[playlist.length - 1] !== activeTrackId)) {
-          this.props.onActivateIteratedTrack(activeTrackId, 1);
-        } else {
-          this.props.onTogglePlayTrack(false);
-        }
-      }
+      const { activeTrackId } = this.props;
+      this.handleIteratedTrack(activeTrackId, 1);
     }
   }
 
@@ -79,6 +73,17 @@ class Player extends React.Component {
     }
   }
 
+  handleIteratedTrack(iterate) {
+    const { activeTrackId, playlist } = this.props;
+    const shouldStream = (activeTrackId === playlist[playlist.length - 1] && iterate > 0);
+
+    if (!shouldStream) {
+      this.props.onActivateIteratedPlaylistTrack(activeTrackId, iterate);
+    } else {
+      this.props.onActivateIteratedStreamTrack(activeTrackId, 1);
+    }
+  }
+
   renderNav() {
     const {
       currentUser,
@@ -88,7 +93,6 @@ class Player extends React.Component {
       playlist,
       isInShuffleMode,
       onSetToggle,
-      onActivateIteratedTrack,
       onLike,
       onTogglePlayTrack,
       onSetShuffleMode,
@@ -142,7 +146,7 @@ class Player extends React.Component {
         </div>
         <div className="player-content">
           <div className="player-content-action">
-            <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, -1)}>
+            <ButtonInline onClick={() => this.handleIteratedTrack(-1)}>
               <i className="fa fa-step-backward" />
             </ButtonInline>
           </div>
@@ -152,7 +156,7 @@ class Player extends React.Component {
             </ButtonInline>
           </div>
           <div className="player-content-action">
-            <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, 1)}>
+            <ButtonInline onClick={() => this.handleIteratedTrack(1)}>
               <i className="fa fa-step-forward" />
             </ButtonInline>
           </div>
@@ -224,7 +228,7 @@ function mapStateToProps(state) {
     entities: state.entities,
     playlist: state.player.playlist,
     isInShuffleMode: state.player.isInShuffleMode,
-    volume: state.player.volume,
+    volume: state.player.volume
   };
 }
 
@@ -232,7 +236,8 @@ function mapDispatchToProps(dispatch) {
   return {
     onTogglePlayTrack: bindActionCreators(actions.togglePlayTrack, dispatch),
     onSetToggle: bindActionCreators(actions.setToggle, dispatch),
-    onActivateIteratedTrack: bindActionCreators(actions.activateIteratedTrack, dispatch),
+    onActivateIteratedPlaylistTrack: bindActionCreators(actions.activateIteratedPlaylistTrack, dispatch),
+    onActivateIteratedStreamTrack: bindActionCreators(actions.activateIteratedStreamTrack, dispatch),
     onLike: bindActionCreators(actions.like, dispatch),
     onSetShuffleMode: bindActionCreators(actions.toggleShuffleMode, dispatch),
   };
@@ -246,11 +251,13 @@ Player.propTypes = {
   playlist: PropTypes.array,
   onTogglePlayTrack: PropTypes.func,
   onSetToggle: PropTypes.func,
-  onActivateIteratedTrack: PropTypes.func,
+  onActivateIteratedPlaylistTrack: PropTypes.func,
+  onActivateIteratedStreamTrack: PropTypes.func,
   onLike: PropTypes.func,
   onSetShuffleMode: PropTypes.func,
   isInShuffleMode: PropTypes.bool,
   handleTimeUpdate: PropTypes.func,
+  handleIteratedTrack: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);
