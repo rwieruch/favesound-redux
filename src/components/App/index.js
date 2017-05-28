@@ -18,7 +18,7 @@ export default class App extends React.Component {
           {children}
         <Playlist />
         <Volume />
-        <Player />
+        <Player genre={genre} pathname={pathname} />
       </div>
     );
   }

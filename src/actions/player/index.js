@@ -117,18 +117,40 @@ function getRandomTrack(playlist, currentActiveTrackId) {
   return playlist[getRandomIndex()];
 }
 
-export const activateIteratedTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
+export const activateIteratedTrack = (currentActiveTrackId, iterate, genre, pathname) => (dispatch, getState) => {
   const playlist = getState().player.playlist;
   const nextActiveTrackId = getIteratedTrack(playlist, currentActiveTrackId, iterate);
   const isInShuffleMode = getState().player.isInShuffleMode;
+  const shouldStream = (currentActiveTrackId === playlist[playlist.length - 1] && iterate > 0);
 
-  if (nextActiveTrackId && isInShuffleMode === false) {
-    dispatch(activateTrack(nextActiveTrackId));
-  } else if (isInShuffleMode) {
-    const randomActiveTrackId = getRandomTrack(playlist, currentActiveTrackId);
-    dispatch(activateTrack(randomActiveTrackId));
+  if (!shouldStream) {
+    if (nextActiveTrackId && isInShuffleMode === false) {
+      dispatch(activateTrack(nextActiveTrackId));
+    } else if (isInShuffleMode) {
+      const randomActiveTrackId = getRandomTrack(playlist, currentActiveTrackId);
+      dispatch(activateTrack(randomActiveTrackId));
+    }
   } else {
-    dispatch(togglePlayTrack(false));
+    let browserList = [];
+    if (pathname === '/dashboard') {
+      browserList = getState().user.activities;
+    } else {
+      browserList = getState().browse[genre];
+    }
+    if (isInShuffleMode) {
+      const randomActiveTrackId = getRandomTrack(browserList, currentActiveTrackId);
+      dispatch(activateTrack(randomActiveTrackId));
+    } else {
+      let nextBrowseTrackId = getIteratedTrack(browserList, currentActiveTrackId, iterate);
+      while (playlist.includes(nextBrowseTrackId)) {
+        nextBrowseTrackId = getIteratedTrack(browserList, nextBrowseTrackId, iterate);
+      }
+      if (nextBrowseTrackId) {
+        dispatch(activateTrack(nextBrowseTrackId));
+      } else {
+        dispatch(togglePlayTrack(false));
+      }
+    }
   }
 };
 

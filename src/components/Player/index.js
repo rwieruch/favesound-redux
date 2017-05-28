@@ -14,6 +14,7 @@ class Player extends React.Component {
   constructor(props) {
     super(props);
 
+
     this.updateProgress = this.updateProgress.bind(this);
     this.setAudioPosition = this.setAudioPosition.bind(this);
   }
@@ -50,14 +51,8 @@ class Player extends React.Component {
     statusbar.style.width = val + "%";
 
     if (event.target.duration <= event.target.currentTime) {
-      const { playlist, activeTrackId } = this.props;
-      if (playlist) {
-        if (playlist.length >= 1 && (playlist[playlist.length - 1] !== activeTrackId)) {
-          this.props.onActivateIteratedTrack(activeTrackId, 1);
-        } else {
-          this.props.onTogglePlayTrack(false);
-        }
-      }
+      const { activeTrackId, genre, pathname } = this.props;
+      this.props.onActivateIteratedTrack(activeTrackId, 1, genre, pathname);
     }
   }
 
@@ -74,7 +69,9 @@ class Player extends React.Component {
       onLike,
       onTogglePlayTrack,
       onSetShuffleMode,
-      volume
+      volume,
+      genre,
+      pathname
     } = this.props;
 
     if (!activeTrackId) { return null; }
@@ -124,7 +121,7 @@ class Player extends React.Component {
         </div>
         <div className="player-content">
           <div className="player-content-action">
-            <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, -1)}>
+            <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, -1, genre, pathname)}>
               <i className="fa fa-step-backward" />
             </ButtonInline>
           </div>
@@ -134,7 +131,7 @@ class Player extends React.Component {
             </ButtonInline>
           </div>
           <div className="player-content-action">
-            <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, 1)}>
+            <ButtonInline onClick={() => onActivateIteratedTrack(activeTrackId, 1, genre, pathname)}>
               <i className="fa fa-step-forward" />
             </ButtonInline>
           </div>
@@ -195,7 +192,7 @@ class Player extends React.Component {
 
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
     currentUser: state.session.user,
     activeTrackId: state.player.activeTrackId,
@@ -204,6 +201,8 @@ function mapStateToProps(state) {
     playlist: state.player.playlist,
     isInShuffleMode: state.player.isInShuffleMode,
     volume: state.player.volume,
+    genre: props.genre,
+    pathname: props.pathname
   };
 }
 
@@ -229,6 +228,8 @@ Player.propTypes = {
   onLike: React.PropTypes.func,
   onSetShuffleMode: React.PropTypes.func,
   isInShuffleMode: React.PropTypes.bool,
+  genre: React.PropTypes.string,
+  pathname: React.PropTypes.string
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);
