@@ -18,7 +18,7 @@ function setUser(user) {
   };
 }
 
-function resetSession() {
+export function resetSession() {
   return {
     type: actionTypes.RESET_SESSION
   };

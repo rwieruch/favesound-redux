@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
 import { addAccessTokenWith } from '../../services/api';
+import { formatSeconds } from '../../services/player';
 import ButtonInline from '../../components/ButtonInline';
 import ReactTooltip from 'react-tooltip';
 import Clipboard from 'react-clipboard.js';
@@ -17,6 +18,7 @@ class Player extends React.Component {
 
     this.updateProgress = this.updateProgress.bind(this);
     this.setAudioPosition = this.setAudioPosition.bind(this);
+    this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
   }
 
   componentDidUpdate() {
@@ -28,6 +30,7 @@ class Player extends React.Component {
     if (isPlaying) {
       audioElement.play();
       audioElement.addEventListener('timeupdate', this.updateProgress, false);
+      audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
     } else {
       audioElement.pause();
     }
@@ -53,6 +56,20 @@ class Player extends React.Component {
     if (event.target.duration <= event.target.currentTime) {
       const { activeTrackId, genre, pathname } = this.props;
       this.props.onActivateIteratedTrack(activeTrackId, 1, genre, pathname);
+    }
+  }
+
+  handleTimeUpdate(event) {
+    const timeElapsedElement = document.getElementById('player-status-time');
+    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+
+    if (event.target.currentTime > 0) {
+      const timeInSeconds = Math.floor(event.target.currentTime);
+      const duration = isNaN(Math.trunc(audioElement.duration)) ? 'Loading' : Math.trunc(audioElement.duration);
+
+      timeElapsedElement.textContent = `${formatSeconds(timeInSeconds)}/${formatSeconds(duration)}`;
+    } else {
+      timeElapsedElement.textContent = 'Loading...';
     }
   }
 
@@ -153,6 +170,9 @@ class Player extends React.Component {
               <i className={muteClass} />
             </ButtonInline>
           </div>
+          <div className="player-status-time">
+            <span id="player-status-time" className="player-status-time"></span>
+          </div>
           <div className="player-content-action">
             {
               currentUser ?
@@ -230,6 +250,7 @@ Player.propTypes = {
   isInShuffleMode: React.PropTypes.bool,
   genre: React.PropTypes.string,
   pathname: React.PropTypes.string
+  handleTimeUpdate: React.PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

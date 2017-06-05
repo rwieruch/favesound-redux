@@ -13,6 +13,7 @@ function VolumeSlider({ volume, onChangeVolume }) {
       min={0}
       max={100}
       value={volume}
+      tooltip={false}
       orientation="vertical"
       onChange={onChangeVolume}
     />

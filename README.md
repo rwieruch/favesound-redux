@@ -2,13 +2,12 @@
 
 The SoundCloud Client in React + Redux made with passion!
 
-![FaveSound](https://s9.postimg.org/yp2tvv4m7/Screen_Shot_2016_09_03_at_23_47_30.png)
-
 [Demo](http://www.favesound.de/)
 
-[Comprehensive Guide: The SoundCloue Client in React + Redux](http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/)
+![FaveSound](https://s9.postimg.org/yp2tvv4m7/Screen_Shot_2016_09_03_at_23_47_30.png)
 
-[Boilerplate Project](https://github.com/rwieruch/react-redux-soundcloud)
+* [Comprehensive Guide: The SoundCloue Client in React + Redux](http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/)
+* [Boilerplate Project](https://github.com/rwieruch/react-redux-soundcloud)
 
 Includes:
 * react
@@ -39,9 +38,10 @@ Features:
 ## Run
 
 1. Clone Repository: `git clone git@github.com:rwieruch/favesound-redux.git`
-2. npm install
-3. npm start
-(4. npm test)
+2. `npm install`
+3. `npm start`
+4. visit http://localhost:8080/
+4. `npm test`
 
 ## Contribute
 

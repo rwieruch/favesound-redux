@@ -1,15 +1,29 @@
-import * as actionTypes from '../../constants/actionTypes';
+import * as actionCreators from '../../actions/player';
 import player from './index';
 
 describe('player reducer', () => {
+  describe('SET_SHUFFLE_MODE', () => {
+    it('toggles shuffle mode', () => {
+      const action = actionCreators.setIsInShuffleMode();
+      const previousState = {
+        activeTrackId: 1,
+        isPlaying: true,
+        playlist: [1, 2, 3],
+        isInShuffleMode: false,
+      };
+      const expectedState = {
+        activeTrackId: 1,
+        isPlaying: true,
+        playlist: [1, 2, 3],
+        isInShuffleMode: true,
+      };
+      expect(player(previousState, action)).to.eql(expectedState);
+    });
+  });
 
   describe('RESET_PLAYLIST', () => {
-
     it('resets a player', () => {
-      const action = {
-        type: actionTypes.RESET_PLAYLIST
-      };
-
+      const action = actionCreators.emptyPlaylist();
       const previousState = {
         activeTrackId: 1,
         isPlaying: true,
@@ -24,17 +38,12 @@ describe('player reducer', () => {
 
       expect(player(previousState, action)).to.eql(expectedState);
     });
-
   });
 
   describe('SET_ACTIVE_TRACK', () => {
-
     it('sets an active track', () => {
-      const action = {
-        type: actionTypes.SET_ACTIVE_TRACK,
-        activeTrackId: 1
-      };
-
+      const activeTrackId = 1;
+      const action = actionCreators.setActiveTrack(activeTrackId);
       const previousState = {
         activeTrackId: null,
         isPlaying: false,
@@ -51,11 +60,8 @@ describe('player reducer', () => {
     });
 
     it('sets an new active track', () => {
-      const action = {
-        type: actionTypes.SET_ACTIVE_TRACK,
-        activeTrackId: 3
-      };
-
+      const activeTrackId = 3;
+      const action = actionCreators.setActiveTrack(activeTrackId);
       const previousState = {
         activeTrackId: 2,
         isPlaying: false,
@@ -70,16 +76,10 @@ describe('player reducer', () => {
 
       expect(player(previousState, action)).to.eql(expectedState);
     });
-
   });
-
   describe('RESET_ACTIVE_TRACK', () => {
-
     it('resets an active track', () => {
-      const action = {
-        type: actionTypes.RESET_ACTIVE_TRACK
-      };
-
+      const action = actionCreators.deactivateTrack();
       const previousState = {
         activeTrackId: 1,
         isPlaying: true,
@@ -94,42 +94,31 @@ describe('player reducer', () => {
 
       expect(player(previousState, action)).to.eql(expectedState);
     });
-
   });
-
   describe('SET_IS_PLAYING', () => {
-
     it('sets state as playing', () => {
-      const action = {
-        type: actionTypes.SET_IS_PLAYING,
-        isPlaying: true
-      };
+      const isPlaying = 'Ibiza';
+      const action = actionCreators.setIsPlaying(isPlaying);
 
       const previousState = {
         activeTrackId: 1,
-        isPlaying: false,
+        isPlaying: null,
         playlist: [1, 2, 3]
       };
 
       const expectedState = {
         activeTrackId: 1,
-        isPlaying: true,
+        isPlaying: 'Ibiza',
         playlist: [1, 2, 3]
       };
 
       expect(player(previousState, action)).to.eql(expectedState);
     });
-
   });
-
   describe('SET_TRACK_IN_PLAYLIST', () => {
-
     it('sets a track in playlist', () => {
-      const action = {
-        type: actionTypes.SET_TRACK_IN_PLAYLIST,
-        trackId: 3
-      };
-
+      const trackId = 3;
+      const action = actionCreators.setTrackInPlaylist(trackId);
       const previousState = {
         activeTrackId: 1,
         isPlaying: false,
@@ -144,16 +133,11 @@ describe('player reducer', () => {
 
       expect(player(previousState, action)).to.eql(expectedState);
     });
-
   });
-
   describe('REMOVE_TRACK_FROM_PLAYLIST', () => {
-
     it('sets a track in playlist', () => {
-      const action = {
-        type: actionTypes.REMOVE_TRACK_FROM_PLAYLIST,
-        trackId: 2
-      };
+      const trackId = 2;
+      const action = actionCreators.removeFromPlaylist(trackId);
 
       const previousState = {
         activeTrackId: 1,
@@ -169,29 +153,20 @@ describe('player reducer', () => {
 
       expect(player(previousState, action)).to.eql(expectedState);
     });
-
   });
-
   describe('SET_VOLUME', () => {
     it('sets the volume of the active track', () => {
-      const action = {
-        type: actionTypes.SET_VOLUME,
-        activeTrackId: 1,
-        volume: 20
-      };
-
+      const newVolume = 20;
+      const action = actionCreators.setTrackVolume(newVolume);
       const previousState = {
-        type: actionTypes.SET_VOLUME,
         activeTrackId: 1,
         volume: 70
       };
 
       const expectedState = {
-        type: actionTypes.SET_VOLUME,
         activeTrackId: 1,
         volume: 20
       };
-
       expect(player(previousState, action)).to.eql(expectedState);
     });
   });
