@@ -45,3 +45,5 @@ export const FILTER_DURATION = 'FILTER_DURATION';
 export const FILTER_NAME = 'FILTER_NAME';
 
 export const SORT_STREAM = 'SORT_STREAM';
+
+export const SET_SELECTED_GENRE = 'SET_SELECTED_GENRE';

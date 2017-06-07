@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { login, logout } from './session';
 import { fetchActivities, fetchFollowers, fetchFavorites, fetchFollowings } from './user';
-import { fetchActivitiesByGenre } from './browse';
+import { fetchActivitiesByGenre, setSelectedGenre } from './browse';
 import { like } from './track';
 import { follow } from './following';
 import { setToggle } from './toggle';
@@ -27,6 +27,7 @@ export {
   like,
   follow,
   setToggle,
+  setSelectedGenre,
   fetchActivitiesByGenre,
   openComments,
   fetchComments,

@@ -7,6 +7,13 @@ import { setRequestInProcess } from '../../actions/request';
 import { setPaginateLink } from '../../actions/paginate';
 import { mergeEntities } from '../../actions/entities';
 
+export function setSelectedGenre(genre) {
+  return {
+    type: actionTypes.SET_SELECTED_GENRE,
+    genre
+  };
+}
+
 function mergeActivitiesByGenre(activities, genre) {
   return {
     type: actionTypes.MERGE_GENRE_ACTIVITIES,
