@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
@@ -20,10 +21,10 @@ function ArtworkAction({ action, isVisible, className, children }) {
 }
 
 ArtworkAction.propTypes = {
-  action: React.PropTypes.func,
-  isVisible: React.PropTypes.bool,
-  className: React.PropTypes.string,
-  children: React.PropTypes.object,
+  action: PropTypes.func,
+  isVisible: PropTypes.bool,
+  className: PropTypes.string,
+  children: PropTypes.object,
 };
 
 export default ArtworkAction;

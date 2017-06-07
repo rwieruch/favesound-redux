@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
@@ -98,6 +99,8 @@ class Player extends React.Component {
 
     const track = entities.tracks[activeTrackId];
     const { user, title, stream_url } = track;
+
+    // console.log(addAccessTokenWith(stream_url, '?'));
     const { username } = entities.users[user];
 
     const isMuted = !volume;
@@ -238,18 +241,18 @@ function mapDispatchToProps(dispatch) {
 }
 
 Player.propTypes = {
-  currentUser: React.PropTypes.object,
-  activeTrackId: React.PropTypes.number,
-  isPlaying: React.PropTypes.bool,
-  entities: React.PropTypes.object,
-  playlist: React.PropTypes.array,
-  onTogglePlayTrack: React.PropTypes.func,
-  onSetToggle: React.PropTypes.func,
-  onActivateIteratedTrack: React.PropTypes.func,
-  onLike: React.PropTypes.func,
-  onSetShuffleMode: React.PropTypes.func,
-  isInShuffleMode: React.PropTypes.bool,
-  handleTimeUpdate: React.PropTypes.func,
+  currentUser: PropTypes.object,
+  activeTrackId: PropTypes.number,
+  isPlaying: PropTypes.bool,
+  entities: PropTypes.object,
+  playlist: PropTypes.array,
+  onTogglePlayTrack: PropTypes.func,
+  onSetToggle: PropTypes.func,
+  onActivateIteratedTrack: PropTypes.func,
+  onLike: PropTypes.func,
+  onSetShuffleMode: PropTypes.func,
+  isInShuffleMode: PropTypes.bool,
+  handleTimeUpdate: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

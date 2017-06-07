@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -60,13 +61,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 StreamActivities.propTypes = {
-  trackEntities: React.PropTypes.object,
-  activities: React.PropTypes.array,
-  requestInProcess: React.PropTypes.bool,
-  nextHref: React.PropTypes.string,
-  activeFilter: React.PropTypes.func,
-  activeSort: React.PropTypes.func,
-  onFetchActivities: React.PropTypes.func,
+  trackEntities: PropTypes.object,
+  activities: PropTypes.array,
+  requestInProcess: PropTypes.bool,
+  nextHref: PropTypes.string,
+  activeFilter: PropTypes.func,
+  activeSort: PropTypes.func,
+  onFetchActivities: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StreamActivities);

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -38,8 +39,8 @@ function mapDispatchToProps(dispatch, props) {
 }
 
 TrackActions.propTypes = {
-  onOpenComments: React.PropTypes.func,
-  onAddTrackToPlaylist: React.PropTypes.func,
+  onOpenComments: PropTypes.func,
+  onAddTrackToPlaylist: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackActions);

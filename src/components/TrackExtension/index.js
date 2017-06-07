@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -23,8 +24,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 TrackExtension.propTypes = {
-  activity: React.PropTypes.object,
-  openComments: React.PropTypes.func,
+  activity: PropTypes.object,
+  openComments: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackExtension);
