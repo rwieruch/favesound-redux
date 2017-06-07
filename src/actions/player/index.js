@@ -62,6 +62,7 @@ export const clearPlaylist = () => (dispatch) => {
   dispatch(emptyPlaylist());
   dispatch(deactivateTrack());
   dispatch(resetToggle(toggleTypes.PLAYLIST));
+  dispatch(resetToggle(toggleTypes.VOLUME));
 };
 
 function isInPlaylist(playlist, trackId) {
