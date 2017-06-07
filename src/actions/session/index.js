@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { CLIENT_ID, OAUTH_TOKEN, REDIRECT_URI } from '../../constants/authentification';
+import { CLIENT_ID, OAUTH_TOKEN, REDIRECT_URI } from '../../constants/authentication';
 import * as actionTypes from '../../constants/actionTypes';
 import { apiUrl } from '../../services/api';
 import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites } from '../../actions/user';
