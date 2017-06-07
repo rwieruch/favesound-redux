@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import map from '../../services/map';
 import classNames from 'classnames';
@@ -98,9 +99,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 Header.propTypes = {
-  currentUser: React.PropTypes.object,
-  onLogin: React.PropTypes.func,
-  onLogout: React.PropTypes.func,
+  currentUser: PropTypes.object,
+  onLogin: PropTypes.func,
+  onLogout: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

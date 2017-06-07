@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import map from '../../services/map';
 import classNames from 'classnames';
@@ -64,10 +65,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 Playlist.propTypes = {
-  toggle: React.PropTypes.object,
-  playlist: React.PropTypes.array,
-  trackEntities: React.PropTypes.object,
-  onClearPlaylist: React.PropTypes.func
+  toggle: PropTypes.object,
+  playlist: PropTypes.array,
+  trackEntities: PropTypes.object,
+  onClearPlaylist: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

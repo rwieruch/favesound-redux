@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import map from '../../services/map';
@@ -28,7 +29,7 @@ function InfoList({ information }) {
 }
 
 InfoList.propTypes = {
-  information: React.PropTypes.array
+  information: PropTypes.array
 };
 
 export default InfoList;

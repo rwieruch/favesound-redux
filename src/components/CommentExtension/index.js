@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -70,13 +71,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 CommentExtension.propTypes = {
-  onFetchComments: React.PropTypes.func,
-  activity: React.PropTypes.object,
-  commentIds: React.PropTypes.array,
-  commentEntities: React.PropTypes.object,
-  userEntities: React.PropTypes.object,
-  requestInProcess: React.PropTypes.bool,
-  nextHref: React.PropTypes.string,
+  onFetchComments: PropTypes.func,
+  activity: PropTypes.object,
+  commentIds: PropTypes.array,
+  commentEntities: PropTypes.object,
+  userEntities: PropTypes.object,
+  requestInProcess: PropTypes.bool,
+  nextHref: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentExtension);

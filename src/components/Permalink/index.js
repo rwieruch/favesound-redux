@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function Permalink({ link, text, title }) {
@@ -9,9 +10,9 @@ function Permalink({ link, text, title }) {
 }
 
 Permalink.propTypes = {
-  link: React.PropTypes.string,
-  text: React.PropTypes.string,
-  title: React.PropTypes.string
+  link: PropTypes.string,
+  text: PropTypes.string,
+  title: PropTypes.string
 };
 
 export default Permalink;
