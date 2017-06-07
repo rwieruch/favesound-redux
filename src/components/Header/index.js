@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import map from '../../services/map';
 import classNames from 'classnames';
@@ -102,11 +103,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 Header.propTypes = {
-  currentUser: React.PropTypes.object,
-  genre: React.PropTypes.string,
-  pathname: React.PropTypes.string,
-  onLogin: React.PropTypes.func,
-  onLogout: React.PropTypes.func,
+  currentUser: PropTypes.object,
+  genre: PropTypes.string,
+  pathname: PropTypes.string,
+  onLogin: PropTypes.func,
+  onLogout: PropTypes.func,
 };
 
 Header.defaultProps = {

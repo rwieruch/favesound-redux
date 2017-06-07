@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import map from '../../services/map';
 import classNames from 'classnames';
@@ -31,8 +32,8 @@ function Actions({ configuration, isVisible }) {
 }
 
 Actions.propTypes = {
-  configuration: React.PropTypes.array,
-  isVisible: React.PropTypes.bool
+  configuration: PropTypes.array,
+  isVisible: PropTypes.bool
 };
 
 export default Actions;

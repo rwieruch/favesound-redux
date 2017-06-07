@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function LoadingSpinner({ isLoading }) {
@@ -11,7 +12,7 @@ function LoadingSpinner({ isLoading }) {
 }
 
 LoadingSpinner.propTypes = {
-  isLoading: React.PropTypes.bool
+  isLoading: PropTypes.bool
 };
 
 export default LoadingSpinner;

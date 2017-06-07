@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -56,14 +57,14 @@ function mapDispatchToProps(dispatch) {
 }
 
 FollowersList.propTypes = {
-  currentUser: React.PropTypes.object,
-  userEntities: React.PropTypes.object,
-  followers: React.PropTypes.array,
-  requestsInProcess: React.PropTypes.object,
-  paginateLinks: React.PropTypes.object,
-  toggle: React.PropTypes.object,
-  onSetToggle: React.PropTypes.func,
-  onFetchFollowers: React.PropTypes.func
+  currentUser: PropTypes.object,
+  userEntities: PropTypes.object,
+  followers: PropTypes.array,
+  requestsInProcess: PropTypes.object,
+  paginateLinks: PropTypes.object,
+  toggle: PropTypes.object,
+  onSetToggle: PropTypes.func,
+  onFetchFollowers: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FollowersList);

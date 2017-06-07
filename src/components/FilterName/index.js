@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
@@ -48,8 +49,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 FilterName.propTypes = {
-  filterNameQuery: React.PropTypes.string,
-  onNameFilter: React.PropTypes.func
+  filterNameQuery: PropTypes.string,
+  onNameFilter: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterName);

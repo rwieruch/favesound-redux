@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Artwork from '../../components/Artwork';
 import Permalink from '../../components/Permalink';
@@ -60,12 +61,12 @@ function TrackPreview({
 }
 
 TrackPreview.propTypes = {
-  userEntities: React.PropTypes.object,
-  activity: React.PropTypes.object,
-  isPlaying: React.PropTypes.bool,
-  activeTrackId: React.PropTypes.number,
-  onActivateTrack: React.PropTypes.func,
-  onAddTrackToPlaylist: React.PropTypes.func
+  userEntities: PropTypes.object,
+  activity: PropTypes.object,
+  isPlaying: PropTypes.bool,
+  activeTrackId: PropTypes.number,
+  onActivateTrack: PropTypes.func,
+  onAddTrackToPlaylist: PropTypes.func
 };
 
 export {

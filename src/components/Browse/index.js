@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -86,13 +87,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 Browse.propTypes = {
-  genre: React.PropTypes.string,
-  browseActivities: React.PropTypes.object,
-  requestsInProcess: React.PropTypes.object,
-  paginateLinks: React.PropTypes.object,
-  trackEntities: React.PropTypes.object,
-  userEntities: React.PropTypes.object,
-  fetchActivitiesByGenre: React.PropTypes.func
+  genre: PropTypes.string,
+  browseActivities: PropTypes.object,
+  requestsInProcess: PropTypes.object,
+  paginateLinks: PropTypes.object,
+  trackEntities: PropTypes.object,
+  userEntities: PropTypes.object,
+  fetchActivitiesByGenre: PropTypes.func
 };
 
 Browse.defaultProps = {
