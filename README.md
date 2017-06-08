@@ -1,15 +1,16 @@
 # favesound-redux
 
-The SoundCloud Client in React + Redux made with passion!
-
-[Demo](http://www.favesound.de/)
+The SoundCloud Client in React + Redux made with passion -> [Demo](http://www.favesound.de/)
 
 ![FaveSound](https://s9.postimg.org/yp2tvv4m7/Screen_Shot_2016_09_03_at_23_47_30.png)
+
+## Get started on your own!
 
 * [Comprehensive Guide: The SoundCloue Client in React + Redux](http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/)
 * [Boilerplate Project](https://github.com/rwieruch/react-redux-soundcloud)
 
-Includes:
+## Includes
+
 * react
 * react-router
 * redux
@@ -20,7 +21,8 @@ Includes:
 * enzyme
 * Soundcloud API.
 
-Features:
+## Features
+
 * login to SoundCloud
 * show your personal stream
 * show favorite tracks, followers and followings
@@ -35,7 +37,7 @@ Features:
 * filter tracks by duration
 * search tracks by name and artist
 
-## Run
+## Run on your Machine
 
 1. Clone Repository: `git clone git@github.com:rwieruch/favesound-redux.git`
 2. `npm install`
