@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Waveform from 'waveform.js';
-import { normalizeSamples, isJsonWaveform, isPngWaveform } from '../../services/track';
+import { normalizeSamples } from '../../services/track';
 
 const WAVE_COLOR = '#61B25A';
 
@@ -16,15 +16,16 @@ class WaveformSc extends React.Component {
 
     if (!waveform_url) { return; }
 
+    const waveformUrlJson = waveform_url.replace('.png', '.json');
+
     const elementId = this.generateElementId(id, idx);
 
-    if (isJsonWaveform(waveform_url)) {
-      this.fetchJsonWaveform(elementId, waveform_url);
-    }
+    this.fetchJsonWaveform(elementId, waveformUrlJson);
 
-    if (isPngWaveform(waveform_url)) {
-      this.fetchPngWaveform(elementId, activity);
-    }
+    // Png version will cause errors.
+    // if (isPngWaveform(waveform_url)) {
+    //   this.fetchPngWaveform(elementId, activity);
+    // }
   }
 
   fetchJsonWaveform(elementId, waveformUrl) {
