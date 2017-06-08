@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as toggleTypes from '../../constants/toggleTypes';
-import { addAccessTokenWith } from '../../services/api';
+import { addTempClientIdWith } from '../../services/api';
 import { formatSeconds } from '../../services/player';
 import ButtonInline from '../../components/ButtonInline';
 import ReactTooltip from 'react-tooltip';
@@ -197,7 +197,7 @@ class Player extends React.Component {
               <p>Song URL copied!</p>
             </ReactTooltip>
           </div>
-          <audio id="audio" ref="audio" src={addAccessTokenWith(stream_url, '?')}></audio>
+          <audio id="audio" ref="audio" src={addTempClientIdWith(stream_url, '?')}></audio>
         </div>
       </div>
     );

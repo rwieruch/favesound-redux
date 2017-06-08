@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { CLIENT_ID } from '../constants/authentication';
+import { CLIENT_ID, TEMP_CLIENT_ID } from '../constants/authentication';
 
 export function unauthApiUrl(url, symbol) {
   return `//api.soundcloud.com/${url}${symbol}client_id=${CLIENT_ID}`;
@@ -13,6 +13,10 @@ export function apiUrl(url, symbol) {
   }
 
   return `//api.soundcloud.com/${url}${symbol}oauth_token=${accessToken}`;
+}
+
+export function addTempClientIdWith(url, symbol) {
+  return `${url}${symbol}client_id=${TEMP_CLIENT_ID}`;
 }
 
 export function addAccessTokenWith(url, symbol) {
