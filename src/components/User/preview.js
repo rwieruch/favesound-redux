@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import find from 'lodash/fp/find';
 import InfoList from '../../components/InfoList';
@@ -45,9 +46,9 @@ function UserPreview({ user, followings, onFollow }) {
 }
 
 UserPreview.propTypes = {
-  followings: React.PropTypes.array,
-  user: React.PropTypes.object,
-  onFollow: React.PropTypes.func
+  followings: PropTypes.array,
+  user: PropTypes.object,
+  onFollow: PropTypes.func
 };
 
 export {

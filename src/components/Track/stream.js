@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import * as sortTypes from '../../constants/sortTypes';
@@ -145,16 +146,16 @@ function RepostIcon({ repostCount }) {
 }
 
 TrackStream.propTypes = {
-  userEntities: React.PropTypes.object,
-  typeReposts: React.PropTypes.object,
-  typeTracks: React.PropTypes.object,
-  activity: React.PropTypes.object,
-  isPlaying: React.PropTypes.bool,
-  activeTrackId: React.PropTypes.number,
-  idx: React.PropTypes.number,
-  activeSortType: React.PropTypes.string,
-  activeDurationFilterType: React.PropTypes.string,
-  onActivateTrack: React.PropTypes.func,
+  userEntities: PropTypes.object,
+  typeReposts: PropTypes.object,
+  typeTracks: PropTypes.object,
+  activity: PropTypes.object,
+  isPlaying: PropTypes.bool,
+  activeTrackId: PropTypes.number,
+  idx: PropTypes.number,
+  activeSortType: PropTypes.string,
+  activeDurationFilterType: PropTypes.string,
+  onActivateTrack: PropTypes.func,
 };
 
 export {

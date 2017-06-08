@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import map from '../../services/map';
 import filter from 'lodash/fp/filter';
@@ -47,10 +48,10 @@ function Activities({
 }
 
 Activities.propTypes = {
-  ids: React.PropTypes.array,
-  entities: React.PropTypes.object,
-  activeFilter: React.PropTypes.func,
-  activeSort: React.PropTypes.func,
+  ids: PropTypes.array,
+  entities: PropTypes.object,
+  activeFilter: PropTypes.func,
+  activeSort: PropTypes.func,
 };
 
 export default withLoadingSpinner(withFetchOnScroll(Activities));

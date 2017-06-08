@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Waveform from 'waveform.js';
 import { normalizeSamples, isJsonWaveform, isPngWaveform } from '../../services/track';
@@ -60,8 +61,8 @@ class WaveformSc extends React.Component {
 }
 
 WaveformSc.propTypes = {
-  activity: React.PropTypes.object,
-  idx: React.PropTypes.number
+  activity: PropTypes.object,
+  idx: PropTypes.number
 };
 
 export default WaveformSc;

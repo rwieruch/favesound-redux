@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import map from '../../services/map';
 import classNames from 'classnames';
@@ -62,8 +63,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 FilterDuration.propTypes = {
-  activeDurationFilter: React.PropTypes.string,
-  onDurationFilter: React.PropTypes.func
+  activeDurationFilter: PropTypes.string,
+  onDurationFilter: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterDuration);

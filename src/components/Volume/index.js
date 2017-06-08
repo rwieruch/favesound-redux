@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
@@ -71,9 +72,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 Volume.propTypes = {
-  onChangeVolume: React.PropTypes.func,
-  volume: React.PropTypes.number,
-  toggle: React.PropTypes.object
+  onChangeVolume: PropTypes.func,
+  volume: PropTypes.number,
+  toggle: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Volume);

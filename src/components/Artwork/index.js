@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function Artwork({ image, title, optionalImage, size }) {
@@ -5,10 +6,10 @@ function Artwork({ image, title, optionalImage, size }) {
 }
 
 Artwork.propTypes = {
-  image: React.PropTypes.string,
-  title: React.PropTypes.string,
-  optionalImage: React.PropTypes.string,
-  size: React.PropTypes.number
+  image: PropTypes.string,
+  title: PropTypes.string,
+  optionalImage: PropTypes.string,
+  size: PropTypes.number
 };
 
 export default Artwork;

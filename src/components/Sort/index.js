@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import map from '../../services/map';
 import classNames from 'classnames';
@@ -61,8 +62,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 Sort.propTypes = {
-  activeSort: React.PropTypes.string,
-  onSort: React.PropTypes.func
+  activeSort: PropTypes.string,
+  onSort: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sort);
