@@ -6,7 +6,7 @@ export const REDIRECT_URI = isDev ?
 
 export const CLIENT_ID = isDev ?
     'a281614d7f34dc30b665dfcaa3ed7505' :
-    '1512fb9cbe8228095fe92c6503e3a071';
+    'a281614d7f34dc30b665dfcaa3ed7505';
 
 // This client_id is a temporary fix for the Request Limit Reached issue of the old one.
 // This only apply to streaming.
