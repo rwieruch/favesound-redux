@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-
+import { OAUTH_TOKEN } from '../../constants/authentication';
+import Cookies from 'js-cookie';
 import { DEFAULT_GENRE } from '../../constants/genre';
 import Browse from '../../components/Browse';
 import Callback from '../../components/Callback';
@@ -13,6 +14,23 @@ import Volume from '../../components/Volume';
 import { browse, dashboard, callback } from '../../constants/pathnames';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onAppClose = this.onAppClose.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('beforeunload', this.onAppClose);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.onAppClose);
+  }
+
+  onAppClose() {
+    Cookies.remove(OAUTH_TOKEN);
+  }
+
   render() {
     return (
       <div>
