@@ -118,7 +118,7 @@ function getRandomTrack(playlist, currentActiveTrackId) {
   return playlist[getRandomIndex()];
 }
 
-export const activateIteratedTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
+export const activateIteratedPlaylistTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
   const playlist = getState().player.playlist;
   const nextActiveTrackId = getIteratedTrack(playlist, currentActiveTrackId, iterate);
   const isInShuffleMode = getState().player.isInShuffleMode;
@@ -126,12 +126,48 @@ export const activateIteratedTrack = (currentActiveTrackId, iterate) => (dispatc
   if (nextActiveTrackId && isInShuffleMode === false) {
     dispatch(activateTrack(nextActiveTrackId));
   } else if (isInShuffleMode) {
-    const randomActiveTrackId = getRandomTrack(playlist, currentActiveTrackId);
-    dispatch(activateTrack(randomActiveTrackId));
-  } else {
-    dispatch(togglePlayTrack(false));
+    dispatchRandomTrack(playlist, currentActiveTrackId, dispatch);
   }
 };
+
+function dispatchRandomTrack(playlist, currentActiveTrackId, dispatch) {
+  const randomActiveTrackId = getRandomTrack(playlist, currentActiveTrackId);
+  dispatch(activateTrack(randomActiveTrackId));
+}
+
+export const activateIteratedStreamTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
+  const isInShuffleMode = getState().player.isInShuffleMode;
+  const playlist = getState().player.playlist;
+
+  const streamList = getStreamList(getState);
+
+  if (isInShuffleMode) {
+    dispatchRandomTrack(streamList, currentActiveTrackId, dispatch);
+  } else {
+    const nextStreamTrackId = findNextStreamTrackId(streamList, playlist, currentActiveTrackId, iterate);
+    if (nextStreamTrackId) {
+      dispatch(activateTrack(nextStreamTrackId));
+    } else {
+      dispatch(togglePlayTrack(false));
+    }
+  }
+};
+
+function getStreamList(getState) {
+  const selectedGenre = getState().browse.selectedGenre;
+  if (selectedGenre) {
+    return getState().browse[selectedGenre];
+  }
+  return getState().user.activities;
+}
+
+function findNextStreamTrackId(streamList, playlist, currentActiveTrackId, iterate) {
+  let nextStreamTrackId = getIteratedTrack(streamList, currentActiveTrackId, iterate);
+  while (playlist.includes(nextStreamTrackId)) {
+    nextStreamTrackId = getIteratedTrack(streamList, nextStreamTrackId, iterate);
+  }
+  return nextStreamTrackId;
+}
 
 export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
   const activeTrackId = getState().player.activeTrackId;
@@ -139,7 +175,7 @@ export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
   const isRelevantTrack = isSameTrackAndPlaying(activeTrackId, track.id, isPlaying);
 
   if (isRelevantTrack) {
-    dispatch(activateIteratedTrack(activeTrackId, 1));
+    dispatch(activateIteratedPlaylistTrack(activeTrackId, 1));
   }
 
   const playlistSize = getState().player.playlist.length;

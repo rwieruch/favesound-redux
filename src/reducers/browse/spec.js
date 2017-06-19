@@ -16,7 +16,8 @@ describe('browse reducer', () => {
       };
 
       const expectedState = {
-        [GENRE]: activities
+        [GENRE]: activities, 
+        selectedGenre: null
       };
 
       expect(browse(undefined, action)).to.eql(expectedState);
