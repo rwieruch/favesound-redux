@@ -126,37 +126,48 @@ export const activateIteratedPlaylistTrack = (currentActiveTrackId, iterate) => 
   if (nextActiveTrackId && isInShuffleMode === false) {
     dispatch(activateTrack(nextActiveTrackId));
   } else if (isInShuffleMode) {
-    const randomActiveTrackId = getRandomTrack(playlist, currentActiveTrackId);
-    dispatch(activateTrack(randomActiveTrackId));
+    dispatchRandomTrack(playlist, currentActiveTrackId, dispatch);
   }
 };
 
-export const activateIteratedStreamTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
-  const playlist = getState().player.playlist;
-  const isInShuffleMode = getState().player.isInShuffleMode;
+function dispatchRandomTrack(playlist, currentActiveTrackId, dispatch) {
+  const randomActiveTrackId = getRandomTrack(playlist, currentActiveTrackId);
+  dispatch(activateTrack(randomActiveTrackId));
+}
 
-  let browserList = [];
-  const selectedGenre = getState().browse.selectedGenre;
-  if (selectedGenre) {
-    browserList = getState().browse[selectedGenre];
-  } else {
-    browserList = getState().user.activities;
-  }
+export const activateIteratedStreamTrack = (currentActiveTrackId, iterate) => (dispatch, getState) => {
+  const isInShuffleMode = getState().player.isInShuffleMode;
+  const playlist = getState().player.playlist;
+
+  const streamList = getStreamList(getState);
+
   if (isInShuffleMode) {
-    const randomActiveTrackId = getRandomTrack(browserList, currentActiveTrackId);
-    dispatch(activateTrack(randomActiveTrackId));
+    dispatchRandomTrack(streamList, currentActiveTrackId, dispatch);
   } else {
-    let nextBrowseTrackId = getIteratedTrack(browserList, currentActiveTrackId, iterate);
-    while (playlist.includes(nextBrowseTrackId)) {
-      nextBrowseTrackId = getIteratedTrack(browserList, nextBrowseTrackId, iterate);
-    }
-    if (nextBrowseTrackId) {
-      dispatch(activateTrack(nextBrowseTrackId));
+    const nextStreamTrackId = findNextStreamTrackId(streamList, playlist, currentActiveTrackId, iterate);
+    if (nextStreamTrackId) {
+      dispatch(activateTrack(nextStreamTrackId));
     } else {
       dispatch(togglePlayTrack(false));
     }
   }
 };
+
+function getStreamList(getState) {
+  const selectedGenre = getState().browse.selectedGenre;
+  if (selectedGenre) {
+    return getState().browse[selectedGenre];
+  }
+  return getState().user.activities;
+}
+
+function findNextStreamTrackId(streamList, playlist, currentActiveTrackId, iterate) {
+  let nextStreamTrackId = getIteratedTrack(streamList, currentActiveTrackId, iterate);
+  while (playlist.includes(nextStreamTrackId)) {
+    nextStreamTrackId = getIteratedTrack(streamList, nextStreamTrackId, iterate);
+  }
+  return nextStreamTrackId;
+}
 
 export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
   const activeTrackId = getState().player.activeTrackId;
