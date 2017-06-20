@@ -190,16 +190,22 @@ class Player extends React.Component {
             }
           </div>
           <div className="player-content-action">
-            <a data-tip data-for="global">
-              <Clipboard component="a" data-clipboard-text={track.permalink_url}>
-                  <div className="player-content-link">
-                    <i className="fa fa-share" />
-                  </div>
+            <a data-tip="Song URL Copied!" data-for="copy">
+              <Clipboard component="span" data-clipboard-text={track.permalink_url}>
+                <div className="player-content-link">
+                  <i className="fa fa-share" />
+                </div>
               </Clipboard>
             </a>
-            <ReactTooltip id="global" event="click" aria-haspopup="true">
-              <p>Song URL copied!</p>
-            </ReactTooltip>
+            <ReactTooltip
+              delayHide={3000}
+              id="copy"
+              event="click"
+              eventOff="mousemove"
+              aria-haspopup="true"
+              effect="solid"
+              offset={{ right: 25 }}
+            />
           </div>
           <audio id="audio" ref="audio" src={addTempClientIdWith(stream_url, '?')}></audio>
         </div>
