@@ -191,7 +191,7 @@ class Player extends React.Component {
           </div>
           <div className="player-content-action">
             <a data-tip data-for="global">
-              <Clipboard component="a" data-clipboard-text={track.permalink_url}>
+              <Clipboard component="span" data-clipboard-text={track.permalink_url}>
                   <div className="player-content-link">
                     <i className="fa fa-share" />
                   </div>
