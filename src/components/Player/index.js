@@ -47,6 +47,7 @@ class Player extends React.Component {
 
   updateProgress(event) {
     const statusbar = document.getElementById('player-status-bar');
+    if (!statusbar) return;
     let val = 0;
     if (event.target.currentTime > 0) {
       val = ((100 / event.target.duration) * event.target.currentTime).toFixed(2);
@@ -62,7 +63,7 @@ class Player extends React.Component {
   handleTimeUpdate(event) {
     const timeElapsedElement = document.getElementById('player-status-time');
     const audioElement = ReactDOM.findDOMNode(this.refs.audio);
-
+    if (!timeElapsedElement || !audioElement) return;
     if (event.target.currentTime > 0) {
       const timeInSeconds = Math.floor(event.target.currentTime);
       const duration = isNaN(Math.trunc(audioElement.duration)) ? 'Loading' : Math.trunc(audioElement.duration);
