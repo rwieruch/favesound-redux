@@ -61,6 +61,7 @@ export function setTrackVolume(volume) {
 export const clearPlaylist = () => (dispatch) => {
   dispatch(emptyPlaylist());
   dispatch(deactivateTrack());
+  dispatch(togglePlayTrack(false));
   dispatch(resetToggle(toggleTypes.PLAYLIST));
   dispatch(resetToggle(toggleTypes.VOLUME));
 };
@@ -181,7 +182,9 @@ export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
   const playlistSize = getState().player.playlist.length;
   if (playlistSize < 2) {
     dispatch(deactivateTrack());
+    dispatch(togglePlayTrack(false));
     dispatch(resetToggle(toggleTypes.PLAYLIST));
+    dispatch(resetToggle(toggleTypes.VOLUME));
   }
 
   dispatch(removeFromPlaylist(track.id));
