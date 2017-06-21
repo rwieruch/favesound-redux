@@ -101,7 +101,8 @@ export const addTrackToPlaylist = (track) => (dispatch, getState) => {
 
 function getIteratedTrack(playlist, currentActiveTrackId, iterate) {
   const index = findIndex(isSameTrack(currentActiveTrackId), playlist);
-  return playlist[index + iterate];
+  const nextIndex = (index + iterate) % playlist.length;
+  return playlist[nextIndex];
 }
 
 function getRandomTrack(playlist, currentActiveTrackId) {
