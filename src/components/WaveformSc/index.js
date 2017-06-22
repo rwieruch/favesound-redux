@@ -8,19 +8,17 @@ const WAVE_COLOR = '#61B25A';
 class WaveformSc extends React.Component {
 
   componentDidMount() {
-    const { activity, idx } = this.props;
+    const { activity } = this.props;
 
     if (!activity) { return; }
 
-    const { waveform_url, id } = activity;
+    const { waveform_url } = activity;
 
     if (!waveform_url) { return; }
 
     const waveformUrlJson = waveform_url.replace('.png', '.json');
 
-    const elementId = this.generateElementId(id, idx);
-
-    this.fetchJsonWaveform(elementId, waveformUrlJson);
+    this.fetchJsonWaveform(this.waveformCanvas, waveformUrlJson);
 
     // Png version will cause errors.
     // if (isPngWaveform(waveform_url)) {
@@ -28,42 +26,34 @@ class WaveformSc extends React.Component {
     // }
   }
 
-  fetchJsonWaveform(elementId, waveformUrl) {
+  fetchJsonWaveform(waveformCanvas, waveformUrl) {
     fetch(waveformUrl)
       .then(response => response.json())
       .then((data) => {
         new Waveform({
-          container: document.getElementById(elementId),
+          container: waveformCanvas,
           innerColor: WAVE_COLOR,
           data: normalizeSamples(data.samples)
         });
       });
   }
-
-  fetchPngWaveform(elementId, activity) {
-    const waveform = new Waveform({
-      container: document.getElementById(elementId),
-      innerColor: WAVE_COLOR
-    });
-    waveform.dataFromSoundCloudTrack(activity);
-  }
-
-  generateElementId(id, idx) {
-    return `waveform-${id}${idx}`;
-  }
+  // Seems like SoundCloud has switched to json instead of png.
+  // fetchPngWaveform(elementId, activity) {
+  //   const waveform = new Waveform({
+  //     container: document.getElementById(elementId),
+  //     innerColor: WAVE_COLOR
+  //   });
+  //   waveform.dataFromSoundCloudTrack(activity);
+  // }
 
   render() {
-    const { activity, idx } = this.props;
-    const { id } = activity;
-
-    return <div className="track-waveform-json" id={"waveform-" + id + idx} />;
+    return <div className="track-waveform-json" ref={(waveform) => { this.waveformCanvas = waveform; }} />;
   }
 
 }
 
 WaveformSc.propTypes = {
   activity: PropTypes.object,
-  idx: PropTypes.number
 };
 
 export default WaveformSc;
