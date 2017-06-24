@@ -148,17 +148,23 @@ class Player extends React.Component {
         <div className="player-content">
           <div className="player-content-action">
             <ButtonInline onClick={() => this.handleIteratedTrack(-1)}>
-              <i className="fa fa-step-backward" />
+              <a data-tip="Previous song" data-offset="{ 'right': 7 }" data-for="global">
+                <i className="fa fa-step-backward" />
+              </a>
             </ButtonInline>
           </div>
           <div className="player-content-action">
             <ButtonInline onClick={() => onTogglePlayTrack(!isPlaying)}>
-              <i className={playClass} />
+              <a data-tip={isPlaying ? 'Pause' : 'Play'} data-offset="{ 'right': 8 }" data-for="global">
+                <i className={playClass} />
+              </a>
             </ButtonInline>
           </div>
           <div className="player-content-action">
             <ButtonInline onClick={() => this.handleIteratedTrack(1)}>
-              <i className="fa fa-step-forward" />
+              <a data-tip="Next song" data-offset="{ 'right': 6 }" data-for="global">
+                <i className="fa fa-step-forward" />
+              </a>
             </ButtonInline>
           </div>
           <div className="player-content-name">
@@ -166,17 +172,23 @@ class Player extends React.Component {
           </div>
           <div className="player-content-action">
             <ButtonInline onClick={() => onSetToggle(toggleTypes.PLAYLIST)}>
-              <i className="fa fa-th-list" /> {playlist.length}
+              <a data-tip="Toggle player queue" data-offset="{ 'right': 10 }" data-for="global">
+                <i className="fa fa-th-list" /> {playlist.length}
+              </a>
             </ButtonInline>
           </div>
           <div className="player-content-action">
             <ButtonInline onClick={onSetShuffleMode}>
-              <i className={shuffleClass} />
+              <a data-tip="Toggle shuffle play" data-offset="{ 'right': 10 }" data-for="global">
+                <i className={shuffleClass} />
+              </a>
             </ButtonInline>
           </div>
           <div className="player-content-action">
             <ButtonInline onClick={() => onSetToggle(toggleTypes.VOLUME)}>
-              <i className={muteClass} />
+              <a data-tip="Adjust volume" data-offset="{ 'right': 10 }" data-for="global">
+                <i className={muteClass} />
+              </a>
             </ButtonInline>
           </div>
           <div className="player-status-time">
@@ -191,24 +203,25 @@ class Player extends React.Component {
             }
           </div>
           <div className="player-content-action">
-            <a data-tip="Song URL Copied!" data-for="copy">
               <Clipboard component="span" data-clipboard-text={track.permalink_url}>
                 <div className="player-content-link">
-                  <i className="fa fa-share" />
+                  <a
+                    title="Copy song url"
+                    data-tip="Song URL Copied!"
+                    data-for="global"
+                    data-delay-show={0}
+                    data-delay-hide={2000}
+                    data-offset="{ 'right': 10 }"
+                    data-event="click"
+                    data-event-off="mousemove"
+                  >
+                      <i className="fa fa-share" />
+                  </a>
                 </div>
               </Clipboard>
-            </a>
-            <ReactTooltip
-              delayHide={3000}
-              id="copy"
-              event="click"
-              eventOff="mousemove"
-              aria-haspopup="true"
-              effect="solid"
-              offset={{ right: 25 }}
-            />
           </div>
           <audio id="audio" ref="audio" src={addTempClientIdWith(stream_url, '?')}></audio>
+          <ReactTooltip id="global" delayShow={1000} place="top" aria-haspopup="true" effect="solid" />
         </div>
       </div>
     );
