@@ -29,7 +29,6 @@ function TrackStream({
   activity,
   activeTrackId,
   isPlaying,
-  idx,
   userEntities,
   typeReposts,
   typeTracks,
@@ -129,7 +128,7 @@ function TrackStream({
         </div>
       </div>
       <div className="track-waveform">
-        <WaveformSc activity={activity} idx={idx} />
+        <WaveformSc activity={activity} />
       </div>
     </div>
   );
@@ -152,7 +151,6 @@ TrackStream.propTypes = {
   activity: PropTypes.object,
   isPlaying: PropTypes.bool,
   activeTrackId: PropTypes.number,
-  idx: PropTypes.number,
   activeSortType: PropTypes.string,
   activeDurationFilterType: PropTypes.string,
   onActivateTrack: PropTypes.func,
