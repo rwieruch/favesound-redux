@@ -4,7 +4,7 @@ import React from 'react';
 function Permalink({ link, text, title }) {
   return (
     <a href={link} title={title}>
-      {text}
+      <span>{text}</span>
     </a>
   );
 }
