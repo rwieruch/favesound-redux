@@ -5,7 +5,7 @@ import { fetchActivitiesByGenre, setSelectedGenre } from './browse';
 import { like } from './track';
 import { follow } from './following';
 import { setToggle } from './toggle';
-import { activateTrack, activateIteratedPlaylistTrack, activateIteratedStreamTrack, addTrackToPlaylist, removeTrackFromPlaylist, clearPlaylist, togglePlayTrack, toggleShuffleMode, changeVolume } from './player';
+import { activateTrack, activateIteratedPlaylistTrack, activateIteratedStreamTrack, addTrackToPlaylist, removeTrackFromPlaylist, clearPlaylist, togglePlayTrack, toggleShuffleMode, toggleRepeatMode, changeVolume } from './player';
 import { openComments, fetchComments } from './comments';
 import { filterDuration, filterName } from './filter';
 import { sortStream } from './sort';
@@ -36,5 +36,6 @@ export {
   filterName,
   sortStream,
   toggleShuffleMode,
+  toggleRepeatMode,
   changeVolume,
 };

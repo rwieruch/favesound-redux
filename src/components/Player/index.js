@@ -55,8 +55,8 @@ class Player extends React.Component {
     statusbar.style.width = val + "%";
 
     if (event.target.duration <= event.target.currentTime) {
-      const { activeTrackId } = this.props;
-      this.handleIteratedTrack(activeTrackId, 1);
+      const iterate = this.props.isInRepeatMode ? 0 : 1;
+      this.handleIteratedTrack(iterate);
     }
   }
 
@@ -77,7 +77,6 @@ class Player extends React.Component {
   handleIteratedTrack(iterate) {
     const { activeTrackId, playlist } = this.props;
     const shouldStream = (activeTrackId === playlist[playlist.length - 1] && iterate > 0);
-
     if (!shouldStream) {
       this.props.onActivateIteratedPlaylistTrack(activeTrackId, iterate);
     } else {
@@ -93,10 +92,12 @@ class Player extends React.Component {
       entities,
       playlist,
       isInShuffleMode,
+      isInRepeatMode,
       onSetToggle,
       onLike,
       onTogglePlayTrack,
       onSetShuffleMode,
+      onSetRepeatMode,
       volume
     } = this.props;
 
@@ -138,6 +139,13 @@ class Player extends React.Component {
       }
     );
 
+    const repeatClass = classNames(
+      'fa fa-repeat',
+      {
+        repeatSelected: isInRepeatMode
+      }
+    );
+
     return (
       <div className="player-container">
         <div className="player-status" onClick={this.setAudioPosition}>
@@ -174,6 +182,13 @@ class Player extends React.Component {
             <ButtonInline onClick={() => onSetToggle(toggleTypes.PLAYLIST)}>
               <a data-tip="Toggle player queue" data-offset="{ 'right': 10 }" data-for="global">
                 <i className="fa fa-th-list" /> {playlist.length}
+              </a>
+            </ButtonInline>
+          </div>
+          <div className="player-content-action">
+            <ButtonInline onClick={onSetRepeatMode}>
+              <a data-tip="Toggle repeat play" data-offset="{ 'right': 10 }" data-for="global">
+                <i className={repeatClass} />
               </a>
             </ButtonInline>
           </div>
@@ -248,6 +263,7 @@ function mapStateToProps(state) {
     entities: state.entities,
     playlist: state.player.playlist,
     isInShuffleMode: state.player.isInShuffleMode,
+    isInRepeatMode: state.player.isInRepeatMode,
     volume: state.player.volume
   };
 }
@@ -258,8 +274,10 @@ function mapDispatchToProps(dispatch) {
     onSetToggle: bindActionCreators(actions.setToggle, dispatch),
     onActivateIteratedPlaylistTrack: bindActionCreators(actions.activateIteratedPlaylistTrack, dispatch),
     onActivateIteratedStreamTrack: bindActionCreators(actions.activateIteratedStreamTrack, dispatch),
+    onActivateCurrentTrack: bindActionCreators(actions.activateTrack, dispatch),
     onLike: bindActionCreators(actions.like, dispatch),
     onSetShuffleMode: bindActionCreators(actions.toggleShuffleMode, dispatch),
+    onSetRepeatMode: bindActionCreators(actions.toggleRepeatMode, dispatch)
   };
 }
 
@@ -275,7 +293,9 @@ Player.propTypes = {
   onActivateIteratedStreamTrack: PropTypes.func,
   onLike: PropTypes.func,
   onSetShuffleMode: PropTypes.func,
+  onSetRepeatMode: PropTypes.func,
   isInShuffleMode: PropTypes.bool,
+  isInRepeatMode: PropTypes.bool,
   handleTimeUpdate: PropTypes.func,
   handleIteratedTrack: PropTypes.func
 };
