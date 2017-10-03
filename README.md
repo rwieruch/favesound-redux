@@ -11,8 +11,8 @@ The SoundCloud Client in React + Redux made with passion -> [Demo](http://www.fa
 
 ## Includes
 
-* react
-* react-router
+* react v. 6
+* react-router v. 4
 * redux
 * redux-thunk
 * normalizr
@@ -26,7 +26,7 @@ The SoundCloud Client in React + Redux made with passion -> [Demo](http://www.fa
 * login to SoundCloud
 * show your personal stream
 * show favorite tracks, followers and followings
-* inifite scroll + paginated fetching
+* infinite scroll + paginated fetching
 * follow people
 * like tracks
 * player play/stop/forward/backward track
