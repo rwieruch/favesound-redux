@@ -14,11 +14,12 @@ The SoundCloud Client in React + Redux made with passion -> [Demo](http://www.fa
 * react v. 16
 * react-router v. 4
 * redux
+* react-redux
 * redux-thunk
 * normalizr
 * lodash-fp
 * airbnb-extended eslint
-* enzyme
+* enzyme v. 3
 * Soundcloud API.
 
 ## Features
