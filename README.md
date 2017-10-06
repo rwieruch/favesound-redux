@@ -11,7 +11,7 @@ The SoundCloud Client in React + Redux made with passion -> [Demo](http://www.fa
 
 ## Includes
 
-* react v. 6
+* react v. 16
 * react-router v. 4
 * redux
 * redux-thunk
