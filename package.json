@@ -45,7 +45,7 @@
     "imports-loader": "0.6.5",
     "jsdom": "9.8.3",
     "mocha": "3.5.3",
-    "node-sass": "3.8.0",
+    "node-sass": "4.5.3",
     "react-addons-test-utils": "15.6.2",
     "react-hot-loader": "3.0.0-beta.6",
     "react-test-renderer": "16.0.0",
