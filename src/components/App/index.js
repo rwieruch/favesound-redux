@@ -6,7 +6,6 @@ import { DEFAULT_GENRE } from '../../constants/genre';
 import Browse from '../../components/Browse';
 import Callback from '../../components/Callback';
 import Dashboard from '../../components/Dashboard';
-
 import Header from '../../components/Header';
 import Player from '../../components/Player';
 import Playlist from '../../components/Playlist';
