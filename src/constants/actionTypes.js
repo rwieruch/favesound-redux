@@ -1,5 +1,6 @@
 export const SET_SESSION = 'SET_SESSION';
 export const SET_USER = 'SET_USER';
+export const SET_LOGIN_ERROR = 'SET_LOGIN_ERROR';
 export const RESET_SESSION = 'RESET_SESSION';
 
 export const MERGE_ENTITIES = 'MERGE_ENTITIES';
