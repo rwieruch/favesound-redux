@@ -18,6 +18,11 @@ class Dashboard extends React.Component {
     if ((!isAuthInProgress && !isAuthed) || loginError) {
       return <Redirect to="/" />;
     }
+
+    if (isAuthInProgress) {
+      return null;
+    }
+
     return (
       <div className="dashboard">
         <div className="dashboard-main">
