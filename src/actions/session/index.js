@@ -20,7 +20,7 @@ function setUser(user) {
   };
 }
 
-function setLoginError(error) {
+export function setLoginError(error) {
   return {
     type: actionTypes.SET_LOGIN_ERROR,
     error
