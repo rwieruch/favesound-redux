@@ -12,12 +12,14 @@ describe('session reducer', () => {
 
       const previousState = {
         user: 'foo',
-        session: 'bar'
+        session: 'bar',
+        loginError: 'access_denied'
       };
 
       const expectedState = {
         user: null,
-        session: null
+        session: null,
+        loginError: null
       };
 
       expect(session(previousState, action)).to.eql(expectedState);
@@ -64,6 +66,31 @@ describe('session reducer', () => {
       const expectedState = {
         user: 'shuar',
         session: 'bar'
+      };
+
+      expect(session(previousState, action)).to.eql(expectedState);
+    });
+
+  });
+
+  describe('SET_LOGIN_ERROR', () => {
+
+    it('sets a login error', () => {
+      const action = {
+        type: actionTypes.SET_LOGIN_ERROR,
+        error: 'access_denied'
+      };
+
+      const previousState = {
+        user: 'foo',
+        session: 'bar',
+        loginError: null,
+      };
+
+      const expectedState = {
+        user: 'foo',
+        session: 'bar',
+        loginError: 'access_denied'
       };
 
       expect(session(previousState, action)).to.eql(expectedState);
