@@ -48,20 +48,17 @@ const fetchUser = () => (dispatch) => {
 export const login = () => (dispatch) => {
   const client_id = CLIENT_ID;
   const redirect_uri = REDIRECT_URI;
-  /* eslint-disable no-undef */
   dispatch(setRequestInProcess(true, requestTypes.AUTH));
   SC.initialize({ client_id, redirect_uri });
   SC.connect().then((session) => {
     Cookies.set(OAUTH_TOKEN, session.oauth_token);
     dispatch(setSession(session));
     dispatch(fetchUser());
+    dispatch(setRequestInProcess(false, requestTypes.AUTH));
   }).catch((err) => {
-    // Login failed or cancelled by user
     dispatch(setLoginError(err));
-  }).finally(() => {
     dispatch(setRequestInProcess(false, requestTypes.AUTH));
   });
-  /* eslint-enable no-undef */
 };
 
 export const logout = () => (dispatch) => {
