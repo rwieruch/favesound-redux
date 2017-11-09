@@ -20,13 +20,6 @@ function setUser(user) {
   };
 }
 
-export function setLoginError(error) {
-  return {
-    type: actionTypes.SET_LOGIN_ERROR,
-    error
-  };
-}
-
 export function resetSession() {
   return {
     type: actionTypes.RESET_SESSION
@@ -55,8 +48,7 @@ export const login = () => (dispatch) => {
     dispatch(setSession(session));
     dispatch(fetchUser());
     dispatch(setRequestInProcess(false, requestTypes.AUTH));
-  }).catch((err) => {
-    dispatch(setLoginError(err));
+  }).catch(() => {
     dispatch(setRequestInProcess(false, requestTypes.AUTH));
   });
 };
