@@ -1,12 +1,12 @@
 # favesound-redux
 
-The SoundCloud Client in React + Redux made with passion -> [Demo](http://www.favesound.de/)
+The SoundCloud Client in React + Redux made with passion. [Demo](http://www.favesound.de/), [Sibling Project: favesound-mobx](https://github.com/rwieruch/favesound-mobx)
 
 ![FaveSound](https://s9.postimg.org/yp2tvv4m7/Screen_Shot_2016_09_03_at_23_47_30.png)
 
 ## Get started on your own!
 
-* [Comprehensive Guide: The SoundCloue Client in React + Redux](http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/)
+* [Comprehensive Guide: The SoundCloud Client in React + Redux](http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/)
 * [Boilerplate Project](https://github.com/rwieruch/react-redux-soundcloud)
 
 ## Includes
