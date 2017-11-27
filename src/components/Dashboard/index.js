@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setLoginError } from '../../actions/session';
 import * as requestTypes from '../../constants/requestTypes';
 import StreamActivities from '../../components/StreamActivities';
 import FollowersList from '../../components/FollowersList';
@@ -9,20 +8,15 @@ import FollowingsList from '../../components/FollowingsList';
 import FavoritesList from '../../components/FavoritesList';
 
 class Dashboard extends React.Component {
-  componentWillUnmount() {
-    if (this.props.loginError) {
-      this.props.setLoginError(null);
-    }
-  }
-
   render() {
-    const { isAuthInProgress, isAuthed, loginError } = this.props;
-    if ((!isAuthInProgress && !isAuthed) || loginError) {
-      return <Redirect to="/" />;
-    }
+    const { isAuthInProgress, isAuthed } = this.props;
 
     if (isAuthInProgress) {
       return null;
+    }
+
+    if (!isAuthed) {
+      return <Redirect to="/" />;
     }
 
     return (
@@ -41,9 +35,8 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthed: state.session.session,
+  isAuthed: Boolean(state.session.session),
   isAuthInProgress: state.request[requestTypes.AUTH],
-  loginError: state.session.loginError,
 });
 
-export default connect(mapStateToProps, { setLoginError })(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

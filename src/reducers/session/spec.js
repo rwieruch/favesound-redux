@@ -73,29 +73,4 @@ describe('session reducer', () => {
 
   });
 
-  describe('SET_LOGIN_ERROR', () => {
-
-    it('sets a login error', () => {
-      const action = {
-        type: actionTypes.SET_LOGIN_ERROR,
-        error: 'access_denied'
-      };
-
-      const previousState = {
-        user: 'foo',
-        session: 'bar',
-        loginError: null,
-      };
-
-      const expectedState = {
-        user: 'foo',
-        session: 'bar',
-        loginError: 'access_denied'
-      };
-
-      expect(session(previousState, action)).to.eql(expectedState);
-    });
-
-  });
-
 });
