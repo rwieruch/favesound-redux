@@ -209,8 +209,8 @@ class Player extends React.Component {
                     data-tip="Song URL Copied!"
                     data-for="global"
                     data-delay-show={0}
+                    data-offset="{ 'right': 5 }"
                     data-delay-hide={2000}
-                    data-offset="{ 'right': 10 }"
                     data-event="click"
                     data-event-off="mousemove"
                   >
