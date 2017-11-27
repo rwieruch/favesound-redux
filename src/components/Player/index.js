@@ -206,11 +206,11 @@ class Player extends React.Component {
                 <div className="player-content-link">
                   <a
                     title="Copy song url"
-                    data-tip="Song URL Copied!"
+                    data-tip="Copied!"
                     data-for="global"
                     data-delay-show={0}
+                    data-offset="{ 'right': 5, 'top': -5 }"
                     data-delay-hide={2000}
-                    data-offset="{ 'right': 10 }"
                     data-event="click"
                     data-event-off="mousemove"
                   >
