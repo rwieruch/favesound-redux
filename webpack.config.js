@@ -50,5 +50,6 @@ module.exports = {
         'NODE_ENV': '"development"'
       }
     })
-  ]
+  ],
+  devtool: 'source-map'
 };
