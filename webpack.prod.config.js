@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   entry: {
@@ -8,7 +9,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -25,7 +26,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
@@ -35,7 +36,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': '"production"'
+        NODE_ENV: '"production"'
       }
     })
   ]

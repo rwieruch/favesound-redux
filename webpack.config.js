@@ -1,10 +1,11 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    './src/index.js'
+    path.resolve(__dirname, 'src', 'index.js')
   ],
   module: {
     preLoaders: [
@@ -28,26 +29,26 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: path.resolve(__dirname, 'dist'),
     hot: true,
     historyApiFallback: true
   },
   eslint: {
-    configFile: './.eslintrc'
+    configFile: path.resolve(__dirname, '.eslintrc')
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': '"development"'
+        NODE_ENV: '"development"'
       }
     })
   ],
