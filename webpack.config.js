@@ -1,53 +1,50 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    './src/index.js'
+    path.resolve(__dirname, 'src', 'index.js')
   ],
   module: {
-    preLoaders: [
+    rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: "eslint-loader"
+        use: ['babel-loader', 'eslint-loader']
       },
-    ],
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: "babel-loader"
-    },
-    {
-      test: /\.scss$/,
-      loader: 'style!css!sass'
-    }]
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      }
+    ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    modules: [path.resolve(__dirname, 'node_modules')],
+    extensions: ['*', '.js', '.jsx']
   },
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    compress: true,
     hot: true,
     historyApiFallback: true
   },
-  eslint: {
-    configFile: './.eslintrc'
-  },
   plugins: [
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': '"development"'
+        NODE_ENV: '"development"'
       }
     })
   ],
