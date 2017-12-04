@@ -9,16 +9,6 @@
     "test": "mocha --compilers js:babel-core/register --require ./test/setup.js 'src/**/spec.js'",
     "test:watch": "npm run test -- --watch"
   },
-  "babel": {
-    "presets": [
-      "es2015",
-      "react",
-      "stage-2"
-    ],
-    "plugins": [
-      "react-hot-loader/babel"
-    ]
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
