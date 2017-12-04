@@ -11,12 +11,13 @@ export default function configureStore(initialState) {
     initialState,
     window.devToolsExtension && window.devToolsExtension()
   );
-  if (process.env.NODE_ENV !== 'production') {
-    if (module.hot) {
-      module.hot.accept('../reducers', () => {
-        store.replaceReducer(rootReducer);
-      });
-    }
+
+  if (process.env.NODE_ENV !== 'production' && module.hot) {
+    module.hot.accept('../reducers', () => {
+       // eslint-disable-next-line
+      const nextReducer = require('../reducers').default;
+      store.replaceReducer(nextReducer);
+    });
   }
   return store;
 }
