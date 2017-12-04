@@ -6,5 +6,17 @@ import rootReducer from '../reducers/index';
 const createStoreWithMiddleware = applyMiddleware(thunk, mixpanel)(createStore);
 
 export default function configureStore(initialState) {
-  return createStoreWithMiddleware(rootReducer, initialState, window.devToolsExtension && window.devToolsExtension());
+  const store = createStoreWithMiddleware(
+    rootReducer,
+    initialState,
+    window.devToolsExtension && window.devToolsExtension()
+  );
+  if (process.env.NODE_ENV !== 'production') {
+    if (module.hot) {
+      module.hot.accept('../reducers', () => {
+        store.replaceReducer(rootReducer);
+      });
+    }
+  }
+  return store;
 }
