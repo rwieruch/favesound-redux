@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { OAUTH_TOKEN } from '../../constants/authentication';
 import Cookies from 'js-cookie';
 import { DEFAULT_GENRE } from '../../constants/genre';
@@ -32,18 +32,20 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path={`${browse}/:genre`} component={Browse} />
-          <Route exact path={dashboard} component={Dashboard} />
-          <Route exact path={callback} component={Callback} />
-          <Redirect to={`${browse}/${DEFAULT_GENRE}`} />
-        </Switch>
-        <Playlist />
-        <Volume />
-        <Player />
-      </div>
+      <BrowserRouter>
+        <div>
+          <Header />
+          <Switch>
+            <Route exact path={`${browse}/:genre`} component={Browse} />
+            <Route exact path={dashboard} component={Dashboard} />
+            <Route exact path={callback} component={Callback} />
+            <Redirect to={`${browse}/${DEFAULT_GENRE}`} />
+          </Switch>
+          <Playlist />
+          <Volume />
+          <Player />
+        </div>
+      </BrowserRouter>
     );
   }
 }

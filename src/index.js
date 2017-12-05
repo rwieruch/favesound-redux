@@ -1,10 +1,12 @@
-/*eslint-disable */
+/* eslint-disable */
 import SC from 'soundcloud';
-/*eslint-enable */
+import { AppContainer } from 'react-hot-loader';
+/* eslint-enable */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+
 import configureStore from './stores/configureStore';
 import App from './components/App';
 
@@ -12,15 +14,24 @@ require('../styles/index.scss');
 
 const store = configureStore();
 
-ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('app')
-);
+function render(Component) {
+  ReactDOM.render(
+    <AppContainer>
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    </AppContainer>,
+    document.getElementById('app'),
+  );
+}
+
+render(App);
 
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept('./components/App', () => {
+    // eslint-disable-next-line
+    const NextApp = require('./components/App').default;
+    render(NextApp);
+  });
 }
+
