@@ -21,6 +21,28 @@ describe('player reducer', () => {
     });
   });
 
+  describe('SET_REPEAT_MODE', () => {
+    it('toggles repeat mode', () => {
+      const action = actionCreators.setIsInRepeatMode();
+      const previousState = {
+        activeTrackId: 1,
+        isPlaying: true,
+        playlist: [1, 2, 3],
+        isInShuffleMode: false,
+        isInRepeatMode: false,
+      };
+      const expectedState = {
+        activeTrackId: 1,
+        isPlaying: true,
+        playlist: [1, 2, 3],
+        isInShuffleMode: false,
+        isInRepeatMode: true,
+      };
+      expect(player(previousState, action)).to.eql(expectedState);
+    });
+  });
+
+
   describe('RESET_PLAYLIST', () => {
     it('resets a player', () => {
       const action = actionCreators.emptyPlaylist();

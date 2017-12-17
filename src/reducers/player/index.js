@@ -3,6 +3,7 @@ import * as actionTypes from '../../constants/actionTypes';
 const initialState = {
   volume: 70,
   isInShuffleMode: false,
+  isInRepeatMode: false,
   activeTrackId: null,
   isPlaying: false,
   playlist: []
@@ -24,6 +25,8 @@ export default function(state = initialState, action) {
       return emptyPlaylist(state);
     case actionTypes.SET_SHUFFLE_MODE:
       return setShuffleMode(state);
+    case actionTypes.SET_REPEAT_MODE:
+      return setRepeatMode(state);
     case actionTypes.SET_VOLUME:
       return setVolume(state, action.volume);
   }
@@ -65,6 +68,10 @@ function emptyPlaylist(state) {
 
 function setShuffleMode(state) {
   return { ...state, isInShuffleMode: !state.isInShuffleMode };
+}
+
+function setRepeatMode(state) {
+  return { ...state, isInRepeatMode: !state.isInRepeatMode };
 }
 
 function setVolume(state, volume) {

@@ -23,7 +23,7 @@
     display: flex;
     justify-content: start;
     height: 100%;
-    margin-left: 25%;
+    margin-left: 20%;
     flex-grow: 1;
 
     &-name {
@@ -63,22 +63,26 @@
     color: $mainColor;
   }
 
+  .repeatSelected{
+    color: $mainColor;
+  }
+
   .player-container {
-  	display: flex;
-  	flex-direction: column;
-  	height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .player-status {
-  	height: 10px;
-  	border-bottom: $darkBorder;
-  	cursor: pointer;
+    height: 10px;
+    border-bottom: $darkBorder;
+    cursor: pointer;
 
-  	.player-status-bar {
-	  	width: 0;
-	  	transition: width 0.3s linear;
-	  	background-color: #61B25A;
-	  	height: 100%;
+    .player-status-bar {
+      width: 0;
+      transition: width 0.3s linear;
+      background-color: #61B25A;
+      height: 100%;
       position: relative;
 
       .player-status-bar-dragger {
@@ -92,7 +96,7 @@
         cursor: pointer;
         border-radius: 3px;
       }
-	  }
+    }
   }
 
 }

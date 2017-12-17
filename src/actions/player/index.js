@@ -51,6 +51,12 @@ export function setIsInShuffleMode() {
   };
 }
 
+export function setIsInRepeatMode() {
+  return {
+    type: actionTypes.SET_REPEAT_MODE,
+  };
+}
+
 export function setTrackVolume(volume) {
   return {
     type: actionTypes.SET_VOLUME,
@@ -194,6 +200,11 @@ export const removeTrackFromPlaylist = (track) => (dispatch, getState) => {
 export const toggleShuffleMode = (isInShuffleMode) => (dispatch) => {
   dispatch(setIsInShuffleMode(isInShuffleMode));
 };
+
+export const toggleRepeatMode = (isInRepeatMode) => (dispatch) => {
+  dispatch(setIsInRepeatMode(isInRepeatMode));
+};
+
 
 export const changeVolume = (volume) => (dispatch) => {
   dispatch(setTrackVolume(volume));
