@@ -6,13 +6,6 @@ import { fetchFollowings, fetchActivities, fetchFollowers, fetchFavorites } from
 import { setRequestInProcess } from '../../actions/request';
 import * as requestTypes from '../../constants/requestTypes';
 
-function setSession(session) {
-  return {
-    type: actionTypes.SET_SESSION,
-    session
-  };
-}
-
 function setUser(user) {
   return {
     type: actionTypes.SET_USER,
@@ -27,7 +20,7 @@ export function resetSession() {
 }
 
 const fetchUser = () => (dispatch) => {
-  fetch(apiUrl(`me`, '?'))
+  fetch(apiUrl('me', '?'))
     .then(response => response.json())
     .then(me => {
       dispatch(setUser(me));
@@ -38,14 +31,30 @@ const fetchUser = () => (dispatch) => {
     });
 };
 
+export const autoLogin = () => (dispatch) => {
+  if (!Cookies.get(OAUTH_TOKEN)) {
+    return;
+  }
+
+  fetch(apiUrl('me', '?')).then(response => {
+    if (response.status === 401 && Cookies.get(OAUTH_TOKEN)) {
+      // If current OAUTH_TOKEN is no longer valid
+      dispatch(logout());
+      dispatch(login());
+    } else if (response.ok) {
+      // Perform login
+      dispatch(fetchUser());
+    }
+  });
+};
+
 export const login = () => (dispatch) => {
   const client_id = CLIENT_ID;
   const redirect_uri = REDIRECT_URI;
   dispatch(setRequestInProcess(true, requestTypes.AUTH));
   SC.initialize({ client_id, redirect_uri });
   SC.connect().then((session) => {
-    Cookies.set(OAUTH_TOKEN, session.oauth_token);
-    dispatch(setSession(session));
+    Cookies.set(OAUTH_TOKEN, session.oauth_token, { expires: 7 });
     dispatch(fetchUser());
     dispatch(setRequestInProcess(false, requestTypes.AUTH));
   }).catch(() => {

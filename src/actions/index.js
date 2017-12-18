@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { login, logout } from './session';
+import { login, logout, autoLogin } from './session';
 import { fetchActivities, fetchFollowers, fetchFavorites, fetchFollowings } from './user';
 import { fetchActivitiesByGenre, setSelectedGenre } from './browse';
 import { like } from './track';
@@ -38,4 +38,5 @@ export {
   toggleShuffleMode,
   toggleRepeatMode,
   changeVolume,
+  autoLogin,
 };
