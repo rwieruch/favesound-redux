@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthed: Boolean(state.session.session),
+  isAuthed: !!state.session.user,
   isAuthInProgress: state.request[requestTypes.AUTH],
 });
 
