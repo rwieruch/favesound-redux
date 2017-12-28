@@ -3,6 +3,7 @@ import * as actionTypes from '../../constants/actionTypes';
 const initialState = {
   session: null,
   user: null,
+  loginError: null,
 };
 
 export default function(state = initialState, action) {

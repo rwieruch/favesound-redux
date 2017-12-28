@@ -17,9 +17,9 @@ describe('session reducer', () => {
       };
 
       const expectedState = {
+        loginError: null,
         user: null,
-        session: null,
-        loginError: null
+        session: null
       };
 
       expect(session(previousState, action)).to.eql(expectedState);
