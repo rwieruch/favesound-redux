@@ -1,5 +1,7 @@
 # favesound-redux
 
+[![Build Status](https://travis-ci.org/rwieruch/favesound-redux.svg?branch=master)](https://travis-ci.org/rwieruch/favesound-redux)
+
 The SoundCloud Client in React + Redux made with passion. [Demo](http://www.favesound.de/), [Sibling Project: favesound-mobx](https://github.com/rwieruch/favesound-mobx)
 
 ![FaveSound](https://s9.postimg.org/yp2tvv4m7/Screen_Shot_2016_09_03_at_23_47_30.png)
