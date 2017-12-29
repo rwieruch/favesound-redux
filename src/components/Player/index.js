@@ -179,7 +179,7 @@ class Player extends React.Component {
           </div>
           <div className="player-content-action">
             <ButtonInline onClick={() => onSetToggle(toggleTypes.PLAYLIST)}>
-              <a data-tip="Toggle player queue" data-offset="{ 'right': 10 }" data-for="global">
+              <a data-tip="Toggle playlist" data-offset="{ 'right': 10 }" data-for="global">
                 <i className="fa fa-th-list" /> {playlist.length}
               </a>
             </ButtonInline>

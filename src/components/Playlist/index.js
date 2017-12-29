@@ -20,10 +20,10 @@ function PlaylistItem({ activity }) {
 function PlaylistMenu({ onClearPlaylist }) {
   return (
     <div className="playlist-menu">
-      <div>Player Queue</div>
+      <div>Playlist</div>
       <div>
         <ButtonInline onClick={onClearPlaylist}>
-          Clear Queue
+          Clear playlist
         </ButtonInline>
       </div>
     </div>
