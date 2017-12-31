@@ -26,6 +26,16 @@
       }
     }
 
+    .dashboard-link {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    .session-link {
+      display: inline;
+      margin-left: 0px;
+    }
+
     a.menu-item:visited {
       color: $fontColor;
     }
