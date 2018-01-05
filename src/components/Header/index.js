@@ -17,9 +17,16 @@ function getGenreLink(genre) {
 function Logo() {
   return (
     <div>
-      <Link to="/">
-        <h1>Favesound</h1>
-      </Link>
+      <div className="logo">
+        <Link to="/">
+          <h1>Favesound</h1>
+        </Link>
+      </div>
+      <div className="github-link">
+        <Link to="https://github.com/rwieruch/favesound-redux/" target="_blank">
+          <p>Fork Me on Github</p>
+        </Link>
+      </div>
     </div>
   );
 }
