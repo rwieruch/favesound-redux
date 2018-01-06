@@ -26,13 +26,13 @@
       }
     }
 
-    .dashboard-link {
-      display: inline;
+    .dashboard-link , .logo {
+      display: inline-block;
       margin-right: 10px;
     }
 
-    .session-link {
-      display: inline;
+    .session-link, .github-link {
+      display: inline-block;
       margin-left: 0px;
     }
 
@@ -55,5 +55,4 @@
       }
     }
   }
-
 }
