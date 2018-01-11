@@ -3,19 +3,20 @@
   background: $nav;
   position: fixed;
   right: 0;
-  bottom: 0;
+  top: 100%;
   width: 100%;
-  height: 0;
+  height: $padding * 3 + 10;
   border-top: $darkBorder;
   z-index: 1;
+  transform: none;
 
-  transition: height 0.2s;
-  -webkit-transition: height 0.2s;
+  transition: transform 0.2s;
+  -webkit-transition: transform 0.2s;
   transition-timing-function: ease;
   -webkit-transition-timing-function: ease;
 
   &-visible {
-    height: $padding * 3 + 10;
+    transform: translateY(-100%);
   }
 
   &-content {
