@@ -41,11 +41,14 @@ function Playlist({ toggle, playlist, trackEntities, onClearPlaylist }) {
   return (
     <div className={playlistClass}>
       <PlaylistMenu onClearPlaylist={onClearPlaylist} />
-      <ul>
-        {map((id, key) => {
-          return <PlaylistItem key={key} activity={trackEntities[id]} />;
-        }, playlist)}
-      </ul>
+      {
+        !!playlist.length &&
+        <ul>
+          {map((id, key) => {
+            return <PlaylistItem key={key} activity={trackEntities[id]} />;
+          }, playlist)}
+        </ul>
+      }
     </div>
   );
 }
