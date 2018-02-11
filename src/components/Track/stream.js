@@ -12,6 +12,7 @@ import InfoList from '../../components/InfoList';
 import { durationFormat, fromNow } from '../../services/track';
 import { getPluralizedWithCount } from '../../services/pluralize';
 import { isSameTrackAndPlaying, isSameTrack } from '../../services/player';
+import * as attributes from "../../constants/trackAttributes";
 
 function Duration({ duration, isActive }) {
   const durationClass = classNames({
@@ -75,25 +76,30 @@ function TrackStream({
     {
       className: 'fa fa-play',
       count: playback_count,
-      activeSort: activeSortType === sortTypes.SORT_PLAYS
+      activeSort: activeSortType === sortTypes.SORT_PLAYS,
+      title: attributes.PLAYBACK
     },
     {
       className: 'fa fa-heart',
       count: likes_count,
-      activeSort: activeSortType === sortTypes.SORT_FAVORITES
+      activeSort: activeSortType === sortTypes.SORT_FAVORITES,
+      title: attributes.LIKES
     },
     {
       className: 'fa fa-retweet',
       count: reposts_count,
-      activeSort: activeSortType === sortTypes.SORT_REPOSTS
+      activeSort: activeSortType === sortTypes.SORT_REPOSTS,
+      title: attributes.REPOST
     },
     {
       className: 'fa fa-comment',
-      count: comment_count
+      count: comment_count,
+      title: attributes.COMMENTS
     },
     {
       className: 'fa fa-download',
-      count: download_count
+      count: download_count,
+      title: attributes.DOWNLOADS
     }
   ];
 

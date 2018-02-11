@@ -12,7 +12,7 @@ function InfoItem({ infoItem }) {
   );
 
   return (
-    <div className={infoItemClass}>
+    <div className={infoItemClass} title={infoItem.title}>
       <i className={infoItem.className} /> {infoItem.count}
     </div>
   );
