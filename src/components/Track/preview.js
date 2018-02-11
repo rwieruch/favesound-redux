@@ -5,6 +5,7 @@ import Permalink from '../../components/Permalink';
 import InfoList from '../../components/InfoList';
 import Actions from '../../components/HoverActions';
 import { isSameTrackAndPlaying, isSameTrack } from '../../services/player';
+import { COMMENTS, LIKES, PLAYBACK } from "../../constants/trackAttributes";
 
 function TrackPreview({
   activity,
@@ -34,15 +35,18 @@ function TrackPreview({
   const information = [
     {
       className: 'fa fa-play',
-      count: playback_count
+      count: playback_count,
+      title: PLAYBACK
     },
     {
       className: 'fa fa-heart',
-      count: favoritings_count
+      count: favoritings_count,
+      title: LIKES
     },
     {
       className: 'fa fa-comment',
-      count: comment_count
+      count: comment_count,
+      title: COMMENTS
     }
   ];
 
