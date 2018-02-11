@@ -28,7 +28,7 @@ function FilterName({
       <div className="stream-interaction-content">
         <InputMenu
           placeholder="SEARCH..."
-          onChange={(event) => onNameFilter(event.target.value.toLowerCase())}
+          onChange={(event) => onNameFilter(event.target.value)}
           value={filterNameQuery}
         />
       </div>
