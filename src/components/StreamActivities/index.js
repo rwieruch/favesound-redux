@@ -5,13 +5,14 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import * as requestTypes from '../../constants/requestTypes';
 import * as paginateLinkTypes from '../../constants/paginateLinkTypes';
-import { getAndCombined } from '../../services/filter';
+import { getAndCombined, getOrCombined } from '../../services/filter';
 import Activities from '../../components/Activities';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StreamInteractions from '../../components/StreamInteractions';
 import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter';
 import { getTracknameFilter } from '../../constants/nameFilter';
 import { SORT_FUNCTIONS } from '../../constants/sort';
+import { getArtistFilter } from '../../constants/artistFilter';
 
 function StreamActivities({
   activities,
@@ -39,9 +40,12 @@ function StreamActivities({
 }
 
 function mapStateToProps(state) {
+  const queryFilters = [getTracknameFilter(state.filter.filterNameQuery),
+    getArtistFilter(state.filter.filterNameQuery, state.entities.users)];
+
   const filters = [
     DURATION_FILTER_FUNCTIONS[state.filter.durationFilterType],
-    getTracknameFilter(state.filter.filterNameQuery)
+    getOrCombined(queryFilters)
   ];
 
   return {

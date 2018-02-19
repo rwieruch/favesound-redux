@@ -10,7 +10,8 @@ import StreamInteractions from '../../components/StreamInteractions';
 import Activities from '../../components/Activities';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { getTracknameFilter } from '../../constants/nameFilter';
-import { getAndCombined } from '../../services/filter';
+import { getAndCombined, getOrCombined } from '../../services/filter';
+import { getArtistFilter } from "../../constants/artistFilter";
 
 class Browse extends React.Component {
   constructor(props) {
@@ -82,9 +83,12 @@ class Browse extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const queryFilters = [getTracknameFilter(state.filter.filterNameQuery),
+    getArtistFilter(state.filter.filterNameQuery, state.entities.users)];
+
   const filters = [
     DURATION_FILTER_FUNCTIONS[state.filter.durationFilterType],
-    getTracknameFilter(state.filter.filterNameQuery)
+    getOrCombined(queryFilters)
   ];
 
   return {
