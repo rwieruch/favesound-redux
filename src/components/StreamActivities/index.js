@@ -12,7 +12,7 @@ import StreamInteractions from '../../components/StreamInteractions';
 import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter';
 import { getTracknameFilter } from '../../constants/nameFilter';
 import { SORT_FUNCTIONS } from '../../constants/sort';
-import { getArtistFilter } from "../../constants/artistFilter";
+import { getArtistFilter } from '../../constants/artistFilter';
 
 function StreamActivities({
   activities,
