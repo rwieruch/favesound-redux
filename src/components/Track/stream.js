@@ -115,7 +115,8 @@ function TrackStream({
           <div>
             <TrackIcon trackCount={typeTracks[activity.id]} />
             <RepostIcon repostCount={typeReposts[activity.id]} />
-            <Permalink link={userEntity.permalink_url} text={username} />&nbsp;-&nbsp;
+            <Permalink link={userEntity.permalink_url} text={username}/>
+              &nbsp;&#8209;&nbsp;
             <Permalink link={permalink_url} text={title} />
           </div>
           <div>
