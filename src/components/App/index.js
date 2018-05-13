@@ -1,29 +1,25 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { OAUTH_TOKEN } from '../../constants/authentication';
-import Cookies from 'js-cookie';
-import { DEFAULT_GENRE } from '../../constants/genre';
-import Browse from '../../components/Browse';
-import Callback from '../../components/Callback';
-import Dashboard from '../../components/Dashboard';
-import Header from '../../components/Header';
-import Player from '../../components/Player';
-import Playlist from '../../components/Playlist';
-import Volume from '../../components/Volume';
-import { browse, dashboard, callback } from '../../constants/pathnames';
+import Cookies from "js-cookie";
+import React, { Component, Fragment } from "react";
 
-export default class App extends React.Component {
+import Header from "../Header";
+import Player from "../Player";
+import Volume from "../Volume";
+import Router from "../Router";
+import Playlist from "../Playlist";
+import { OAUTH_TOKEN } from "../../constants/authentication";
+
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.onAppClose = this.onAppClose.bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener('beforeunload', this.onAppClose);
+    window.addEventListener("beforeunload", this.onAppClose);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.onAppClose);
+    window.removeEventListener("beforeunload", this.onAppClose);
   }
 
   onAppClose() {
@@ -32,20 +28,13 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div>
-          <Header />
-          <Switch>
-            <Route exact path={`${browse}/:genre`} component={Browse} />
-            <Route exact path={dashboard} component={Dashboard} />
-            <Route exact path={callback} component={Callback} />
-            <Redirect to={`${browse}/${DEFAULT_GENRE}`} />
-          </Switch>
-          <Playlist />
-          <Volume />
-          <Player />
-        </div>
-      </BrowserRouter>
+      <Fragment>
+        <Header />
+        <Router />
+        <Playlist />
+        <Volume />
+        <Player />
+      </Fragment>
     );
   }
 }
