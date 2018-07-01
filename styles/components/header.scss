@@ -1,5 +1,4 @@
 .header {
-
   background: $nav;
   position: fixed;
   right: 0;
@@ -21,19 +20,57 @@
       margin: 0 ($padding / 2);
       padding: ($padding / 8) 0;
 
-      &-selected, &:hover {
+      &-selected,
+      &:hover {
         border-bottom: 1px solid $mainColor;
       }
     }
 
-    .dashboard-link , .logo {
+    .dashboard-link {
       display: inline-block;
       margin-right: 10px;
     }
 
-    .session-link, .github-link {
+    .logo {
+      position: absolute;
+      display: inline-block;
+      margin-right: 10px;
+
+      h1 {
+        float: right;
+        margin-left: 10px;
+        margin-bottom: 10px;
+
+        @media screen and (max-width: 1200px) {
+          display: none;
+        }
+      }
+      img {
+        position: relative;
+        top: -5px;
+      }
+    }
+
+    .dashboard-link {
+      float: right;
+    }
+
+    .session-link {
       display: inline-block;
       margin-left: 0px;
+
+      img {
+        margin-right: 100px;
+      }
+    }
+
+    .github-link {
+      img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 0;
+      }
     }
 
     a.menu-item:visited {
@@ -51,7 +88,6 @@
         &:hover {
           color: $mainColor;
         }
-
       }
     }
   }

@@ -1,37 +1,42 @@
 /* eslint-disable */
-import SC from 'soundcloud';
-import { AppContainer } from 'react-hot-loader';
+import SC from "soundcloud";
+import { AppContainer } from "react-hot-loader";
 /* eslint-enable */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { render } from "react-dom";
+import Favicon from "react-favicon";
+import { Provider } from "react-redux";
+import React, { Fragment } from "react";
+import { BrowserRouter } from "react-router-dom";
 
-import configureStore from './stores/configureStore';
-import App from './components/App';
+import ico from "../src/assets/sc_ico.png";
 
-require('../styles/index.scss');
+import configureStore from "./stores/configureStore";
+
+import "../styles/index.scss";
+import App from "./components/App";
 
 const store = configureStore();
 
-function render(Component) {
-  ReactDOM.render(
-    <AppContainer>
+const app = (
+  <AppContainer>
+    <Fragment>
+      <Favicon url={ico} />
       <Provider store={store}>
-        <Component />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
-    </AppContainer>,
-    document.getElementById('app'),
-  );
-}
+    </Fragment>
+  </AppContainer>
+);
 
-render(App);
+render(app, document.getElementById("app"));
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
+  module.hot.accept("./components/App", () => {
     // eslint-disable-next-line
-    const NextApp = require('./components/App').default;
+    const NextApp = require("./components/App").default;
     render(NextApp);
   });
 }
-
