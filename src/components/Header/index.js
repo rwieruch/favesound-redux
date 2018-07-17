@@ -59,19 +59,19 @@ function Logout({ onLogout }) {
   );
 }
 
-function Dashboard({ onDashboard }) {
+function Dashboard() {
   return (
-    <Link onClick={onDashboard} to={dashboard}>
+    <Link to={dashboard}>
       Dashboard
     </Link>
   );
 }
 
-function SessionAction({ currentUser, onLogin, onLogout, onDashboard }) {
+function SessionAction({ currentUser, onLogin, onLogout }) {
   return (
     <div>
       <div className="dashboard-link">
-        { currentUser ? <Dashboard onDashboard={onDashboard} /> : ' ' }
+        { currentUser ? <Dashboard /> : ' ' }
       </div>
       <div className="session-link">
         { currentUser ? <Logout onLogout={onLogout} /> : <Login onLogin={onLogin} /> }
@@ -92,7 +92,7 @@ function MenuList({ selectedGenre }) {
   );
 }
 
-function Header({ currentUser, selectedGenre, onLogin, onLogout, onDashboard }) {
+function Header({ currentUser, selectedGenre, onLogin, onLogout }) {
   return (
     <div className="header">
       <div className="header-content">
@@ -102,7 +102,6 @@ function Header({ currentUser, selectedGenre, onLogin, onLogout, onDashboard }) 
           currentUser={currentUser}
           onLogin={onLogin}
           onLogout={onLogout}
-          onDashboard={onDashboard}
         />
       </div>
     </div>
