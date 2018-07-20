@@ -18,6 +18,9 @@ module.exports = {
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(jpe?g|png|gif|ico)$/, loader: 'file-loader?name=[name].[ext]'
       }
     ]
   },
@@ -47,7 +50,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: '"development"'
       }
-    })
+    }),
   ],
   devtool: 'source-map'
 };
