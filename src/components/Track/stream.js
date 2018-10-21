@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import * as sortTypes from '../../constants/sortTypes';
+import * as dateSortTypes from '../../constants/dateSortTypes';
 import * as filterTypes from '../../constants/filterTypes';
 import WaveformSc from '../../components/WaveformSc';
 import TrackActions from '../../components/TrackActions';
@@ -26,6 +27,18 @@ function Duration({ duration, isActive }) {
   );
 }
 
+function Created({ created_at, isActive }) {
+  const durationClass = classNames({
+    'active-duration-filter': isActive
+  });
+
+  return (
+    <span className={durationClass}>
+     {fromNow(created_at)}
+    </span>
+  );
+}
+
 function TrackStream({
   activity,
   activeTrackId,
@@ -34,6 +47,7 @@ function TrackStream({
   typeReposts,
   typeTracks,
   activeSortType,
+  activeDateSortType,
   activeDurationFilterType,
   onActivateTrack,
 }) {
@@ -50,7 +64,6 @@ function TrackStream({
     permalink_url,
     created_at
   } = activity;
-
   const userEntity = userEntities[user];
   const { avatar_url, username } = userEntity;
 
@@ -123,7 +136,12 @@ function TrackStream({
             <Duration
               duration={duration}
               isActive={activeDurationFilterType !== filterTypes.ALL}
-            /> / {fromNow(created_at)}</div>
+            /> /
+            <Created
+              created_at={created_at}
+              isActive={activeDateSortType !== dateSortTypes.NONE}
+            />
+            </div>
         </div>
         <div className="track-content-footer">
           <div>
@@ -159,6 +177,7 @@ TrackStream.propTypes = {
   isPlaying: PropTypes.bool,
   activeTrackId: PropTypes.number,
   activeSortType: PropTypes.string,
+  activeDateSortType: PropTypes.string,
   activeDurationFilterType: PropTypes.string,
   onActivateTrack: PropTypes.func,
 };

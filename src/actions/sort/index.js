@@ -6,3 +6,9 @@ export function sortStream(sortType) {
     sortType
   };
 }
+export function dateSortStream(dateSortType) {
+  return {
+    type: actionTypes.DATE_SORT_STREAM,
+    dateSortType
+  };
+}

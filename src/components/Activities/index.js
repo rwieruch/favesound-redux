@@ -27,11 +27,12 @@ function Activities({
   entities,
   activeFilter,
   activeSort,
+  activeDateSort
 }) {
   const matchedEntities = getMatchedEntities(ids, entities);
   const filteredEntities = matchedEntities.filter(activeFilter);
-  const sortedEntities = activeSort(filteredEntities);
-
+  const sortedDateEntities = activeDateSort(filteredEntities);
+  const sortedEntities = activeSort(sortedDateEntities);
   return (
     <div>
       <div>
@@ -51,6 +52,7 @@ Activities.propTypes = {
   entities: PropTypes.object,
   activeFilter: PropTypes.func,
   activeSort: PropTypes.func,
+  activeDateSort: PropTypes.func,
 };
 
 export default withLoadingSpinner(withFetchOnScroll(Activities));
