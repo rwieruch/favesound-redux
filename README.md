@@ -1,6 +1,6 @@
 # favesound-redux
 
-[![Build Status](https://travis-ci.org/rwieruch/favesound-redux.svg?branch=master)](https://travis-ci.org/rwieruch/favesound-redux) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/)
+[![Build Status](https://travis-ci.org/rwieruch/favesound-redux.svg?branch=master)](https://travis-ci.org/rwieruch/favesound-redux) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/rwieruch/favesound-redux.svg)](https://greenkeeper.io/)
 
 The SoundCloud Client in React + Redux made with passion. [Demo](http://www.favesound.de/), [Sibling Project: favesound-mobx](https://github.com/rwieruch/favesound-mobx)
 
