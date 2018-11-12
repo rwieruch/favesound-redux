@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { SORT_FUNCTIONS } from '../../constants/sort';
+import { SORT_FUNCTIONS, DATE_SORT_FUNCTIONS } from '../../constants/sort';
 import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter';
 import * as actions from '../../actions/index';
 import * as requestTypes from '../../constants/requestTypes';
@@ -62,7 +62,8 @@ class Browse extends React.Component {
   }
 
   render() {
-    const { browseActivities, match, requestsInProcess, trackEntities, activeFilter, activeSort } = this.props;
+    const { browseActivities, match, requestsInProcess, trackEntities,
+      activeFilter, activeSort, activeDateSort } = this.props;
     const genre = match.params.genre;
     return (
       <div className="browse">
@@ -73,6 +74,7 @@ class Browse extends React.Component {
           entities={trackEntities}
           activeFilter={activeFilter}
           activeSort={activeSort}
+          activeDateSort={activeDateSort}
           scrollFunction={this.fetchActivitiesByGenre}
         />
         <LoadingSpinner isLoading={!!(requestsInProcess[requestTypes.GENRES] && browseActivities[genre])} />
@@ -99,6 +101,7 @@ function mapStateToProps(state) {
     userEntities: state.entities.users,
     activeFilter: getAndCombined(filters),
     activeSort: SORT_FUNCTIONS[state.sort.sortType],
+    activeDateSort: DATE_SORT_FUNCTIONS[state.sort.dateSortType],
   };
 }
 

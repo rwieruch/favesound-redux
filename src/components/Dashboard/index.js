@@ -20,10 +20,12 @@ class Dashboard extends React.Component {
     }
 
     return (
+      <div>
       <div className="dashboard">
         <div className="dashboard-main">
           <StreamActivities />
         </div>
+      </div>
         <div className="dashboard-side">
           <FollowingsList />
           <FollowersList />

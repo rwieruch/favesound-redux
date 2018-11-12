@@ -17,6 +17,7 @@ function mapStateToProps(state, props) {
     isPlaying: state.player.isPlaying,
     activeTrackId: state.player.activeTrackId,
     activeSortType: state.sort.sortType,
+    activeDateSortType: state.sort.dateSortType,
     activeDurationFilterType: state.filter.durationFilterType,
   };
 }

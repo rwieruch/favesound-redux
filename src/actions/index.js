@@ -8,7 +8,7 @@ import { setToggle } from './toggle';
 import { activateTrack, activateIteratedPlaylistTrack, activateIteratedStreamTrack, addTrackToPlaylist, removeTrackFromPlaylist, clearPlaylist, togglePlayTrack, toggleShuffleMode, toggleRepeatMode, changeVolume } from './player';
 import { openComments, fetchComments } from './comments';
 import { filterDuration, filterName } from './filter';
-import { sortStream } from './sort';
+import { sortStream, dateSortStream } from './sort';
 /* eslint-enable max-len */
 
 export {
@@ -35,6 +35,7 @@ export {
   filterDuration,
   filterName,
   sortStream,
+  dateSortStream,
   toggleShuffleMode,
   toggleRepeatMode,
   changeVolume,
